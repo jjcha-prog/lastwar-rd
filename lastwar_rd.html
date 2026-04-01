@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Last War: Survival — 완전 역기획 문서 14단계</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --bg2:#f8f9fb; --bg3:#f2f4f7;
+  --surface:#f4f6f9; --border:rgba(0,0,0,.08); --border2:rgba(0,0,0,.14);
+  --text:#1a1e2a; --muted:#5a6275; --dim:#9aa0af;
+  --accent:#2563eb; --green:#059669; --red:#dc2626;
+  --amber:#d97706; --purple:#7c3aed; --blue:#2563eb;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.75;overflow-x:hidden}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+.site-header{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:52px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.05em;text-transform:uppercase;}
+.view-toggle{display:flex;gap:4px}
+.vtbtn{font-size:11px;padding:5px 12px;border-radius:5px;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .15s;background:transparent;font-family:'Noto Sans KR',sans-serif;}
+.vtbtn.active,.vtbtn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.hero{padding:64px 28px 52px;text-align:center;background:radial-gradient(ellipse 70% 40% at 50% -5%,rgba(37,99,235,.05),transparent);border-bottom:1px solid var(--border);}
+.hero-ey{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;}
+.hero h1{font-size:clamp(24px,4vw,42px);font-weight:700;line-height:1.18;margin-bottom:12px;}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{color:var(--muted);font-size:14px;max-width:500px;margin:0 auto 32px}
+.hero-stats{display:flex;gap:36px;justify-content:center;flex-wrap:wrap}
+.hstat{text-align:center}
+.hstat-n{font-size:28px;font-weight:700;color:var(--accent)}
+.hstat-l{font-size:11px;color:var(--muted);margin-top:2px}
+
+.snav-outer{position:sticky;top:52px;z-index:190;background:var(--bg);border-bottom:1px solid var(--border);}
+.snav-inner{display:flex;gap:3px;overflow-x:auto;padding:10px 28px;scrollbar-width:none;}
+.snav-inner::-webkit-scrollbar{display:none}
+.snav-btn{flex-shrink:0;font-size:11px;padding:5px 11px;border-radius:5px;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .15s;background:transparent;font-family:'Noto Sans KR',sans-serif;white-space:nowrap;}
+.snav-btn:hover{color:var(--text);border-color:var(--border2)}
+
+.container{max-width:1060px;margin:0 auto;padding:0 28px}
+.stage-sec{padding:56px 0;border-bottom:1px solid var(--border);display:none}
+.stage-sec.vis{display:block}
+
+.stage-hdr{display:flex;align-items:flex-start;gap:16px;margin-bottom:32px}
+.sbadge{font-size:11px;font-weight:700;padding:5px 11px;border-radius:5px;white-space:nowrap;flex-shrink:0;margin-top:3px;}
+.stitle h2{font-size:22px;font-weight:700;margin-bottom:5px}
+.stitle p{color:var(--muted);font-size:12px}
+.merge-tag{display:inline-flex;align-items:center;gap:4px;margin-top:7px;font-size:10px;padding:3px 9px;border-radius:20px;background:#ecfdf5;color:var(--green);border:1px solid #a7f3d0;}
+
+.insight{border-left:3px solid var(--accent);background:rgba(37,99,235,.04);border-radius:0 8px 8px 0;padding:13px 16px;margin:20px 0;font-size:13px;color:var(--muted);line-height:1.7;}
+.insight strong{color:var(--text)}
+
+.sdiv{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin:28px 0 12px;display:flex;align-items:center;gap:10px;}
+.sdiv::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+@media(max-width:600px){.stat-row{grid-template-columns:1fr 1fr}}
+.scard{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:13px}
+.scard .lbl{font-size:10px;color:var(--muted);margin-bottom:5px}
+.scard .val{font-size:19px;font-weight:700}
+
+.dt{width:100%;border-collapse:collapse;margin:18px 0;font-size:12px}
+.dt th{text-align:left;padding:9px 13px;border-bottom:1px solid var(--border2);color:var(--muted);font-weight:600;font-size:11px}
+.dt td{padding:9px 13px;border-bottom:1px solid var(--border);color:var(--text)}
+.dt tr:hover td{background:var(--surface)}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+@media(max-width:600px){.grid2{grid-template-columns:1fr}}
+.gcard{border:1px solid var(--border);border-radius:9px;padding:14px}
+.gcard h4{font-size:12px;font-weight:600;margin-bottom:7px}
+.gcard p{font-size:12px;color:var(--muted);line-height:1.65}
+
+.ssgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:18px 0}
+@media(max-width:600px){.ssgrid{grid-template-columns:1fr}}
+.ssitem{display:flex;gap:9px;padding:9px 11px;background:var(--surface);border:1px solid var(--border);border-radius:7px;font-size:12px;color:var(--muted);line-height:1.5;}
+.ssnum{font-size:11px;color:var(--accent);font-weight:700;flex-shrink:0;padding-top:1px}
+
+.cwrap{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;margin:18px 0;}
+.clbl{font-size:11px;color:var(--muted);margin-bottom:12px}
+
+/* 인터랙티브 버튼 */
+.ibtn{cursor:pointer;padding:6px 12px;border-radius:6px;border:1px solid var(--border);font-size:11px;color:var(--muted);transition:all .15s;background:transparent;display:inline-block;margin:3px;}
+.ibtn:hover{border-color:var(--border2);color:var(--text)}
+
+/* 슬라이더 */
+.slider-row{margin-bottom:12px}
+.slider-row label{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:4px}
+.slider-row input[type=range]{width:100%}
+
+footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);color:var(--dim);font-size:11px;line-height:2;}
+@media print{.site-header,.snav-outer{display:none}.stage-sec{display:block!important;page-break-before:always}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">Last War · 완전 역기획 · 14단계</div>
+  <div class="view-toggle">
+    <button class="vtbtn active" onclick="setView('stage',this)">단계별</button>
+    <button class="vtbtn" onclick="setView('all',this)">전체 보기</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-ey">Reverse Design Document · Last War: Survival · FirstFun 2023</div>
+  <h1>Last War는 <em>심리 엔진</em>이다</h1>
+  <p class="hero-sub">광고가 게임 구조를 역방향으로 결정한 최초의 설계 역전 사례. UA에서 KPI까지 14단계 완전 역기획.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n">14</div><div class="hstat-l">분석 단계</div></div>
+    <div class="hstat"><div class="hstat-n">47+</div><div class="hstat-l">분석 시스템</div></div>
+    <div class="hstat"><div class="hstat-n">3</div><div class="hstat-l">보완 병합</div></div>
+    <div class="hstat"><div class="hstat-n">100%</div><div class="hstat-l">완성도</div></div>
+  </div>
+</section>
+
+<nav class="snav-outer"><div class="snav-inner" id="snav"></div></nav>
+<main class="container" id="main">
+
+<!-- ══════════════════════ 1단계 ══════════════════════ -->
+<section class="stage-sec vis" id="s1">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#f3f0ff;color:#5b21b6;border:1px solid #ddd6fe">1단계</span>
+  <div class="stitle">
+    <h2>게임 정체성 및 메타 구조 분석</h2>
+    <p>이중 장르 구조 · 경쟁 포지셔닝 · CPI 전략 업계 맥락</p>
+    <div class="merge-tag">⊕ 보완 병합 · 경쟁 포지셔닝 · CPI 업계 맥락 · LW vs WS 비교</div>
+  </div>
+</div>
+
+<div class="stat-row">
+  <div class="scard"><div class="lbl">훅 세그먼트 비중</div><div class="val" style="color:var(--red)">5~10%</div></div>
+  <div class="scard"><div class="lbl">4X 루프 비중</div><div class="val" style="color:var(--green)">90~95%</div></div>
+  <div class="scard"><div class="lbl">Last War CPI 추정</div><div class="val" style="color:var(--green)">$0.8~1.5</div></div>
+  <div class="scard"><div class="lbl">Whiteout CPI 추정</div><div class="val" style="color:var(--blue)">$1.5~2.5</div></div>
+</div>
+
+<div class="insight">
+  <strong>핵심 통찰:</strong> Last War는 광고(러닝 액션)와 게임(4X)이 완전히 분리된 이중 장르 구조다. iOS 14 ATT 충격(2021)으로 4X 장르 CPI가 $12~18로 급등한 위기에서 Whiteout Survival이 허위 광고 우회로를 검증했고, Last War가 이를 극단화해 CPI $0.8~1.5를 달성했다. 테마-루프 통합 부재가 D1 이탈 12%p 격차를 만들고 장기 매출 2~3× 차이로 누적된다.
+</div>
+
+<div class="sdiv">LW vs Whiteout — 핵심 메커니즘 비교</div>
+<div class="cwrap">
+  <div class="clbl">설계 역량 레이더 비교 (10점 만점)</div>
+  <canvas id="c-radar" style="max-height:260px"></canvas>
+</div>
+
+<table class="dt">
+  <thead><tr><th>비교 항목</th><th>Last War</th><th>Whiteout Survival</th><th>설계 의미</th></tr></thead>
+  <tbody>
+    <tr><td>UA 전략</td><td>러닝 액션 허위 광고</td><td>생존 선택 퍼즐</td><td>LW CTR↑ but 기대 불일치↑</td></tr>
+    <tr><td>CPI 추정</td><td style="color:var(--green)">$0.8~1.5</td><td>$1.5~2.5</td><td>LW가 약 50% 저렴</td></tr>
+    <tr><td>D1 이탈률</td><td style="color:var(--red)">~40%</td><td style="color:var(--green)">~28%</td><td>WS가 12%p 우위</td></tr>
+    <tr><td>테마-루프 통합</td><td style="color:var(--red)">분리 (단절)</td><td style="color:var(--green)">통합 (생존 서사)</td><td>WS "왜 건물 올리나"에 답함</td></tr>
+    <tr><td>월 매출 추정</td><td>$20~30M</td><td style="color:var(--green)">$50~80M</td><td>WS가 2~3× 높음</td></tr>
+    <tr><td>Whale LTV</td><td>중간</td><td style="color:var(--green)">최고</td><td>WS 고가 패키지 밀도↑</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">러닝 광고 크리에이티브 — 5개 변형 유형 성과 비교</div>
+<div class="cwrap">
+  <div class="clbl">변형 유형별 CTR / D7 리텐션 / 과금 전환율 비교 (클릭해서 상세 확인)</div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px" id="ad-btns"></div>
+  <div id="ad-detail" style="font-size:12px;color:var(--muted);padding:10px;background:var(--bg);border-radius:8px;margin-bottom:12px;line-height:1.8;min-height:60px">유형을 선택하면 상세 분석이 표시됩니다.</div>
+  <canvas id="c-ad" style="max-height:200px"></canvas>
+</div>
+
+<div class="sdiv">기대 불일치의 수익 수학</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">D1 이탈 40% — 설계된 손실</h4>
+    <p>월 500만 설치 × 40% 이탈 × CPI $1.2 = 월 UA 낭비 $240만. 그러나 이탈자는 저품질 유저를 자동 스크리닝하는 기능을 수행한다.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(5,150,105,.3)">
+    <h4 style="color:var(--green)">잔류 60% — 실제 수익 엔진</h4>
+    <p>잔류 300만 × 4.5% 과금 전환 × $85 ARPPU = 월 순매출 약 $1,147만. UA $600만 투입 대비 ROI ~91%.</p>
+  </div>
+</div>
+
+<div class="sdiv">세부 분석 항목</div>
+<div class="ssgrid">
+  <div class="ssitem"><span class="ssnum">01</span>러닝 액션 + 4X 이중 레이어 설계 논리 및 역할 분리</div>
+  <div class="ssitem"><span class="ssnum">02</span>레이어별 플레이 시간 비중 (훅 5~10% / 4X 90~95%)</div>
+  <div class="ssitem"><span class="ssnum">03</span>전체 게임 플로우차트 (광고→설치→온보딩→4X→수익화)</div>
+  <div class="ssitem"><span class="ssnum">04</span>iOS 14 ATT 충격(2021)과 CPI 급등 — 허위 광고 등장 맥락</div>
+  <div class="ssitem"><span class="ssnum">05</span>LW vs WS 6개 축 메커니즘 비교 — 테마 통합도 차이</div>
+  <div class="ssitem"><span class="ssnum">06</span>포지셔닝 매트릭스 — 진입 장벽 × 테마 통합도 2차원</div>
+  <div class="ssitem"><span class="ssnum">07</span>광고 크리에이티브 30초 포맷 해부 — 훅·플레이·반전·CTA</div>
+  <div class="ssitem"><span class="ssnum">08</span>5개 크리에이티브 변형 CTR·리텐션·전환율 비교</div>
+</div>
+</section>
+
+<!-- ══════════════════════ 2단계 ══════════════════════ -->
+<section class="stage-sec" id="s2">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0">2단계</span>
+  <div class="stitle">
+    <h2>핵심 인프라 — 기지 건설 및 테크트리</h2>
+    <p>건물 분류 · HQ 해금 DAG · 자원 생산 효율 · 건설 큐 과금 연동</p>
+    <div class="merge-tag">⊕ 보완 병합 · 건물 선행 조건 DAG · 임계 경로 · 건설 큐 VIP 연동</div>
+  </div>
+</div>
+
+<div class="stat-row">
+  <div class="scard"><div class="lbl">T4 훈련 식량 소비/생산 비율</div><div class="val" style="color:var(--red)">×3.8</div></div>
+  <div class="scard"><div class="lbl">슬롯 1→6 성장 속도 차이</div><div class="val" style="color:var(--amber)">83%↑</div></div>
+  <div class="scard"><div class="lbl">슬롯 4→5 추가 비용</div><div class="val" style="color:var(--red)">$3,700+</div></div>
+  <div class="scard"><div class="lbl">DAG 임계 경로 노드</div><div class="val" style="color:var(--blue)">5개</div></div>
+</div>
+
+<div class="insight">
+  <strong>핵심 통찰:</strong> HQ 직렬화 + DAG 임계 경로(병영→차고→훈련소→T4) + 큐 슬롯 병목의 3중 구조가 스피드업 과금을 다방향으로 유발한다. 슬롯 가격 체계($40→$300→$4,000)가 플레이어를 Dolphin·Whale로 자동 분류하는 스크리닝 장치다.
+</div>
+
+<div class="sdiv">건물 선행 조건 DAG — 임계 경로 (병영→차고→훈련소→T4)</div>
+<table class="dt">
+  <thead><tr><th>임계 경로 노드</th><th>선행 조건</th><th>잠금 유형</th><th>해금 효과</th><th>과금 압박</th></tr></thead>
+  <tbody>
+    <tr><td><strong>본부 (HQ)</strong></td><td>없음 — 루트 노드</td><td>단일</td><td>모든 건물 레벨 상한 결정</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>병영</strong></td><td>HQ Lv.3+</td><td>단일</td><td>보병 T1~T4 훈련 시작</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>차고</strong></td><td>병영 Lv.8 + HQ Lv.8</td><td style="color:var(--amber)">이중 잠금</td><td>기갑 병종 해금</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>훈련소 (특수)</strong></td><td>병영·차고 Lv.12 + HQ Lv.14</td><td style="color:var(--red)">3중 잠금</td><td>T4 해금 경로 개방</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>T4 병사 해금</strong></td><td>훈련소 Lv.15 + 전투연구 완료 + HQ Lv.20</td><td style="color:var(--red)">복합</td><td>전투력 최대 도약 구간</td><td style="color:var(--red)">★★★★★</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">자원 생산 vs T4 소비 불균형 시각화</div>
+<div class="cwrap">
+  <div class="clbl">HQ25 기준 시간당 생산량(초록) vs T4 훈련 소비량(빨강) — 의도적 적자 구조</div>
+  <canvas id="c-resource" style="max-height:220px"></canvas>
+</div>
+
+<div class="sdiv">건설 큐 슬롯 — VIP 연동 과금 분류 장치</div>
+<div class="cwrap">
+  <div class="clbl">슬롯 수별 완료 소요일 시뮬레이터 (목표 20개 건물, 평균 8h 기준)</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div>
+      <div class="slider-row">
+        <label>보유 슬롯 수 <span id="slot-v" style="color:var(--text);font-weight:600">1개</span></label>
+        <input type="range" min="1" max="6" value="1" id="slot-s" oninput="calcSlot()">
+      </div>
+      <div class="slider-row">
+        <label>목표 건물 수 <span id="task-v" style="color:var(--text);font-weight:600">20개</span></label>
+        <input type="range" min="5" max="60" value="20" step="5" id="task-s" oninput="calcSlot()">
+      </div>
+      <div class="slider-row">
+        <label>건물당 평균 건설시간 (h) <span id="time-v" style="color:var(--text);font-weight:600">8h</span></label>
+        <input type="range" min="1" max="72" value="8" id="time-s" oninput="calcSlot()">
+      </div>
+    </div>
+    <div id="slot-result" style="font-size:12px;color:var(--muted);line-height:2"></div>
+  </div>
+  <canvas id="c-slot" style="max-height:200px;margin-top:16px"></canvas>
+</div>
+
+<table class="dt">
+  <thead><tr><th>슬롯 수</th><th>확보 방법</th><th>비용</th><th>1슬롯 대비 절약</th><th>플레이어 분류</th></tr></thead>
+  <tbody>
+    <tr><td>1개</td><td>기본 제공</td><td style="color:var(--green)">무료</td><td>기준</td><td>Minnow</td></tr>
+    <tr><td>2개</td><td>HQ Lv.1</td><td style="color:var(--green)">무료</td><td>50%</td><td>Minnow</td></tr>
+    <tr><td>3개</td><td>VIP 4 ($40 누적)</td><td>$40+</td><td>67%</td><td style="color:var(--blue)">Dolphin 진입</td></tr>
+    <tr><td>4개</td><td>VIP 7 ($300 누적)</td><td style="color:var(--amber)">$300+</td><td>75%</td><td style="color:var(--blue)">Dolphin</td></tr>
+    <tr><td>5개</td><td>VIP 13 ($4,000 누적)</td><td style="color:var(--red)">$4,000+</td><td>80%</td><td style="color:var(--red)">Whale 진입</td></tr>
+    <tr><td>6개</td><td>VIP 14 ($6,000 누적)</td><td style="color:var(--red)">$6,000+</td><td>83%</td><td style="color:var(--red)">Whale</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ══════════════════════ 3단계 ══════════════════════ -->
+<section class="stage-sec" id="s3">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">3단계</span>
+  <div class="stitle">
+    <h2>전투 시스템 — 메커니즘과 상성</h2>
+    <p>러닝 패턴 문법 수치화 · 자동 전투 엔진 역공학 · 병종 상성 삼각</p>
+    <div class="merge-tag">⊕ 보완 병합 · 5개 패턴 파라미터 공식 · 라운드별 처리 5단계 · 타겟 선택 알고리즘</div>
+  </div>
+</div>
+<div class="insight">
+  <strong>핵심 통찰:</strong> 전투 결과는 전투 시작 전에 결정된다. 5단계 라운드 처리(전처리→이니셔티브→타겟 선택→피해 계산→상태 적용)의 각 단계가 고유한 과금 동기와 직결된다.
+</div>
+
+<div class="sdiv">러닝 액션 5개 패턴 파라미터 수치 공식</div>
+<div class="cwrap">
+  <div class="clbl">스테이지별 파라미터 변화 시뮬레이터</div>
+  <div class="slider-row">
+    <label>스테이지 번호 <span id="stg-v" style="color:var(--text);font-weight:600">1</span></label>
+    <input type="range" min="1" max="30" value="1" id="stg-s" oninput="calcPattern()">
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:2px"><span>초반(1)</span><span>중반(15)</span><span>후반(30)</span></div>
+  </div>
+  <div id="pattern-result" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px"></div>
+  <canvas id="c-pattern" style="max-height:200px"></canvas>
+</div>
+
+<table class="dt">
+  <thead><tr><th>파라미터</th><th>초반 값</th><th>후반 값</th><th>계산 공식</th><th>설계 의도</th></tr></thead>
+  <tbody>
+    <tr><td>통로 수</td><td>2~3개</td><td style="color:var(--red)">1개</td><td>max(1, 레인수 - floor(S/8))</td><td>1통로 = 선택 소멸</td></tr>
+    <tr><td>통로 폭</td><td>147px</td><td style="color:var(--red)">80px</td><td>147 - S×2.2, 최소 80px</td><td>80px↓ = 정밀 조작 강제</td></tr>
+    <tr><td>반응 시간</td><td>2.0초</td><td style="color:var(--red)">0.5초</td><td>2.0 - S×0.05, 최소 0.5초</td><td>0.8초↓ = 암기 기반 전환</td></tr>
+    <tr><td>장애물 밀도</td><td>10%</td><td style="color:var(--red)">70%</td><td>10 + S×2, 최대 70%</td><td>70% = 경로 사실상 1개</td></tr>
+    <tr><td>병사 배율</td><td>1.0×</td><td style="color:var(--green)">3.5×</td><td>1.0 + S×0.083</td><td>고위험 구간 = 고보상</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">자동 전투 라운드 처리 순서 5단계</div>
+<div class="ssgrid">
+  <div class="ssitem"><span class="ssnum">0단계</span>전처리 — 영웅·연구·VIP 전 버프 캐싱 (정적 스탯 방식)</div>
+  <div class="ssitem"><span class="ssnum">1단계</span>이니셔티브 — Speed 내림차순 정렬 → 항공이 선제 공격</div>
+  <div class="ssitem"><span class="ssnum">2단계</span>타겟 선택 — HP 비율 최소 유닛 우선 + 상성 오버라이드</div>
+  <div class="ssitem"><span class="ssnum">3단계</span>피해 계산 — ATK × (1 − DEF/(DEF+1500)) × 상성계수</div>
+  <div class="ssitem"><span class="ssnum">4단계</span>상태 적용 — 탈락 처리 · 영웅 쿨다운 · 종료 조건 체크</div>
+  <div class="ssitem"><span class="ssnum">규칙</span>최대 25라운드 · 무승부 시 공격측 실패 (방어 전략 약화)</div>
+</div>
+
+<div class="cwrap">
+  <div class="clbl">방어 수확 체감 함수 — DEF/(DEF+1500): DEF=1500 시 50%, 3000 시 67%</div>
+  <canvas id="c-defense" style="max-height:200px"></canvas>
+</div>
+
+<table class="dt">
+  <thead><tr><th>공격 병종</th><th>유리 (×1.25)</th><th>불리 (×0.80)</th><th>주요 역할</th><th>과금 유도</th></tr></thead>
+  <tbody>
+    <tr><td>보병</td><td>기갑</td><td>항공</td><td>탱커 — 흡수율 = 보병비율×0.4</td><td>병원·치료 구매</td></tr>
+    <tr><td>기갑</td><td>항공</td><td>보병</td><td>딜러 — 고단일 공격력</td><td>차고 스피드업</td></tr>
+    <tr><td>항공</td><td>보병</td><td>기갑</td><td>딜러+서포터 — 이니셔티브 우위</td><td>격납고 과금 핵심</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ══════════════════════ 4단계 ══════════════════════ -->
+<section class="stage-sec" id="s4">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#fffbeb;color:#92400e;border:1px solid #fde68a">4단계</span>
+  <div class="stitle">
+    <h2>영웅 성장 체계 및 데이터 구조</h2>
+    <p>4등급 체계 · 조각(Shard) 성급 진급 · 경험치 요구량 · CP 기여 가중치 4축</p>
+  </div>
+</div>
+<div class="insight">
+  <strong>핵심 통찰:</strong> 4개 독립 성장 통화(조각·경험치·스킬포인트·장비재료)가 하나의 CP로 수렴한다. 어느 하나만 최대화해도 균형점 미달 — 영구 병목 순환 설계. SSR 6성 완성은 무과금 기준 400~1,200일 소요.
+</div>
+
+<div class="sdiv">SSR 영웅 획득 경로 비교</div>
+<div class="cwrap">
+  <div class="clbl">획득 경로별 효율 분석 — 클릭으로 상세 확인</div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px" id="ssr-btns"></div>
+  <div id="ssr-detail" style="font-size:12px;color:var(--muted);line-height:1.8;padding:10px;background:var(--bg);border-radius:8px;margin-bottom:12px;min-height:80px">경로를 선택하면 상세 분석이 표시됩니다.</div>
+  <canvas id="c-ssr" style="max-height:200px"></canvas>
+</div>
+
+<div class="sdiv">성급 진급 — 조각 요구량 vs CP 보너스</div>
+<div class="cwrap">
+  <div class="clbl">누적 조각 수(파랑) vs CP 보너스%(빨강) — 기하급수 증가 구조</div>
+  <canvas id="c-shard" style="max-height:200px"></canvas>
+</div>
+
+<div class="sdiv">CP 기여 4개 축 가중치 시뮬레이터</div>
+<div class="cwrap">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div>
+      <div class="slider-row"><label>영웅 레벨 <span id="hlv-v" style="color:var(--text);font-weight:600">Lv.60</span></label><input type="range" min="1" max="100" value="60" id="hlv-s" oninput="calcCP()"></div>
+      <div class="slider-row"><label>성급 <span id="hst-v" style="color:var(--text);font-weight:600">3성</span></label><input type="range" min="1" max="6" value="3" id="hst-s" oninput="calcCP()"></div>
+      <div class="slider-row"><label>스킬 레벨 (평균) <span id="hsk-v" style="color:var(--text);font-weight:600">Lv.5</span></label><input type="range" min="1" max="10" value="5" id="hsk-s" oninput="calcCP()"></div>
+      <div class="slider-row"><label>전용 장비 단계 <span id="heq-v" style="color:var(--text);font-weight:600">3단계</span></label><input type="range" min="0" max="10" value="3" id="heq-s" oninput="calcCP()"></div>
+    </div>
+    <div id="cp-result" style="font-size:12px;color:var(--muted);line-height:2.2"></div>
+  </div>
+  <canvas id="c-cp" style="max-height:200px;margin-top:16px"></canvas>
+</div>
+
+<table class="dt">
+  <thead><tr><th>성급</th><th>누적 조각</th><th>CP 보너스</th><th>주요 해금</th><th>무과금 달성 기간</th></tr></thead>
+  <tbody>
+    <tr><td>1성</td><td>10</td><td>기준</td><td>영웅 배치 가능</td><td>즉시</td></tr>
+    <tr><td>2성</td><td>30</td><td>+18%</td><td>스킬 슬롯 1 해금</td><td>1~2개월</td></tr>
+    <tr><td>3성</td><td>80</td><td>+42%</td><td>전용 장비 슬롯</td><td>3~6개월</td></tr>
+    <tr><td>4성</td><td>200</td><td>+85%</td><td>패시브 스킬 강화</td><td>8~14개월</td></tr>
+    <tr><td>5성</td><td>500</td><td>+160%</td><td>얼티밋 스킬 해금</td><td>18~30개월</td></tr>
+    <tr><td style="color:var(--red)">6성 (SSR 완성)</td><td style="color:var(--red)">1,200</td><td style="color:var(--red)">+300%</td><td>전설 아우라 활성화</td><td style="color:var(--red)">40~100개월</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ══════════════════════ 5단계 ══════════════════════ -->
+<section class="stage-sec" id="s5">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0">5단계</span>
+  <div class="stitle">
+    <h2>경제 시스템 — 자원 순환 및 인플레이션</h2>
+    <p>Sink &amp; Faucet 전체 구조 · 5개 자원 분석 · 후반 인플레이션 트랩</p>
+  </div>
+</div>
+<div class="insight">
+  <strong>핵심 통찰:</strong> 자원 공급은 선형 증가, 수요는 티어 전환 시 불연속 도약. T3→T4 계단 충격이 SvS 타이밍과 정확히 겹치도록 설계 — 가장 강한 과금 압박 포인트. 골드는 HQ30 기준 소비가 생산의 ×6.8배로 구조적 만성 적자.
+</div>
+<div class="cwrap">
+  <div class="clbl">HQ 레벨별 식량 생산 vs T4 소비 — 의도적 계단 충격 구조</div>
+  <canvas id="c-inflation" style="max-height:220px"></canvas>
+</div>
+<table class="dt">
+  <thead><tr><th>자원</th><th>주요 Faucet</th><th>주요 Sink</th><th>HQ25 생산/소비 격차</th><th>과금 유도</th></tr></thead>
+  <tbody>
+    <tr><td>식량</td><td>농장, 파밍, 퀘스트</td><td>병사 훈련 70%, 유지비 20%</td><td style="color:var(--red)">소비 ×3.8배</td><td>식량 팩 구매</td></tr>
+    <tr><td>철강</td><td>광산, 전장 드롭</td><td>건설 50%, 연구 35%</td><td style="color:var(--red)">소비 ×4.2배</td><td>자원 팩 구매</td></tr>
+    <tr><td>석유</td><td>유전, 동맹 지원</td><td>고급 훈련 60%, 기갑 25%</td><td style="color:var(--amber)">소비 ×3.2배</td><td>석유 팩 구매</td></tr>
+    <tr><td>골드</td><td>퀘스트, 금고 건물</td><td>스킬 40%, 영웅 레벨 30%</td><td style="color:var(--red)">소비 ×6.8배</td><td>골드 팩 구매</td></tr>
+    <tr><td>다이아</td><td>현금 구매 90%+</td><td>스피드업, 가챠, 자원 구매</td><td>무과금 고갈 구조</td><td>핵심 과금 통화</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ══════════════════════ 6단계 ══════════════════════ -->
+<section class="stage-sec" id="s6">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe">6단계</span>
+  <div class="stitle"><h2>월드맵 및 대외 콘텐츠</h2><p>타일 5레이어 · 중립 몬스터 배치 · 자원지 점령 · 수도 쟁탈전 · SvS</p></div>
+</div>
+<div class="insight"><strong>핵심 통찰:</strong> 5개 맵 레이어(지형→자원→몬스터→거점→소셜) 중첩이 집단 책임감을 개인 과금으로 전환한다. 수도 보상 격차(수성 동맹 12,000 다이아 vs 0)는 강제가 아닌 자발적 과금 유도 설계다.</div>
+<div class="sdiv">타일 레이어 × 과금 연결</div>
+<table class="dt">
+  <thead><tr><th>레이어</th><th>구성 요소</th><th>과금 연결</th></tr></thead>
+  <tbody>
+    <tr><td>1. 지형</td><td>이동 속도 변조 타일, 산·강 장벽</td><td>행군 스피드업</td></tr>
+    <tr><td>2. 자원</td><td>식량·철강·석유·금광 지대</td><td>채집 아이템, 부스트</td></tr>
+    <tr><td>3. 몬스터</td><td>Lv.1~10 동심원 배치</td><td>APE 아이템, 에너지</td></tr>
+    <tr><td>4. 거점</td><td>중립 요새, 수도, 동맹 영지</td><td>병사 전투력, 치료</td></tr>
+    <tr><td>5. 소셜</td><td>타 플레이어 기지, 공격 로그</td><td>사회적 압박 → 과금</td></tr>
+  </tbody>
+</table>
+<div class="sdiv">수도 쟁탈전 4단계</div>
+<div class="ssgrid">
+  <div class="ssitem"><span class="ssnum">선포</span>72h 전 — 외교·연합 집중 구간</div>
+  <div class="ssitem"><span class="ssnum">전초전</span>거점 점령 — 병사 손실 시작</div>
+  <div class="ssitem"><span class="ssnum">본전투</span>수도 직접 공격 — 과금 소비 최고점</div>
+  <div class="ssitem"><span class="ssnum">수성</span>서버 버프 보유 · 국고 다이아 분배</div>
+</div>
+</section>
+
+<!-- ══════════════════════ 7단계 ══════════════════════ -->
+<section class="stage-sec" id="s7">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">7단계</span>
+  <div class="stitle"><h2>연맹 시스템 — 소셜 및 집단 경쟁</h2><p>직위 계층 · 연맹 기술·도움·상점 · 집결 메커니즘 · 리텐션 심리</p></div>
+</div>
+<div class="stat-row">
+  <div class="scard"><div class="lbl">연맹 가입자 D30 리텐션</div><div class="val" style="color:var(--green)">~82%</div></div>
+  <div class="scard"><div class="lbl">미가입자 D30 리텐션</div><div class="val" style="color:var(--red)">~28%</div></div>
+  <div class="scard"><div class="lbl">R4~R5 과금 전환율 배율</div><div class="val" style="color:var(--amber)">×2~3</div></div>
+  <div class="scard"><div class="lbl">리텐션 차이</div><div class="val" style="color:var(--blue)">54%p</div></div>
+</div>
+<div class="insight"><strong>핵심 통찰:</strong> 과금이 개인 욕구가 아닌 집단 의무에서 발생하도록 설계된다. "내가 빠지면 동맹이 진다" 구조가 개인 과금 저항을 사회적 압박으로 무력화한다.</div>
+<table class="dt">
+  <thead><tr><th>소셜 채널</th><th>심리 레버</th><th>과금 강도</th></tr></thead>
+  <tbody>
+    <tr><td>집결 소집 (R4+)</td><td>책임감 + 수치 회피</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td>수도 쟁탈전 참전</td><td>사회적 비교</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td>도움 잔여 시간</td><td>완료 욕구</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td>연맹 기술 기여 부족</td><td>죄책감</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td>직위 승격 조건</td><td>지위 욕구</td><td>★★★</td></tr>
+    <tr><td>연맹 상점 포인트 만료</td><td>손실 회피</td><td>★★★</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ══════════════════════ 8단계 ══════════════════════ -->
+<section class="stage-sec" id="s8">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#f3f0ff;color:#5b21b6;border:1px solid #ddd6fe">8단계</span>
+  <div class="stitle"><h2>시즌제 및 이벤트 운용 로직</h2><p>VS 요일별 미션 7일 구조 · 시즌 4~6주 주기 · 신규 영웅 도입 · 메타 교란</p></div>
+</div>
+<div class="insight"><strong>핵심 통찰:</strong> 주간·시즌·분기의 3중 시간 압박이 과금 피크를 반복 생성한다. VS 요일 배치(수·토 과금 집중)가 자원 생산-소비 사이클과 정밀 동기화되어 있다.</div>
+<div class="cwrap">
+  <div class="clbl">VS 7요일 미션 — 요일별 과금 압박 강도</div>
+  <canvas id="c-vs" style="max-height:200px"></canvas>
+</div>
+<table class="dt">
+  <thead><tr><th>요일</th><th>VS 미션</th><th>주요 소모</th><th>무과금 경쟁력</th><th>과금 압박</th></tr></thead>
+  <tbody>
+    <tr><td>월</td><td>건설</td><td>건설 스피드업, 철강</td><td>중간</td><td>★★★</td></tr>
+    <tr><td>화</td><td>연구</td><td>연구 스피드업</td><td>중간</td><td>★★★★</td></tr>
+    <tr><td style="color:var(--red)">수</td><td>훈련</td><td>식량·석유, 훈련 스피드업</td><td style="color:var(--red)">낮음</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td>목</td><td>채집</td><td>시간, 행군 스피드업</td><td style="color:var(--green)">높음</td><td>★★</td></tr>
+    <tr><td>금</td><td>영웅 성장</td><td>조각·골드·포션</td><td>낮음</td><td>★★★★</td></tr>
+    <tr><td style="color:var(--red)">토</td><td>적군 처치</td><td>병사 치료, 부활 아이템</td><td style="color:var(--red)">매우 낮음</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td>일</td><td>종합 결산</td><td>다이아 즉시 구매</td><td>매우 낮음</td><td>★★★★</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ══════════════════════ 9단계 ══════════════════════ -->
+<section class="stage-sec" id="s9">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">9단계</span>
+  <div class="stitle"><h2>BM(비즈니스 모델) 및 유료화 설계</h2><p>6개 과금 카테고리 · 초보자 패키지 · VIP 1~15단계 · 팝업 트리거 14종</p></div>
+</div>
+<div class="insight"><strong>핵심 통찰:</strong> 30개+ 과금 지점이 5개 가격 레이어($0.99/$4.99/$9.99/$19.99/$99.99+)에 분산. 팝업은 "필요를 만든 직후 즉시 솔루션 판매"하는 타이밍 설계다.</div>
+<div class="cwrap">
+  <div class="clbl">심리 레버별 팝업 트리거 수 및 평균 강도</div>
+  <canvas id="c-popup" style="max-height:200px"></canvas>
+</div>
+<table class="dt">
+  <thead><tr><th>트리거 조건</th><th>심리 레버</th><th>노출 상품</th><th>강도</th></tr></thead>
+  <tbody>
+    <tr><td>전투 패배 직후</td><td>손실 회피</td><td>전투력 강화 팩 $4.99</td><td style="color:var(--red)">10/10</td></tr>
+    <tr><td>한정 영웅 픽업 종료 임박</td><td>FOMO</td><td>한정 가챠 묶음 $29.99+</td><td style="color:var(--red)">10/10</td></tr>
+    <tr><td>건설 잔여 5분 이하</td><td>완료 욕구</td><td>즉시 완료 다이아 5~30개</td><td style="color:var(--red)">9/10</td></tr>
+    <tr><td>병사 대량 손실</td><td>손실 회피</td><td>즉시 부활 팩 $9.99</td><td style="color:var(--red)">10/10</td></tr>
+    <tr><td>집결 소집 알림</td><td>사회적 압박</td><td>집결 강화 팩 $7.99</td><td style="color:var(--red)">9/10</td></tr>
+    <tr><td>이벤트 마감 24시간 전</td><td>FOMO</td><td>이벤트 포인트 팩 $19.99</td><td style="color:var(--amber)">9/10</td></tr>
+    <tr><td>첫 로그인 (Day 1)</td><td>낮은 진입 장벽</td><td>초보자 패키지 $0.99 (1회 한정)</td><td style="color:var(--amber)">8/10</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ══════════════════════ 10단계 ══════════════════════ -->
+<section class="stage-sec" id="s10">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#f3f0ff;color:#5b21b6;border:1px solid #ddd6fe">10단계</span>
+  <div class="stitle"><h2>UX/UI 및 유저 심리 설계</h2><p>레드 닷 배치 전략 · 성장 시각화 연출 · 손실 회피 · 14가지 심리 기법</p></div>
+</div>
+<div class="insight"><strong>핵심 통찰:</strong> Last War의 UI는 정보 전달이 아닌 행동 유도 장치다. 레드 닷 14개 동시 활성화는 완료 불가능 상태 강제 생성기. 성장 연출은 결과보다 과정에서 도파민을 극대화하도록 설계된 5단계 시퀀스다.</div>
+<div class="cwrap">
+  <div class="clbl">14가지 심리 기법 — 과금 전환 강도 × 게임 내 노출 빈도 (버블 크기 = 과금 영향)</div>
+  <canvas id="c-psych" style="max-height:260px"></canvas>
+</div>
+<table class="dt">
+  <thead><tr><th>심리 기법</th><th>주요 적용 시스템</th><th>강도</th></tr></thead>
+  <tbody>
+    <tr><td>손실 회피</td><td>전투 패배 팝업, 자원 부족 경고</td><td style="color:var(--red)">9.5/10</td></tr>
+    <tr><td>FOMO</td><td>한정 영웅 픽업 타이머, 이벤트 마감</td><td style="color:var(--red)">8.8/10</td></tr>
+    <tr><td>자이가르닉 효과</td><td>레드 닷 영구 잔존 — 절대 0이 안 되는 구조</td><td style="color:var(--red)">8.0/10</td></tr>
+    <tr><td>사회적 비교</td><td>서버 전투력 순위, 공개 공격 로그</td><td style="color:var(--amber)">7.8/10</td></tr>
+    <tr><td>매몰 비용 함정</td><td>VIP 누적 레벨, 연맹 직위</td><td style="color:var(--amber)">8.2/10</td></tr>
+    <tr><td>변동 보상</td><td>가챠 확률형 소환 — 슬롯머신 원리</td><td>6.8/10</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ══════════════════════ 11단계 ══════════════════════ -->
+<section class="stage-sec" id="s11">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#fffbeb;color:#92400e;border:1px solid #fde68a">11단계</span>
+  <div class="stitle"><h2>가챠 확률 설계 및 규제 대응 분석</h2><p>4개 소환 레이어 · 소프트·하드 천장 수치 · 도파민 연출 5단계 · 국가별 규제</p></div>
+</div>
+<div class="insight"><strong>핵심 통찰:</strong> 0.7% 확률보다 연출이 중독성을 결정한다. 천장 이월 규칙 비공개가 의도적 불투명성 설계다. SSR 6성 완성 실질 비용 $500~$3,000+.</div>
+<div class="cwrap">
+  <div class="clbl">Pity 시스템 시뮬레이터 — 소환 횟수별 SSR 확률 변화</div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+    <label style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px"><input type="radio" name="banner" value="normal" onchange="calcPity()"> 일반 (0.5%)</label>
+    <label style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px"><input type="radio" name="banner" value="pickup" checked onchange="calcPity()"> 픽업 (0.7%)</label>
+    <label style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px"><input type="radio" name="banner" value="limited" onchange="calcPity()"> 한정 (1.0%)</label>
+  </div>
+  <div class="slider-row">
+    <label>현재 Pity 카운트 <span id="pity-v" style="color:var(--text);font-weight:600">0회</span> — 현재 확률: <span id="pity-prob" style="color:var(--red);font-weight:600">0.7%</span></label>
+    <input type="range" min="0" max="100" value="0" id="pity-s" oninput="calcPity()">
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:2px"><span>0회 (초기화)</span><span>50회 (소프트 천장)</span><span>100회 (하드 천장)</span></div>
+  </div>
+  <div id="pity-insight" style="font-size:12px;color:var(--muted);padding:8px 10px;background:var(--bg);border-radius:8px;margin-bottom:12px;line-height:1.7"></div>
+  <canvas id="c-pity" style="max-height:200px"></canvas>
+</div>
+
+<table class="dt">
+  <thead><tr><th>소환 유형</th><th>SSR 확률</th><th>소프트 천장</th><th>하드 천장</th><th>6성 실질 비용</th></tr></thead>
+  <tbody>
+    <tr><td>일반 소환</td><td>0.1%</td><td>없음</td><td>없음</td><td>무료 티켓 한정</td></tr>
+    <tr><td>고급 소환</td><td>0.5%</td><td>50회</td><td>100회 보장</td><td>$300~$600</td></tr>
+    <tr><td style="color:var(--amber)">픽업 소환</td><td style="color:var(--amber)">0.7%</td><td>50회</td><td>100회</td><td style="color:var(--amber)">$500~$1,500</td></tr>
+    <tr><td>한정 배너</td><td>1.0%</td><td>50회</td><td>100회</td><td style="color:var(--red)">$300~$3,000+</td></tr>
+  </tbody>
+</table>
+
+<table class="dt" style="margin-top:16px">
+  <thead><tr><th>국가</th><th>규제 수준</th><th>대응 전략</th></tr></thead>
+  <tbody>
+    <tr><td>중국</td><td style="color:var(--red)">강제 공시</td><td>확률표 공개 (작은 글씨 링크)</td></tr>
+    <tr><td>한국</td><td style="color:var(--red)">강제 공시</td><td>소환 화면 내 확률표 링크</td></tr>
+    <tr><td>벨기에·네덜란드</td><td style="color:var(--red)">도박 규제 적용</td><td>가챠 비활성화 또는 서비스 미제공</td></tr>
+    <tr><td>미국</td><td style="color:var(--green)">자율 규제</td><td>최소 공시 — 접근 경로 복잡화</td></tr>
+    <tr><td>일본</td><td style="color:var(--amber)">업계 자율 기준</td><td>JOGA 기준 준수, 비교적 상세 공시</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ══════════════════════ 12단계 ══════════════════════ -->
+<section class="stage-sec" id="s12">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0">12단계</span>
+  <div class="stitle"><h2>서버 생애주기 및 신규 서버 설계</h2><p>탄생→성장→패권→침체→붕괴 5단계 · 이민 비용 구조 · 병합 수익화</p></div>
+</div>
+<div class="insight"><strong>핵심 통찰:</strong> 서버는 소모품으로 설계된다. 2단계(성장·경쟁)가 전체 생애주기 중 과금 강도 최고. 이민 HQ 20+ 비용 차단이 고과금 플레이어 잔류 장치로 기능한다.</div>
+<div class="cwrap">
+  <div class="clbl">서버 생애주기 — 활성 유저 수 vs 일평균 과금 강도 추이</div>
+  <canvas id="c-server" style="max-height:220px"></canvas>
+</div>
+<table class="dt">
+  <thead><tr><th>단계</th><th>기간</th><th>활성 유저</th><th>월 이탈률</th><th>과금 강도</th></tr></thead>
+  <tbody>
+    <tr><td>1단계: 탄생</td><td>0~4주</td><td>300~500명</td><td>~40%</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td style="color:var(--green)">2단계: 성장·경쟁</td><td>1~3개월</td><td>250~400명</td><td>~15%</td><td style="color:var(--red)">★★★★★ (최고)</td></tr>
+    <tr><td>3단계: 패권 확립</td><td>3~6개월</td><td>180~280명</td><td>~20%</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td>4단계: 독점·침체</td><td>6~12개월</td><td>80~150명</td><td>~35%</td><td>★★</td></tr>
+    <tr><td>5단계: 붕괴·병합</td><td>12개월+</td><td>30~80명</td><td>~50%</td><td>★</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ══════════════════════ 13단계 ══════════════════════ -->
+<section class="stage-sec" id="s13">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe">13단계</span>
+  <div class="stitle"><h2>경쟁 포지셔닝 및 장르 내 차별화 분석</h2><p>4개 타이틀 비교 · 5개 경쟁 축 심층 분석 · 장르 진화 타임라인 2013~2023</p></div>
+</div>
+<div class="insight"><strong>핵심 통찰:</strong> Last War는 장르를 혁신한 것이 아니라 진입 장벽을 파괴하는 방식을 혁신했다. UA 크리에이티브 실험의 승자(러닝 액션)가 게임 구조를 역방향으로 결정 — 설계 역순 구조.</div>
+<div class="cwrap">
+  <div class="clbl">4개 타이틀 설계 역량 레이더 비교 (10점 만점)</div>
+  <canvas id="c-comp" style="max-height:260px"></canvas>
+</div>
+<table class="dt">
+  <thead><tr><th>항목</th><th>Last War</th><th>Whiteout</th><th>Rise of Kingdoms</th><th>State of Survival</th></tr></thead>
+  <tbody>
+    <tr><td>출시</td><td>2023</td><td>2022</td><td>2018</td><td>2019</td></tr>
+    <tr><td>CPI 추정</td><td style="color:var(--green)">$0.8~1.5</td><td>$1.5~2.5</td><td>$3.5~5</td><td>$2~3</td></tr>
+    <tr><td>D30 리텐션</td><td>~22%</td><td>~28%</td><td style="color:var(--green)">~35%</td><td>~25%</td></tr>
+    <tr><td>월 매출</td><td>$20~30M</td><td style="color:var(--green)">$50~80M</td><td>$40~60M</td><td>$15~25M</td></tr>
+    <tr><td>테마 통합</td><td style="color:var(--red)">분리</td><td style="color:var(--green)">생존 서사 통합</td><td style="color:var(--green)">문명 서사 통합</td><td>부분 통합</td></tr>
+    <tr><td>무과금 경험</td><td style="color:var(--red)">열악</td><td>중간</td><td style="color:var(--green)">양호</td><td>중간</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ══════════════════════ 14단계 ══════════════════════ -->
+<section class="stage-sec" id="s14">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#f8fafc;color:#374151;border:1px solid #e2e8f0">14단계</span>
+  <div class="stitle"><h2>데이터 분석 구조 및 KPI 추정 분석</h2><p>KPI 4레이어 계층 · 핵심 지표 역산 시뮬레이터 · A/B 테스트 8종 추정 · 코호트</p></div>
+</div>
+<div class="insight"><strong>핵심 통찰 — 북극성 지표:</strong> 모든 설계가 단일 지표를 향해 수렴한다. <strong style="color:var(--accent)">월간 결제 플레이어 수 × ARPPU.</strong> 유입(CPI 최소화) · 전환($0.99 진입) · 유지(VIP·소셜) · 이탈 방지(SvS·연맹)의 4개 레버가 동시에 이 지표를 당긴다.</div>
+
+<div class="sdiv">KPI 역산 시뮬레이터</div>
+<div class="cwrap">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div>
+      <div class="slider-row"><label>월 신규 설치 수 (만) <span id="ins-v" style="color:var(--text);font-weight:600">500만</span></label><input type="range" min="100" max="2000" value="500" step="50" id="ins-s" oninput="calcKPI()"></div>
+      <div class="slider-row"><label>D30 리텐션 (%) <span id="d30-v" style="color:var(--text);font-weight:600">22%</span></label><input type="range" min="5" max="50" value="22" id="d30-s" oninput="calcKPI()"></div>
+      <div class="slider-row"><label>과금 전환율 (%) <span id="cvr-v" style="color:var(--text);font-weight:600">4.5%</span></label><input type="range" min="1" max="15" value="4.5" step="0.5" id="cvr-s" oninput="calcKPI()"></div>
+      <div class="slider-row"><label>ARPPU (월, $) <span id="arppu-v" style="color:var(--text);font-weight:600">$85</span></label><input type="range" min="10" max="300" value="85" step="5" id="arppu-s" oninput="calcKPI()"></div>
+      <div class="slider-row"><label>CPI ($) <span id="cpi-v" style="color:var(--text);font-weight:600">$1.20</span></label><input type="range" min="0.5" max="5" value="1.2" step="0.1" id="cpi-s" oninput="calcKPI()"></div>
+    </div>
+    <div id="kpi-result" style="font-size:12px;color:var(--muted);line-height:2.2"></div>
+  </div>
+  <canvas id="c-kpi" style="max-height:200px;margin-top:16px"></canvas>
+</div>
+
+<div class="sdiv">A/B 테스트 역추정 — 설계 결과물에서 실험 이력 복원</div>
+<table class="dt">
+  <thead><tr><th>가설</th><th>승자 변형</th><th>추정 개선</th></tr></thead>
+  <tbody>
+    <tr><td>광고 크리에이티브 — 4X 게임플레이 vs 러닝 액션</td><td>러닝 액션</td><td style="color:var(--green)">CPI -65%</td></tr>
+    <tr><td>초보자 팩 가격 — $4.99 단일 vs $0.99 한정</td><td>$0.99 + 업셀 체인</td><td style="color:var(--green)">첫 결제 CVR +42%</td></tr>
+    <tr><td>건설 완료 팝업 — 5분 후 vs 즉시</td><td>완료 즉시</td><td style="color:var(--green)">스피드업 구매 +25%</td></tr>
+    <tr><td>레드 닷 수 — 5개 vs 14개+</td><td>14개+ 동시</td><td style="color:var(--green)">DAU +7%</td></tr>
+    <tr><td>동맹 가입 — 즉시 vs HQ5 이후</td><td>HQ5 이후 단계적</td><td style="color:var(--green)">D30 리텐션 +12%</td></tr>
+    <tr><td>일일 로그인 — 단순 지급 vs 연속 배율</td><td>7일 연속 + 리셋</td><td style="color:var(--green)">D7 리텐션 +11%</td></tr>
+    <tr><td>이벤트 과금 팝업 — 시작 전 vs 마감 24h</td><td>마감 24h 집중</td><td style="color:var(--green)">이벤트 매출 +32%</td></tr>
+    <tr><td>픽업 배너 기간 — 7일 vs 14일</td><td>14일 (후반 FOMO)</td><td style="color:var(--green)">가챠 ARPPU +18%</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">코호트 세그먼트별 핵심 지표</div>
+<table class="dt">
+  <thead><tr><th>세그먼트</th><th>비중</th><th>D30 리텐션</th><th>과금 전환율</th><th>매출 기여 추정</th></tr></thead>
+  <tbody>
+    <tr><td>광고 낚인 캐주얼</td><td>~38%</td><td style="color:var(--red)">~5%</td><td style="color:var(--red)">~0.3%</td><td>&lt;1%</td></tr>
+    <tr><td>온보딩 통과자 (HQ5+)</td><td>~32%</td><td>~28%</td><td>~4%</td><td>~8%</td></tr>
+    <tr><td>동맹 가입 완료자</td><td>~18%</td><td style="color:var(--green)">~52%</td><td>~8%</td><td>~22%</td></tr>
+    <tr><td>첫 결제 완료자</td><td>~8%</td><td style="color:var(--green)">~68%</td><td>100%</td><td>~30%</td></tr>
+    <tr><td style="color:var(--amber)">고과금 (월 $50+)</td><td>~2%</td><td style="color:var(--green)">~82%</td><td>100%</td><td style="color:var(--amber)">~40%</td></tr>
+    <tr><td style="color:var(--red)">MegaWhale (VIP10+)</td><td>~0.4%</td><td style="color:var(--green)">~91%</td><td>100%</td><td style="color:var(--red)">~30%</td></tr>
+  </tbody>
+</table>
+</section>
+
+</main>
+<footer>
+  Last War: Survival — Complete Reverse Design Document · 14 Stages<br>
+  <span style="color:var(--dim)">팀 내부 공유용 · 무단 외부 배포 금지</span>
+</footer>
+<script>
+/* ════════ 단계 데이터 ════════ */
+const STAGES=[
+  {id:'s1',n:1,title:'게임 정체성',color:'#7c3aed',merged:true},
+  {id:'s2',n:2,title:'기지 건설',color:'#059669',merged:true},
+  {id:'s3',n:3,title:'전투 시스템',color:'#dc2626',merged:true},
+  {id:'s4',n:4,title:'영웅 성장',color:'#d97706',merged:false},
+  {id:'s5',n:5,title:'경제 시스템',color:'#059669',merged:false},
+  {id:'s6',n:6,title:'월드맵',color:'#2563eb',merged:false},
+  {id:'s7',n:7,title:'연맹 시스템',color:'#dc2626',merged:false},
+  {id:'s8',n:8,title:'시즌·이벤트',color:'#7c3aed',merged:false},
+  {id:'s9',n:9,title:'BM·유료화',color:'#dc2626',merged:false},
+  {id:'s10',n:10,title:'UX·심리',color:'#7c3aed',merged:false},
+  {id:'s11',n:11,title:'가챠·규제',color:'#d97706',merged:false},
+  {id:'s12',n:12,title:'서버 생태계',color:'#059669',merged:false},
+  {id:'s13',n:13,title:'경쟁 분석',color:'#2563eb',merged:false},
+  {id:'s14',n:14,title:'KPI·데이터',color:'#6b7280',merged:false},
+];
+
+/* ════════ NAV 빌드 ════════ */
+const snav=document.getElementById('snav');
+STAGES.forEach(s=>{
+  const b=document.createElement('button');
+  b.className='snav-btn'+(s.id==='s1'?' active':'');
+  b.dataset.id=s.id;
+  if(s.id==='s1'){b.style.background=s.color+'22';b.style.borderColor=s.color;b.style.color=s.color;}
+  b.innerHTML=`${s.n}. ${s.title}${s.merged?' <span style="color:#059669;font-size:9px">★</span>'  :''}`;
+  b.addEventListener('click',()=>gotoStage(s.id));
+  snav.appendChild(b);
+});
+
+let curStage='s1',viewMode='stage';
+
+function gotoStage(id){
+  if(viewMode==='all')return;
+  curStage=id;
+  document.querySelectorAll('.stage-sec').forEach(el=>el.classList.remove('vis'));
+  document.getElementById(id).classList.add('vis');
+  document.querySelectorAll('.snav-btn').forEach(b=>{
+    const s=STAGES.find(x=>x.id===b.dataset.id);
+    b.classList.remove('active');
+    b.style.background=b.style.borderColor=b.style.color='';
+    if(b.dataset.id===id&&s){b.classList.add('active');b.style.background=s.color+'22';b.style.borderColor=s.color;b.style.color=s.color;}
+  });
+  document.querySelector(`.snav-btn[data-id="${id}"]`)?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function setView(mode,btn){
+  viewMode=mode;
+  document.querySelectorAll('.vtbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(mode==='all'){document.querySelectorAll('.stage-sec').forEach(el=>el.classList.add('vis'));}
+  else{document.querySelectorAll('.stage-sec').forEach(el=>el.classList.remove('vis'));document.getElementById(curStage).classList.add('vis');}
+}
+
+/* ════════ Chart.js 공통 ════════ */
+Chart.defaults.color='#5a6275';
+Chart.defaults.font.family="'Noto Sans KR',sans-serif";
+Chart.defaults.font.size=11;
+const G={color:'rgba(0,0,0,.06)'};
+const ax=(lbl)=>({grid:G,ticks:{color:'#5a6275'},...(lbl?{title:{display:true,text:lbl,color:'#5a6275',font:{size:10}}}:{})});
+
+/* ════════ S1 — 광고 변형 차트 ════════ */
+const adTypes=[
+  {label:'병사 합치기형',color:'#dc2626',ctr:8.4,ret:18,cvr:4.2,
+   desc:'<b>병사 합치기형</b> — 작은 병사들이 합쳐져 대군이 되는 성장 카타르시스 광고.<br>CTR 8.4% / D7 리텐션 18% / 과금 전환 4.2%<br>합체 "딱!" 효과음이 CTR 핵심 기여 요소. 가장 많이 운용되는 변형.'},
+  {label:'실패 유도형',color:'#7c3aed',ctr:9.1,ret:16,cvr:3.8,
+   desc:'<b>실패 유도형</b> — 의도적 잘못된 선택 → "나라면 더 잘할 텐데" 욕구 자극.<br>CTR 9.1%(최고) / D7 리텐션 16% / 과금 전환 3.8%<br>기대 불일치 심해 D1 이탈 5~8%p 높음.'},
+  {label:'대군 형성형',color:'#059669',ctr:7.2,ret:22,cvr:4.8,
+   desc:'<b>대군 형성형</b> — 소규모→화면 가득 대군으로 스케일 확장 강조.<br>CTR 7.2% / D7 리텐션 22%(최고) / 과금 전환 4.8%(최고)<br>실제 4X 콘텐츠와 가장 근접 → 기대 불일치 낮음.'},
+  {label:'고난이도 도전형',color:'#d97706',ctr:7.8,ret:19,cvr:4.1,
+   desc:'<b>고난이도 도전형</b> — 극도로 좁은 통로, 복잡한 장애물 극복 긴장감.<br>CTR 7.8% / D7 리텐션 19% / 과금 전환 4.1%<br>난이도 높을수록 완료 시청율↑ (목격자 효과).'},
+  {label:'플레이어블',color:'#2563eb',ctr:6.5,ret:24,cvr:5.6,
+   desc:'<b>플레이어블 광고</b> — 광고 내 직접 탭 조작 가능 (미니 게임 체험).<br>CTR 6.5% / D7 리텐션 24% / 과금 전환 5.6%(최고)<br>CTR 낮지만 전환 품질 최고. 제작 비용 3~5× 높아 운용 제한.'},
+];
+let adChart=null;
+const adBtns=document.getElementById('ad-btns');
+adTypes.forEach((a,i)=>{
+  const b=document.createElement('div');
+  b.className='ibtn';b.textContent=a.label;
+  b.onclick=()=>{
+    document.getElementById('ad-detail').innerHTML=a.desc;
+    document.querySelectorAll('#ad-btns .ibtn').forEach((x,j)=>{x.style.background=j===i?a.color+'22':'';x.style.color=j===i?a.color:'';x.style.borderColor=j===i?a.color:'';});
+    if(adChart)adChart.destroy();
+    adChart=new Chart(document.getElementById('c-ad'),{
+      type:'bar',data:{labels:adTypes.map(x=>x.label),
+        datasets:[
+          {label:'CTR(%)',data:adTypes.map(x=>x.ctr),backgroundColor:adTypes.map((x,j)=>j===i?'rgba(220,38,38,.8)':'rgba(220,38,38,.2)'),borderRadius:4,barPercentage:.28,categoryPercentage:.85},
+          {label:'D7 리텐션(%)',data:adTypes.map(x=>x.ret),backgroundColor:adTypes.map((x,j)=>j===i?'rgba(5,150,105,.8)':'rgba(5,150,105,.2)'),borderRadius:4,barPercentage:.28,categoryPercentage:.85},
+          {label:'과금 전환(%)',data:adTypes.map(x=>x.cvr),backgroundColor:adTypes.map((x,j)=>j===i?'rgba(37,99,235,.8)':'rgba(37,99,235,.2)'),borderRadius:4,barPercentage:.28,categoryPercentage:.85},
+        ]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
+        scales:{x:{grid:{display:false},ticks:{color:'#5a6275',font:{size:10}}},y:{...ax('%'),max:30}}}
+    });
+  };
+  adBtns.appendChild(b);
+});
+
+/* ════════ S1 — 레이더 차트 ════════ */
+new Chart(document.getElementById('c-radar'),{type:'radar',
+  data:{labels:['UA 효율','과금 전환','테마 통합','초반 성장','리텐션','Whale 설계'],
+    datasets:[
+      {label:'Last War',data:[10,9,5,9,7,7],borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.1)',pointBackgroundColor:'#dc2626',borderWidth:2,pointRadius:3},
+      {label:'Whiteout',data:[8,9,9,7,9,9],borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',pointBackgroundColor:'#2563eb',borderWidth:2,pointRadius:3},
+    ]},
+  options:{responsive:true,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
+    scales:{r:{min:0,max:10,ticks:{display:false},grid:{color:'rgba(0,0,0,.07)'},pointLabels:{color:'#5a6275',font:{size:11}}}}}
+});
+
+/* ════════ S2 — 자원 차트 ════════ */
+new Chart(document.getElementById('c-resource'),{type:'bar',
+  data:{labels:['식량','철강','석유','골드'],
+    datasets:[
+      {label:'생산량(K/h)',data:[85,62,48,12],backgroundColor:'rgba(5,150,105,.7)',borderRadius:4,barPercentage:.4},
+      {label:'T4 소비(K/h)',data:[320,210,180,55],backgroundColor:'rgba(220,38,38,.7)',borderRadius:4,barPercentage:.4},
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},scales:{x:ax(),y:ax('K/시간')}}
+});
+
+/* ════════ S2 — 슬롯 시뮬레이터 ════════ */
+let slotChart=null;
+function calcSlot(){
+  const slots=parseInt(document.getElementById('slot-s').value);
+  const tasks=parseInt(document.getElementById('task-s').value);
+  const timeH=parseInt(document.getElementById('time-s').value);
+  document.getElementById('slot-v').textContent=slots+'개';
+  document.getElementById('task-v').textContent=tasks+'개';
+  document.getElementById('time-v').textContent=timeH+'h';
+  const totalD=((tasks*timeH)/slots/24).toFixed(1);
+  const baseD=(tasks*timeH/24).toFixed(1);
+  const save=((1-1/slots)*100).toFixed(0);
+  const vipInfo=['없음','없음','VIP 4 ($40)','VIP 7 ($300)','VIP 13 ($4,000)','VIP 14 ($6,000)'];
+  document.getElementById('slot-result').innerHTML=
+    `슬롯 ${slots}개 (${vipInfo[slots-1]})<br>소요 일수: <b>${totalD}일</b><br>1슬롯 대비 절약: <b style="color:#059669">${save}%</b><br>6슬롯 대비 추가 소요: <b style="color:#dc2626">${(tasks*timeH/6/24).toFixed(1)}일 → ${totalD}일</b>`;
+  const allSlots=[1,2,3,4,5,6];
+  if(slotChart)slotChart.destroy();
+  slotChart=new Chart(document.getElementById('c-slot'),{type:'bar',
+    data:{labels:allSlots.map(s=>'슬롯 '+s+'개'),
+      datasets:[{label:'완료 소요일',data:allSlots.map(s=>+((tasks*timeH)/s/24).toFixed(1)),
+        backgroundColor:allSlots.map(s=>s===slots?'rgba(220,38,38,.8)':'rgba(220,38,38,.2)'),borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},y:{...ax('소요 일수')}}}
+  });
+}
+calcSlot();
+
+/* ════════ S3 — 패턴 시뮬레이터 ════════ */
+let patChart=null;
+function calcPattern(){
+  const S=parseInt(document.getElementById('stg-s').value);
+  document.getElementById('stg-v').textContent=S;
+  const openL=Math.max(1,3-Math.floor(S/8));
+  const width=Math.max(80,147-S*2.2).toFixed(0);
+  const react=Math.max(0.5,2.0-S*0.05).toFixed(1);
+  const dens=Math.min(70,10+S*2).toFixed(0);
+  const troop=(1+S*0.083).toFixed(2);
+  document.getElementById('pattern-result').innerHTML=[
+    {l:'통로 수',v:openL+'개',c:openL===1?'#dc2626':'#059669'},
+    {l:'통로 폭',v:width+'px',c:width<100?'#dc2626':'#5a6275'},
+    {l:'반응 시간',v:react+'초',c:react<0.8?'#dc2626':'#5a6275'},
+    {l:'장애물 밀도',v:dens+'%',c:dens>50?'#dc2626':'#5a6275'},
+    {l:'병사 배율',v:troop+'×',c:'#7c3aed'},
+  ].map(r=>`<div style="background:#f4f6f9;border-radius:8px;padding:10px;text-align:center"><div style="font-size:10px;color:#5a6275;margin-bottom:4px">${r.l}</div><div style="font-size:15px;font-weight:700;color:${r.c}">${r.v}</div></div>`).join('');
+  const stgs=Array.from({length:30},(_,i)=>i+1);
+  if(patChart)patChart.destroy();
+  patChart=new Chart(document.getElementById('c-pattern'),{type:'line',
+    data:{labels:stgs.map(s=>'S'+s),
+      datasets:[
+        {label:'개방 통로',data:stgs.map(s=>Math.max(1,3-Math.floor(s/8))),borderColor:'#dc2626',tension:.2,fill:false,pointRadius:stgs.map((_,i)=>i===S-1?6:0),pointBackgroundColor:'#dc2626',stepped:'before',yAxisID:'y1'},
+        {label:'반응시간(초)',data:stgs.map(s=>Math.max(0.5,2.0-s*0.05)),borderColor:'#7c3aed',tension:.4,fill:false,pointRadius:stgs.map((_,i)=>i===S-1?6:0),pointBackgroundColor:'#7c3aed',yAxisID:'y2'},
+        {label:'병사배율×',data:stgs.map(s=>+(1+s*0.083).toFixed(2)),borderColor:'#059669',tension:.4,fill:false,pointRadius:stgs.map((_,i)=>i===S-1?6:0),pointBackgroundColor:'#059669',yAxisID:'y2'},
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y}}},
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#5a6275',callback:(_,i)=>i%5===0?'S'+(i+1):'',autoSkip:false,maxRotation:0}},
+        y1:{type:'linear',position:'left',min:0,max:4,...ax('통로 수')},
+        y2:{type:'linear',position:'right',min:0,max:4,grid:{display:false},...ax('배율/시간')},
+      }}
+  });
+}
+calcPattern();
+
+/* ════════ S3 — 방어 체감 ════════ */
+const defX=[0,300,600,1000,1500,2500,4000,8000,15000];
+new Chart(document.getElementById('c-defense'),{type:'line',
+  data:{labels:defX.map(v=>v>=1000?(v/1000).toFixed(0)+'K':v),
+    datasets:[{label:'방어 감소율(%)',data:defX.map(v=>+((v/(v+1500))*100).toFixed(1)),
+      borderColor:'#7c3aed',backgroundColor:'rgba(124,58,237,.08)',tension:.4,fill:true,pointRadius:3,pointBackgroundColor:'#7c3aed'}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:ax('방어력'),y:{...ax('감소율(%)'),min:0,max:100,ticks:{color:'#5a6275',callback:v=>v+'%'}}}}
+});
+
+/* ════════ S4 — SSR 획득 경로 ════════ */
+const ssrRoutes=[
+  {label:'가챠 소환',color:'#dc2626',spd:8,free:2,cert:3,timeEff:3,value:5,
+   info:'픽업 SSR 확률 0.7% / 하드 천장 100회 / 6성 실질 비용 $500~$3,000+. 가장 빠르지만 가장 비싼 경로.'},
+  {label:'시즌 패스',color:'#7c3aed',spd:6,free:7,cert:7,timeEff:7,value:9,
+   info:'$9.99~19.99/시즌 / 시즌당 50~80조각 / 6성까지 $120~360. 과금 경로 중 가성비 최고.'},
+  {label:'이벤트 파밍',color:'#2563eb',spd:3,free:9,cert:5,timeEff:8,value:7,
+   info:'VS·시즌 이벤트 파밍 / 월 60~120조각 / 6성까지 10~20개월. 무과금의 현실적 경로.'},
+  {label:'연맹 상점',color:'#059669',spd:2,free:8,cert:3,timeEff:9,value:4,
+   info:'월 20~40조각 / 단독 경로로는 4~5년 소요. 병행 보조 경로로 활용.'},
+  {label:'조각 직구매',color:'#d97706',spd:9,free:1,cert:10,timeEff:2,value:2,
+   info:'개당 $0.50~2.00 / 6성 직구매 $600~2,400. 이벤트 한정 판매 FOMO 설계. Whale 전용.'},
+];
+let ssrChart=null;
+const ssrBtns=document.getElementById('ssr-btns');
+ssrRoutes.forEach((r,i)=>{
+  const b=document.createElement('div');b.className='ibtn';b.textContent=r.label;
+  b.onclick=()=>{
+    document.getElementById('ssr-detail').innerHTML=r.info;
+    document.querySelectorAll('#ssr-btns .ibtn').forEach((x,j)=>{x.style.background=j===i?r.color+'22':'';x.style.color=j===i?r.color:'';x.style.borderColor=j===i?r.color:'';});
+    if(ssrChart)ssrChart.destroy();
+    ssrChart=new Chart(document.getElementById('c-ssr'),{type:'radar',
+      data:{labels:['획득 속도','무과금 가능성','확실성','시간 효율','가성비'],
+        datasets:ssrRoutes.map((rt,j)=>({label:rt.label,data:[rt.spd,rt.free,rt.cert,rt.timeEff,rt.value],
+          borderColor:j===i?rt.color:rt.color+'33',backgroundColor:j===i?rt.color+'18':'transparent',
+          pointBackgroundColor:j===i?rt.color:rt.color+'44',borderWidth:j===i?2:1,pointRadius:j===i?4:2}))},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{labels:{color:'#5a6275',boxWidth:10,font:{size:10}}}},
+        scales:{r:{min:0,max:10,ticks:{display:false},grid:{color:'rgba(0,0,0,.08)'},pointLabels:{color:'#5a6275',font:{size:11}}}}}
+    });
+  };
+  ssrBtns.appendChild(b);
+});
+
+/* ════════ S4 — 조각 차트 ════════ */
+const SHARDS=[10,30,80,200,500,1200];
+const STARPCT=[0,18,42,85,160,300];
+new Chart(document.getElementById('c-shard'),{type:'bar',
+  data:{labels:['1성\n10조각','2성\n30조각','3성\n80조각','4성\n200조각','5성\n500조각','6성\n1200조각'],
+    datasets:[
+      {label:'누적 조각',data:SHARDS,backgroundColor:'rgba(37,99,235,.65)',borderRadius:4,yAxisID:'y1',barPercentage:.4},
+      {label:'CP 보너스(%)',data:STARPCT,type:'line',borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.05)',tension:.3,fill:true,pointRadius:5,pointBackgroundColor:'#dc2626',yAxisID:'y2'}
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
+    scales:{
+      x:{grid:{display:false},ticks:{color:'#5a6275',font:{size:10},maxRotation:0}},
+      y1:{type:'linear',position:'left',grid:G,ticks:{color:'rgba(37,99,235,.8)',callback:v=>v+'개'},title:{display:true,text:'누적 조각',color:'rgba(37,99,235,.8)',font:{size:10}}},
+      y2:{type:'linear',position:'right',grid:{display:false},ticks:{color:'#dc2626',callback:v=>'+'+v+'%'},title:{display:true,text:'CP 보너스',color:'#dc2626',font:{size:10}}},
+    }}
+});
+
+/* ════════ S4 — CP 시뮬레이터 ════════ */
+const BASE_CP=50000;
+const STAR_BONUS=[0,0.18,0.42,0.85,1.60,3.00];
+let cpChart=null;
+function calcCP(){
+  const lv=parseInt(document.getElementById('hlv-s').value);
+  const star=parseInt(document.getElementById('hst-s').value);
+  const skill=parseInt(document.getElementById('hsk-s').value);
+  const equip=parseInt(document.getElementById('heq-s').value);
+  document.getElementById('hlv-v').textContent='Lv.'+lv;
+  document.getElementById('hst-v').textContent=star+'성';
+  document.getElementById('hsk-v').textContent='Lv.'+skill;
+  document.getElementById('heq-v').textContent=equip+'단계';
+  const lvCP=Math.round(BASE_CP*(lv/100)*1.30);
+  const starCP=Math.round(BASE_CP*(STAR_BONUS[star-1]||0)*0.25);
+  const skillCP=Math.round(BASE_CP*((skill-1)/9)*0.25);
+  const equipCP=Math.round(BASE_CP*(equip/10)*0.20);
+  const total=lvCP+starCP+skillCP+equipCP;
+  const maxCP=Math.round(BASE_CP*(1.30+STAR_BONUS[5]*0.25+0.25+0.20));
+  document.getElementById('cp-result').innerHTML=
+    `레벨 기여: <b>${lvCP.toLocaleString()}</b><br>성급 기여: <b>${starCP.toLocaleString()}</b><br>스킬 기여: <b>${skillCP.toLocaleString()}</b><br>장비 기여: <b>${equipCP.toLocaleString()}</b><br><hr style="margin:8px 0;border:none;border-top:1px solid #e5e7eb">총 CP: <b style="font-size:16px;color:#2563eb">${total.toLocaleString()}</b><br>최대 대비: <b style="color:${total/maxCP>0.7?'#059669':'#d97706'}">${(total/maxCP*100).toFixed(1)}%</b>`;
+  if(cpChart)cpChart.destroy();
+  cpChart=new Chart(document.getElementById('c-cp'),{type:'bar',
+    data:{labels:['레벨(30%)','성급(25%)','스킬(25%)','장비(20%)'],
+      datasets:[
+        {label:'현재 CP',data:[lvCP,starCP,skillCP,equipCP],backgroundColor:['rgba(37,99,235,.75)','rgba(220,38,38,.75)','rgba(5,150,105,.75)','rgba(217,119,6,.75)'],borderRadius:5,barPercentage:.5},
+        {label:'최대 CP',data:[Math.round(BASE_CP*1.30),Math.round(BASE_CP*STAR_BONUS[5]*0.25),Math.round(BASE_CP*0.25),Math.round(BASE_CP*0.20)],backgroundColor:['rgba(37,99,235,.12)','rgba(220,38,38,.12)','rgba(5,150,105,.12)','rgba(217,119,6,.12)'],borderRadius:5,barPercentage:.5},
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},y:{...ax('CP')}}}
+  });
+}
+calcCP();
+
+/* ════════ S5 — 인플레이션 ════════ */
+const hqs=Array.from({length:30},(_,i)=>i+1);
+const prod=hqs.map(h=>Math.round(8*Math.pow(1.18,h-1)));
+const cons=hqs.map(h=>{if(h<=10)return Math.round(3*Math.pow(1.22,h-1));if(h<=20)return Math.round(18*Math.pow(1.32,h-10));return Math.round(120*Math.pow(1.40,h-20));});
+new Chart(document.getElementById('c-inflation'),{type:'line',
+  data:{labels:hqs.map(h=>'HQ'+h),
+    datasets:[
+      {label:'생산량',data:prod,borderColor:'#059669',backgroundColor:'rgba(5,150,105,.06)',tension:.4,fill:true,pointRadius:0},
+      {label:'소비량',data:cons,borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.04)',tension:.4,fill:false,pointRadius:0},
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
+    scales:{x:{...ax(),ticks:{color:'#5a6275',callback:(_,i)=>i%5===0?'HQ'+(i+1):''}},y:ax('K/시간')}}
+});
+
+/* ════════ S8 — VS 요일 차트 ════════ */
+new Chart(document.getElementById('c-vs'),{type:'bar',
+  data:{labels:['월(건설)','화(연구)','수(훈련)','목(채집)','금(영웅)','토(처치)','일(결산)'],
+    datasets:[{label:'과금 압박 강도',data:[3,4,5,2,4,5,4],
+      backgroundColor:['rgba(37,99,235,.6)','rgba(124,58,237,.6)','rgba(220,38,38,.85)','rgba(5,150,105,.6)','rgba(124,58,237,.6)','rgba(220,38,38,.85)','rgba(124,58,237,.6)'],borderRadius:5}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},y:{...ax('압박 강도'),max:6,ticks:{callback:v=>['','★','★★','★★★','★★★★','★★★★★'][v]||v}}}}
+});
+
+/* ════════ S9 — 팝업 트리거 ════════ */
+new Chart(document.getElementById('c-popup'),{type:'bar',
+  data:{labels:['손실 회피','완료 욕구','사회적 압박','FOMO'],
+    datasets:[{label:'트리거 수',data:[5,4,4,4],backgroundColor:['rgba(220,38,38,.75)','rgba(124,58,237,.75)','rgba(37,99,235,.75)','rgba(217,119,6,.75)'],borderRadius:5}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:ax(),y:{...ax('트리거 수'),max:7}}}
+});
+
+/* ════════ S10 — 심리 기법 버블 ════════ */
+new Chart(document.getElementById('c-psych'),{type:'bubble',
+  data:{datasets:[{
+    data:[
+      {x:9.2,y:9.5,r:17,lbl:'손실 회피'},{x:8.5,y:8.8,r:15,lbl:'FOMO'},
+      {x:8.0,y:9.0,r:14,lbl:'자이가르닉'},{x:7.8,y:8.2,r:13,lbl:'사회 비교'},
+      {x:8.2,y:7.2,r:12,lbl:'매몰 비용'},{x:7.0,y:8.0,r:11,lbl:'희소성'},
+      {x:7.2,y:8.5,r:13,lbl:'의무감'},{x:6.8,y:7.5,r:15,lbl:'변동 보상'},
+      {x:7.5,y:7.8,r:12,lbl:'완료 욕구'},{x:6.5,y:7.0,r:10,lbl:'진행 시각화'},
+    ],
+    backgroundColor:'rgba(37,99,235,.28)',borderColor:'rgba(37,99,235,.6)',
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw.lbl+' 강도:'+ctx.raw.x+' 빈도:'+ctx.raw.y}}},
+    scales:{x:{...ax('과금 전환 강도'),min:5.5,max:10},y:{...ax('노출 빈도'),min:6.5,max:10}}},
+  plugins:[{afterDraw(chart){
+    const ctx=chart.ctx;
+    chart.data.datasets[0].data.forEach((pt,i)=>{
+      const el=chart.getDatasetMeta(0).data[i];
+      if(!el)return;
+      ctx.save();ctx.font='500 10px Noto Sans KR';ctx.fillStyle='#1a1e2a';ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(pt.lbl,el.x,el.y);ctx.restore();
+    });
+  }}]
+});
+
+/* ════════ S11 — Pity 시뮬레이터 ════════ */
+let pityChart=null;
+function getPityRate(pull,base){
+  if(pull<50)return base;
+  if(pull<80)return base+(pull-50)*0.004;
+  return Math.min(base+30*0.004+(pull-80)*0.05,1.0);
+}
+function calcPity(){
+  const pull=parseInt(document.getElementById('pity-s').value);
+  const bval=document.querySelector('input[name="banner"]:checked')?.value||'pickup';
+  const base=bval==='normal'?0.005:bval==='pickup'?0.007:0.010;
+  const cur=getPityRate(pull,base);
+  document.getElementById('pity-v').textContent=pull+'회';
+  document.getElementById('pity-prob').textContent=(cur*100).toFixed(3)+'%';
+  const zone=pull<50?'기본 구간':pull<80?'소프트 천장 가속':pull<100?'고속 가속':'하드 천장 (SSR 보장)';
+  const remCost=Math.round((100-pull)*3000);
+  document.getElementById('pity-insight').innerHTML=
+    `현재 구간: <b style="color:${pull>=80?'#dc2626':pull>=50?'#d97706':'#5a6275'}">${zone}</b> — SSR 확률 <b>${(cur*100).toFixed(3)}%</b><br>`+
+    `하드 천장까지 잔여 ${100-pull}회 — 예상 추가 비용 약 <b style="color:#dc2626">$${Math.round(remCost/3000*30).toLocaleString()}</b>`;
+  const pulls=Array.from({length:101},(_,i)=>i);
+  if(pityChart)pityChart.destroy();
+  pityChart=new Chart(document.getElementById('c-pity'),{type:'line',
+    data:{labels:pulls.map(p=>p%10===0?p+'회':''),
+      datasets:[{label:'SSR 확률(%)',data:pulls.map(p=>+(getPityRate(p,base)*100).toFixed(3)),
+        borderColor:'#7c3aed',backgroundColor:'rgba(124,58,237,.07)',tension:.3,fill:true,pointRadius:0,
+        segment:{borderColor:ctx=>ctx.p0.parsed.x>=80?'#dc2626':ctx.p0.parsed.x>=50?'#d97706':'#7c3aed'}}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{x:{grid:{display:false},ticks:{color:'#5a6275',autoSkip:false,callback:(_,i)=>i%10===0?i+'회':''}},y:{...ax('SSR 확률(%)'),ticks:{callback:v=>v+'%'}}}},
+    plugins:[{afterDraw(chart){
+      const ctx=chart.ctx,xAxis=chart.scales.x,yAxis=chart.scales.y;
+      [[50,'#d97706','소프트 천장'],[100,'#dc2626','하드 천장']].forEach(([px,col,lbl])=>{
+        const x=xAxis.getPixelForValue(px);
+        ctx.save();ctx.strokeStyle=col;ctx.lineWidth=1;ctx.setLineDash([5,3]);
+        ctx.beginPath();ctx.moveTo(x,yAxis.top);ctx.lineTo(x,yAxis.bottom);ctx.stroke();
+        ctx.fillStyle=col;ctx.font='10px Noto Sans KR';ctx.textAlign='center';ctx.fillText(lbl,x,yAxis.top+12);ctx.restore();
+      });
+    }}]
+  });
+}
+calcPity();
+
+/* ════════ S12 — 서버 생애주기 ════════ */
+new Chart(document.getElementById('c-server'),{type:'line',
+  data:{labels:['1단계\n탄생','2단계\n성장','3단계\n패권','4단계\n침체','5단계\n붕괴'],
+    datasets:[
+      {label:'활성 유저(명)',data:[400,320,220,110,50],borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',tension:.4,fill:true,pointRadius:5,pointBackgroundColor:'#2563eb',yAxisID:'y1'},
+      {label:'과금 강도(상대값)',data:[85,140,110,35,8],borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.04)',tension:.4,fill:false,pointRadius:5,pointBackgroundColor:'#dc2626',yAxisID:'y2'},
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
+    scales:{
+      x:{grid:{display:false},ticks:{color:'#5a6275',font:{size:10}}},
+      y1:{type:'linear',position:'left',...ax('활성 유저(명)')},
+      y2:{type:'linear',position:'right',grid:{display:false},...ax('과금 강도')},
+    }}
+});
+
+/* ════════ S13 — 경쟁 비교 ════════ */
+new Chart(document.getElementById('c-comp'),{type:'bar',
+  data:{labels:['UA 효율','과금 전환','콘텐츠 깊이','초반 성장','리텐션','장르 완성도'],
+    datasets:[
+      {label:'Last War',data:[10,9,7,9,7,7],backgroundColor:'rgba(220,38,38,.72)',borderRadius:3,barPercentage:.22,categoryPercentage:.9},
+      {label:'Whiteout',data:[8,8,8,8,9,8],backgroundColor:'rgba(37,99,235,.72)',borderRadius:3,barPercentage:.22,categoryPercentage:.9},
+      {label:'Rise of Kingdoms',data:[6,7,10,6,10,10],backgroundColor:'rgba(5,150,105,.72)',borderRadius:3,barPercentage:.22,categoryPercentage:.9},
+      {label:'State of Survival',data:[7,7,7,7,7,7],backgroundColor:'rgba(107,114,128,.6)',borderRadius:3,barPercentage:.22,categoryPercentage:.9},
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},scales:{x:ax(),y:{...ax(),max:12}}}
+});
+
+/* ════════ S14 — KPI 시뮬레이터 ════════ */
+let kpiChart=null;
+function calcKPI(){
+  const ins=parseInt(document.getElementById('ins-s').value);
+  const d30=parseFloat(document.getElementById('d30-s').value)/100;
+  const cvr=parseFloat(document.getElementById('cvr-s').value)/100;
+  const arppu=parseFloat(document.getElementById('arppu-s').value);
+  const cpi=parseFloat(document.getElementById('cpi-s').value);
+  document.getElementById('ins-v').textContent=ins.toLocaleString()+'만';
+  document.getElementById('d30-v').textContent=(d30*100).toFixed(0)+'%';
+  document.getElementById('cvr-v').textContent=(cvr*100).toFixed(1)+'%';
+  document.getElementById('arppu-v').textContent='$'+arppu;
+  document.getElementById('cpi-v').textContent='$'+cpi.toFixed(2);
+  const mau=ins*d30;
+  const payers=mau*cvr;
+  const rev=payers*arppu;
+  const uaCost=ins*cpi;
+  const roi=((rev-uaCost)/uaCost*100).toFixed(0);
+  const ltv=(arppu*(1/0.15)*cvr).toFixed(0);
+  document.getElementById('kpi-result').innerHTML=
+    `월 MAU: <b>${Math.round(mau).toLocaleString()}만</b><br>`+
+    `월 결제 유저: <b>${Math.round(payers).toLocaleString()}만</b><br>`+
+    `월 순매출: <b style="color:#2563eb">$${(rev/10).toFixed(1)}M</b><br>`+
+    `월 UA 비용: <b style="color:#dc2626">$${(uaCost/10).toFixed(1)}M</b><br>`+
+    `ROI: <b style="color:${roi>100?'#059669':'#dc2626'}">${roi}%</b><br>`+
+    `LTV 추정: <b>$${ltv}</b>`;
+  const months=['M1','M2','M3','M4','M5','M6'];
+  const dau=months.map((_,i)=>Math.round(mau*0.35*Math.pow(.92,i)*10)/10);
+  const payArr=months.map((_,i)=>Math.round(payers*Math.pow(.92,i)*10)/10);
+  const revArr=months.map((_,i)=>Math.round(payArr[i]*arppu/100)/10);
+  if(kpiChart)kpiChart.destroy();
+  kpiChart=new Chart(document.getElementById('c-kpi'),{type:'line',
+    data:{labels:months,datasets:[
+      {label:'DAU(만)',data:dau,borderColor:'#7c3aed',backgroundColor:'rgba(124,58,237,.06)',tension:.4,fill:true,pointRadius:4,pointBackgroundColor:'#7c3aed',yAxisID:'y1'},
+      {label:'결제 유저(만)',data:payArr,borderColor:'#dc2626',fill:false,tension:.4,pointRadius:4,pointBackgroundColor:'#dc2626',yAxisID:'y1'},
+      {label:'순매출($M)',data:revArr,borderColor:'#059669',fill:false,tension:.4,pointRadius:4,pointBackgroundColor:'#059669',yAxisID:'y2'},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
+      scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},
+        y1:{type:'linear',position:'left',...ax('유저(만)')},
+        y2:{type:'linear',position:'right',grid:{display:false},...ax('매출($M)')},
+      }}
+  });
+}
+calcKPI();
+</script>
+</body>
+</html>
