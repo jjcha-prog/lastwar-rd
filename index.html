@@ -83,6 +83,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 
 .cwrap{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;margin:18px 0;}
 .clbl{font-size:11px;color:var(--muted);margin-bottom:12px}
+.cwrap canvas{display:block;width:100%!important;}
+.stage-sec canvas{box-sizing:border-box;}
 
 /* 인터랙티브 버튼 */
 .ibtn{cursor:pointer;padding:6px 12px;border-radius:6px;border:1px solid var(--border);font-size:11px;color:var(--muted);transition:all .15s;background:transparent;display:inline-block;margin:3px;}
@@ -692,6 +694,15 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
   <span style="color:var(--dim)">팀 내부 공유용 · 무단 외부 배포 금지</span>
 </footer>
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+
+/* ════════ Chart.js 글로벌 설정 ════════ */
+Chart.defaults.color='#5a6275';
+Chart.defaults.font.family="'Noto Sans KR',sans-serif";
+Chart.defaults.font.size=11;
+const G={color:'rgba(0,0,0,.06)'};
+const ax=(lbl)=>({grid:G,ticks:{color:'#5a6275'},...(lbl?{title:{display:true,text:lbl,color:'#5a6275',font:{size:10}}}:{})});
+
 /* ════════ 단계 데이터 ════════ */
 const STAGES=[
   {id:'s1',n:1,title:'게임 정체성',color:'#7c3aed',merged:true},
@@ -709,6 +720,9 @@ const STAGES=[
   {id:'s13',n:13,title:'경쟁 분석',color:'#2563eb',merged:false},
   {id:'s14',n:14,title:'KPI·데이터',color:'#6b7280',merged:false},
 ];
+
+/* ════════ 초기화 추적 ════════ */
+const initialized = {};
 
 /* ════════ NAV 빌드 ════════ */
 const snav=document.getElementById('snav');
@@ -737,408 +751,459 @@ function gotoStage(id){
   });
   document.querySelector(`.snav-btn[data-id="${id}"]`)?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
   window.scrollTo({top:0,behavior:'smooth'});
+  // 해당 섹션 차트 지연 초기화
+  setTimeout(()=>initChartsForStage(id), 50);
 }
 
 function setView(mode,btn){
   viewMode=mode;
   document.querySelectorAll('.vtbtn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  if(mode==='all'){document.querySelectorAll('.stage-sec').forEach(el=>el.classList.add('vis'));}
-  else{document.querySelectorAll('.stage-sec').forEach(el=>el.classList.remove('vis'));document.getElementById(curStage).classList.add('vis');}
+  if(mode==='all'){
+    document.querySelectorAll('.stage-sec').forEach(el=>el.classList.add('vis'));
+    setTimeout(()=>STAGES.forEach(s=>initChartsForStage(s.id)), 50);
+  } else {
+    document.querySelectorAll('.stage-sec').forEach(el=>el.classList.remove('vis'));
+    document.getElementById(curStage).classList.add('vis');
+    setTimeout(()=>initChartsForStage(curStage), 50);
+  }
 }
 
-/* ════════ Chart.js 공통 ════════ */
-Chart.defaults.color='#5a6275';
-Chart.defaults.font.family="'Noto Sans KR',sans-serif";
-Chart.defaults.font.size=11;
-const G={color:'rgba(0,0,0,.06)'};
-const ax=(lbl)=>({grid:G,ticks:{color:'#5a6275'},...(lbl?{title:{display:true,text:lbl,color:'#5a6275',font:{size:10}}}:{})});
+/* ════════ 섹션별 차트 초기화 ════════ */
+function initChartsForStage(id) {
+  if(initialized[id]) return;
+  initialized[id] = true;
+  
+  if(id==='s1') initS1();
+  if(id==='s2') initS2();
+  if(id==='s3') initS3();
+  if(id==='s4') initS4();
+  if(id==='s5') initS5();
+  if(id==='s8') initS8();
+  if(id==='s9') initS9();
+  if(id==='s10') initS10();
+  if(id==='s11') initS11();
+  if(id==='s12') initS12();
+  if(id==='s13') initS13();
+  if(id==='s14') initS14();
+}
 
-/* ════════ S1 — 광고 변형 차트 ════════ */
-const adTypes=[
-  {label:'병사 합치기형',color:'#dc2626',ctr:8.4,ret:18,cvr:4.2,
-   desc:'<b>병사 합치기형</b> — 작은 병사들이 합쳐져 대군이 되는 성장 카타르시스 광고.<br>CTR 8.4% / D7 리텐션 18% / 과금 전환 4.2%<br>합체 "딱!" 효과음이 CTR 핵심 기여 요소. 가장 많이 운용되는 변형.'},
-  {label:'실패 유도형',color:'#7c3aed',ctr:9.1,ret:16,cvr:3.8,
-   desc:'<b>실패 유도형</b> — 의도적 잘못된 선택 → "나라면 더 잘할 텐데" 욕구 자극.<br>CTR 9.1%(최고) / D7 리텐션 16% / 과금 전환 3.8%<br>기대 불일치 심해 D1 이탈 5~8%p 높음.'},
-  {label:'대군 형성형',color:'#059669',ctr:7.2,ret:22,cvr:4.8,
-   desc:'<b>대군 형성형</b> — 소규모→화면 가득 대군으로 스케일 확장 강조.<br>CTR 7.2% / D7 리텐션 22%(최고) / 과금 전환 4.8%(최고)<br>실제 4X 콘텐츠와 가장 근접 → 기대 불일치 낮음.'},
-  {label:'고난이도 도전형',color:'#d97706',ctr:7.8,ret:19,cvr:4.1,
-   desc:'<b>고난이도 도전형</b> — 극도로 좁은 통로, 복잡한 장애물 극복 긴장감.<br>CTR 7.8% / D7 리텐션 19% / 과금 전환 4.1%<br>난이도 높을수록 완료 시청율↑ (목격자 효과).'},
-  {label:'플레이어블',color:'#2563eb',ctr:6.5,ret:24,cvr:5.6,
-   desc:'<b>플레이어블 광고</b> — 광고 내 직접 탭 조작 가능 (미니 게임 체험).<br>CTR 6.5% / D7 리텐션 24% / 과금 전환 5.6%(최고)<br>CTR 낮지만 전환 품질 최고. 제작 비용 3~5× 높아 운용 제한.'},
-];
-let adChart=null;
-const adBtns=document.getElementById('ad-btns');
-adTypes.forEach((a,i)=>{
-  const b=document.createElement('div');
-  b.className='ibtn';b.textContent=a.label;
-  b.onclick=()=>{
-    document.getElementById('ad-detail').innerHTML=a.desc;
-    document.querySelectorAll('#ad-btns .ibtn').forEach((x,j)=>{x.style.background=j===i?a.color+'22':'';x.style.color=j===i?a.color:'';x.style.borderColor=j===i?a.color:'';});
-    if(adChart)adChart.destroy();
-    adChart=new Chart(document.getElementById('c-ad'),{
-      type:'bar',data:{labels:adTypes.map(x=>x.label),
-        datasets:[
-          {label:'CTR(%)',data:adTypes.map(x=>x.ctr),backgroundColor:adTypes.map((x,j)=>j===i?'rgba(220,38,38,.8)':'rgba(220,38,38,.2)'),borderRadius:4,barPercentage:.28,categoryPercentage:.85},
-          {label:'D7 리텐션(%)',data:adTypes.map(x=>x.ret),backgroundColor:adTypes.map((x,j)=>j===i?'rgba(5,150,105,.8)':'rgba(5,150,105,.2)'),borderRadius:4,barPercentage:.28,categoryPercentage:.85},
-          {label:'과금 전환(%)',data:adTypes.map(x=>x.cvr),backgroundColor:adTypes.map((x,j)=>j===i?'rgba(37,99,235,.8)':'rgba(37,99,235,.2)'),borderRadius:4,barPercentage:.28,categoryPercentage:.85},
-        ]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
-        scales:{x:{grid:{display:false},ticks:{color:'#5a6275',font:{size:10}}},y:{...ax('%'),max:30}}}
-    });
-  };
-  adBtns.appendChild(b);
-});
+/* ════════ S1 ════════ */
+function initS1(){
+  new Chart(document.getElementById('c-radar'),{type:'radar',
+    data:{labels:['UA 효율','과금 전환','테마 통합','초반 성장','리텐션','Whale 설계'],
+      datasets:[
+        {label:'Last War',data:[10,9,5,9,7,7],borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.1)',pointBackgroundColor:'#dc2626',borderWidth:2,pointRadius:3},
+        {label:'Whiteout',data:[8,9,9,7,9,9],borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',pointBackgroundColor:'#2563eb',borderWidth:2,pointRadius:3},
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
+      scales:{r:{min:0,max:10,ticks:{display:false},grid:{color:'rgba(0,0,0,.07)'},pointLabels:{color:'#5a6275',font:{size:11}}}}}
+  });
 
-/* ════════ S1 — 레이더 차트 ════════ */
-new Chart(document.getElementById('c-radar'),{type:'radar',
-  data:{labels:['UA 효율','과금 전환','테마 통합','초반 성장','리텐션','Whale 설계'],
-    datasets:[
-      {label:'Last War',data:[10,9,5,9,7,7],borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.1)',pointBackgroundColor:'#dc2626',borderWidth:2,pointRadius:3},
-      {label:'Whiteout',data:[8,9,9,7,9,9],borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',pointBackgroundColor:'#2563eb',borderWidth:2,pointRadius:3},
-    ]},
-  options:{responsive:true,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
-    scales:{r:{min:0,max:10,ticks:{display:false},grid:{color:'rgba(0,0,0,.07)'},pointLabels:{color:'#5a6275',font:{size:11}}}}}
-});
-
-/* ════════ S2 — 자원 차트 ════════ */
-new Chart(document.getElementById('c-resource'),{type:'bar',
-  data:{labels:['식량','철강','석유','골드'],
-    datasets:[
-      {label:'생산량(K/h)',data:[85,62,48,12],backgroundColor:'rgba(5,150,105,.7)',borderRadius:4,barPercentage:.4},
-      {label:'T4 소비(K/h)',data:[320,210,180,55],backgroundColor:'rgba(220,38,38,.7)',borderRadius:4,barPercentage:.4},
-    ]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},scales:{x:ax(),y:ax('K/시간')}}
-});
-
-/* ════════ S2 — 슬롯 시뮬레이터 ════════ */
-let slotChart=null;
-function calcSlot(){
-  const slots=parseInt(document.getElementById('slot-s').value);
-  const tasks=parseInt(document.getElementById('task-s').value);
-  const timeH=parseInt(document.getElementById('time-s').value);
-  document.getElementById('slot-v').textContent=slots+'개';
-  document.getElementById('task-v').textContent=tasks+'개';
-  document.getElementById('time-v').textContent=timeH+'h';
-  const totalD=((tasks*timeH)/slots/24).toFixed(1);
-  const baseD=(tasks*timeH/24).toFixed(1);
-  const save=((1-1/slots)*100).toFixed(0);
-  const vipInfo=['없음','없음','VIP 4 ($40)','VIP 7 ($300)','VIP 13 ($4,000)','VIP 14 ($6,000)'];
-  document.getElementById('slot-result').innerHTML=
-    `슬롯 ${slots}개 (${vipInfo[slots-1]})<br>소요 일수: <b>${totalD}일</b><br>1슬롯 대비 절약: <b style="color:#059669">${save}%</b><br>6슬롯 대비 추가 소요: <b style="color:#dc2626">${(tasks*timeH/6/24).toFixed(1)}일 → ${totalD}일</b>`;
-  const allSlots=[1,2,3,4,5,6];
-  if(slotChart)slotChart.destroy();
-  slotChart=new Chart(document.getElementById('c-slot'),{type:'bar',
-    data:{labels:allSlots.map(s=>'슬롯 '+s+'개'),
-      datasets:[{label:'완료 소요일',data:allSlots.map(s=>+((tasks*timeH)/s/24).toFixed(1)),
-        backgroundColor:allSlots.map(s=>s===slots?'rgba(220,38,38,.8)':'rgba(220,38,38,.2)'),borderRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},y:{...ax('소요 일수')}}}
+  const adTypes=[
+    {label:'병사 합치기형',color:'#dc2626',ctr:8.4,ret:18,cvr:4.2,
+     info:'<b>병사 합치기형</b> — 가장 많이 사용. 작은 병사들이 합쳐져 대군이 되는 카타르시스.<br>CTR 8.4% / D7 리텐션 18% / 과금 전환 4.2%<br>합체 "딱!" 효과음이 CTR 핵심 기여 요소.'},
+    {label:'실패 유도형',color:'#7c3aed',ctr:9.1,ret:16,cvr:3.8,
+     info:'<b>실패 유도형</b> — "나라면 더 잘할 텐데" 욕구 자극.<br>CTR 9.1%(최고) / D7 리텐션 16% / 과금 전환 3.8%<br>기대 불일치 심해 D1 이탈 5~8%p 높음.'},
+    {label:'대군 형성형',color:'#059669',ctr:7.2,ret:22,cvr:4.8,
+     info:'<b>대군 형성형</b> — 소규모→화면 가득 대군 스케일 확장.<br>CTR 7.2% / D7 리텐션 22% / 과금 전환 4.8%<br>실제 4X 콘텐츠와 근접 → 기대 불일치 낮음.'},
+    {label:'고난이도 도전형',color:'#d97706',ctr:7.8,ret:19,cvr:4.1,
+     info:'<b>고난이도 도전형</b> — 극도로 좁은 통로, 복잡한 장애물 긴장감.<br>CTR 7.8% / D7 리텐션 19% / 과금 전환 4.1%'},
+    {label:'플레이어블',color:'#2563eb',ctr:6.5,ret:24,cvr:5.6,
+     info:'<b>플레이어블</b> — 광고 내 직접 탭 조작 가능.<br>CTR 6.5% / D7 리텐션 24%(최고) / 과금 전환 5.6%(최고)<br>제작 비용 3~5× 높아 운용 제한.'},
+  ];
+  let adChart=null;
+  const adBtns=document.getElementById('ad-btns');
+  adTypes.forEach((a,i)=>{
+    const b=document.createElement('div');
+    b.className='ibtn';b.textContent=a.label;
+    b.onclick=()=>{
+      document.getElementById('ad-detail').innerHTML=a.info;
+      document.querySelectorAll('#ad-btns .ibtn').forEach((x,j)=>{x.style.background=j===i?a.color+'22':'';x.style.color=j===i?a.color:'';x.style.borderColor=j===i?a.color:'';});
+      if(adChart)adChart.destroy();
+      adChart=new Chart(document.getElementById('c-ad'),{
+        type:'bar',data:{labels:adTypes.map(x=>x.label),
+          datasets:[
+            {label:'CTR(%)',data:adTypes.map(x=>x.ctr),backgroundColor:adTypes.map((x,j)=>j===i?'rgba(220,38,38,.8)':'rgba(220,38,38,.2)'),borderRadius:4,barPercentage:.28,categoryPercentage:.85},
+            {label:'D7 리텐션(%)',data:adTypes.map(x=>x.ret),backgroundColor:adTypes.map((x,j)=>j===i?'rgba(5,150,105,.8)':'rgba(5,150,105,.2)'),borderRadius:4,barPercentage:.28,categoryPercentage:.85},
+            {label:'과금 전환(%)',data:adTypes.map(x=>x.cvr),backgroundColor:adTypes.map((x,j)=>j===i?'rgba(37,99,235,.8)':'rgba(37,99,235,.2)'),borderRadius:4,barPercentage:.28,categoryPercentage:.85},
+          ]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
+          scales:{x:{grid:{display:false},ticks:{color:'#5a6275',font:{size:10}}},y:{...ax('%'),max:30}}}
+      });
+    };
+    adBtns.appendChild(b);
   });
 }
-calcSlot();
 
-/* ════════ S3 — 패턴 시뮬레이터 ════════ */
-let patChart=null;
-function calcPattern(){
-  const S=parseInt(document.getElementById('stg-s').value);
-  document.getElementById('stg-v').textContent=S;
-  const openL=Math.max(1,3-Math.floor(S/8));
-  const width=Math.max(80,147-S*2.2).toFixed(0);
-  const react=Math.max(0.5,2.0-S*0.05).toFixed(1);
-  const dens=Math.min(70,10+S*2).toFixed(0);
-  const troop=(1+S*0.083).toFixed(2);
-  document.getElementById('pattern-result').innerHTML=[
-    {l:'통로 수',v:openL+'개',c:openL===1?'#dc2626':'#059669'},
-    {l:'통로 폭',v:width+'px',c:width<100?'#dc2626':'#5a6275'},
-    {l:'반응 시간',v:react+'초',c:react<0.8?'#dc2626':'#5a6275'},
-    {l:'장애물 밀도',v:dens+'%',c:dens>50?'#dc2626':'#5a6275'},
-    {l:'병사 배율',v:troop+'×',c:'#7c3aed'},
-  ].map(r=>`<div style="background:#f4f6f9;border-radius:8px;padding:10px;text-align:center"><div style="font-size:10px;color:#5a6275;margin-bottom:4px">${r.l}</div><div style="font-size:15px;font-weight:700;color:${r.c}">${r.v}</div></div>`).join('');
-  const stgs=Array.from({length:30},(_,i)=>i+1);
-  if(patChart)patChart.destroy();
-  patChart=new Chart(document.getElementById('c-pattern'),{type:'line',
-    data:{labels:stgs.map(s=>'S'+s),
+/* ════════ S2 ════════ */
+function initS2(){
+  new Chart(document.getElementById('c-resource'),{type:'bar',
+    data:{labels:['식량','철강','석유','골드'],
       datasets:[
-        {label:'개방 통로',data:stgs.map(s=>Math.max(1,3-Math.floor(s/8))),borderColor:'#dc2626',tension:.2,fill:false,pointRadius:stgs.map((_,i)=>i===S-1?6:0),pointBackgroundColor:'#dc2626',stepped:'before',yAxisID:'y1'},
-        {label:'반응시간(초)',data:stgs.map(s=>Math.max(0.5,2.0-s*0.05)),borderColor:'#7c3aed',tension:.4,fill:false,pointRadius:stgs.map((_,i)=>i===S-1?6:0),pointBackgroundColor:'#7c3aed',yAxisID:'y2'},
-        {label:'병사배율×',data:stgs.map(s=>+(1+s*0.083).toFixed(2)),borderColor:'#059669',tension:.4,fill:false,pointRadius:stgs.map((_,i)=>i===S-1?6:0),pointBackgroundColor:'#059669',yAxisID:'y2'},
+        {label:'생산량(K/h)',data:[85,62,48,12],backgroundColor:'rgba(5,150,105,.7)',borderRadius:4,barPercentage:.4},
+        {label:'T4 소비(K/h)',data:[320,210,180,55],backgroundColor:'rgba(220,38,38,.7)',borderRadius:4,barPercentage:.4},
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},scales:{x:ax(),y:ax('K/시간')}}
+  });
+
+  let slotChart=null;
+  function calcSlot(){
+    const slots=parseInt(document.getElementById('slot-s').value);
+    const tasks=parseInt(document.getElementById('task-s').value);
+    const timeH=parseInt(document.getElementById('time-s').value);
+    document.getElementById('slot-v').textContent=slots+'개';
+    document.getElementById('task-v').textContent=tasks+'개';
+    document.getElementById('time-v').textContent=timeH+'h';
+    const totalD=((tasks*timeH)/slots/24).toFixed(1);
+    const save=((1-1/slots)*100).toFixed(0);
+    const vipInfo=['없음','없음','VIP 4 ($40)','VIP 7 ($300)','VIP 13 ($4,000)','VIP 14 ($6,000)'];
+    document.getElementById('slot-result').innerHTML=
+      `슬롯 ${slots}개 (${vipInfo[slots-1]})<br>완료 소요: <b>${totalD}일</b><br>1슬롯 대비 절약: <b style="color:#059669">${save}%</b>`;
+    if(slotChart)slotChart.destroy();
+    slotChart=new Chart(document.getElementById('c-slot'),{type:'bar',
+      data:{labels:['슬롯1','슬롯2','슬롯3','슬롯4','슬롯5','슬롯6'],
+        datasets:[{label:'완료 소요일',data:[1,2,3,4,5,6].map(s=>+((tasks*timeH)/s/24).toFixed(1)),
+          backgroundColor:[1,2,3,4,5,6].map(s=>s===slots?'rgba(220,38,38,.8)':'rgba(220,38,38,.2)'),borderRadius:4}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+        scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},y:ax('소요 일수')}}
+    });
+  }
+  document.getElementById('slot-s').oninput=calcSlot;
+  document.getElementById('task-s').oninput=calcSlot;
+  document.getElementById('time-s').oninput=calcSlot;
+  calcSlot();
+}
+
+/* ════════ S3 ════════ */
+function initS3(){
+  let patChart=null;
+  function calcPattern(){
+    const S=parseInt(document.getElementById('stg-s').value);
+    document.getElementById('stg-v').textContent=S;
+    const openL=Math.max(1,3-Math.floor(S/8));
+    const width=Math.max(80,147-S*2.2).toFixed(0);
+    const react=Math.max(0.5,2.0-S*0.05).toFixed(1);
+    const dens=Math.min(70,10+S*2).toFixed(0);
+    const troop=(1+S*0.083).toFixed(2);
+    document.getElementById('pattern-result').innerHTML=[
+      {l:'통로 수',v:openL+'개',c:openL===1?'#dc2626':'#059669'},
+      {l:'통로 폭',v:width+'px',c:+width<100?'#dc2626':'#5a6275'},
+      {l:'반응 시간',v:react+'초',c:+react<0.8?'#dc2626':'#5a6275'},
+      {l:'장애물 밀도',v:dens+'%',c:+dens>50?'#dc2626':'#5a6275'},
+      {l:'병사 배율',v:troop+'×',c:'#7c3aed'},
+    ].map(r=>`<div style="background:#f4f6f9;border-radius:8px;padding:10px;text-align:center"><div style="font-size:10px;color:#5a6275;margin-bottom:4px">${r.l}</div><div style="font-size:15px;font-weight:700;color:${r.c}">${r.v}</div></div>`).join('');
+    const stgs=Array.from({length:30},(_,i)=>i+1);
+    if(patChart)patChart.destroy();
+    patChart=new Chart(document.getElementById('c-pattern'),{type:'line',
+      data:{labels:stgs.map(s=>'S'+s),
+        datasets:[
+          {label:'개방 통로',data:stgs.map(s=>Math.max(1,3-Math.floor(s/8))),borderColor:'#dc2626',tension:.2,fill:false,pointRadius:stgs.map((_,i)=>i===S-1?6:0),pointBackgroundColor:'#dc2626',stepped:'before',yAxisID:'y1'},
+          {label:'반응시간(초)',data:stgs.map(s=>Math.max(0.5,2.0-s*0.05)),borderColor:'#7c3aed',tension:.4,fill:false,pointRadius:stgs.map((_,i)=>i===S-1?6:0),pointBackgroundColor:'#7c3aed',yAxisID:'y2'},
+          {label:'병사배율',data:stgs.map(s=>+(1+s*0.083).toFixed(2)),borderColor:'#059669',tension:.4,fill:false,pointRadius:stgs.map((_,i)=>i===S-1?6:0),pointBackgroundColor:'#059669',yAxisID:'y2'},
+        ]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
+        scales:{
+          x:{grid:{display:false},ticks:{color:'#5a6275',callback:(_,i)=>i%5===0?'S'+(i+1):'',autoSkip:false,maxRotation:0}},
+          y1:{type:'linear',position:'left',min:0,max:4,...ax('통로 수')},
+          y2:{type:'linear',position:'right',min:0,max:4,grid:{display:false},...ax('배율/시간')},
+        }}
+    });
+  }
+  document.getElementById('stg-s').oninput=calcPattern;
+  calcPattern();
+
+  const defX=[0,300,600,1000,1500,2500,4000,8000,15000];
+  new Chart(document.getElementById('c-defense'),{type:'line',
+    data:{labels:defX.map(v=>v>=1000?(v/1000).toFixed(0)+'K':v),
+      datasets:[{label:'방어 감소율(%)',data:defX.map(v=>+((v/(v+1500))*100).toFixed(1)),
+        borderColor:'#7c3aed',backgroundColor:'rgba(124,58,237,.08)',tension:.4,fill:true,pointRadius:3,pointBackgroundColor:'#7c3aed'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{x:ax('방어력'),y:{...ax('감소율(%)'),min:0,max:100,ticks:{color:'#5a6275',callback:v=>v+'%'}}}}
+  });
+}
+
+/* ════════ S4 ════════ */
+function initS4(){
+  const ssrRoutes=[
+    {label:'가챠 소환',color:'#dc2626',spd:8,free:2,cert:3,timeEff:3,value:5,info:'픽업 SSR 확률 0.7% / 하드 천장 100회 / 6성 실질 비용 $500~$3,000+<br>가장 빠르지만 가장 비싼 경로. 소프트 천장(50회) 구간이 매몰 비용 함정의 핵심.'},
+    {label:'시즌 패스',color:'#7c3aed',spd:6,free:7,cert:7,timeEff:7,value:9,info:'$9.99~19.99/시즌 / 시즌당 50~80조각 / 6성까지 $120~360<br>과금 경로 중 가성비 최고. 매 시즌 반복 구매 → 구독 고착 효과.'},
+    {label:'이벤트 파밍',color:'#2563eb',spd:3,free:9,cert:5,timeEff:8,value:7,info:'VS·시즌 이벤트 파밍 / 월 60~120조각 / 6성까지 10~20개월<br>무과금의 현실적 경로. 상위 순위권 유지에 소량 과금 필요한 모순.'},
+    {label:'연맹 상점',color:'#059669',spd:2,free:8,cert:3,timeEff:9,value:4,info:'월 20~40조각 / 단독 경로로 4~5년 소요<br>보조 경로로만 활용. 연맹 포인트 적립이 집결·도움 참여를 간접 강제.'},
+    {label:'조각 직구매',color:'#d97706',spd:9,free:1,cert:10,timeEff:2,value:2,info:'개당 $0.50~2.00 / 6성 직구매 $600~2,400<br>이벤트 한정 FOMO 설계. Whale 전용 경로.'},
+  ];
+  let ssrChart=null;
+  const ssrBtns=document.getElementById('ssr-btns');
+  ssrRoutes.forEach((r,i)=>{
+    const b=document.createElement('div');b.className='ibtn';b.textContent=r.label;
+    b.onclick=()=>{
+      document.getElementById('ssr-detail').innerHTML=r.info;
+      document.querySelectorAll('#ssr-btns .ibtn').forEach((x,j)=>{x.style.background=j===i?r.color+'22':'';x.style.color=j===i?r.color:'';x.style.borderColor=j===i?r.color:'';});
+      if(ssrChart)ssrChart.destroy();
+      ssrChart=new Chart(document.getElementById('c-ssr'),{type:'radar',
+        data:{labels:['획득 속도','무과금 가능성','확실성','시간 효율','가성비'],
+          datasets:ssrRoutes.map((rt,j)=>({label:rt.label,data:[rt.spd,rt.free,rt.cert,rt.timeEff,rt.value],
+            borderColor:j===i?rt.color:rt.color+'33',backgroundColor:j===i?rt.color+'18':'transparent',
+            pointBackgroundColor:j===i?rt.color:rt.color+'44',borderWidth:j===i?2:1,pointRadius:j===i?4:2}))},
+        options:{responsive:true,maintainAspectRatio:false,
+          plugins:{legend:{labels:{color:'#5a6275',boxWidth:10,font:{size:10}}}},
+          scales:{r:{min:0,max:10,ticks:{display:false},grid:{color:'rgba(0,0,0,.08)'},pointLabels:{color:'#5a6275',font:{size:11}}}}}
+      });
+    };
+    ssrBtns.appendChild(b);
+  });
+
+  const SHARDS=[10,30,80,200,500,1200];
+  const STARPCT=[0,18,42,85,160,300];
+  new Chart(document.getElementById('c-shard'),{type:'bar',
+    data:{labels:['1성','2성','3성','4성','5성','6성'],
+      datasets:[
+        {label:'누적 조각',data:SHARDS,backgroundColor:'rgba(37,99,235,.65)',borderRadius:4,yAxisID:'y1',barPercentage:.4},
+        {label:'CP 보너스(%)',data:STARPCT,type:'line',borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.05)',tension:.3,fill:true,pointRadius:5,pointBackgroundColor:'#dc2626',yAxisID:'y2'}
       ]},
     options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y}}},
+      plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
       scales:{
-        x:{grid:{display:false},ticks:{color:'#5a6275',callback:(_,i)=>i%5===0?'S'+(i+1):'',autoSkip:false,maxRotation:0}},
-        y1:{type:'linear',position:'left',min:0,max:4,...ax('통로 수')},
-        y2:{type:'linear',position:'right',min:0,max:4,grid:{display:false},...ax('배율/시간')},
+        x:{grid:{display:false},ticks:{color:'#5a6275'}},
+        y1:{type:'linear',position:'left',grid:G,ticks:{color:'rgba(37,99,235,.8)',callback:v=>v+'개'},title:{display:true,text:'누적 조각',color:'rgba(37,99,235,.8)',font:{size:10}}},
+        y2:{type:'linear',position:'right',grid:{display:false},ticks:{color:'#dc2626',callback:v=>'+'+v+'%'},title:{display:true,text:'CP 보너스',color:'#dc2626',font:{size:10}}},
       }}
   });
-}
-calcPattern();
 
-/* ════════ S3 — 방어 체감 ════════ */
-const defX=[0,300,600,1000,1500,2500,4000,8000,15000];
-new Chart(document.getElementById('c-defense'),{type:'line',
-  data:{labels:defX.map(v=>v>=1000?(v/1000).toFixed(0)+'K':v),
-    datasets:[{label:'방어 감소율(%)',data:defX.map(v=>+((v/(v+1500))*100).toFixed(1)),
-      borderColor:'#7c3aed',backgroundColor:'rgba(124,58,237,.08)',tension:.4,fill:true,pointRadius:3,pointBackgroundColor:'#7c3aed'}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{x:ax('방어력'),y:{...ax('감소율(%)'),min:0,max:100,ticks:{color:'#5a6275',callback:v=>v+'%'}}}}
-});
-
-/* ════════ S4 — SSR 획득 경로 ════════ */
-const ssrRoutes=[
-  {label:'가챠 소환',color:'#dc2626',spd:8,free:2,cert:3,timeEff:3,value:5,
-   info:'픽업 SSR 확률 0.7% / 하드 천장 100회 / 6성 실질 비용 $500~$3,000+. 가장 빠르지만 가장 비싼 경로.'},
-  {label:'시즌 패스',color:'#7c3aed',spd:6,free:7,cert:7,timeEff:7,value:9,
-   info:'$9.99~19.99/시즌 / 시즌당 50~80조각 / 6성까지 $120~360. 과금 경로 중 가성비 최고.'},
-  {label:'이벤트 파밍',color:'#2563eb',spd:3,free:9,cert:5,timeEff:8,value:7,
-   info:'VS·시즌 이벤트 파밍 / 월 60~120조각 / 6성까지 10~20개월. 무과금의 현실적 경로.'},
-  {label:'연맹 상점',color:'#059669',spd:2,free:8,cert:3,timeEff:9,value:4,
-   info:'월 20~40조각 / 단독 경로로는 4~5년 소요. 병행 보조 경로로 활용.'},
-  {label:'조각 직구매',color:'#d97706',spd:9,free:1,cert:10,timeEff:2,value:2,
-   info:'개당 $0.50~2.00 / 6성 직구매 $600~2,400. 이벤트 한정 판매 FOMO 설계. Whale 전용.'},
-];
-let ssrChart=null;
-const ssrBtns=document.getElementById('ssr-btns');
-ssrRoutes.forEach((r,i)=>{
-  const b=document.createElement('div');b.className='ibtn';b.textContent=r.label;
-  b.onclick=()=>{
-    document.getElementById('ssr-detail').innerHTML=r.info;
-    document.querySelectorAll('#ssr-btns .ibtn').forEach((x,j)=>{x.style.background=j===i?r.color+'22':'';x.style.color=j===i?r.color:'';x.style.borderColor=j===i?r.color:'';});
-    if(ssrChart)ssrChart.destroy();
-    ssrChart=new Chart(document.getElementById('c-ssr'),{type:'radar',
-      data:{labels:['획득 속도','무과금 가능성','확실성','시간 효율','가성비'],
-        datasets:ssrRoutes.map((rt,j)=>({label:rt.label,data:[rt.spd,rt.free,rt.cert,rt.timeEff,rt.value],
-          borderColor:j===i?rt.color:rt.color+'33',backgroundColor:j===i?rt.color+'18':'transparent',
-          pointBackgroundColor:j===i?rt.color:rt.color+'44',borderWidth:j===i?2:1,pointRadius:j===i?4:2}))},
-      options:{responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{labels:{color:'#5a6275',boxWidth:10,font:{size:10}}}},
-        scales:{r:{min:0,max:10,ticks:{display:false},grid:{color:'rgba(0,0,0,.08)'},pointLabels:{color:'#5a6275',font:{size:11}}}}}
+  const BASE_CP=50000;
+  const STAR_BONUS=[0,0.18,0.42,0.85,1.60,3.00];
+  let cpChart=null;
+  function calcCP(){
+    const lv=parseInt(document.getElementById('hlv-s').value);
+    const star=parseInt(document.getElementById('hst-s').value);
+    const skill=parseInt(document.getElementById('hsk-s').value);
+    const equip=parseInt(document.getElementById('heq-s').value);
+    document.getElementById('hlv-v').textContent='Lv.'+lv;
+    document.getElementById('hst-v').textContent=star+'성';
+    document.getElementById('hsk-v').textContent='Lv.'+skill;
+    document.getElementById('heq-v').textContent=equip+'단계';
+    const lvCP=Math.round(BASE_CP*(lv/100)*1.30);
+    const starCP=Math.round(BASE_CP*(STAR_BONUS[star-1]||0)*0.25);
+    const skillCP=Math.round(BASE_CP*((skill-1)/9)*0.25);
+    const equipCP=Math.round(BASE_CP*(equip/10)*0.20);
+    const total=lvCP+starCP+skillCP+equipCP;
+    const maxCP=Math.round(BASE_CP*(1.30+STAR_BONUS[5]*0.25+0.25+0.20));
+    document.getElementById('cp-result').innerHTML=
+      `레벨 기여: <b>${lvCP.toLocaleString()}</b><br>성급 기여: <b>${starCP.toLocaleString()}</b><br>스킬 기여: <b>${skillCP.toLocaleString()}</b><br>장비 기여: <b>${equipCP.toLocaleString()}</b><br><hr style="margin:8px 0;border:none;border-top:1px solid #e5e7eb">총 CP: <b style="font-size:16px;color:#2563eb">${total.toLocaleString()}</b><br>최대 대비: <b style="color:${total/maxCP>0.7?'#059669':'#d97706'}">${(total/maxCP*100).toFixed(1)}%</b>`;
+    if(cpChart)cpChart.destroy();
+    cpChart=new Chart(document.getElementById('c-cp'),{type:'bar',
+      data:{labels:['레벨(30%)','성급(25%)','스킬(25%)','장비(20%)'],
+        datasets:[
+          {label:'현재 CP',data:[lvCP,starCP,skillCP,equipCP],backgroundColor:['rgba(37,99,235,.75)','rgba(220,38,38,.75)','rgba(5,150,105,.75)','rgba(217,119,6,.75)'],borderRadius:5,barPercentage:.5},
+          {label:'최대 CP',data:[Math.round(BASE_CP*1.30),Math.round(BASE_CP*STAR_BONUS[5]*0.25),Math.round(BASE_CP*0.25),Math.round(BASE_CP*0.20)],backgroundColor:['rgba(37,99,235,.12)','rgba(220,38,38,.12)','rgba(5,150,105,.12)','rgba(217,119,6,.12)'],borderRadius:5,barPercentage:.5},
+        ]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},y:ax('CP')}}
     });
-  };
-  ssrBtns.appendChild(b);
-});
+  }
+  ['hlv-s','hst-s','hsk-s','heq-s'].forEach(id=>document.getElementById(id).oninput=calcCP);
+  calcCP();
+}
 
-/* ════════ S4 — 조각 차트 ════════ */
-const SHARDS=[10,30,80,200,500,1200];
-const STARPCT=[0,18,42,85,160,300];
-new Chart(document.getElementById('c-shard'),{type:'bar',
-  data:{labels:['1성\n10조각','2성\n30조각','3성\n80조각','4성\n200조각','5성\n500조각','6성\n1200조각'],
-    datasets:[
-      {label:'누적 조각',data:SHARDS,backgroundColor:'rgba(37,99,235,.65)',borderRadius:4,yAxisID:'y1',barPercentage:.4},
-      {label:'CP 보너스(%)',data:STARPCT,type:'line',borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.05)',tension:.3,fill:true,pointRadius:5,pointBackgroundColor:'#dc2626',yAxisID:'y2'}
-    ]},
-  options:{responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
-    scales:{
-      x:{grid:{display:false},ticks:{color:'#5a6275',font:{size:10},maxRotation:0}},
-      y1:{type:'linear',position:'left',grid:G,ticks:{color:'rgba(37,99,235,.8)',callback:v=>v+'개'},title:{display:true,text:'누적 조각',color:'rgba(37,99,235,.8)',font:{size:10}}},
-      y2:{type:'linear',position:'right',grid:{display:false},ticks:{color:'#dc2626',callback:v=>'+'+v+'%'},title:{display:true,text:'CP 보너스',color:'#dc2626',font:{size:10}}},
-    }}
-});
-
-/* ════════ S4 — CP 시뮬레이터 ════════ */
-const BASE_CP=50000;
-const STAR_BONUS=[0,0.18,0.42,0.85,1.60,3.00];
-let cpChart=null;
-function calcCP(){
-  const lv=parseInt(document.getElementById('hlv-s').value);
-  const star=parseInt(document.getElementById('hst-s').value);
-  const skill=parseInt(document.getElementById('hsk-s').value);
-  const equip=parseInt(document.getElementById('heq-s').value);
-  document.getElementById('hlv-v').textContent='Lv.'+lv;
-  document.getElementById('hst-v').textContent=star+'성';
-  document.getElementById('hsk-v').textContent='Lv.'+skill;
-  document.getElementById('heq-v').textContent=equip+'단계';
-  const lvCP=Math.round(BASE_CP*(lv/100)*1.30);
-  const starCP=Math.round(BASE_CP*(STAR_BONUS[star-1]||0)*0.25);
-  const skillCP=Math.round(BASE_CP*((skill-1)/9)*0.25);
-  const equipCP=Math.round(BASE_CP*(equip/10)*0.20);
-  const total=lvCP+starCP+skillCP+equipCP;
-  const maxCP=Math.round(BASE_CP*(1.30+STAR_BONUS[5]*0.25+0.25+0.20));
-  document.getElementById('cp-result').innerHTML=
-    `레벨 기여: <b>${lvCP.toLocaleString()}</b><br>성급 기여: <b>${starCP.toLocaleString()}</b><br>스킬 기여: <b>${skillCP.toLocaleString()}</b><br>장비 기여: <b>${equipCP.toLocaleString()}</b><br><hr style="margin:8px 0;border:none;border-top:1px solid #e5e7eb">총 CP: <b style="font-size:16px;color:#2563eb">${total.toLocaleString()}</b><br>최대 대비: <b style="color:${total/maxCP>0.7?'#059669':'#d97706'}">${(total/maxCP*100).toFixed(1)}%</b>`;
-  if(cpChart)cpChart.destroy();
-  cpChart=new Chart(document.getElementById('c-cp'),{type:'bar',
-    data:{labels:['레벨(30%)','성급(25%)','스킬(25%)','장비(20%)'],
+/* ════════ S5 ════════ */
+function initS5(){
+  const hqs=Array.from({length:30},(_,i)=>i+1);
+  const prod=hqs.map(h=>Math.round(8*Math.pow(1.18,h-1)));
+  const cons=hqs.map(h=>{if(h<=10)return Math.round(3*Math.pow(1.22,h-1));if(h<=20)return Math.round(18*Math.pow(1.32,h-10));return Math.round(120*Math.pow(1.40,h-20));});
+  new Chart(document.getElementById('c-inflation'),{type:'line',
+    data:{labels:hqs.map(h=>'HQ'+h),
       datasets:[
-        {label:'현재 CP',data:[lvCP,starCP,skillCP,equipCP],backgroundColor:['rgba(37,99,235,.75)','rgba(220,38,38,.75)','rgba(5,150,105,.75)','rgba(217,119,6,.75)'],borderRadius:5,barPercentage:.5},
-        {label:'최대 CP',data:[Math.round(BASE_CP*1.30),Math.round(BASE_CP*STAR_BONUS[5]*0.25),Math.round(BASE_CP*0.25),Math.round(BASE_CP*0.20)],backgroundColor:['rgba(37,99,235,.12)','rgba(220,38,38,.12)','rgba(5,150,105,.12)','rgba(217,119,6,.12)'],borderRadius:5,barPercentage:.5},
+        {label:'생산량',data:prod,borderColor:'#059669',backgroundColor:'rgba(5,150,105,.06)',tension:.4,fill:true,pointRadius:0},
+        {label:'소비량',data:cons,borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.04)',tension:.4,fill:false,pointRadius:0},
       ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},y:{...ax('CP')}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
+      scales:{x:{...ax(),ticks:{color:'#5a6275',callback:(_,i)=>i%5===0?'HQ'+(i+1):''}},y:ax('K/시간')}}
   });
 }
-calcCP();
 
-/* ════════ S5 — 인플레이션 ════════ */
-const hqs=Array.from({length:30},(_,i)=>i+1);
-const prod=hqs.map(h=>Math.round(8*Math.pow(1.18,h-1)));
-const cons=hqs.map(h=>{if(h<=10)return Math.round(3*Math.pow(1.22,h-1));if(h<=20)return Math.round(18*Math.pow(1.32,h-10));return Math.round(120*Math.pow(1.40,h-20));});
-new Chart(document.getElementById('c-inflation'),{type:'line',
-  data:{labels:hqs.map(h=>'HQ'+h),
-    datasets:[
-      {label:'생산량',data:prod,borderColor:'#059669',backgroundColor:'rgba(5,150,105,.06)',tension:.4,fill:true,pointRadius:0},
-      {label:'소비량',data:cons,borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.04)',tension:.4,fill:false,pointRadius:0},
-    ]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
-    scales:{x:{...ax(),ticks:{color:'#5a6275',callback:(_,i)=>i%5===0?'HQ'+(i+1):''}},y:ax('K/시간')}}
-});
-
-/* ════════ S8 — VS 요일 차트 ════════ */
-new Chart(document.getElementById('c-vs'),{type:'bar',
-  data:{labels:['월(건설)','화(연구)','수(훈련)','목(채집)','금(영웅)','토(처치)','일(결산)'],
-    datasets:[{label:'과금 압박 강도',data:[3,4,5,2,4,5,4],
-      backgroundColor:['rgba(37,99,235,.6)','rgba(124,58,237,.6)','rgba(220,38,38,.85)','rgba(5,150,105,.6)','rgba(124,58,237,.6)','rgba(220,38,38,.85)','rgba(124,58,237,.6)'],borderRadius:5}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},y:{...ax('압박 강도'),max:6,ticks:{callback:v=>['','★','★★','★★★','★★★★','★★★★★'][v]||v}}}}
-});
-
-/* ════════ S9 — 팝업 트리거 ════════ */
-new Chart(document.getElementById('c-popup'),{type:'bar',
-  data:{labels:['손실 회피','완료 욕구','사회적 압박','FOMO'],
-    datasets:[{label:'트리거 수',data:[5,4,4,4],backgroundColor:['rgba(220,38,38,.75)','rgba(124,58,237,.75)','rgba(37,99,235,.75)','rgba(217,119,6,.75)'],borderRadius:5}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:ax(),y:{...ax('트리거 수'),max:7}}}
-});
-
-/* ════════ S10 — 심리 기법 버블 ════════ */
-new Chart(document.getElementById('c-psych'),{type:'bubble',
-  data:{datasets:[{
-    data:[
-      {x:9.2,y:9.5,r:17,lbl:'손실 회피'},{x:8.5,y:8.8,r:15,lbl:'FOMO'},
-      {x:8.0,y:9.0,r:14,lbl:'자이가르닉'},{x:7.8,y:8.2,r:13,lbl:'사회 비교'},
-      {x:8.2,y:7.2,r:12,lbl:'매몰 비용'},{x:7.0,y:8.0,r:11,lbl:'희소성'},
-      {x:7.2,y:8.5,r:13,lbl:'의무감'},{x:6.8,y:7.5,r:15,lbl:'변동 보상'},
-      {x:7.5,y:7.8,r:12,lbl:'완료 욕구'},{x:6.5,y:7.0,r:10,lbl:'진행 시각화'},
-    ],
-    backgroundColor:'rgba(37,99,235,.28)',borderColor:'rgba(37,99,235,.6)',
-  }]},
-  options:{responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw.lbl+' 강도:'+ctx.raw.x+' 빈도:'+ctx.raw.y}}},
-    scales:{x:{...ax('과금 전환 강도'),min:5.5,max:10},y:{...ax('노출 빈도'),min:6.5,max:10}}},
-  plugins:[{afterDraw(chart){
-    const ctx=chart.ctx;
-    chart.data.datasets[0].data.forEach((pt,i)=>{
-      const el=chart.getDatasetMeta(0).data[i];
-      if(!el)return;
-      ctx.save();ctx.font='500 10px Noto Sans KR';ctx.fillStyle='#1a1e2a';ctx.textAlign='center';ctx.textBaseline='middle';
-      ctx.fillText(pt.lbl,el.x,el.y);ctx.restore();
-    });
-  }}]
-});
-
-/* ════════ S11 — Pity 시뮬레이터 ════════ */
-let pityChart=null;
-function getPityRate(pull,base){
-  if(pull<50)return base;
-  if(pull<80)return base+(pull-50)*0.004;
-  return Math.min(base+30*0.004+(pull-80)*0.05,1.0);
-}
-function calcPity(){
-  const pull=parseInt(document.getElementById('pity-s').value);
-  const bval=document.querySelector('input[name="banner"]:checked')?.value||'pickup';
-  const base=bval==='normal'?0.005:bval==='pickup'?0.007:0.010;
-  const cur=getPityRate(pull,base);
-  document.getElementById('pity-v').textContent=pull+'회';
-  document.getElementById('pity-prob').textContent=(cur*100).toFixed(3)+'%';
-  const zone=pull<50?'기본 구간':pull<80?'소프트 천장 가속':pull<100?'고속 가속':'하드 천장 (SSR 보장)';
-  const remCost=Math.round((100-pull)*3000);
-  document.getElementById('pity-insight').innerHTML=
-    `현재 구간: <b style="color:${pull>=80?'#dc2626':pull>=50?'#d97706':'#5a6275'}">${zone}</b> — SSR 확률 <b>${(cur*100).toFixed(3)}%</b><br>`+
-    `하드 천장까지 잔여 ${100-pull}회 — 예상 추가 비용 약 <b style="color:#dc2626">$${Math.round(remCost/3000*30).toLocaleString()}</b>`;
-  const pulls=Array.from({length:101},(_,i)=>i);
-  if(pityChart)pityChart.destroy();
-  pityChart=new Chart(document.getElementById('c-pity'),{type:'line',
-    data:{labels:pulls.map(p=>p%10===0?p+'회':''),
-      datasets:[{label:'SSR 확률(%)',data:pulls.map(p=>+(getPityRate(p,base)*100).toFixed(3)),
-        borderColor:'#7c3aed',backgroundColor:'rgba(124,58,237,.07)',tension:.3,fill:true,pointRadius:0,
-        segment:{borderColor:ctx=>ctx.p0.parsed.x>=80?'#dc2626':ctx.p0.parsed.x>=50?'#d97706':'#7c3aed'}}]},
+/* ════════ S8 ════════ */
+function initS8(){
+  new Chart(document.getElementById('c-vs'),{type:'bar',
+    data:{labels:['월(건설)','화(연구)','수(훈련)','목(채집)','금(영웅)','토(처치)','일(결산)'],
+      datasets:[{label:'과금 압박',data:[3,4,5,2,4,5,4],
+        backgroundColor:['rgba(37,99,235,.6)','rgba(124,58,237,.6)','rgba(220,38,38,.85)','rgba(5,150,105,.6)','rgba(124,58,237,.6)','rgba(220,38,38,.85)','rgba(124,58,237,.6)'],borderRadius:5}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{x:{grid:{display:false},ticks:{color:'#5a6275',autoSkip:false,callback:(_,i)=>i%10===0?i+'회':''}},y:{...ax('SSR 확률(%)'),ticks:{callback:v=>v+'%'}}}},
+      scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},y:{...ax('압박 강도'),max:6,ticks:{callback:v=>['','★','★★','★★★','★★★★','★★★★★'][v]||v}}}}
+  });
+}
+
+/* ════════ S9 ════════ */
+function initS9(){
+  new Chart(document.getElementById('c-popup'),{type:'bar',
+    data:{labels:['손실 회피','완료 욕구','사회 압박','FOMO'],
+      datasets:[{label:'트리거 수',data:[5,4,4,4],backgroundColor:['rgba(220,38,38,.75)','rgba(124,58,237,.75)','rgba(37,99,235,.75)','rgba(217,119,6,.75)'],borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:ax(),y:{...ax('트리거 수'),max:7}}}
+  });
+}
+
+/* ════════ S10 ════════ */
+function initS10(){
+  new Chart(document.getElementById('c-psych'),{type:'bubble',
+    data:{datasets:[{
+      data:[
+        {x:9.2,y:9.5,r:17,lbl:'손실 회피'},{x:8.5,y:8.8,r:15,lbl:'FOMO'},
+        {x:8.0,y:9.0,r:14,lbl:'자이가르닉'},{x:7.8,y:8.2,r:13,lbl:'사회 비교'},
+        {x:8.2,y:7.2,r:12,lbl:'매몰 비용'},{x:7.0,y:8.0,r:11,lbl:'희소성'},
+        {x:7.2,y:8.5,r:13,lbl:'의무감'},{x:6.8,y:7.5,r:15,lbl:'변동 보상'},
+        {x:7.5,y:7.8,r:12,lbl:'완료 욕구'},{x:6.5,y:7.0,r:10,lbl:'진행 시각화'},
+      ],
+      backgroundColor:'rgba(37,99,235,.28)',borderColor:'rgba(37,99,235,.6)',
+    }]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw.lbl+' 강도:'+ctx.raw.x+' 빈도:'+ctx.raw.y}}},
+      scales:{x:{...ax('과금 전환 강도'),min:5.5,max:10},y:{...ax('노출 빈도'),min:6.5,max:10}}},
     plugins:[{afterDraw(chart){
-      const ctx=chart.ctx,xAxis=chart.scales.x,yAxis=chart.scales.y;
-      [[50,'#d97706','소프트 천장'],[100,'#dc2626','하드 천장']].forEach(([px,col,lbl])=>{
-        const x=xAxis.getPixelForValue(px);
-        ctx.save();ctx.strokeStyle=col;ctx.lineWidth=1;ctx.setLineDash([5,3]);
-        ctx.beginPath();ctx.moveTo(x,yAxis.top);ctx.lineTo(x,yAxis.bottom);ctx.stroke();
-        ctx.fillStyle=col;ctx.font='10px Noto Sans KR';ctx.textAlign='center';ctx.fillText(lbl,x,yAxis.top+12);ctx.restore();
+      const ctx=chart.ctx;
+      chart.data.datasets[0].data.forEach((pt,i)=>{
+        const el=chart.getDatasetMeta(0).data[i];
+        if(!el)return;
+        ctx.save();ctx.font='bold 10px Noto Sans KR';ctx.fillStyle='#1a1e2a';ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.fillText(pt.lbl,el.x,el.y);ctx.restore();
       });
     }}]
   });
 }
-calcPity();
 
-/* ════════ S12 — 서버 생애주기 ════════ */
-new Chart(document.getElementById('c-server'),{type:'line',
-  data:{labels:['1단계\n탄생','2단계\n성장','3단계\n패권','4단계\n침체','5단계\n붕괴'],
-    datasets:[
-      {label:'활성 유저(명)',data:[400,320,220,110,50],borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',tension:.4,fill:true,pointRadius:5,pointBackgroundColor:'#2563eb',yAxisID:'y1'},
-      {label:'과금 강도(상대값)',data:[85,140,110,35,8],borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.04)',tension:.4,fill:false,pointRadius:5,pointBackgroundColor:'#dc2626',yAxisID:'y2'},
-    ]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
-    scales:{
-      x:{grid:{display:false},ticks:{color:'#5a6275',font:{size:10}}},
-      y1:{type:'linear',position:'left',...ax('활성 유저(명)')},
-      y2:{type:'linear',position:'right',grid:{display:false},...ax('과금 강도')},
-    }}
-});
+/* ════════ S11 ════════ */
+function initS11(){
+  let pityChart=null;
+  function getPityRate(pull,base){
+    if(pull<50)return base;
+    if(pull<80)return base+(pull-50)*0.004;
+    return Math.min(base+30*0.004+(pull-80)*0.05,1.0);
+  }
+  function calcPity(){
+    const pull=parseInt(document.getElementById('pity-s').value);
+    const bval=document.querySelector('input[name="banner"]:checked')?.value||'pickup';
+    const base=bval==='normal'?0.005:bval==='pickup'?0.007:0.010;
+    const cur=getPityRate(pull,base);
+    document.getElementById('pity-v').textContent=pull+'회';
+    document.getElementById('pity-prob').textContent=(cur*100).toFixed(3)+'%';
+    const zone=pull<50?'기본 구간':pull<80?'소프트 천장 가속':pull<100?'고속 가속':'하드 천장 (SSR 보장)';
+    document.getElementById('pity-insight').innerHTML=
+      `현재 구간: <b style="color:${pull>=80?'#dc2626':pull>=50?'#d97706':'#5a6275'}">${zone}</b> — SSR 확률 <b>${(cur*100).toFixed(3)}%</b><br>`+
+      `하드 천장까지 잔여 ${100-pull}회 — 추가 예상 비용 약 <b style="color:#dc2626">$${Math.round((100-pull)*30).toLocaleString()}</b>`;
+    const pulls=Array.from({length:101},(_,i)=>i);
+    if(pityChart)pityChart.destroy();
+    pityChart=new Chart(document.getElementById('c-pity'),{type:'line',
+      data:{labels:pulls.map(p=>p%10===0?p+'회':''),
+        datasets:[{label:'SSR 확률(%)',data:pulls.map(p=>+(getPityRate(p,base)*100).toFixed(3)),
+          borderColor:'#7c3aed',backgroundColor:'rgba(124,58,237,.07)',tension:.3,fill:true,pointRadius:0,
+          segment:{borderColor:ctx=>ctx.p0.parsed.x>=80?'#dc2626':ctx.p0.parsed.x>=50?'#d97706':'#7c3aed'}}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+        scales:{x:{grid:{display:false},ticks:{color:'#5a6275',autoSkip:false,callback:(_,i)=>i%10===0?i+'회':''}},y:{...ax('SSR 확률(%)'),ticks:{callback:v=>v+'%'}}}},
+      plugins:[{afterDraw(chart){
+        const ctx=chart.ctx,xA=chart.scales.x,yA=chart.scales.y;
+        [[50,'#d97706','소프트 천장'],[100,'#dc2626','하드 천장']].forEach(([px,col,lbl])=>{
+          const x=xA.getPixelForValue(px);
+          ctx.save();ctx.strokeStyle=col;ctx.lineWidth=1;ctx.setLineDash([5,3]);
+          ctx.beginPath();ctx.moveTo(x,yA.top);ctx.lineTo(x,yA.bottom);ctx.stroke();
+          ctx.fillStyle=col;ctx.font='10px Noto Sans KR';ctx.textAlign='center';ctx.fillText(lbl,x,yA.top+12);ctx.restore();
+        });
+      }}]
+    });
+  }
+  document.getElementById('pity-s').oninput=calcPity;
+  document.querySelectorAll('input[name="banner"]').forEach(r=>r.onchange=calcPity);
+  calcPity();
+}
 
-/* ════════ S13 — 경쟁 비교 ════════ */
-new Chart(document.getElementById('c-comp'),{type:'bar',
-  data:{labels:['UA 효율','과금 전환','콘텐츠 깊이','초반 성장','리텐션','장르 완성도'],
-    datasets:[
-      {label:'Last War',data:[10,9,7,9,7,7],backgroundColor:'rgba(220,38,38,.72)',borderRadius:3,barPercentage:.22,categoryPercentage:.9},
-      {label:'Whiteout',data:[8,8,8,8,9,8],backgroundColor:'rgba(37,99,235,.72)',borderRadius:3,barPercentage:.22,categoryPercentage:.9},
-      {label:'Rise of Kingdoms',data:[6,7,10,6,10,10],backgroundColor:'rgba(5,150,105,.72)',borderRadius:3,barPercentage:.22,categoryPercentage:.9},
-      {label:'State of Survival',data:[7,7,7,7,7,7],backgroundColor:'rgba(107,114,128,.6)',borderRadius:3,barPercentage:.22,categoryPercentage:.9},
-    ]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},scales:{x:ax(),y:{...ax(),max:12}}}
-});
-
-/* ════════ S14 — KPI 시뮬레이터 ════════ */
-let kpiChart=null;
-function calcKPI(){
-  const ins=parseInt(document.getElementById('ins-s').value);
-  const d30=parseFloat(document.getElementById('d30-s').value)/100;
-  const cvr=parseFloat(document.getElementById('cvr-s').value)/100;
-  const arppu=parseFloat(document.getElementById('arppu-s').value);
-  const cpi=parseFloat(document.getElementById('cpi-s').value);
-  document.getElementById('ins-v').textContent=ins.toLocaleString()+'만';
-  document.getElementById('d30-v').textContent=(d30*100).toFixed(0)+'%';
-  document.getElementById('cvr-v').textContent=(cvr*100).toFixed(1)+'%';
-  document.getElementById('arppu-v').textContent='$'+arppu;
-  document.getElementById('cpi-v').textContent='$'+cpi.toFixed(2);
-  const mau=ins*d30;
-  const payers=mau*cvr;
-  const rev=payers*arppu;
-  const uaCost=ins*cpi;
-  const roi=((rev-uaCost)/uaCost*100).toFixed(0);
-  const ltv=(arppu*(1/0.15)*cvr).toFixed(0);
-  document.getElementById('kpi-result').innerHTML=
-    `월 MAU: <b>${Math.round(mau).toLocaleString()}만</b><br>`+
-    `월 결제 유저: <b>${Math.round(payers).toLocaleString()}만</b><br>`+
-    `월 순매출: <b style="color:#2563eb">$${(rev/10).toFixed(1)}M</b><br>`+
-    `월 UA 비용: <b style="color:#dc2626">$${(uaCost/10).toFixed(1)}M</b><br>`+
-    `ROI: <b style="color:${roi>100?'#059669':'#dc2626'}">${roi}%</b><br>`+
-    `LTV 추정: <b>$${ltv}</b>`;
-  const months=['M1','M2','M3','M4','M5','M6'];
-  const dau=months.map((_,i)=>Math.round(mau*0.35*Math.pow(.92,i)*10)/10);
-  const payArr=months.map((_,i)=>Math.round(payers*Math.pow(.92,i)*10)/10);
-  const revArr=months.map((_,i)=>Math.round(payArr[i]*arppu/100)/10);
-  if(kpiChart)kpiChart.destroy();
-  kpiChart=new Chart(document.getElementById('c-kpi'),{type:'line',
-    data:{labels:months,datasets:[
-      {label:'DAU(만)',data:dau,borderColor:'#7c3aed',backgroundColor:'rgba(124,58,237,.06)',tension:.4,fill:true,pointRadius:4,pointBackgroundColor:'#7c3aed',yAxisID:'y1'},
-      {label:'결제 유저(만)',data:payArr,borderColor:'#dc2626',fill:false,tension:.4,pointRadius:4,pointBackgroundColor:'#dc2626',yAxisID:'y1'},
-      {label:'순매출($M)',data:revArr,borderColor:'#059669',fill:false,tension:.4,pointRadius:4,pointBackgroundColor:'#059669',yAxisID:'y2'},
-    ]},
+/* ════════ S12 ════════ */
+function initS12(){
+  new Chart(document.getElementById('c-server'),{type:'line',
+    data:{labels:['1단계
+탄생','2단계
+성장','3단계
+패권','4단계
+침체','5단계
+붕괴'],
+      datasets:[
+        {label:'활성 유저(명)',data:[400,320,220,110,50],borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',tension:.4,fill:true,pointRadius:5,pointBackgroundColor:'#2563eb',yAxisID:'y1'},
+        {label:'과금 강도',data:[85,140,110,35,8],borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.04)',tension:.4,fill:false,pointRadius:5,pointBackgroundColor:'#dc2626',yAxisID:'y2'},
+      ]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
-      scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},
-        y1:{type:'linear',position:'left',...ax('유저(만)')},
-        y2:{type:'linear',position:'right',grid:{display:false},...ax('매출($M)')},
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#5a6275',font:{size:10}}},
+        y1:{type:'linear',position:'left',...ax('활성 유저(명)')},
+        y2:{type:'linear',position:'right',grid:{display:false},...ax('과금 강도')},
       }}
   });
 }
-calcKPI();
+
+/* ════════ S13 ════════ */
+function initS13(){
+  new Chart(document.getElementById('c-comp'),{type:'bar',
+    data:{labels:['UA 효율','과금 전환','콘텐츠 깊이','초반 성장','리텐션','장르 완성도'],
+      datasets:[
+        {label:'Last War',data:[10,9,7,9,7,7],backgroundColor:'rgba(220,38,38,.72)',borderRadius:3,barPercentage:.22,categoryPercentage:.9},
+        {label:'Whiteout',data:[8,8,8,8,9,8],backgroundColor:'rgba(37,99,235,.72)',borderRadius:3,barPercentage:.22,categoryPercentage:.9},
+        {label:'Rise of Kingdoms',data:[6,7,10,6,10,10],backgroundColor:'rgba(5,150,105,.72)',borderRadius:3,barPercentage:.22,categoryPercentage:.9},
+        {label:'State of Survival',data:[7,7,7,7,7,7],backgroundColor:'rgba(107,114,128,.6)',borderRadius:3,barPercentage:.22,categoryPercentage:.9},
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},scales:{x:ax(),y:{...ax(),max:12}}}
+  });
+}
+
+/* ════════ S14 ════════ */
+function initS14(){
+  let kpiChart=null;
+  function calcKPI(){
+    const ins=parseInt(document.getElementById('ins-s').value);
+    const d30=parseFloat(document.getElementById('d30-s').value)/100;
+    const cvr=parseFloat(document.getElementById('cvr-s').value)/100;
+    const arppu=parseFloat(document.getElementById('arppu-s').value);
+    const cpi=parseFloat(document.getElementById('cpi-s').value);
+    document.getElementById('ins-v').textContent=ins.toLocaleString()+'만';
+    document.getElementById('d30-v').textContent=(d30*100).toFixed(0)+'%';
+    document.getElementById('cvr-v').textContent=(cvr*100).toFixed(1)+'%';
+    document.getElementById('arppu-v').textContent='$'+arppu;
+    document.getElementById('cpi-v').textContent='$'+cpi.toFixed(2);
+    const mau=ins*d30,payers=mau*cvr,rev=payers*arppu,uaCost=ins*cpi;
+    const roi=((rev-uaCost)/uaCost*100).toFixed(0);
+    document.getElementById('kpi-result').innerHTML=
+      `월 MAU: <b>${Math.round(mau).toLocaleString()}만</b><br>`+
+      `월 결제 유저: <b>${Math.round(payers).toLocaleString()}만</b><br>`+
+      `월 순매출: <b style="color:#2563eb">$${(rev/10).toFixed(1)}M</b><br>`+
+      `월 UA 비용: <b style="color:#dc2626">$${(uaCost/10).toFixed(1)}M</b><br>`+
+      `ROI: <b style="color:${+roi>100?'#059669':'#dc2626'}">${roi}%</b>`;
+    const months=['M1','M2','M3','M4','M5','M6'];
+    const payArr=months.map((_,i)=>Math.round(payers*Math.pow(.92,i)*10)/10);
+    const revArr=months.map((_,i)=>Math.round(payArr[i]*arppu/100)/10);
+    if(kpiChart)kpiChart.destroy();
+    kpiChart=new Chart(document.getElementById('c-kpi'),{type:'line',
+      data:{labels:months,datasets:[
+        {label:'결제 유저(만)',data:payArr,borderColor:'#dc2626',fill:false,tension:.4,pointRadius:4,pointBackgroundColor:'#dc2626',yAxisID:'y1'},
+        {label:'순매출($M)',data:revArr,borderColor:'#059669',fill:false,tension:.4,pointRadius:4,pointBackgroundColor:'#059669',yAxisID:'y2'},
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
+        scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},
+          y1:{type:'linear',position:'left',...ax('유저(만)')},
+          y2:{type:'linear',position:'right',grid:{display:false},...ax('매출($M)')},
+        }}
+    });
+  }
+  ['ins-s','d30-s','cvr-s','arppu-s','cpi-s'].forEach(id=>document.getElementById(id).oninput=calcKPI);
+  calcKPI();
+}
+
+/* ════════ global 노출 (HTML onclick에서 호출 가능하도록) ════════ */
+window.setView = setView;
+window.gotoStage = gotoStage;
+window.calcSlot = function(){};
+window.calcCP = function(){};
+window.calcPattern = function(){};
+window.calcKPI = function(){};
+window.calcPity = function(){};
+
+/* ════════ 초기 로드: s1 차트 즉시 초기화 ════════ */
+initChartsForStage('s1');
+
+}); // DOMContentLoaded 끝
 </script>
 </body>
 </html>
