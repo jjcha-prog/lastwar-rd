@@ -180,47 +180,84 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
   <span class="sbadge" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0">2단계</span>
   <div class="stitle">
     <h2>핵심 인프라 — 기지 건설 및 테크트리</h2>
-    <p>건물 분류 · HQ 해금 DAG · 자원 생산 효율 · 건설 큐 과금 연동 · 군사 건물 상세</p>
-    <div class="merge-tag">⊕ 보완 병합 · DAG 임계 경로 · 건설 큐 VIP 연동 · 군사 건물 8종 역할 분석</div>
+    <p>전체 건물 카테고리 분류 · HQ 해금 DAG · 자원 생산 효율 · 건설 큐 과금 연동 · 누락 건물 완전 수록</p>
+    <div class="merge-tag">⊕ 보완 병합 · DAG 임계 경로 · 건설 큐 VIP 연동 · 전체 건물 21종+ 역할 분석</div>
   </div>
 </div>
 <div class="check-row">
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 인터랙티브: 건설 큐 슬롯 시뮬레이터</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 인터랙티브: 건물 카테고리 탐색기</span>
   <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 차트: 자원 생산 vs 소비 + 슬롯별 소요일</span>
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 표: DAG 임계 경로 + VIP 슬롯 비용 + 군사 건물 8종</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 표: DAG 임계 경로 + 전체 건물 21종 + VIP 슬롯 비용</span>
 </div>
 <div class="stat-row">
+  <div class="scard"><div class="lbl">전체 건물 카테고리</div><div class="val" style="color:var(--blue)">7개</div></div>
   <div class="scard"><div class="lbl">T4 훈련 식량 소비/생산 비율</div><div class="val" style="color:var(--red)">×3.8</div></div>
-  <div class="scard"><div class="lbl">슬롯 1→6 성장 속도 차이</div><div class="val" style="color:var(--amber)">83%↑</div></div>
   <div class="scard"><div class="lbl">슬롯 4→5 추가 비용</div><div class="val" style="color:var(--red)">$3,700+</div></div>
   <div class="scard"><div class="lbl">DAG 임계 경로 노드</div><div class="val" style="color:var(--blue)">5개</div></div>
 </div>
-<div class="insight"><strong>핵심 통찰:</strong> HQ 직렬화 + DAG 임계 경로(병영→차고→훈련소→T4) + 큐 슬롯 병목의 3중 구조가 스피드업 과금을 다방향으로 유발. 슬롯 가격 체계($40→$300→$4,000)가 Dolphin·Whale 자동 분류 장치.</div>
+<div class="insight"><strong>핵심 통찰:</strong> HQ 직렬화 + DAG 임계 경로(병영→차고→훈련소→T4) + 큐 슬롯 병목의 3중 구조가 스피드업 과금을 다방향으로 유발. 슬롯 가격 체계($40→$300→$4,000)가 Dolphin·Whale 자동 분류 장치. 과학기술센터 2번째는 District 102 클리어($10), 3번째는 HQ 30 달성 후 해금.</div>
+
+<div class="sdiv">전체 건물 — 카테고리별 탐색기</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px" id="bcat-tabs"></div>
+<div id="bcat-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px;margin-bottom:12px"></div>
 
 <div class="sdiv">건물 선행 조건 DAG — 임계 경로</div>
 <table class="dt">
   <thead><tr><th>임계 경로 노드</th><th>선행 조건</th><th>잠금 유형</th><th>해금 효과</th><th>과금 압박</th></tr></thead>
   <tbody>
-    <tr><td><strong>본부(HQ)</strong></td><td>없음 — 루트</td><td>단일</td><td>모든 건물 레벨 상한 결정</td><td style="color:var(--red)">★★★★★</td></tr>
-    <tr><td><strong>병영</strong></td><td>HQ Lv.3+</td><td>단일</td><td>보병 T1~T4 훈련 시작</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>본부(HQ)</strong></td><td>없음 — 루트</td><td>단일</td><td>모든 건물 레벨 상한 결정 · 영웅 레벨 캡 +5/레벨</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>병영</strong></td><td>HQ Lv.3</td><td>단일</td><td>보병 T1~T4 훈련 시작</td><td style="color:var(--red)">★★★★★</td></tr>
     <tr><td><strong>차고</strong></td><td>병영 Lv.8 + HQ Lv.8</td><td style="color:var(--amber)">이중</td><td>기갑 병종 해금</td><td style="color:var(--amber)">★★★★</td></tr>
     <tr><td><strong>훈련소(특수)</strong></td><td>병영·차고 Lv.12 + HQ Lv.14</td><td style="color:var(--red)">3중</td><td>T4 해금 경로 개방</td><td style="color:var(--red)">★★★★★</td></tr>
     <tr><td><strong>T4 병사 해금</strong></td><td>훈련소 Lv.15 + 전투연구 + HQ Lv.20</td><td style="color:var(--red)">복합</td><td>전투력 최대 도약 구간</td><td style="color:var(--red)">★★★★★</td></tr>
   </tbody>
 </table>
 
-<div class="sdiv">군사 건물 8종 — 역할 및 과금 연동</div>
-<table class="dt">
-  <thead><tr><th>건물</th><th>카테고리</th><th>선행 조건</th><th>주요 역할</th><th>과금 트리거</th><th>압박</th></tr></thead>
+<div class="sdiv">전체 건물 21종 — 완전 목록 (기존 누락 포함)</div>
+<table class="dt" id="bld-full-table">
+  <thead><tr><th>건물명 (한글)</th><th>영문명</th><th>카테고리</th><th>해금 조건</th><th>주요 역할</th><th>복수 건설</th><th>과금 압박</th></tr></thead>
   <tbody>
-    <tr><td><strong>병영</strong></td><td style="color:var(--red)">훈련</td><td>HQ Lv.3</td><td>보병 훈련 · DAG 루트 노드</td><td>훈련 스피드업</td><td style="color:var(--red)">★★★★★</td></tr>
-    <tr><td><strong>차고</strong></td><td style="color:var(--red)">훈련</td><td>병영Lv.8+HQ Lv.8</td><td>기갑 훈련 · 이중 잠금</td><td>HQ·병영 스피드업</td><td style="color:var(--red)">★★★★★</td></tr>
-    <tr><td><strong>격납고</strong></td><td style="color:var(--red)">훈련</td><td>차고Lv.8+HQ Lv.10</td><td>항공 훈련 · Speed 최고</td><td>격납고 스피드업</td><td style="color:var(--amber)">★★★★</td></tr>
-    <tr><td><strong>훈련소(특수)</strong></td><td style="color:var(--red)">훈련</td><td>병영·차고Lv.12+HQ Lv.14</td><td>T4 해금 필수 전제 · 3중 잠금</td><td>3중 동시 스피드업</td><td style="color:var(--red)">★★★★★</td></tr>
-    <tr><td><strong>병원</strong></td><td style="color:var(--blue)">지원</td><td>병영Lv.5+HQ Lv.6</td><td>부상 병사 치료 · 초과 시 영구 소멸</td><td>치료 팩 · 즉시 치료</td><td style="color:var(--red)">★★★★★</td></tr>
-    <tr><td><strong>집결 지점</strong></td><td style="color:var(--purple)">전략</td><td>동맹센터+HQ Lv.10</td><td>연맹 집단 공격 · 사회적 압박 핵심</td><td>집결 전투력 팩</td><td style="color:var(--red)">★★★★★</td></tr>
-    <tr><td><strong>감시탑</strong></td><td style="color:var(--green)">방어</td><td>HQ Lv.8</td><td>적 정찰 탐지 · 방어 준비 시간 확보</td><td>방어 버프 팩</td><td>★★★</td></tr>
-    <tr><td><strong>성벽</strong></td><td style="color:var(--green)">방어</td><td>HQ Lv.5</td><td>기지 방어 체력 · HP 0 시 약탈 증가</td><td>방어 강화 팩</td><td>★★★</td></tr>
+    <tr style="background:rgba(220,38,38,.04)"><td colspan="7" style="font-weight:600;color:var(--red);padding:8px 13px">── 핵심 인프라</td></tr>
+    <tr><td><strong>본부</strong></td><td>Headquarters</td><td style="color:var(--red)">핵심</td><td>시작 시 보유</td><td>모든 건물 레벨 상한 결정 · 영웅 레벨 캡</td><td>불가 (1개)</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>과학기술센터</strong></td><td>Tech Center</td><td style="color:var(--red)">핵심</td><td>HQ Lv.7</td><td>연구 큐 운용 · 건물·병사·경제 전 분야 강화. 2번째: District 102($10). 3번째: HQ Lv.30</td><td>최대 3개</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>건물사무소</strong></td><td>Builder's Hut</td><td style="color:var(--red)">핵심</td><td>HQ Lv.2</td><td>건설 큐 슬롯 수 결정 · 생존자 배치로 건설 속도 추가 감소. 레벨 높을수록 기본 시간 감소↑</td><td>불가 (1개)</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>병원</strong></td><td>Hospital</td><td style="color:var(--red)">핵심</td><td>병영 Lv.5 + HQ Lv.6</td><td>부상 병사 치료 · 수용량 초과 시 영구 소멸 → 즉시 치료 팩 구매 트리거</td><td>불가 (1개)</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>응급센터</strong></td><td>Emergency Center</td><td style="color:var(--red)">핵심</td><td>HQ Lv.15</td><td>병원 수용 초과 병사를 추가 수용 · 전투 중 병사 영구 손실 방어선 역할</td><td>불가 (1개)</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>연맹센터</strong></td><td>Alliance Center</td><td style="color:var(--purple)">전략</td><td>HQ Lv.8</td><td>동맹 가입·기여·기술 연구 허브 · 집결 지점 선행 조건. 연맹 기술 레벨 연동</td><td>불가 (1개)</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>집결 지점</strong></td><td>Rally Spot</td><td style="color:var(--purple)">전략</td><td>연맹센터 + HQ Lv.10</td><td>연맹 집단 공격(Rally) · 사회적 과금 압박 핵심. 최대 5인 참여</td><td>불가 (1개)</td><td style="color:var(--red)">★★★★★</td></tr>
+
+    <tr style="background:rgba(220,38,38,.04)"><td colspan="7" style="font-weight:600;color:var(--red);padding:8px 13px">── 군사 · 훈련</td></tr>
+    <tr><td><strong>병영</strong></td><td>Barracks</td><td style="color:var(--red)">훈련</td><td>HQ Lv.3</td><td>보병 T1~T4 훈련 · DAG 임계 경로 루트 노드. 차고·훈련소 선행 조건</td><td>복수 가능</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>유닛센터 (차고)</strong></td><td>Garage</td><td style="color:var(--red)">훈련</td><td>병영 Lv.8 + HQ Lv.8</td><td>기갑 T2~T4 훈련 · 이중 잠금. 격납고 선행 조건(Lv.8)</td><td>복수 가능</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>드론센터 (격납고)</strong></td><td>Hangar / Drone Center</td><td style="color:var(--red)">훈련</td><td>차고 Lv.8 + HQ Lv.10</td><td>항공 T2~T4 훈련 · Speed 최고 병종. 이니셔티브 우위</td><td>복수 가능</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>포병기지 (훈련소)</strong></td><td>Special Training</td><td style="color:var(--red)">훈련</td><td>병영·차고 Lv.12 + HQ Lv.14</td><td>T4 병사 해금 필수 전제 · 3중 잠금 최대 병목</td><td>불가 (1개)</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>조종사 기지 (드릴 그라운드)</strong></td><td>Drill Ground</td><td style="color:var(--red)">훈련</td><td>HQ Lv.4</td><td>주둔 가능 병사 수 결정 · 행군 속도 버프 역할. 레벨별 수용 인원 증가</td><td>복수 가능</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>병기 공장 (장비 공장)</strong></td><td>Gear Factory</td><td style="color:var(--blue)">제조</td><td>HQ Lv.9</td><td>영웅 장비 제작·합성·분해 · 에픽~신화 등급 장비 생산. 일일 미션 연동</td><td>불가 (1개)</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>칩연구소</strong></td><td>Chip Lab</td><td style="color:var(--blue)">제조</td><td>HQ Lv.10 (2024.10 업데이트)</td><td>드론 스킬 칩 제작·분해·레벨 리셋 · Lv.20에서 전설 칩 전체 해금</td><td>불가 (1개)</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>부품 공장 (컴포넌트 공장)</strong></td><td>Component Factory</td><td style="color:var(--blue)">제조</td><td>HQ Lv.10</td><td>드론 부품 생산 · 드론 장비 업그레이드 재료 공급</td><td>불가 (1개)</td><td>★★★</td></tr>
+    <tr><td><strong>탱크 센터</strong></td><td>Tank Center</td><td style="color:var(--red)">강화</td><td>HQ Lv.12</td><td>탱크 영웅 전체 스탯 증가 · 탱크 행군 속도 버프</td><td>불가 (1개)</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>미사일 센터</strong></td><td>Missile Center</td><td style="color:var(--red)">강화</td><td>HQ Lv.12</td><td>미사일 영웅 전체 스탯 증가 · 미사일 행군 속도 버프</td><td>불가 (1개)</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>항공 센터</strong></td><td>Aircraft Center</td><td style="color:var(--red)">강화</td><td>HQ Lv.12</td><td>항공 영웅 전체 스탯 증가 · 항공 행군 속도 버프</td><td>불가 (1개)</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>훈련 기지</strong></td><td>Training Base</td><td style="color:var(--blue)">지원</td><td>HQ Lv.8</td><td>영웅 EXP 생산 · 최대 5개 건설 가능 · 최대 레벨 시 259,200 EXP/h</td><td>최대 5개</td><td>★★★</td></tr>
+    <tr><td><strong>주점 (태번)</strong></td><td>Tavern</td><td style="color:var(--blue)">지원</td><td>HQ Lv.5</td><td>영웅·생존자 모집 · 연속 뽑기 가능 · 레전더리 모집 티켓 사용처</td><td>불가 (1개)</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>감시탑 (레이더)</strong></td><td>Alert Tower / Radar</td><td style="color:var(--green)">방어</td><td>HQ Lv.8</td><td>적 정찰·행군 탐지 · 방어 준비 시간 확보 · 집결 탐지</td><td>불가 (1개)</td><td>★★★</td></tr>
+    <tr><td><strong>성벽</strong></td><td>Wall</td><td style="color:var(--green)">방어</td><td>HQ Lv.5</td><td>기지 방어 체력 · HP 0 시 병사 사상률 증가 · 방어 병종 공격력 버프</td><td>불가 (1개)</td><td>★★★</td></tr>
+    <tr><td><strong>정찰기 (탐지기)</strong></td><td>Recon Plane</td><td style="color:var(--green)">방어</td><td>HQ Lv.10</td><td>맵 탐색 · 자원 수집 지원 · 생존자 모집 기능. 정찰 속도 버프</td><td>불가 (1개)</td><td>★★</td></tr>
+
+    <tr style="background:rgba(5,150,105,.04)"><td colspan="7" style="font-weight:600;color:var(--green);padding:8px 13px">── 자원 생산</td></tr>
+    <tr><td><strong>농지 (농장)</strong></td><td>Farmland</td><td style="color:var(--green)">생산</td><td>튜토리얼 (HQ Lv.1부터)</td><td>식량 생산 · 병사 훈련·유지 핵심 자원. 추가 슬롯은 연구로 해금</td><td>최대 5개</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>철광 (철 광산)</strong></td><td>Iron Mine</td><td style="color:var(--green)">생산</td><td>HQ Lv.2</td><td>철강 생산 · 건설·연구 핵심 자원. 최대 Lv.35에서 39,600 철/h</td><td>복수 가능</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>연료 펌프 (유전)</strong></td><td>Oil Well</td><td style="color:var(--green)">생산</td><td>HQ Lv.6 + 농장 Lv.5</td><td>석유 생산 · T3+ 훈련 핵심 자원. 연구로 추가 최대 2개 · HQ 업그레이드로 3개 추가, 총 5개</td><td>최대 5개</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>금광</strong></td><td>Gold Mine</td><td style="color:var(--green)">생산</td><td>HQ Lv.5</td><td>골드(코인) 생산 · Lv.9+ 건물 업그레이드 필수. 구조적 만성 적자 자원</td><td>복수 가능</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>고열 용광로 (제련소)</strong></td><td>Smelter</td><td style="color:var(--green)">생산</td><td>HQ Lv.6</td><td>업그레이드 광석(Upgrade Ore) 생산 · 영웅 장비 강화 전용 재료. 유일 공급원</td><td>복수 가능</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>단백질 농장</strong></td><td>Protein Farm</td><td style="color:var(--green)">생산</td><td>S1 시즌 특별 건물</td><td>단백질 생산 · S1 시즌 전용 자원. 시즌 건물 업그레이드 재료로 사용</td><td>복수 가능</td><td style="color:var(--blue)">시즌</td></tr>
+    <tr><td><strong>바이러스 연구센터</strong></td><td>Virus Research Center</td><td style="color:var(--green)">생산</td><td>S2 시즌 특별 건물</td><td>바이러스 저항력 증가 · S2 시즌 오프 "에이지 오브 오일" 전용 특수 건물</td><td>복수 가능</td><td style="color:var(--blue)">시즌</td></tr>
+    <tr><td><strong>합금 공장</strong></td><td>Alloy Factory / Material Workshop</td><td style="color:var(--blue)">제조</td><td>HQ Lv.10+</td><td>특수 합금 재료 제작 · 장비·칩 제작용 고급 소재 생산. 나사 → 고급 재료 합성</td><td>불가 (1개)</td><td style="color:var(--amber)">★★★</td></tr>
+
+    <tr style="background:rgba(5,150,105,.04)"><td colspan="7" style="font-weight:600;color:var(--green);padding:8px 13px">── 자원 저장</td></tr>
+    <tr><td><strong>용품창고 (식량 창고)</strong></td><td>Food Warehouse</td><td style="color:var(--muted)">저장</td><td>HQ Lv.3</td><td>식량 약탈 보호 한도 결정 · 레벨 높을수록 보호 식량량↑</td><td>불가 (1개)</td><td>★★★</td></tr>
+    <tr><td><strong>자원 창고 (철강 창고)</strong></td><td>Iron Warehouse</td><td style="color:var(--muted)">저장</td><td>HQ Lv.3</td><td>철강 약탈 보호 한도 결정</td><td>불가 (1개)</td><td>★★★</td></tr>
+    <tr><td><strong>자원금고 (코인 볼트)</strong></td><td>Coin Vault</td><td style="color:var(--muted)">저장</td><td>HQ Lv.5</td><td>골드(코인) 약탈 보호 · 레벨 높을수록 보호 골드량↑</td><td>불가 (1개)</td><td>★★★</td></tr>
   </tbody>
 </table>
 
@@ -252,8 +289,6 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
   </tbody>
 </table>
 </section>
-
-<!-- ══════ S3: 전투 시스템 ══════ -->
 <section class="stage-sec" id="s3">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">3단계</span>
@@ -877,6 +912,91 @@ function initS1(){
 
 /* S2 */
 function initS2(){
+  // 건물 카테고리 탐색기
+  const BLDGS = [
+    // 핵심 인프라
+    {name:'본부',en:'Headquarters',cat:'핵심',color:'#dc2626',hq:'시작',role:'모든 건물 레벨 상한 결정 · 영웅 레벨 캡',multi:'1개',pay:10},
+    {name:'과학기술센터',en:'Tech Center',cat:'핵심',color:'#dc2626',hq:'HQ 7',role:'연구 큐 운용 · 건물·병사·경제 전 분야 강화. 2번째: District 102, 3번째: HQ 30',multi:'최대 3개',pay:10},
+    {name:'건물사무소',en:"Builder's Hut",cat:'핵심',color:'#dc2626',hq:'HQ 2',role:'건설 큐 슬롯 수 결정 · 생존자 배치로 건설 속도 추가 감소',multi:'1개',pay:10},
+    {name:'병원',en:'Hospital',cat:'핵심',color:'#dc2626',hq:'병영 Lv.5 + HQ 6',role:'부상 병사 치료 · 수용 초과 시 영구 소멸',multi:'1개',pay:9},
+    {name:'응급센터',en:'Emergency Center',cat:'핵심',color:'#dc2626',hq:'HQ 15',role:'병원 초과 병사 추가 수용 · 전투 병사 손실 방어선',multi:'1개',pay:8},
+    {name:'연맹센터',en:'Alliance Center',cat:'핵심',color:'#dc2626',hq:'HQ 8',role:'동맹 가입·기여·기술 허브 · 집결 지점 선행 조건',multi:'1개',pay:10},
+    {name:'집결 지점',en:'Rally Spot',cat:'핵심',color:'#dc2626',hq:'연맹센터 + HQ 10',role:'연맹 집단 공격(Rally) · 최대 5인 참여',multi:'1개',pay:10},
+    // 군사·훈련
+    {name:'병영',en:'Barracks',cat:'군사',color:'#7c3aed',hq:'HQ 3',role:'보병 T1~T4 훈련 · DAG 임계 경로 루트',multi:'복수',pay:10},
+    {name:'유닛센터(차고)',en:'Garage',cat:'군사',color:'#7c3aed',hq:'병영 Lv.8 + HQ 8',role:'기갑 T2~T4 훈련 · 이중 잠금',multi:'복수',pay:9},
+    {name:'드론센터(격납고)',en:'Hangar',cat:'군사',color:'#7c3aed',hq:'차고 Lv.8 + HQ 10',role:'항공 T2~T4 훈련 · Speed 최고',multi:'복수',pay:8},
+    {name:'포병기지(훈련소)',en:'Special Training',cat:'군사',color:'#7c3aed',hq:'병영·차고 Lv.12 + HQ 14',role:'T4 해금 필수 전제 · 3중 잠금 최대 병목',multi:'1개',pay:10},
+    {name:'조종사기지(드릴)',en:'Drill Ground',cat:'군사',color:'#7c3aed',hq:'HQ 4',role:'주둔 병사 수 · 행군 속도 버프',multi:'복수',pay:8},
+    {name:'탱크 센터',en:'Tank Center',cat:'군사',color:'#7c3aed',hq:'HQ 12',role:'탱크 영웅 스탯 · 행군 속도 증가',multi:'1개',pay:8},
+    {name:'미사일 센터',en:'Missile Center',cat:'군사',color:'#7c3aed',hq:'HQ 12',role:'미사일 영웅 스탯 · 행군 속도 증가',multi:'1개',pay:8},
+    {name:'항공 센터',en:'Aircraft Center',cat:'군사',color:'#7c3aed',hq:'HQ 12',role:'항공 영웅 스탯 · 행군 속도 증가',multi:'1개',pay:8},
+    // 자원 생산
+    {name:'농지(농장)',en:'Farmland',cat:'생산',color:'#059669',hq:'튜토리얼',role:'식량 생산 · 병사 훈련·유지 핵심 자원',multi:'최대 5개',pay:10},
+    {name:'철광(철 광산)',en:'Iron Mine',cat:'생산',color:'#059669',hq:'HQ 2',role:'철강 생산 · 건설·연구 핵심 자원. 최대 39,600/h(Lv.35)',multi:'복수',pay:10},
+    {name:'연료 펌프(유전)',en:'Oil Well',cat:'생산',color:'#059669',hq:'HQ 6 + 농장 Lv.5',role:'석유 생산 · T3+ 훈련 필수. 연구+HQ 업그레이드로 최대 5개',multi:'최대 5개',pay:8},
+    {name:'금광',en:'Gold Mine',cat:'생산',color:'#059669',hq:'HQ 5',role:'골드 생산 · Lv.9+ 건물 업그레이드 필수. 구조적 만성 적자',multi:'복수',pay:10},
+    {name:'고열 용광로(제련소)',en:'Smelter',cat:'생산',color:'#059669',hq:'HQ 6',role:'업그레이드 광석 생산 · 영웅 장비 강화 유일 재료',multi:'복수',pay:8},
+    {name:'단백질 농장',en:'Protein Farm',cat:'생산',color:'#059669',hq:'S1 시즌',role:'단백질 생산 · S1 시즌 전용 자원',multi:'복수',pay:5},
+    {name:'바이러스 연구센터',en:'Virus Research Center',cat:'생산',color:'#059669',hq:'S2 시즌',role:'바이러스 저항력 증가 · S2 시즌 특수 건물',multi:'복수',pay:5},
+    // 제조·지원
+    {name:'병기 공장(장비)',en:'Gear Factory',cat:'제조',color:'#2563eb',hq:'HQ 9',role:'영웅 장비 제작·합성·분해 · 일일 미션 연동',multi:'1개',pay:8},
+    {name:'칩연구소',en:'Chip Lab',cat:'제조',color:'#2563eb',hq:'HQ 10 (2024.10)',role:'드론 스킬 칩 제작·분해·리셋 · Lv.20 전설 칩 해금',multi:'1개',pay:8},
+    {name:'부품 공장',en:'Component Factory',cat:'제조',color:'#2563eb',hq:'HQ 10',role:'드론 부품 생산 · 드론 장비 업그레이드 재료',multi:'1개',pay:6},
+    {name:'합금 공장',en:'Material Workshop',cat:'제조',color:'#2563eb',hq:'HQ 10+',role:'특수 합금·나사 제작 · 고급 장비·칩 소재 생산',multi:'1개',pay:6},
+    {name:'훈련 기지',en:'Training Base',cat:'제조',color:'#2563eb',hq:'HQ 8',role:'영웅 EXP 생산 · 최대 5개 · 최대 259,200 EXP/h',multi:'최대 5개',pay:6},
+    {name:'주점(태번)',en:'Tavern',cat:'제조',color:'#2563eb',hq:'HQ 5',role:'영웅·생존자 모집 · 레전더리 티켓 사용처',multi:'1개',pay:8},
+    // 저장·방어
+    {name:'용품창고(식량)',en:'Food Warehouse',cat:'저장',color:'#d97706',hq:'HQ 3',role:'식량 약탈 보호 한도 · 레벨↑ = 보호 식량↑',multi:'1개',pay:5},
+    {name:'자원 창고(철강)',en:'Iron Warehouse',cat:'저장',color:'#d97706',hq:'HQ 3',role:'철강 약탈 보호 한도',multi:'1개',pay:5},
+    {name:'자원금고(코인)',en:'Coin Vault',cat:'저장',color:'#d97706',hq:'HQ 5',role:'골드 약탈 보호 한도',multi:'1개',pay:5},
+    {name:'감시탑(레이더)',en:'Alert Tower',cat:'저장',color:'#d97706',hq:'HQ 8',role:'적 행군·집결 탐지 · 방어 준비 시간 확보',multi:'1개',pay:5},
+    {name:'성벽',en:'Wall',cat:'저장',color:'#d97706',hq:'HQ 5',role:'기지 방어 체력 · HP 0 시 병사 사상률↑',multi:'1개',pay:5},
+  ];
+  const CAT_COLORS = {'핵심':'#dc2626','군사':'#7c3aed','생산':'#059669','제조':'#2563eb','저장':'#d97706','전체':'#5a6275'};
+  const cats = ['전체',...new Set(BLDGS.map(b=>b.cat))];
+  let bActiveCat = '전체';
+
+  const bTabs = document.getElementById('bcat-tabs');
+  const bGrid = document.getElementById('bcat-grid');
+  if(!bTabs || !bGrid) return;
+
+  cats.forEach(cat=>{
+    const btn = document.createElement('div');
+    btn.className='ibtn';
+    btn.textContent = cat + (cat!=='전체'?' ('+BLDGS.filter(b=>b.cat===cat).length+'개)':'' );
+    const c = CAT_COLORS[cat]||'#5a6275';
+    if(cat==='전체'){btn.style.background=c+'22';btn.style.color=c;btn.style.borderColor=c;}
+    btn.onclick = ()=>{
+      bActiveCat = cat;
+      document.querySelectorAll('#bcat-tabs .ibtn').forEach(b2=>{b2.style.background='';b2.style.color='';b2.style.borderColor='';});
+      btn.style.background=c+'22';btn.style.color=c;btn.style.borderColor=c;
+      renderBldgGrid();
+    };
+    bTabs.appendChild(btn);
+  });
+
+  function renderBldgGrid(){
+    const list = bActiveCat==='전체' ? BLDGS : BLDGS.filter(b=>b.cat===bActiveCat);
+    bGrid.innerHTML = list.map(b=>{
+      const bars = Array.from({length:5},(_,i)=>`<span style="display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:2px;background:${i<b.pay?b.color:b.color+'22'}"></span>`).join('');
+      return `<div style="background:var(--sur);border:0.5px solid var(--border);border-radius:9px;padding:12px;border-left:3px solid ${b.color}">
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:5px;flex-wrap:wrap">
+          <span style="font-size:13px;font-weight:500;color:var(--text)">${b.name}</span>
+          <span style="font-size:10px;color:var(--muted)">${b.en}</span>
+          <span style="font-size:10px;padding:1px 7px;border-radius:20px;background:${b.color}18;color:${b.color}">${b.cat}</span>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.5">${b.role}</div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
+          <span>해금: <b style="color:var(--text)">${b.hq}</b></span>
+          <span>복수 건설: <b style="color:var(--text)">${b.multi}</b></span>
+          <span>과금 압박: ${bars}</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  renderBldgGrid();
+
   new Chart(document.getElementById('c-resource'),{type:'bar',
     data:{labels:['식량','철강','석유','골드'],
       datasets:[
