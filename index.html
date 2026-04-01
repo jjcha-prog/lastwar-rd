@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Last War: Survival — 완전 역기획 문서 v3</title>
+<title>라스트워: 서바이벌 역기획서</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -92,8 +92,8 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </header>
 <section class="hero">
   <div class="hero-ey">Reverse Design Document · Last War: Survival · FirstFun 2023</div>
-  <h1>Last War는 <em>심리 엔진</em>이다</h1>
-  <p class="hero-sub">광고가 게임 구조를 역방향으로 결정한 최초의 설계 역전 사례. UA에서 KPI까지 14단계 완전 역기획.</p>
+  <h1>라스트워: 서바이벌 역기획서</h1>
+  <p class="hero-sub">광고가 게임 구조를 역방향으로 결정한 최초의 설계 역전 사례.</p>
   <div class="hero-stats">
     <div class="hstat"><div class="hstat-n">14</div><div class="hstat-l">분석 단계</div></div>
     <div class="hstat"><div class="hstat-n">47+</div><div class="hstat-l">분석 시스템</div></div>
@@ -161,18 +161,178 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
   <div class="gcard" style="border-color:rgba(5,150,105,.3)"><h4 style="color:var(--green)">잔류 60% — 실제 수익 엔진</h4><p>잔류 300만 × 4.5% 과금 전환 × $85 ARPPU = 월 순매출 ~$1,147만. UA $600만 투입 대비 ROI ~91%.</p></div>
 </div>
 
-<div class="sdiv">세부 분석 항목</div>
-<div class="ssgrid">
-  <div class="ssitem"><span class="ssnum">01</span>러닝 액션+4X 이중 레이어 설계 논리 및 역할 분리</div>
-  <div class="ssitem"><span class="ssnum">02</span>레이어별 플레이 시간 비중 (훅 5~10% / 4X 90~95%)</div>
-  <div class="ssitem"><span class="ssnum">03</span>전체 게임 플로우차트 (광고→설치→온보딩→4X→수익화)</div>
-  <div class="ssitem"><span class="ssnum">04</span>iOS 14 ATT 충격과 CPI 급등 — 허위 광고 등장 맥락</div>
-  <div class="ssitem"><span class="ssnum">05</span>LW vs WS 6개 축 메커니즘 비교 — 테마 통합도 차이</div>
-  <div class="ssitem"><span class="ssnum">06</span>광고 크리에이티브 30초 포맷 해부 — 훅·플레이·반전·CTA</div>
-  <div class="ssitem"><span class="ssnum">07</span>5개 크리에이티브 변형 유형 CTR·리텐션·전환율 비교</div>
-  <div class="ssitem"><span class="ssnum">08</span>포지셔닝 매트릭스 — 진입 장벽 × 테마 통합도</div>
+<div class="sdiv">세부 분석 항목 — 01~08 완전 분석</div>
+
+<!-- 01 -->
+<div style="margin-bottom:16px;border:1.5px solid #dc262644;border-left:4px solid #dc2626;border-radius:8px;overflow:hidden">
+  <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(220,38,38,.05)">
+    <span class="ssnum" style="color:#dc2626;min-width:28px;flex-shrink:0">01</span>
+    <strong style="font-size:13px;color:#dc2626;line-height:1.4">러닝 액션 + 4X 이중 레이어 설계 논리 및 역할 분리</strong>
+  </div>
+  <div style="padding:10px 14px;font-size:12px;color:var(--muted);line-height:1.8;border-top:1px solid #dc262622">
+    Last War는 하나의 앱 안에 <strong>두 개의 완전히 다른 게임</strong>이 공존한다. 레이어는 기능적으로 분리되어 있으며 서로 다른 목적에 복무한다.
+    <div style="margin-top:6px;display:flex;flex-direction:column;gap:3px">
+      <div><strong>러닝 액션 레이어</strong> — UA 도구. 광고와 동일한 경험으로 초반 30분을 만든다. 병사 합치기·통로 회피·보스 처치의 3막 구조. 조작 단순성으로 신규 유저 진입 장벽 최소화.</div>
+      <div><strong>4X 전략 레이어</strong> — 실질적 수익 엔진. 기지 건설·연구·병사 훈련·연맹·전쟁·시즌의 복합 루프. 깊이와 복잡도로 장기 리텐션·과금 동기 생성.</div>
+      <div><strong>역할 분리의 설계 의도</strong> — 러닝 레이어는 4X의 높은 진입 장벽을 숨기는 데모 모드다. 광고→설치→러닝 체험→4X 노출 순서로 이탈 없이 전환시킨다.</div>
+    </div>
+  </div>
 </div>
-</section>
+
+<!-- 02 -->
+<div style="margin-bottom:16px;border:1.5px solid #dc262644;border-left:4px solid #dc2626;border-radius:8px;overflow:hidden">
+  <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(220,38,38,.05)">
+    <span class="ssnum" style="color:#dc2626;min-width:28px;flex-shrink:0">02</span>
+    <strong style="font-size:13px;color:#dc2626;line-height:1.4">레이어별 플레이 시간 비중 — 훅 5~10% / 4X 90~95%</strong>
+  </div>
+  <div style="padding:10px 14px;font-size:12px;color:var(--muted);line-height:1.8;border-top:1px solid #dc262622">
+    설치 후 첫 1주 기준 시간 배분 추정치. <strong>러닝 액션 5~10%</strong>(일 30~60분 중 2~5분), <strong>4X 전략 90~95%</strong>(나머지 전체).
+    <div style="margin-top:6px;display:flex;flex-direction:column;gap:3px">
+      <div><strong>왜 러닝이 5~10%에 불과한가?</strong> — Day 3~5 이후 신규 스테이지 없음. 반복 플레이 가치가 낮아 자연스럽게 4X가 메인. 일부 이벤트·일일 미션이 최소 접속을 유지시킨다.</div>
+      <div><strong>비중 비대칭의 수익 함의</strong> — 광고 예산의 100%가 5~10% 레이어에 투입된다. CPI 감소(Whiteout 대비 ~50% 저렴)가 이 투자를 정당화. UA 절감→더 많은 유저→4X 전환→수익 극대화.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 -->
+<div style="margin-bottom:16px;border:1.5px solid #d9770644;border-left:4px solid #d97706;border-radius:8px;overflow:hidden">
+  <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(217,119,6,.05)">
+    <span class="ssnum" style="color:#d97706;min-width:28px;flex-shrink:0">03</span>
+    <strong style="font-size:13px;color:#d97706;line-height:1.4">전체 게임 플로우차트 — 광고→설치→온보딩→4X→수익화</strong>
+  </div>
+  <div style="padding:10px 14px;font-size:12px;color:var(--muted);line-height:1.8;border-top:1px solid #d9770622">
+    설치부터 수익화까지 유저 여정 6단계.
+    <div style="margin-top:6px;display:flex;flex-direction:column;gap:3px">
+      <div><strong>① 광고 노출</strong> — 러닝 액션 크리에이티브. CTR ~3~6%, CPI $0.8~1.5.</div>
+      <div><strong>② 설치·런치</strong> — 앱스토어 다운로드→로딩→서버 선택. D1 런치율 ~85%.</div>
+      <div><strong>③ 강제 튜토리얼</strong> (0~30분) — 러닝 스테이지 3~5개 클리어. 화살표 클릭 유도 — 선택지 없음.</div>
+      <div><strong>④ 4X 온보딩</strong> (Day 1~3) — 연맹 가입, 영웅 소환, 병사 훈련 시작. 자원 부족 체험→$0.99 팝업.</div>
+      <div><strong>⑤ Core Loop 진입</strong> (Day 3~14) — Alliance Duel·Arms Race 참여. 집결 공격→사회적 압박 형성.</div>
+      <div><strong>⑥ 수익화 루프</strong> (Day 7+) — VIP 포인트, 이벤트 팩, 가챠 시작. 3~6개월 후 Dolphin/Whale 전환 결정.</div>
+    </div>
+  </div>
+  <div style="padding:10px 14px;border-top:1px solid #d9770622">
+    <div class="cwrap" style="padding:6px 0;margin:0"><div class="clbl">전체 플로우 — 광고→설치→온보딩→4X→수익화 전환 퍼널</div><canvas id="c-funnel" style="max-height:150px"></canvas></div>
+  </div>
+</div>
+
+<!-- 04 -->
+<div style="margin-bottom:16px;border:1.5px solid #d9770644;border-left:4px solid #d97706;border-radius:8px;overflow:hidden">
+  <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(217,119,6,.05)">
+    <span class="ssnum" style="color:#d97706;min-width:28px;flex-shrink:0">04</span>
+    <strong style="font-size:13px;color:#d97706;line-height:1.4">iOS 14 ATT 충격과 CPI 급등 — 허위 광고 등장 맥락</strong>
+  </div>
+  <div style="padding:10px 14px;font-size:12px;color:var(--muted);line-height:1.8;border-top:1px solid #d9770622">
+    2021년 Apple iOS 14.5 ATT 도입 → IDFA 동의율 20~25% → 타겟팅 정밀도 급락.
+    <div style="margin-top:6px;display:flex;flex-direction:column;gap:3px">
+      <div><strong>결과</strong> — 4X 게임 평균 CPI $1.5→$3~5+로 급등. UA 예산 대비 수익성 악화.</div>
+      <div><strong>업계 대응 — 허위 광고 등장</strong> — 실제 게임과 전혀 다른 미니게임 광고 확산. 핵심 원리: CTR 극대화→CPI 낮추기→UA 효율 회복.</div>
+      <div><strong>Last War의 차별화</strong> — 광고와 동일한 러닝 레이어를 게임 내 실제 구현. D1 이탈 시 광고 플랫폼 품질 점수 하락 방어.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 05 -->
+<div style="margin-bottom:16px;border:1.5px solid #2563eb44;border-left:4px solid #2563eb;border-radius:8px;overflow:hidden">
+  <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(37,99,235,.05)">
+    <span class="ssnum" style="color:#2563eb;min-width:28px;flex-shrink:0">05</span>
+    <strong style="font-size:13px;color:#2563eb;line-height:1.4">LW vs WS 6개 축 메커니즘 비교 — 테마 통합도 차이</strong>
+  </div>
+  <div style="padding:10px 14px;font-size:12px;color:var(--muted);line-height:1.8;border-top:1px solid #2563eb22">
+    두 게임의 근본 설계 차이는 <strong>테마-루프 통합도</strong>다.
+  </div>
+  <div style="padding:10px 14px;border-top:1px solid #2563eb22;overflow-x:auto">
+    <table class="dt" style="font-size:11px">
+    <thead><tr><th>비교 축</th><th>Last War</th><th>Whiteout Survival</th><th>승자 &amp; 이유</th></tr></thead>
+    <tbody>
+      <tr><td>테마-루프 통합</td><td style="color:var(--red)">분리 — 러닝과 4X가 별개 세계</td><td style="color:var(--green)">통합 — 생존·온도 서사가 4X 루프를 감쌈</td><td style="color:var(--green)">WS — 서사가 자원 관리 동기 강화</td></tr>
+      <tr><td>CPI 효율</td><td style="color:var(--green)">$0.8~1.5 (낮음)</td><td>$1.5~2.5 (보통)</td><td style="color:var(--green)">LW — UA 비용 ~50% 절감</td></tr>
+      <tr><td>D1 이탈률</td><td style="color:var(--red)">~40% (높음)</td><td style="color:var(--green)">~28% (낮음)</td><td style="color:var(--green)">WS — 기대-현실 일치로 이탈 적음</td></tr>
+      <tr><td>D30 리텐션</td><td>~22%</td><td style="color:var(--green)">~28%</td><td style="color:var(--green)">WS — 서사 몰입으로 장기 유지</td></tr>
+      <tr><td>월 매출 추정</td><td>$20~30M</td><td style="color:var(--green)">$50~80M</td><td style="color:var(--green)">WS — Whale LTV 우위</td></tr>
+      <tr><td>진입 장벽</td><td style="color:var(--green)">낮음 (러닝으로 완충)</td><td>중간</td><td style="color:var(--green)">LW — 더 넓은 유저 포획</td></tr>
+    </tbody></table>
+  </div>
+  <div style="padding:8px 14px;background:rgba(37,99,235,.05);border-top:1px solid #2563eb33;font-size:12px;color:var(--muted)">
+    <strong style="color:#2563eb">▶ 핵심 결론</strong> — LW는 '많이 데려오는 전략', WS는 '오래 머물게 하는 전략'. LTV 측면에서 WS 우위지만, UA 비용 절감으로 LW도 수익성을 확보한다.
+  </div>
+</div>
+
+<!-- 06 -->
+<div style="margin-bottom:16px;border:1.5px solid #2563eb44;border-left:4px solid #2563eb;border-radius:8px;overflow:hidden">
+  <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(37,99,235,.05)">
+    <span class="ssnum" style="color:#2563eb;min-width:28px;flex-shrink:0">06</span>
+    <strong style="font-size:13px;color:#2563eb;line-height:1.4">광고 크리에이티브 30초 포맷 해부 — 훅·플레이·반전·CTA</strong>
+  </div>
+  <div style="padding:10px 14px;font-size:12px;color:var(--muted);line-height:1.8;border-top:1px solid #2563eb22">
+    Last War 광고는 <strong>30초 4막 구조</strong>로 표준화되어 있다.
+  </div>
+  <div style="padding:10px 14px;border-top:1px solid #2563eb22;overflow-x:auto">
+    <table class="dt" style="font-size:11px">
+    <thead><tr><th>구간</th><th>시간</th><th>내용</th><th>심리 목적</th><th>이탈 방지 장치</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--red)"><strong>훅(Hook)</strong></td><td>0~3초</td><td>병사 합치기 / 실패 상황 / 도발 텍스트</td><td>호기심·긴장감 즉시 유발</td><td>"이 게임 못 깸?" → 자존심 자극</td></tr>
+      <tr><td style="color:var(--amber)"><strong>플레이(Play)</strong></td><td>3~20초</td><td>스테이지 진행·병사 성장·장애물 회피</td><td>조작 학습 욕구·성취 예고</td><td>진행 바로 완료 욕구 자극</td></tr>
+      <tr><td style="color:var(--red)"><strong>반전(Twist)</strong></td><td>20~27초</td><td>보스 등장 / 병력 패배 / 위기</td><td>손실 회피·FOMO 자극</td><td>"여기서 어떻게 하지?" 미결 상태</td></tr>
+      <tr><td style="color:var(--green)"><strong>CTA</strong></td><td>27~30초</td><td>"지금 무료 설치" / 설치 버튼</td><td>낮은 마찰(무료) 유도</td><td>버튼 최대화, 즉시 반응</td></tr>
+    </tbody></table>
+  </div>
+  <div style="padding:8px 14px;background:rgba(37,99,235,.05);border-top:1px solid #2563eb33;font-size:12px;color:var(--muted)">
+    <strong style="color:#2563eb">▶ 핵심 결론</strong> — 광고 포맷의 핵심: <strong>0~3초에 이탈을 막는 것</strong>이 전부다. 나머지 27초는 0~3초 통과자를 설치로 유도하는 funneling이다.
+  </div>
+</div>
+
+<!-- 07 -->
+<div style="margin-bottom:16px;border:1.5px solid #7c3aed44;border-left:4px solid #7c3aed;border-radius:8px;overflow:hidden">
+  <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(124,58,237,.05)">
+    <span class="ssnum" style="color:#7c3aed;min-width:28px;flex-shrink:0">07</span>
+    <strong style="font-size:13px;color:#7c3aed;line-height:1.4">5개 크리에이티브 변형 유형 CTR·리텐션·전환율 비교</strong>
+  </div>
+  <div style="padding:10px 14px;font-size:12px;color:var(--muted);line-height:1.8;border-top:1px solid #7c3aed22">
+    Last War 광고 크리에이티브는 5개 유형으로 분류된다.
+  </div>
+  <div style="padding:10px 14px;border-top:1px solid #7c3aed22;overflow-x:auto">
+    <table class="dt" style="font-size:11px">
+    <thead><tr><th>유형</th><th>훅 방식</th><th>CTR 추정</th><th>D7 리텐션</th><th>과금 전환율</th><th>설계 의도</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--red)"><strong>실패 유도형</strong></td><td>"이 스테이지 통과 불가?" 도발</td><td style="color:var(--red)">5~7%</td><td>~22%</td><td>~3.5%</td><td>자존심 자극→높은 CTR, 기대 불일치 후 이탈</td></tr>
+      <tr><td style="color:var(--amber)"><strong>성장 시각화형</strong></td><td>병사 1→100명 성장 연출</td><td>3~5%</td><td style="color:var(--green)">~28%</td><td>~4.2%</td><td>성장 쾌감 예고→D7+ 리텐션 우수</td></tr>
+      <tr><td style="color:var(--blue)"><strong>전략 선택형</strong></td><td>"당신이라면 어떻게 하겠어요?"</td><td>4~6%</td><td>~25%</td><td style="color:var(--green)">~5.1%</td><td>능동 참여감→과금 전환율 최고</td></tr>
+      <tr><td><strong>내러티브형</strong></td><td>생존 스토리·감정 이입</td><td>2~4%</td><td style="color:var(--green)">~30%</td><td>~3.8%</td><td>WS 유사 접근→리텐션 최고, CTR 낮음</td></tr>
+      <tr><td><strong>비교형</strong></td><td>"다른 게임보다 쉬움"</td><td>3~4%</td><td>~20%</td><td>~2.9%</td><td>진입 장벽 낮춤→캐주얼 유저 유입</td></tr>
+    </tbody></table>
+  </div>
+  <div style="padding:8px 14px;background:rgba(124,58,237,.05);border-top:1px solid #7c3aed33;font-size:12px;color:var(--muted)">
+    <strong style="color:#7c3aed">▶ 핵심 결론</strong> — <strong>포트폴리오 전략</strong>: 5개 유형을 A/B 테스트로 동시 운용. 유형별 타겟 세그먼트(CTR 우선 vs 리텐션 우선)를 분리해 UA 예산 효율을 극대화한다.
+  </div>
+</div>
+
+<!-- 08 -->
+<div style="margin-bottom:16px;border:1.5px solid #7c3aed44;border-left:4px solid #7c3aed;border-radius:8px;overflow:hidden">
+  <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(124,58,237,.05)">
+    <span class="ssnum" style="color:#7c3aed;min-width:28px;flex-shrink:0">08</span>
+    <strong style="font-size:13px;color:#7c3aed;line-height:1.4">포지셔닝 매트릭스 — 진입 장벽 × 테마 통합도</strong>
+  </div>
+  <div style="padding:10px 14px;font-size:12px;color:var(--muted);line-height:1.8;border-top:1px solid #7c3aed22">
+    4X 모바일 장르 주요 경쟁작을 <strong>진입 장벽(X축)</strong>과 <strong>테마-루프 통합도(Y축)</strong> 두 축으로 분석한다.
+  </div>
+  <div style="padding:10px 14px;border-top:1px solid #7c3aed22">
+    <div class="cwrap" style="padding:6px 0;margin:0"><div class="clbl">포지셔닝 매트릭스 — 진입 장벽(낮음→높음) × 테마 통합도(낮음→높음)</div><canvas id="c-matrix" style="max-height:210px"></canvas></div>
+  </div>
+  <div style="padding:10px 14px;border-top:1px solid #7c3aed22;overflow-x:auto">
+    <table class="dt" style="font-size:11px">
+    <thead><tr><th>속성</th><th style="color:#dc2626">Last War</th><th style="color:#2563eb">Whiteout</th><th>Rise of Kingdoms</th><th>State of Survival</th><th>Clash of Clans</th></tr></thead>
+    <tbody>
+      <tr><td><strong>진입 장벽</strong></td><td style="color:var(--green)">낮음<br><small>(러닝 완충)</small></td><td>중간</td><td style="color:var(--red)">높음</td><td>중간</td><td>중간</td></tr>
+      <tr><td><strong>테마 통합도</strong></td><td style="color:var(--red)">낮음<br><small>(레이어 분리)</small></td><td style="color:var(--green)">높음<br><small>(생존 서사)</small></td><td>중간</td><td>중간</td><td style="color:var(--green)">높음<br><small>(판타지 마을)</small></td></tr>
+      <tr><td><strong>포지션</strong></td><td>낮은장벽·낮은통합<br><strong>대중 포획형</strong></td><td>중간장벽·높은통합<br><strong>프리미엄 리텐션형</strong></td><td>높은장벽·중간통합<br><strong>코어 전략 팬</strong></td><td>중간·중간<br><strong>범용형</strong></td><td>중간장벽·높은통합<br><strong>장수 브랜드형</strong></td></tr>
+      <tr><td><strong>전략적 함의</strong></td><td>CPI 낮춰 최대 유저 포획. 이탈 감수</td><td>D30+ 리텐션·Whale LTV 우위</td><td>깊이 있는 4X 팬층 공략</td><td>LW 이전 좀비 4X 표준 포지션</td><td>IP 자산·통합 서사로 10년+ 운영</td></tr>
+    </tbody></table>
+  </div>
+  <div style="padding:8px 14px;background:rgba(124,58,237,.05);border-top:1px solid #7c3aed33;font-size:12px;color:var(--muted)">
+    <strong style="color:#7c3aed">▶ 핵심 결론</strong> — Last War는 의도적으로 테마 통합도를 희생해 진입 장벽을 낮췄다. <strong>"많이 들어오게 하되, Whale만 남는"</strong> 구조다. Whiteout는 "적게 들어오되, 오래 머문다." 두 전략 모두 각자의 KPI에서 최적해다.
+  </div>
+</div>
 
 <!-- ══════ S3: 기지 건설 ══════ -->
 <section class="stage-sec" id="s3">
@@ -2023,6 +2183,73 @@ function initS1(){
     adBtns.appendChild(b);
   });
   adBtns.firstChild.onclick(); // 첫 번째 항목 자동 활성화
+
+  /* ── 03. 전체 플로우 퍼널 차트 (c-funnel) ── */
+  new Chart(document.getElementById('c-funnel'),{type:'bar',
+    data:{
+      labels:['광고 노출\n(100%)','설치\n(CTR 4~5%)','튜토리얼 완료\n(~60%)','4X 진입\n(~50%)','D7 잔류\n(~35%)','D30 잔류\n(~22%)','과금 전환\n(~4%)'],
+      datasets:[{
+        label:'전환율',
+        data:[100, 4.5, 60, 50, 35, 22, 4],
+        backgroundColor:['rgba(124,58,237,.7)','rgba(37,99,235,.7)','rgba(37,99,235,.6)','rgba(5,150,105,.6)','rgba(217,119,6,.7)','rgba(217,119,6,.8)','rgba(220,38,38,.85)'],
+        borderRadius:4, barPercentage:.6
+      }]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.y+'%';}}}},
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#5a6275',font:{size:9}}},
+        y:{grid:{color:'rgba(0,0,0,.05)'},ticks:{color:'#5a6275',callback:function(v){return v+'%';}},max:110}
+      }
+    }
+  });
+
+  /* ── 08. 포지셔닝 매트릭스 차트 (c-matrix) ── */
+  var matrixGames = [
+    {x:2,y:2,r:16,name:'Last War',color:'rgba(220,38,38,.75)'},
+    {x:6,y:8,r:20,name:'Whiteout',color:'rgba(37,99,235,.75)'},
+    {x:8,y:5,r:14,name:'Rise of\nKingdoms',color:'rgba(217,119,6,.7)'},
+    {x:5,y:5,r:13,name:'State of\nSurvival',color:'rgba(107,114,128,.65)'},
+    {x:5,y:8,r:18,name:'Clash of\nClans',color:'rgba(5,150,105,.7)'},
+  ];
+  new Chart(document.getElementById('c-matrix'),{
+    type:'bubble',
+    data:{datasets: matrixGames.map(function(g){return{
+      label:g.name,
+      data:[{x:g.x,y:g.y,r:g.r}],
+      backgroundColor:g.color,
+      borderColor:g.color.replace('.7','1').replace('.75','1').replace('.65','1'),
+      borderWidth:1.5
+    };})},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.dataset.label;}}}},
+      scales:{
+        x:{min:0,max:10,grid:{color:'rgba(0,0,0,.05)'},
+          ticks:{color:'#5a6275',callback:function(v){return v===2?'낮음':v===5?'중간':v===8?'높음':'';}},
+          title:{display:true,text:'진입 장벽',color:'#5a6275',font:{size:10}}},
+        y:{min:0,max:10,grid:{color:'rgba(0,0,0,.05)'},
+          ticks:{color:'#5a6275',callback:function(v){return v===2?'낮음':v===5?'중간':v===8?'높음':'';}},
+          title:{display:true,text:'테마-루프 통합도',color:'#5a6275',font:{size:10}}}
+      }
+    },
+    plugins:[{afterDraw:function(c){
+      var ctx2=c.ctx;
+      c.data.datasets.forEach(function(ds,i){
+        var el=c.getDatasetMeta(i).data[0];
+        if(!el)return;
+        ctx2.save();
+        ctx2.font='bold 9px sans-serif';
+        ctx2.fillStyle='rgba(0,0,0,.8)';
+        ctx2.textAlign='center';
+        ctx2.textBaseline='middle';
+        var lines=ds.label.split('\n');
+        lines.forEach(function(line,j){
+          ctx2.fillText(line,el.x,el.y+(j-0.5*(lines.length-1))*11);
+        });
+        ctx2.restore();
+      });
+    }}]
+  });
 }
 
 /* S3 */
