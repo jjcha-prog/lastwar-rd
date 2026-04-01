@@ -334,6 +334,177 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
   </div>
 </div>
 
+<!-- ══════ S2: UX·심리 ══════ -->
+
+<section class="stage-sec" id="s2">
+<div class="stage-hdr">
+  <span class="sbadge" style="background:#f3f0ff;color:#5b21b6;border:1px solid #ddd6fe">2단계</span>
+  <div class="stitle">
+    <h2>UX/UI 설계 — 튜토리얼·레드닷·성장 시각화·접근성·다크패턴</h2>
+    <p>점진적 복잡도 공개 · 레드닷 배치 전략 · 성장 시각화 · 접속 유지 시간 구조 · 접근성·다크패턴 법적 쟁점 · 14가지 심리 기법</p>
+    <div class="merge-tag">⊕ 대폭 보강 · 튜토리얼 단계적 공개 · 레드닷 전략 · 시간 구조 · 접근성·다크패턴 쟁점 신규</div>
+  </div>
+</div>
+<div class="check-row">
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 차트: 14가지 심리 기법 버블 차트 + 접속 유지 시간 구조</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 표: 튜토리얼 단계 · 레드닷 배치 · 성장 연출 · 심리 기법 14종 계열 분류</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 분석: 접근성 설계 · 다크패턴 법적 쟁점</span>
+</div>
+<div class="insight"><strong>핵심 통찰:</strong> Last War의 UI는 정보 전달이 아닌 <strong>행동 유도 장치</strong>다. 튜토리얼은 복잡도를 숨기며 진입 장벽을 낮추고, 레드닷 14개 동시 활성화는 완료 불가능 상태를 강제 생성한다. 성장 연출은 결과보다 과정에서 도파민을 극대화하며, 접속 유지 구조는 이탈 비용을 지속적으로 높인다.</div>
+
+<div class="sdiv">① 튜토리얼 — 단계적 복잡도 공개(Progressive Disclosure) 설계</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(37,99,235,.3)">
+    <h4 style="color:var(--blue)">Progressive Disclosure의 설계 원리</h4>
+    <p>한꺼번에 모든 시스템을 보여주면 신규 플레이어가 이탈한다. Last War는 <strong>14개 주요 시스템을 약 21일에 걸쳐 순차적으로 잠금 해제</strong>한다.<br><br>
+    핵심 설계 전략:<br>
+    · <strong>강제 튜토리얼</strong>: 첫 30분은 선택지 없음. 화살표 클릭 유도로 학습 부담 제거.<br>
+    · <strong>첫 성공 즉시 보상</strong>: 행동 후 5초 내 보상 → 도파민 반응 학습.<br>
+    · <strong>시스템 언락 타이밍</strong>: HQ 레벨 단계마다 1~2개씩 언락 → "다음 레벨이면 더 생긴다" 동기.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(37,99,235,.3)">
+    <h4 style="color:var(--blue)">복잡도 숨김의 과금 연결</h4>
+    <p>초반에는 단순해 보이는 게임 → 중반 복잡도 노출 → "이제 왔는데 못 그만두겠다"는 매몰 비용 발동.<br><br>
+    새 시스템 언락 = 새 과금 지점 언락. 연맹 시스템이 열리면 집결 팩, 시즌 시스템이 열리면 전용 장비 패스가 따라온다. 복잡도 공개 속도가 과금 지점 노출 속도와 정밀 동기화되어 있다.</p>
+  </div>
+</div>
+
+<table class="dt">
+  <thead><tr><th>시기</th><th>HQ 레벨</th><th>언락 시스템</th><th>복잡도</th><th>동시 노출 과금 지점</th></tr></thead>
+  <tbody>
+    <tr><td>Day 1 (0~2h)</td><td>HQ 1~5</td><td>기지 건설·러닝 전투</td><td style="color:var(--green)">최저 — 클릭만</td><td>$0.99 초보자 패키지</td></tr>
+    <tr><td>Day 1~3</td><td>HQ 5~10</td><td>영웅 시스템·병사 훈련</td><td style="color:var(--green)">낮음</td><td>소형 영웅 팩 · Hero Growth Pass</td></tr>
+    <tr><td>Day 3~7</td><td>HQ 10~15</td><td>연맹·Alliance Duel·집결</td><td style="color:var(--amber)">중간</td><td>집결 팩 · VIP 활성화</td></tr>
+    <tr><td>Day 7~14</td><td>HQ 15~20</td><td>시즌 시스템·Capitol War</td><td style="color:var(--amber)">높음</td><td>시즌 패스 · 전용 장비 패스</td></tr>
+    <tr><td>Day 14~30</td><td>HQ 20~25</td><td>Warzone Duel·이민·Arms Race</td><td style="color:var(--red)">매우 높음</td><td>고급 팩 · 월간 패스</td></tr>
+    <tr><td style="color:var(--red)">Day 30+</td><td>HQ 25~30</td><td>T4+ 병사·영구 성장·Whale 경쟁</td><td style="color:var(--red)">최고 — 전문가 수준</td><td>모든 과금 채널 동시 활성</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">② 레드닷(Red Dot) 알림 배치 전략</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">레드닷의 심리 메커니즘</h4>
+    <p><strong>자이가르닉 효과(Zeigarnik Effect)</strong>: 미완료 과제가 완료 과제보다 더 오래 기억에 남는다. 레드닷은 "아직 해결 안 된 것"을 항상 눈에 보이게 만든다.<br><br>
+    <strong>14개 동시 활성화 설계</strong>: Last War의 레드닷은 원칙적으로 <strong>동시에 모두 제거 불가능</strong>하다. 연맹 도움을 주면 건설 알림이 생기고, 건설을 완료하면 레이더 알림이 뜬다. "완전히 처리 완료"인 상태는 존재하지 않는다.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">주요 레드닷 배치 위치와 설계 의도</h4>
+    <p>· <strong>건설 완료</strong>: 즉시 탭 → 다음 건설 시작 유도<br>
+    · <strong>연구 완료</strong>: 즉시 탭 → 다음 연구 시작 유도<br>
+    · <strong>VIP 일일 체스트</strong>: 매일 오전 재활성화 → 일일 로그인 강제<br>
+    · <strong>Alliance Duel</strong>: 점수 미달 경고 → 자원 소비 유도<br>
+    · <strong>이벤트 마감 타이머</strong>: 카운트다운 강조 → FOMO<br>
+    · <strong>영웅 레벨업 가능</strong>: EXP 충분 표시 → 조각·메달 소비 유도</p>
+  </div>
+</div>
+
+<div class="sdiv">③ 성장 시각화 전략 — 5단계 도파민 시퀀스</div>
+<div class="ssgrid">
+  <div class="ssitem"><span class="ssnum" style="color:var(--blue)">1단계</span><strong>진행 예고</strong> — 성장 직전 상태를 프리뷰로 보여줌. "5조각 더 모으면 5성" 표시. 목표가 시각화되면 포기 비율이 급감한다.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--blue)">2단계</span><strong>바 채우기</strong> — EXP바·성급바·전투력바가 서서히 차오르는 애니메이션. 실제 수치보다 시각적 진행감이 강조되도록 비선형 스케일 적용.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--amber)">3단계</span><strong>레벨업 연출</strong> — 황금빛 파티클·사운드·화면 전체 플래시. 0.5~1초 지연 후 보상 목록 팝업. 지연이 기대감을 증폭시킨다.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--amber)">4단계</span><strong>비교 강조</strong> — "이전 대비 +35% 전투력" 표시. 절대 수치보다 상대적 성장량이 더 크게 느껴지도록 설계.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--red)">5단계</span><strong>다음 목표 즉시 제시</strong> — 레벨업 직후 "다음 마일스톤까지 X개" 표시. 한 목표 달성 후 쉬지 못하도록 바로 다음 미완성 상태로 연결.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--red)">설계 핵심</span>성장 연출의 목적은 <strong>성취감이 아닌 다음 행동 유발</strong>이다. 5단계 시퀀스 전체가 "지금 한 단계 더"를 위한 심리적 예열 장치.</div>
+</div>
+
+<div class="sdiv">④ 접속 유지 설계 — 시간 구조 분석</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(5,150,105,.3)">
+    <h4 style="color:var(--green)">단기 접속 트리거 (5분 내)</h4>
+    <p>· VIP 일일 체스트 수령 (30초)<br>
+    · 연맹 도움 주기 (1~2분)<br>
+    · 레이더 임무 수행 (2~3분)<br>
+    · 병사 훈련 시작 (30초)<br>
+    · 이벤트 일일 미션 체크 (1분)<br><br>
+    <strong>설계 원리</strong>: 하루 최소 2~3회의 "5분 접속"을 만들어내는 구조. 5분 접속이 30분으로 길어지는 게 게임의 의도.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(5,150,105,.3)">
+    <h4 style="color:var(--green)">장기 접속 유도 (30분+)</h4>
+    <p>· Alliance Duel 과제 처리 (30~60분)<br>
+    · 집결 공격 참여 (알림 → 즉시 접속 필수)<br>
+    · Capitol War (수시간 집중 접속)<br>
+    · 이벤트 마감 전 집중 처리 (1~3시간)<br><br>
+    <strong>설계 원리</strong>: 이탈 비용이 시간이 지날수록 증가. 게임을 안 하면 "뒤처진다"는 FOMO가 접속을 강제한다.</p>
+  </div>
+</div>
+
+<div class="cwrap">
+  <div class="clbl">하루 접속 패턴 시간 구조 — 단기 반복 접속이 장기 접속으로 이어지는 구조</div>
+  <canvas id="c-session" style="max-height:180px"></canvas>
+</div>
+
+<table class="dt">
+  <thead><tr><th>접속 유형</th><th>평균 체류시간</th><th>트리거</th><th>이탈 비용</th><th>과금 기회</th></tr></thead>
+  <tbody>
+    <tr><td>일일 루틴 접속</td><td>5~15분</td><td>VIP 체스트·레이더·도움</td><td>낮음 (매일 누적)</td><td>★★</td></tr>
+    <tr><td>이벤트 참여 접속</td><td>20~60분</td><td>Alliance Duel·Arms Race</td><td>중간 (순위 이탈)</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td>전투 반응 접속</td><td>15~30분</td><td>공격 피격·집결 소집 알림</td><td>높음 (병사 손실)</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td>이벤트 마감 집중</td><td>1~3시간</td><td>이벤트 마감 24h 전 알림</td><td>높음 (보상 소멸)</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td style="color:var(--red)">Capitol War 참전</td><td>2~6시간</td><td>Warzone Duel 토요일</td><td>매우 높음 (서버 전패)</td><td style="color:var(--red)">★★★★★</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">⑤ 접근성 설계 분석 — 폰트·색맹 대응·의도적 불편함</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(107,114,128,.3)">
+    <h4 style="color:var(--muted)">접근성 설계 현황 (실측)</h4>
+    <p><strong>폰트 크기</strong>: 핵심 정보(전투력·잔여 시간) 18~24px, 부수 정보 10~12px. 부수 정보(확률 수치·소자 조건) 가독성 의도적 축소.<br><br>
+    <strong>색맹 대응</strong>: 미흡. 색상(빨강=위험, 초록=안전)에만 의존한 구분이 많음. 색맹 사용자는 FOMO 색상 신호를 놓칠 수 있으나, 이는 AAA 게임 대비 낮은 투자 영역.<br><br>
+    <strong>다국어</strong>: 40개+ 언어 지원. 현지화 수준은 시장별 상이.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">의도적 불편함 설계 (Dark UX)</h4>
+    <p><strong>확인 버튼 크기 비대칭</strong>: "구매" 버튼 > "취소" 버튼. 실수 구매 유도.<br>
+    <strong>다이아 즉시 소모</strong>: 스피드업 확인 없이 다이아 즉시 차감. "실수 소비" 구조.<br>
+    <strong>취소 경로 복잡화</strong>: 구독 취소 흐름이 5단계 이상. 지속 과금 유지 목적.<br>
+    <strong>확률 미공개</strong>: 소프트 천장 수치 미고지 — 규제 당국 대응 이슈.<br>
+    <strong>가챠 결과 지연 연출</strong>: 실제 결과 결정 후에도 1~2초 지연 → 기대감 조작.</p>
+  </div>
+</div>
+
+<div class="sdiv">⑥ 다크패턴 법적 쟁점</div>
+<table class="dt">
+  <thead><tr><th>다크패턴 유형</th><th>게임 내 사례</th><th>법적 위험 수준</th><th>주요 규제 지역</th><th>산업 대응</th></tr></thead>
+  <tbody>
+    <tr><td><strong>확률형 아이템 미공개</strong></td><td>소프트 천장 수치 비공개 · 픽업 배너 세부 확률 미고지</td><td style="color:var(--red)">★★★★★ 최고</td><td>한국·중국·벨기에·네덜란드</td><td>한국 자체등급분류·중국 확률 공시 의무화</td></tr>
+    <tr><td><strong>미성년자 과금 유도</strong></td><td>FOMO·집단 압박 메커니즘 → 미성년자 취약</td><td style="color:var(--red)">★★★★★</td><td>전 세계 (FTC·CMA 조사 중)</td><td>나이 인증·월 지출 한도 자율 규제</td></tr>
+    <tr><td><strong>숨겨진 비용</strong></td><td>VIP 레벨 vs VIP 활성화 이중 과금 구조</td><td style="color:var(--amber)">★★★★</td><td>EU DSA·UK CMA</td><td>약관 명시 강화</td></tr>
+    <tr><td><strong>구독 취소 방해</strong></td><td>월간 패스 취소 경로 복잡</td><td style="color:var(--amber)">★★★★</td><td>EU·캘리포니아주</td><td>원클릭 취소 법제화 대응 중</td></tr>
+    <tr><td><strong>실수 구매 유도</strong></td><td>다이아 즉시 소모 · 확인 없는 속도 완료</td><td style="color:var(--amber)">★★★</td><td>EU·영국</td><td>확인 팝업 추가 (일부 시장)</td></tr>
+    <tr><td><strong>어린이 온라인 보호</strong></td><td>미성년자 식별 없이 전체 과금 기능 노출</td><td style="color:var(--red)">★★★★★</td><td>COPPA(미국)·UK AADC</td><td>연령 게이트 UI 추가</td></tr>
+  </tbody>
+</table>
+<div class="insight"><strong>규제 트렌드:</strong> 한국(2024년 확률형 아이템 자율규제 강화), 중국(미성년자 게임 시간 제한 기 시행), EU(DSA 다크패턴 금지 적용 검토), 벨기에(가챠=도박 판정 사례)가 4X 모바일 게임의 주요 법적 압박원이다. First Fun은 주요 시장에 따라 현지화 대응을 적용 중이나, 설계 핵심은 유지되고 있다.</div>
+
+<div class="sdiv">⑦ 14가지 심리 기법 — 계열별 완전 분류</div>
+<div class="cwrap">
+  <div class="clbl">심리 기법 14종 — 과금 전환 강도(x) × 노출 빈도(y) × 영향력(버블 크기) · 색상 = 계열</div>
+  <canvas id="c-psych" style="max-height:260px"></canvas>
+</div>
+
+<table class="dt">
+  <thead><tr><th>계열</th><th>심리 기법</th><th>주요 적용 시스템</th><th>과금 강도</th><th>설계 의도</th></tr></thead>
+  <tbody>
+    <tr style="background:rgba(220,38,38,.04)"><td rowspan="3" style="color:var(--red);font-weight:600">손실 회피<br>계열</td><td>손실 회피</td><td>전투 패배 팝업 · 자원 부족 경고</td><td style="color:var(--red)">9.5/10</td><td>현재 손실을 막기 위한 즉각 구매 유발</td></tr>
+    <tr style="background:rgba(220,38,38,.04)"><td>매몰 비용 함정</td><td>VIP 누적 레벨 · 연맹 직위 · 시즌 진행</td><td style="color:var(--red)">8.2/10</td><td>"여기까지 투자했는데"로 이탈 저항</td></tr>
+    <tr style="background:rgba(220,38,38,.04)"><td>후회 회피</td><td>한정 영웅 종료 알림 · "놓쳤습니다" 메시지</td><td style="color:var(--amber)">7.5/10</td><td>미래 후회를 현재 결제로 예방</td></tr>
+    <tr style="background:rgba(220,38,38,.06)"><td rowspan="3" style="color:var(--red);font-weight:600">FOMO<br>계열</td><td>FOMO</td><td>한정 영웅 픽업 타이머 · 이벤트 마감</td><td style="color:var(--red)">8.8/10</td><td>시간 제한이 의사결정을 가속</td></tr>
+    <tr style="background:rgba(220,38,38,.06)"><td>희소성</td><td>한정 판매 상품 · "잔여 X개" 표시</td><td style="color:var(--amber)">7.0/10</td><td>수량 제한이 가치 인식을 높임</td></tr>
+    <tr style="background:rgba(220,38,38,.06)"><td>계절성 FOMO</td><td>시즌 종료 카운트다운 · 오프시즌 대청소</td><td style="color:var(--amber)">7.2/10</td><td>시즌 리셋 전 자원 소진 강제</td></tr>
+    <tr style="background:rgba(124,58,237,.04)"><td rowspan="3" style="color:var(--purple);font-weight:600">완료 욕구<br>계열</td><td>자이가르닉 효과</td><td>레드 닷 영구 잔존 — 절대 0 불가</td><td style="color:var(--red)">8.0/10</td><td>미완료 상태가 두뇌에 가장 오래 남음</td></tr>
+    <tr style="background:rgba(124,58,237,.04)"><td>완료 욕구</td><td>진행 바 95% 상태 연출 · 목표 근접 표시</td><td style="color:var(--amber)">7.5/10</td><td>거의 다 됐을 때 포기하지 못함</td></tr>
+    <tr style="background:rgba(124,58,237,.04)"><td>변동 보상</td><td>가챠 확률형 소환 — 슬롯머신 원리</td><td style="color:var(--amber)">6.8/10</td><td>불규칙 보상이 규칙 보상보다 중독성 높음</td></tr>
+    <tr style="background:rgba(37,99,235,.04)"><td rowspan="3" style="color:var(--blue);font-weight:600">소셜<br>계열</td><td>사회적 비교</td><td>서버 전투력 순위 · 공개 공격 로그</td><td style="color:var(--amber)">7.8/10</td><td>타인과의 비교가 투자 동기 생성</td></tr>
+    <tr style="background:rgba(37,99,235,.04)"><td>사회적 의무감</td><td>집결 소집 알림 · 기여도 압박</td><td style="color:var(--red)">8.5/10</td><td>집단 소속이 개인 이탈 비용을 높임</td></tr>
+    <tr style="background:rgba(37,99,235,.04)"><td>권위 압박</td><td>R5 명령 · 연맹 공지 · 서버 외교</td><td style="color:var(--amber)">7.0/10</td><td>상위 계층 지시가 순응을 유도</td></tr>
+    <tr style="background:rgba(5,150,105,.04)"><td rowspan="2" style="color:var(--green);font-weight:600">성장 시각화<br>계열</td><td>진행 시각화</td><td>전투력 수치 · 성장 그래프 · 랭킹 변동</td><td style="color:var(--blue)">6.5/10</td><td>성장이 보여야 계속하는 동기 유지</td></tr>
+    <tr style="background:rgba(5,150,105,.04)"><td>목표 근접성 효과</td><td>"X개만 더" 표시 · 마지막 별 강조</td><td style="color:var(--amber)">7.5/10</td><td>목표에 가까울수록 노력량 증가</td></tr>
+  </tbody>
+</table>
+</section>
+
 <!-- ══════ S3: 기지 건설 ══════ -->
 <section class="stage-sec" id="s3">
 <div class="stage-hdr">
@@ -1729,175 +1900,6 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </table>
 </section>
 
-<section class="stage-sec" id="s2">
-<div class="stage-hdr">
-  <span class="sbadge" style="background:#f3f0ff;color:#5b21b6;border:1px solid #ddd6fe">2단계</span>
-  <div class="stitle">
-    <h2>UX/UI 설계 — 튜토리얼·레드닷·성장 시각화·접근성·다크패턴</h2>
-    <p>점진적 복잡도 공개 · 레드닷 배치 전략 · 성장 시각화 · 접속 유지 시간 구조 · 접근성·다크패턴 법적 쟁점 · 14가지 심리 기법</p>
-    <div class="merge-tag">⊕ 대폭 보강 · 튜토리얼 단계적 공개 · 레드닷 전략 · 시간 구조 · 접근성·다크패턴 쟁점 신규</div>
-  </div>
-</div>
-<div class="check-row">
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 차트: 14가지 심리 기법 버블 차트 + 접속 유지 시간 구조</span>
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 표: 튜토리얼 단계 · 레드닷 배치 · 성장 연출 · 심리 기법 14종 계열 분류</span>
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 분석: 접근성 설계 · 다크패턴 법적 쟁점</span>
-</div>
-<div class="insight"><strong>핵심 통찰:</strong> Last War의 UI는 정보 전달이 아닌 <strong>행동 유도 장치</strong>다. 튜토리얼은 복잡도를 숨기며 진입 장벽을 낮추고, 레드닷 14개 동시 활성화는 완료 불가능 상태를 강제 생성한다. 성장 연출은 결과보다 과정에서 도파민을 극대화하며, 접속 유지 구조는 이탈 비용을 지속적으로 높인다.</div>
-
-<div class="sdiv">① 튜토리얼 — 단계적 복잡도 공개(Progressive Disclosure) 설계</div>
-<div class="grid2">
-  <div class="gcard" style="border-color:rgba(37,99,235,.3)">
-    <h4 style="color:var(--blue)">Progressive Disclosure의 설계 원리</h4>
-    <p>한꺼번에 모든 시스템을 보여주면 신규 플레이어가 이탈한다. Last War는 <strong>14개 주요 시스템을 약 21일에 걸쳐 순차적으로 잠금 해제</strong>한다.<br><br>
-    핵심 설계 전략:<br>
-    · <strong>강제 튜토리얼</strong>: 첫 30분은 선택지 없음. 화살표 클릭 유도로 학습 부담 제거.<br>
-    · <strong>첫 성공 즉시 보상</strong>: 행동 후 5초 내 보상 → 도파민 반응 학습.<br>
-    · <strong>시스템 언락 타이밍</strong>: HQ 레벨 단계마다 1~2개씩 언락 → "다음 레벨이면 더 생긴다" 동기.</p>
-  </div>
-  <div class="gcard" style="border-color:rgba(37,99,235,.3)">
-    <h4 style="color:var(--blue)">복잡도 숨김의 과금 연결</h4>
-    <p>초반에는 단순해 보이는 게임 → 중반 복잡도 노출 → "이제 왔는데 못 그만두겠다"는 매몰 비용 발동.<br><br>
-    새 시스템 언락 = 새 과금 지점 언락. 연맹 시스템이 열리면 집결 팩, 시즌 시스템이 열리면 전용 장비 패스가 따라온다. 복잡도 공개 속도가 과금 지점 노출 속도와 정밀 동기화되어 있다.</p>
-  </div>
-</div>
-
-<table class="dt">
-  <thead><tr><th>시기</th><th>HQ 레벨</th><th>언락 시스템</th><th>복잡도</th><th>동시 노출 과금 지점</th></tr></thead>
-  <tbody>
-    <tr><td>Day 1 (0~2h)</td><td>HQ 1~5</td><td>기지 건설·러닝 전투</td><td style="color:var(--green)">최저 — 클릭만</td><td>$0.99 초보자 패키지</td></tr>
-    <tr><td>Day 1~3</td><td>HQ 5~10</td><td>영웅 시스템·병사 훈련</td><td style="color:var(--green)">낮음</td><td>소형 영웅 팩 · Hero Growth Pass</td></tr>
-    <tr><td>Day 3~7</td><td>HQ 10~15</td><td>연맹·Alliance Duel·집결</td><td style="color:var(--amber)">중간</td><td>집결 팩 · VIP 활성화</td></tr>
-    <tr><td>Day 7~14</td><td>HQ 15~20</td><td>시즌 시스템·Capitol War</td><td style="color:var(--amber)">높음</td><td>시즌 패스 · 전용 장비 패스</td></tr>
-    <tr><td>Day 14~30</td><td>HQ 20~25</td><td>Warzone Duel·이민·Arms Race</td><td style="color:var(--red)">매우 높음</td><td>고급 팩 · 월간 패스</td></tr>
-    <tr><td style="color:var(--red)">Day 30+</td><td>HQ 25~30</td><td>T4+ 병사·영구 성장·Whale 경쟁</td><td style="color:var(--red)">최고 — 전문가 수준</td><td>모든 과금 채널 동시 활성</td></tr>
-  </tbody>
-</table>
-
-<div class="sdiv">② 레드닷(Red Dot) 알림 배치 전략</div>
-<div class="grid2">
-  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
-    <h4 style="color:var(--red)">레드닷의 심리 메커니즘</h4>
-    <p><strong>자이가르닉 효과(Zeigarnik Effect)</strong>: 미완료 과제가 완료 과제보다 더 오래 기억에 남는다. 레드닷은 "아직 해결 안 된 것"을 항상 눈에 보이게 만든다.<br><br>
-    <strong>14개 동시 활성화 설계</strong>: Last War의 레드닷은 원칙적으로 <strong>동시에 모두 제거 불가능</strong>하다. 연맹 도움을 주면 건설 알림이 생기고, 건설을 완료하면 레이더 알림이 뜬다. "완전히 처리 완료"인 상태는 존재하지 않는다.</p>
-  </div>
-  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
-    <h4 style="color:var(--red)">주요 레드닷 배치 위치와 설계 의도</h4>
-    <p>· <strong>건설 완료</strong>: 즉시 탭 → 다음 건설 시작 유도<br>
-    · <strong>연구 완료</strong>: 즉시 탭 → 다음 연구 시작 유도<br>
-    · <strong>VIP 일일 체스트</strong>: 매일 오전 재활성화 → 일일 로그인 강제<br>
-    · <strong>Alliance Duel</strong>: 점수 미달 경고 → 자원 소비 유도<br>
-    · <strong>이벤트 마감 타이머</strong>: 카운트다운 강조 → FOMO<br>
-    · <strong>영웅 레벨업 가능</strong>: EXP 충분 표시 → 조각·메달 소비 유도</p>
-  </div>
-</div>
-
-<div class="sdiv">③ 성장 시각화 전략 — 5단계 도파민 시퀀스</div>
-<div class="ssgrid">
-  <div class="ssitem"><span class="ssnum" style="color:var(--blue)">1단계</span><strong>진행 예고</strong> — 성장 직전 상태를 프리뷰로 보여줌. "5조각 더 모으면 5성" 표시. 목표가 시각화되면 포기 비율이 급감한다.</div>
-  <div class="ssitem"><span class="ssnum" style="color:var(--blue)">2단계</span><strong>바 채우기</strong> — EXP바·성급바·전투력바가 서서히 차오르는 애니메이션. 실제 수치보다 시각적 진행감이 강조되도록 비선형 스케일 적용.</div>
-  <div class="ssitem"><span class="ssnum" style="color:var(--amber)">3단계</span><strong>레벨업 연출</strong> — 황금빛 파티클·사운드·화면 전체 플래시. 0.5~1초 지연 후 보상 목록 팝업. 지연이 기대감을 증폭시킨다.</div>
-  <div class="ssitem"><span class="ssnum" style="color:var(--amber)">4단계</span><strong>비교 강조</strong> — "이전 대비 +35% 전투력" 표시. 절대 수치보다 상대적 성장량이 더 크게 느껴지도록 설계.</div>
-  <div class="ssitem"><span class="ssnum" style="color:var(--red)">5단계</span><strong>다음 목표 즉시 제시</strong> — 레벨업 직후 "다음 마일스톤까지 X개" 표시. 한 목표 달성 후 쉬지 못하도록 바로 다음 미완성 상태로 연결.</div>
-  <div class="ssitem"><span class="ssnum" style="color:var(--red)">설계 핵심</span>성장 연출의 목적은 <strong>성취감이 아닌 다음 행동 유발</strong>이다. 5단계 시퀀스 전체가 "지금 한 단계 더"를 위한 심리적 예열 장치.</div>
-</div>
-
-<div class="sdiv">④ 접속 유지 설계 — 시간 구조 분석</div>
-<div class="grid2">
-  <div class="gcard" style="border-color:rgba(5,150,105,.3)">
-    <h4 style="color:var(--green)">단기 접속 트리거 (5분 내)</h4>
-    <p>· VIP 일일 체스트 수령 (30초)<br>
-    · 연맹 도움 주기 (1~2분)<br>
-    · 레이더 임무 수행 (2~3분)<br>
-    · 병사 훈련 시작 (30초)<br>
-    · 이벤트 일일 미션 체크 (1분)<br><br>
-    <strong>설계 원리</strong>: 하루 최소 2~3회의 "5분 접속"을 만들어내는 구조. 5분 접속이 30분으로 길어지는 게 게임의 의도.</p>
-  </div>
-  <div class="gcard" style="border-color:rgba(5,150,105,.3)">
-    <h4 style="color:var(--green)">장기 접속 유도 (30분+)</h4>
-    <p>· Alliance Duel 과제 처리 (30~60분)<br>
-    · 집결 공격 참여 (알림 → 즉시 접속 필수)<br>
-    · Capitol War (수시간 집중 접속)<br>
-    · 이벤트 마감 전 집중 처리 (1~3시간)<br><br>
-    <strong>설계 원리</strong>: 이탈 비용이 시간이 지날수록 증가. 게임을 안 하면 "뒤처진다"는 FOMO가 접속을 강제한다.</p>
-  </div>
-</div>
-
-<div class="cwrap">
-  <div class="clbl">하루 접속 패턴 시간 구조 — 단기 반복 접속이 장기 접속으로 이어지는 구조</div>
-  <canvas id="c-session" style="max-height:180px"></canvas>
-</div>
-
-<table class="dt">
-  <thead><tr><th>접속 유형</th><th>평균 체류시간</th><th>트리거</th><th>이탈 비용</th><th>과금 기회</th></tr></thead>
-  <tbody>
-    <tr><td>일일 루틴 접속</td><td>5~15분</td><td>VIP 체스트·레이더·도움</td><td>낮음 (매일 누적)</td><td>★★</td></tr>
-    <tr><td>이벤트 참여 접속</td><td>20~60분</td><td>Alliance Duel·Arms Race</td><td>중간 (순위 이탈)</td><td style="color:var(--amber)">★★★★</td></tr>
-    <tr><td>전투 반응 접속</td><td>15~30분</td><td>공격 피격·집결 소집 알림</td><td>높음 (병사 손실)</td><td style="color:var(--red)">★★★★★</td></tr>
-    <tr><td>이벤트 마감 집중</td><td>1~3시간</td><td>이벤트 마감 24h 전 알림</td><td>높음 (보상 소멸)</td><td style="color:var(--red)">★★★★★</td></tr>
-    <tr><td style="color:var(--red)">Capitol War 참전</td><td>2~6시간</td><td>Warzone Duel 토요일</td><td>매우 높음 (서버 전패)</td><td style="color:var(--red)">★★★★★</td></tr>
-  </tbody>
-</table>
-
-<div class="sdiv">⑤ 접근성 설계 분석 — 폰트·색맹 대응·의도적 불편함</div>
-<div class="grid2">
-  <div class="gcard" style="border-color:rgba(107,114,128,.3)">
-    <h4 style="color:var(--muted)">접근성 설계 현황 (실측)</h4>
-    <p><strong>폰트 크기</strong>: 핵심 정보(전투력·잔여 시간) 18~24px, 부수 정보 10~12px. 부수 정보(확률 수치·소자 조건) 가독성 의도적 축소.<br><br>
-    <strong>색맹 대응</strong>: 미흡. 색상(빨강=위험, 초록=안전)에만 의존한 구분이 많음. 색맹 사용자는 FOMO 색상 신호를 놓칠 수 있으나, 이는 AAA 게임 대비 낮은 투자 영역.<br><br>
-    <strong>다국어</strong>: 40개+ 언어 지원. 현지화 수준은 시장별 상이.</p>
-  </div>
-  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
-    <h4 style="color:var(--red)">의도적 불편함 설계 (Dark UX)</h4>
-    <p><strong>확인 버튼 크기 비대칭</strong>: "구매" 버튼 > "취소" 버튼. 실수 구매 유도.<br>
-    <strong>다이아 즉시 소모</strong>: 스피드업 확인 없이 다이아 즉시 차감. "실수 소비" 구조.<br>
-    <strong>취소 경로 복잡화</strong>: 구독 취소 흐름이 5단계 이상. 지속 과금 유지 목적.<br>
-    <strong>확률 미공개</strong>: 소프트 천장 수치 미고지 — 규제 당국 대응 이슈.<br>
-    <strong>가챠 결과 지연 연출</strong>: 실제 결과 결정 후에도 1~2초 지연 → 기대감 조작.</p>
-  </div>
-</div>
-
-<div class="sdiv">⑥ 다크패턴 법적 쟁점</div>
-<table class="dt">
-  <thead><tr><th>다크패턴 유형</th><th>게임 내 사례</th><th>법적 위험 수준</th><th>주요 규제 지역</th><th>산업 대응</th></tr></thead>
-  <tbody>
-    <tr><td><strong>확률형 아이템 미공개</strong></td><td>소프트 천장 수치 비공개 · 픽업 배너 세부 확률 미고지</td><td style="color:var(--red)">★★★★★ 최고</td><td>한국·중국·벨기에·네덜란드</td><td>한국 자체등급분류·중국 확률 공시 의무화</td></tr>
-    <tr><td><strong>미성년자 과금 유도</strong></td><td>FOMO·집단 압박 메커니즘 → 미성년자 취약</td><td style="color:var(--red)">★★★★★</td><td>전 세계 (FTC·CMA 조사 중)</td><td>나이 인증·월 지출 한도 자율 규제</td></tr>
-    <tr><td><strong>숨겨진 비용</strong></td><td>VIP 레벨 vs VIP 활성화 이중 과금 구조</td><td style="color:var(--amber)">★★★★</td><td>EU DSA·UK CMA</td><td>약관 명시 강화</td></tr>
-    <tr><td><strong>구독 취소 방해</strong></td><td>월간 패스 취소 경로 복잡</td><td style="color:var(--amber)">★★★★</td><td>EU·캘리포니아주</td><td>원클릭 취소 법제화 대응 중</td></tr>
-    <tr><td><strong>실수 구매 유도</strong></td><td>다이아 즉시 소모 · 확인 없는 속도 완료</td><td style="color:var(--amber)">★★★</td><td>EU·영국</td><td>확인 팝업 추가 (일부 시장)</td></tr>
-    <tr><td><strong>어린이 온라인 보호</strong></td><td>미성년자 식별 없이 전체 과금 기능 노출</td><td style="color:var(--red)">★★★★★</td><td>COPPA(미국)·UK AADC</td><td>연령 게이트 UI 추가</td></tr>
-  </tbody>
-</table>
-<div class="insight"><strong>규제 트렌드:</strong> 한국(2024년 확률형 아이템 자율규제 강화), 중국(미성년자 게임 시간 제한 기 시행), EU(DSA 다크패턴 금지 적용 검토), 벨기에(가챠=도박 판정 사례)가 4X 모바일 게임의 주요 법적 압박원이다. First Fun은 주요 시장에 따라 현지화 대응을 적용 중이나, 설계 핵심은 유지되고 있다.</div>
-
-<div class="sdiv">⑦ 14가지 심리 기법 — 계열별 완전 분류</div>
-<div class="cwrap">
-  <div class="clbl">심리 기법 14종 — 과금 전환 강도(x) × 노출 빈도(y) × 영향력(버블 크기) · 색상 = 계열</div>
-  <canvas id="c-psych" style="max-height:260px"></canvas>
-</div>
-
-<table class="dt">
-  <thead><tr><th>계열</th><th>심리 기법</th><th>주요 적용 시스템</th><th>과금 강도</th><th>설계 의도</th></tr></thead>
-  <tbody>
-    <tr style="background:rgba(220,38,38,.04)"><td rowspan="3" style="color:var(--red);font-weight:600">손실 회피<br>계열</td><td>손실 회피</td><td>전투 패배 팝업 · 자원 부족 경고</td><td style="color:var(--red)">9.5/10</td><td>현재 손실을 막기 위한 즉각 구매 유발</td></tr>
-    <tr style="background:rgba(220,38,38,.04)"><td>매몰 비용 함정</td><td>VIP 누적 레벨 · 연맹 직위 · 시즌 진행</td><td style="color:var(--red)">8.2/10</td><td>"여기까지 투자했는데"로 이탈 저항</td></tr>
-    <tr style="background:rgba(220,38,38,.04)"><td>후회 회피</td><td>한정 영웅 종료 알림 · "놓쳤습니다" 메시지</td><td style="color:var(--amber)">7.5/10</td><td>미래 후회를 현재 결제로 예방</td></tr>
-    <tr style="background:rgba(220,38,38,.06)"><td rowspan="3" style="color:var(--red);font-weight:600">FOMO<br>계열</td><td>FOMO</td><td>한정 영웅 픽업 타이머 · 이벤트 마감</td><td style="color:var(--red)">8.8/10</td><td>시간 제한이 의사결정을 가속</td></tr>
-    <tr style="background:rgba(220,38,38,.06)"><td>희소성</td><td>한정 판매 상품 · "잔여 X개" 표시</td><td style="color:var(--amber)">7.0/10</td><td>수량 제한이 가치 인식을 높임</td></tr>
-    <tr style="background:rgba(220,38,38,.06)"><td>계절성 FOMO</td><td>시즌 종료 카운트다운 · 오프시즌 대청소</td><td style="color:var(--amber)">7.2/10</td><td>시즌 리셋 전 자원 소진 강제</td></tr>
-    <tr style="background:rgba(124,58,237,.04)"><td rowspan="3" style="color:var(--purple);font-weight:600">완료 욕구<br>계열</td><td>자이가르닉 효과</td><td>레드 닷 영구 잔존 — 절대 0 불가</td><td style="color:var(--red)">8.0/10</td><td>미완료 상태가 두뇌에 가장 오래 남음</td></tr>
-    <tr style="background:rgba(124,58,237,.04)"><td>완료 욕구</td><td>진행 바 95% 상태 연출 · 목표 근접 표시</td><td style="color:var(--amber)">7.5/10</td><td>거의 다 됐을 때 포기하지 못함</td></tr>
-    <tr style="background:rgba(124,58,237,.04)"><td>변동 보상</td><td>가챠 확률형 소환 — 슬롯머신 원리</td><td style="color:var(--amber)">6.8/10</td><td>불규칙 보상이 규칙 보상보다 중독성 높음</td></tr>
-    <tr style="background:rgba(37,99,235,.04)"><td rowspan="3" style="color:var(--blue);font-weight:600">소셜<br>계열</td><td>사회적 비교</td><td>서버 전투력 순위 · 공개 공격 로그</td><td style="color:var(--amber)">7.8/10</td><td>타인과의 비교가 투자 동기 생성</td></tr>
-    <tr style="background:rgba(37,99,235,.04)"><td>사회적 의무감</td><td>집결 소집 알림 · 기여도 압박</td><td style="color:var(--red)">8.5/10</td><td>집단 소속이 개인 이탈 비용을 높임</td></tr>
-    <tr style="background:rgba(37,99,235,.04)"><td>권위 압박</td><td>R5 명령 · 연맹 공지 · 서버 외교</td><td style="color:var(--amber)">7.0/10</td><td>상위 계층 지시가 순응을 유도</td></tr>
-    <tr style="background:rgba(5,150,105,.04)"><td rowspan="2" style="color:var(--green);font-weight:600">성장 시각화<br>계열</td><td>진행 시각화</td><td>전투력 수치 · 성장 그래프 · 랭킹 변동</td><td style="color:var(--blue)">6.5/10</td><td>성장이 보여야 계속하는 동기 유지</td></tr>
-    <tr style="background:rgba(5,150,105,.04)"><td>목표 근접성 효과</td><td>"X개만 더" 표시 · 마지막 별 강조</td><td style="color:var(--amber)">7.5/10</td><td>목표에 가까울수록 노력량 증가</td></tr>
-  </tbody>
-</table>
-</section>
-
 <section class="stage-sec" id="s11">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#fffbeb;color:#92400e;border:1px solid #fde68a">11단계</span>
@@ -2132,7 +2134,6 @@ function initStage(id){
   if(id==='s8')initS8();
   if(id==='s9')initS9();
   if(id==='s10')initS10();
-  if(id==='s2')initS2();
   if(id==='s11')initS11();
   if(id==='s12')initS12();
   if(id==='s13')initS13();
