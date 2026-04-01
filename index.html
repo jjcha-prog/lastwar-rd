@@ -620,54 +620,152 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 <div class="stage-hdr">
   <span class="sbadge" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0">5단계</span>
   <div class="stitle">
-    <h2>경제 시스템 — 자원 순환 및 자원 생산 건물 효율 분석</h2>
-    <p>Sink &amp; Faucet 전체 구조 · 인플레이션 트랩 · 자원 생산 건물 레벨별 효율 · 업그레이드 ROI</p>
+    <h2>경제 시스템 — 자원 순환 · 보호막 · 약탈 · 서버 인플레이션</h2>
+    <p>Sink &amp; Faucet 구조 · 자원 보호막(금고 보호 한도) · 약탈 Charge 시스템 · 서버 나이별 인플레이션 가속</p>
+    <div class="merge-tag">⊕ 보완 · 보호막 메커니즘 완전 정의 · 약탈 시스템 수치 설계 · 서버 생애주기 경제 패턴</div>
   </div>
 </div>
 <div class="check-row">
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 인터랙티브: 자원 생산 건물별 효율 탐색기</span>
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 차트: 생산 곡선 + 인플레이션 + 레벨당 증가분</span>
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 표: Sink&amp;Faucet + 생산 효율 + ROI 우선순위</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 인터랙티브: 자원 생산 건물 효율 탐색기 + 약탈 Charge 시뮬레이터</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 차트: 생산 곡선 + 계단 충격 + 서버 나이별 인플레이션</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 표: Sink&amp;Faucet + 창고 보호 한도 + 약탈 Charge + 서버 생애주기</span>
 </div>
-<div class="insight"><strong>핵심 통찰:</strong> 자원 공급은 선형 증가, 수요는 티어 전환 시 불연속 도약. T3→T4 계단 충격이 SvS 타이밍과 정확히 겹치도록 설계. 골드는 HQ30 기준 소비가 생산의 ×6.8배 — 구조적 만성 적자.</div>
+<div class="insight"><strong>핵심 통찰:</strong> Last War의 경제는 3중 압박 구조다. ① 생산-소비 격차(식량 소비 ×3.8배)로 <em>만성 자원 부족</em>, ② 창고 보호 한도 초과분 100% 약탈 가능으로 <em>자원 축적 불가</em>, ③ 서버 나이가 올라갈수록 수요 인플레이션이 가속되는 <em>시간 압박</em>. 이 3가지가 맞물려 지속적 과금을 유도한다.</div>
 
-<div class="sdiv">Sink &amp; Faucet 전체 구조</div>
+<div class="sdiv">① Sink &amp; Faucet 전체 구조 — 구조적 적자 설계</div>
 <table class="dt">
-  <thead><tr><th>자원</th><th>주요 Faucet</th><th>주요 Sink</th><th>HQ25 생산/소비 격차</th><th>과금 유도</th></tr></thead>
+  <thead><tr><th>자원</th><th>주요 Faucet (공급)</th><th>주요 Sink (소비)</th><th>HQ25 생산/소비 격차</th><th>보호막 효과</th><th>과금 유도</th></tr></thead>
   <tbody>
-    <tr><td>식량</td><td>농장, 파밍, 퀘스트</td><td>병사 훈련 70%, 유지비 20%</td><td style="color:var(--red)">소비 ×3.8배</td><td>식량 팩 구매</td></tr>
-    <tr><td>철강</td><td>광산, 전장 드롭</td><td>건설 50%, 연구 35%</td><td style="color:var(--red)">소비 ×4.2배</td><td>자원 팩 구매</td></tr>
-    <tr><td>석유</td><td>유전, 동맹 지원</td><td>고급 훈련 60%, 기갑 25%</td><td style="color:var(--amber)">소비 ×3.2배</td><td>석유 팩 구매</td></tr>
-    <tr><td>골드</td><td>퀘스트, 금고 건물</td><td>스킬 40%, 영웅 레벨 30%</td><td style="color:var(--red)">소비 ×6.8배 (만성 적자)</td><td>골드 팩 구매</td></tr>
-    <tr><td>다이아</td><td>현금 구매 90%+</td><td>스피드업, 가챠, 자원 구매</td><td>무과금 고갈 구조</td><td>핵심 과금 통화</td></tr>
+    <tr><td><strong>식량</strong></td><td>농장(생산), 파밍, 퀘스트</td><td>병사 훈련 70% · 유지비 20%</td><td style="color:var(--red)">소비 ×3.8배</td><td>용품창고 레벨별</td><td>식량 팩 구매</td></tr>
+    <tr><td><strong>철강</strong></td><td>광산, 전장 드롭</td><td>건설 50% · 연구 35%</td><td style="color:var(--red)">소비 ×4.2배</td><td>자원창고 레벨별</td><td>자원 팩 구매</td></tr>
+    <tr><td><strong>석유</strong></td><td>유전, 동맹 지원</td><td>고급 훈련 60% · 기갑 25%</td><td style="color:var(--amber)">소비 ×3.2배</td><td>없음 (전량 약탈 가능)</td><td>석유 팩 구매</td></tr>
+    <tr><td><strong>골드</strong></td><td>퀘스트, 금광 건물</td><td>스킬 40% · 영웅 레벨 30%</td><td style="color:var(--red)">소비 ×6.8배 (만성 적자)</td><td>자원금고 레벨별 (낮음)</td><td>골드 팩 구매</td></tr>
+    <tr><td><strong>다이아</strong></td><td>현금 구매 90%+</td><td>스피드업 · 가챠 · 자원 구매</td><td>무과금 고갈 구조</td><td>없음 (약탈 불가, 직구매만)</td><td>핵심 과금 통화</td></tr>
   </tbody>
 </table>
 
-<div class="sdiv">자원 생산 건물 효율 탐색기</div>
+<div class="sdiv">② 자원 보호막(Resource Shield) — 창고 보호 한도 메커니즘</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(37,99,235,.3)">
+    <h4 style="color:var(--blue)">보호막 작동 원리</h4>
+    <p>각 창고(용품창고·자원창고·자원금고)는 레벨에 비례해 <strong>보호 한도</strong>를 갖는다. 한도 이하 자원은 약탈 불가. 한도 초과분은 <strong>100% 약탈 가능</strong>.<br><br>
+    <span style="color:var(--red)">중요:</span> 생산 건물(농장·광산·금광)에 수집 대기 중인 자원도 최근 업데이트 이후 창고 보호 한도 내로 보호된다.<br><br>
+    방패(Shield)와 혼동 금지 — 보호막은 물리적 방어막(공격 차단)이 아니라 <strong>자원량 기반 한도</strong>다.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">설계 의도 — 보호막의 과금 유발 구조</h4>
+    <p>창고를 업그레이드할수록 보호 한도가 늘어나지만 <strong>소비 수요 증가 속도가 더 빠르다</strong>. HQ20+ 에서는 1회 훈련·건설 비용이 보호 한도를 초과하는 상황이 빈번하게 발생.<br><br>
+    결과: "자원을 모으면 약탈당한다" → 즉시 소비 강요 → 이벤트 타이밍에 자원 부족 → 자원 팩 구매 동기 생성.</p>
+  </div>
+</div>
+
+<table class="dt">
+  <thead><tr><th>창고 종류</th><th>자원</th><th>레벨별 보호 한도 (추정치)</th><th>최대 보호 (Lv.30)</th><th>보호 설계 특성</th><th>과금 압박</th></tr></thead>
+  <tbody>
+    <tr><td><strong>용품창고</strong><br><small>Food Warehouse</small></td><td>식량</td><td>Lv.1: ~50K · Lv.10: ~500K · Lv.20: ~3M</td><td style="color:var(--amber)">~15M</td><td>식량 소비 속도 빠름 → 보호 효과 체감↑</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>자원창고</strong><br><small>Iron Warehouse</small></td><td>철강</td><td>Lv.1: ~40K · Lv.10: ~400K · Lv.20: ~2.5M</td><td style="color:var(--amber)">~12M</td><td>건설·연구 대량 소비 → 창고 레벨이 중요</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>자원금고</strong><br><small>Coin Vault</small></td><td>골드</td><td>Lv.1: ~20K · Lv.10: ~200K · Lv.20: ~1M</td><td style="color:var(--red)">~4M <span style="font-size:10px">(매우 낮음)</span></td><td>골드 소비가 보호 한도보다 훨씬 커서 사실상 보호 불가</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><span style="color:var(--muted)">석유</span></td><td>석유</td><td colspan="2" style="color:var(--red)">보호막 없음 — 전량 약탈 가능</td><td>늦은 게임 핵심 자원 → 방어력 필수</td><td style="color:var(--red)">★★★★★</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">③ 약탈 시스템(Plunder) — Charge 기반 수치 설계</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(217,119,6,.3)">
+    <h4 style="color:var(--amber)">약탈 Charge 공식</h4>
+    <p><strong>최대 약탈량(Charge) = 병사 수 × 병사당 적재량</strong><br><br>
+    병사당 적재량:<br>
+    · T1: 400 · T4: ~1,800 · T8: ~4,200 · T10: ~6,000<br><br>
+    예: T8 병사 1,000명 → Charge = 4,200,000<br><br>
+    약탈되는 자원은 <strong>보호 한도 초과분에서만</strong> 발생. 비율 배분 방식으로 자원 종류별 비율에 따라 나뉨.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(217,119,6,.3)">
+    <h4 style="color:var(--amber)">Charge 증가 방법 및 일일 약탈 한도</h4>
+    <p><strong>Charge 증가 경로:</strong><br>
+    · Load Training I~V 연구: 각 +5% (최대 +25%)<br>
+    · 연맹 전쟁 Unit Load 연구: +10%<br>
+    · 스쿼드 Power Boost: 최대 +15%<br>
+    · March Size 증가 → 병사 수 증가 → Charge 증가<br><br>
+    <strong>일일 약탈 한도:</strong> 반복 약탈 시 효율 점진적 감소 (매일 리셋). War Leader 직업: 일일 한도 +50%.</p>
+  </div>
+</div>
+
+<div class="cwrap">
+  <div class="clbl">약탈 Charge 시뮬레이터 — 병사 수 × 티어 조합으로 최대 약탈량 계산</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+    <div>
+      <div class="sl-row"><label>병사 수 <span id="pl-cnt-v" style="color:var(--text);font-weight:500">1,000명</span></label><input type="range" min="100" max="5000" value="1000" step="100" id="pl-cnt-s" oninput="window.calcPlunder&&window.calcPlunder()"></div>
+      <div class="sl-row"><label>병사 티어 <span id="pl-tier-v" style="color:var(--text);font-weight:500">T8</span></label><input type="range" min="1" max="10" value="8" id="pl-tier-s" oninput="window.calcPlunder&&window.calcPlunder()"></div>
+      <div class="sl-row"><label>Load 연구 보너스 <span id="pl-res-v" style="color:var(--text);font-weight:500">+25%</span></label><input type="range" min="0" max="50" value="25" step="5" id="pl-res-s" oninput="window.calcPlunder&&window.calcPlunder()"></div>
+    </div>
+    <div id="pl-result" style="font-size:12px;color:var(--muted);line-height:2.2"></div>
+  </div>
+  <canvas id="c-plunder" style="max-height:180px"></canvas>
+</div>
+
+<table class="dt">
+  <thead><tr><th>병사 티어</th><th>병사당 적재량</th><th>1,000명 Charge</th><th>보호 한도 초과 기준</th><th>약탈 효율</th></tr></thead>
+  <tbody>
+    <tr><td>T1</td><td>400</td><td>400,000</td><td>용품창고 Lv.8 이상 보호 범위 초과</td><td style="color:var(--muted)">낮음</td></tr>
+    <tr><td>T4</td><td>1,800</td><td>1,800,000</td><td>Lv.15+ 창고에서 초과 가능성</td><td style="color:var(--amber)">중간</td></tr>
+    <tr><td>T6</td><td>2,800</td><td>2,800,000</td><td>중간 수준 창고 초과</td><td style="color:var(--amber)">중간~높음</td></tr>
+    <tr><td style="color:var(--green)">T8</td><td>4,200</td><td>4,200,000</td><td>HQ20+ Lv.20 창고 초과 가능</td><td style="color:var(--green)">높음</td></tr>
+    <tr><td style="color:var(--red)">T10</td><td>6,000</td><td>6,000,000</td><td>대부분 창고 초과 → 약탈 효율 극대</td><td style="color:var(--red)">최고</td></tr>
+  </tbody>
+</table>
+
+<div class="insight"><strong>약탈 설계 통찰:</strong> "Fridge(냉장고)" 시스템 — 자원이 풍부하지만 방어력이 낮은 비활성 플레이어를 타겟으로 삼는 전략. HQ가 높지만 오래 접속 안 한 플레이어가 최적 타겟. 이 시스템은 역설적으로 <strong>적극적 플레이어가 자원을 즉시 소비</strong>(업그레이드·훈련)하도록 강제해 속도감 있는 진행을 유도한다.</div>
+
+<div class="sdiv">④ 자원 생산 건물 효율 탐색기</div>
 <div class="cwrap">
   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px" id="res-tabs"></div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px" id="res-detail"></div>
   <div class="clbl">레벨별 생산량 곡선 (실선 = 선택 건물)</div>
   <canvas id="c-res" style="max-height:200px;margin-bottom:14px"></canvas>
-  <div class="clbl">레벨당 증가분 (복리 구조)</div>
+  <div class="clbl">레벨당 증가분 (복리 가속 구조)</div>
   <canvas id="c-res-delta" style="max-height:160px"></canvas>
 </div>
 
-<div class="sdiv">HQ 레벨별 식량 생산 vs T4 소비 — 계단 충격</div>
-<div class="cwrap"><canvas id="c-inflation" style="max-height:200px"></canvas></div>
-
 <table class="dt">
-  <thead><tr><th>건물</th><th>자원</th><th>기준 생산(Lv.1)</th><th>Lv.25 생산</th><th>레벨당 증가율</th><th>업그레이드 ROI</th></tr></thead>
+  <thead><tr><th>건물</th><th>자원</th><th>Lv.1 생산</th><th>Lv.25 생산</th><th>레벨당 증가율</th><th>업그레이드 ROI</th><th>약탈 보호</th></tr></thead>
   <tbody>
-    <tr><td>농장</td><td>식량</td><td>1.8 K/h</td><td>~85 K/h</td><td>+19.5%/레벨</td><td style="color:var(--green)">높음 (Lv.1~15)</td></tr>
-    <tr><td>광산</td><td>철강</td><td>1.4 K/h</td><td>~62 K/h</td><td>+19.0%/레벨</td><td style="color:var(--green)">높음 (Lv.1~18)</td></tr>
-    <tr><td>유전</td><td>석유</td><td>1.1 K/h</td><td>~48 K/h</td><td>+18.5%/레벨</td><td style="color:var(--amber)">중간 (T3 이후)</td></tr>
-    <tr><td>금고</td><td>골드</td><td>0.6 K/h</td><td>~12 K/h</td><td>+17.5%/레벨</td><td style="color:var(--red)">낮음 (설계된 적자)</td></tr>
+    <tr><td>농장</td><td>식량</td><td>1.8 K/h</td><td>~85 K/h</td><td>+19.5%/레벨</td><td style="color:var(--green)">높음 (Lv.1~15)</td><td>용품창고 레벨 의존</td></tr>
+    <tr><td>광산</td><td>철강</td><td>1.4 K/h</td><td>~62 K/h</td><td>+19.0%/레벨</td><td style="color:var(--green)">높음 (Lv.1~18)</td><td>자원창고 레벨 의존</td></tr>
+    <tr><td>유전</td><td>석유</td><td>1.1 K/h</td><td>~48 K/h</td><td>+18.5%/레벨</td><td style="color:var(--amber)">중간 (T3 이후)</td><td style="color:var(--red)">보호 없음 (전량 약탈)</td></tr>
+    <tr><td>금광</td><td>골드</td><td>0.6 K/h</td><td>~12 K/h</td><td>+17.5%/레벨</td><td style="color:var(--red)">낮음 (설계된 적자)</td><td style="color:var(--red)">자원금고 한도 매우 낮음</td></tr>
   </tbody>
 </table>
+
+<div class="sdiv">⑤ 서버 나이(Server Age)별 자원 인플레이션 가속 패턴</div>
+<div class="insight"><strong>서버 나이 경제학:</strong> 서버가 성숙할수록 상위 플레이어의 HQ 레벨이 올라가며 자원 수요가 기하급수적으로 증가한다. 동시에 활성 플레이어 감소로 자원 공급(파밍·거래) 생태계가 축소된다. 이 구조적 압박이 중후반 서버에서 과금 강도가 최고에 달하는 이유다.</div>
+
+<div class="cwrap"><div class="clbl">서버 나이별 — 자원 수요 지수(빨강) vs 활성 유저 수(파랑) 추이</div><canvas id="c-server-eco" style="max-height:200px"></canvas></div>
+
+<table class="dt">
+  <thead><tr><th>서버 나이</th><th>단계 명칭</th><th>HQ 분포<br>(상위권)</th><th>자원 수요<br>(상대 지수)</th><th>활성 유저<br>유지율</th><th>인플레이션<br>주요 원인</th><th>과금 강도</th></tr></thead>
+  <tbody>
+    <tr><td>개서 0~4주</td><td style="color:var(--green)">탄생기</td><td>HQ10~15</td><td>×1.0 (기준)</td><td>100%</td><td>초기 진입 비용 낮음</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td>1~3개월</td><td style="color:var(--red)">성장·경쟁기</td><td>HQ18~24</td><td style="color:var(--red)">×4~8</td><td>~60%</td><td>T4 해금 러시 → 식량·석유 폭발 수요</td><td style="color:var(--red)">★★★★★ (최고)</td></tr>
+    <tr><td>3~6개월</td><td style="color:var(--amber)">패권기</td><td>HQ24~28</td><td style="color:var(--amber)">×12~20</td><td>~40%</td><td>SvS 이벤트 자원 소비 집중 · 상위권 독주</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td>6~12개월</td><td>성숙·침체기</td><td>HQ28~30</td><td>×25~40</td><td>~25%</td><td>T8~T10 훈련 비용 폭발 · 저자원 플레이어 이탈</td><td>★★★</td></tr>
+    <tr><td>12개월+</td><td>쇠퇴·병합기</td><td>HQ30+</td><td>×50+</td><td>~15%</td><td>잔존 Whale만 남아 자원 인플레이션 극한 도달</td><td>★★</td></tr>
+    <tr><td>S2 오프 이후</td><td style="color:var(--purple)">에이지 오브 오일</td><td>HQ30~35</td><td style="color:var(--purple)">석유: ×100+</td><td>~10%</td><td>석유 신규 자원 도입 → 신규 인플레이션 사이클</td><td style="color:var(--purple)">★★★★ (리부트)</td></tr>
+  </tbody>
+</table>
+
+<div class="ssgrid">
+  <div class="ssitem"><span class="ssnum" style="color:var(--red)">패턴①</span><strong>T 티어 전환 충격</strong> — T3→T4(HQ20) 전환 시 식량 소비가 ×3~5배 급증. 이 시점이 서버 성장기 과금 최고점과 정확히 일치. SvS 스케줄도 이 타이밍에 집중 설계됨.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--red)">패턴②</span><strong>약탈-보호 인플레이션 순환</strong> — 서버 성숙 → 창고 레벨 높아짐 → 더 많은 자원 축적 필요 → 더 강한 Charge 필요 → T8+ 대량 훈련 → 식량 소비 추가 증가.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--amber)">패턴③</span><strong>생산자 이탈 → 파밍 생태계 붕괴</strong> — 중소 플레이어 이탈로 서버 내 파밍 가능 자원 타겟 감소. 상위 플레이어는 오히려 더 큰 Charge가 필요해지는 역설.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--amber)">패턴④</span><strong>SvS 타이밍 동기화</strong> — 자원 소비가 많은 SvS 이벤트가 T4 해금 시점(성장기)에 집중. 이 구간에 자원 팩·스피드업 소비가 전체 서버 생애주기 중 최고 수준.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--blue)">패턴⑤</span><strong>에이지 오브 오일 리셋</strong> — S2 오프시즌에 석유라는 신규 병목 자원이 추가. 기존 적자 구조에 새 레이어를 덮어 Whale에게는 새 과금 동기, 무과금에게는 새 장벽 생성.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--blue)">패턴⑥</span><strong>서버 이전 방어선</strong> — 서버 나이 차이가 큰 서버 간 이전은 불가(Transfer Surge 정책: 유사 나이 서버 간만 허용). 나쁜 서버에서 탈출 불가 → 과금 or 이탈 二択.</div>
+</div>
+
+<div class="sdiv">HQ 레벨별 식량 생산 vs T4 소비 — 계단 충격</div>
+<div class="cwrap"><div class="clbl">HQ 레벨 상승에 따른 식량 생산(초록) vs 소비(빨강) — T3→T4 전환 구간이 핵심 병목</div><canvas id="c-inflation" style="max-height:200px"></canvas></div>
 </section>
 
-<!-- ══════ S6: 월드맵 ══════ -->
 <section class="stage-sec" id="s6">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe">6단계</span>
@@ -1688,6 +1786,84 @@ function initS5(){
       ]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}}},
       scales:{x:{...ax(),ticks:{color:'#5a6275',callback:(_,i)=>i%5===0?'HQ'+(i+1):''}},y:ax('K/h')}}
+  });
+
+  /* ── 약탈 Charge 시뮬레이터 ── */
+  const TIER_LOAD=[0,400,900,1400,1800,2200,2600,3100,4200,5100,6000]; // T1~T10
+  let plunderChart=null;
+  function calcPlunder(){
+    const cnt=+document.getElementById('pl-cnt-s').value;
+    const tier=+document.getElementById('pl-tier-s').value;
+    const res=+document.getElementById('pl-res-s').value;
+    document.getElementById('pl-cnt-v').textContent=cnt.toLocaleString()+'명';
+    document.getElementById('pl-tier-v').textContent='T'+tier;
+    document.getElementById('pl-res-v').textContent='+'+res+'%';
+    const baseLoad=TIER_LOAD[tier]||400;
+    const totalLoad=Math.round(baseLoad*(1+res/100));
+    const charge=cnt*totalLoad;
+    const foodProt=3000000,ironProt=2500000,goldProt=1000000; // 창고 Lv.20 추정 보호 한도
+    const plFood=Math.max(0,charge*0.4-foodProt);
+    const plIron=Math.max(0,charge*0.35-ironProt);
+    const plGold=Math.max(0,charge*0.25-goldProt);
+    const fmtM=v=>(v>=1e6?(v/1e6).toFixed(1)+'M':v>=1e3?(v/1e3).toFixed(0)+'K':v);
+    const plResEl=document.getElementById('pl-result');
+    if(!plResEl)return;
+    plResEl.innerHTML=[
+      ['병사당 적재량',fmtLoad(totalLoad),'#5a6275'],
+      ['총 Charge',fmtM(charge),'#2563eb'],
+      ['예상 식량 약탈',fmtM(plFood),plFood>0?'#dc2626':'#059669'],
+      ['예상 철강 약탈',fmtM(plIron),plIron>0?'#dc2626':'#059669'],
+      ['예상 골드 약탈',fmtM(plGold),plGold>0?'#dc2626':'#059669'],
+    ].map(([l,v,c])=>`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:0.5px solid var(--border);font-size:12px"><span style="color:#5a6275">${l}</span><span style="font-weight:500;color:${c}">${v}</span></div>`).join('');
+    if(plunderChart)plunderChart.destroy();
+    const tiers=Array.from({length:10},(_,i)=>i+1);
+    plunderChart=new Chart(document.getElementById('c-plunder'),{type:'bar',
+      data:{labels:tiers.map(t=>'T'+t),
+        datasets:[{label:'총 Charge',data:tiers.map(t=>cnt*TIER_LOAD[t]*(1+res/100)),
+          backgroundColor:tiers.map(t=>t===tier?'rgba(37,99,235,.8)':'rgba(37,99,235,.2)'),borderRadius:4}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+        scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},
+          y:{grid:{color:'rgba(0,0,0,.05)'},ticks:{color:'#5a6275',callback:v=>fmtM(v)},title:{display:true,text:'최대 약탈량',color:'#5a6275',font:{size:10}}}}}
+    });
+  }
+  function fmtLoad(v){return v>=1000?(v/1000).toFixed(1)+'K':v;}
+  function fmtM(v){return v>=1e6?(v/1e6).toFixed(1)+'M':v>=1e3?(v/1e3).toFixed(0)+'K':String(v);}
+  window.calcPlunder=calcPlunder;
+  ['pl-cnt-s','pl-tier-s','pl-res-s'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.oninput=calcPlunder;
+  });
+  calcPlunder();
+
+  /* ── 서버 나이별 경제 추이 차트 ── */
+  const sAgeLabels=['탄생기\n0~4주','성장기\n1~3개월','패권기\n3~6개월','성숙기\n6~12개월','쇠퇴기\n12개월+','에이지오브오일'];
+  const demandIdx=[1,6,16,32,55,100];
+  const retentionPct=[100,60,40,25,15,10];
+  new Chart(document.getElementById('c-server-eco'),{type:'line',
+    data:{labels:sAgeLabels,
+      datasets:[
+        {label:'자원 수요 지수(상대)',data:demandIdx,borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.07)',tension:.4,fill:true,pointRadius:6,pointBackgroundColor:'#dc2626',yAxisID:'y1'},
+        {label:'활성 유저 유지율(%)',data:retentionPct,borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.05)',tension:.4,fill:false,pointRadius:6,pointBackgroundColor:'#2563eb',yAxisID:'y2'},
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#5a6275',boxWidth:10}},
+        tooltip:{callbacks:{label:ctx=>{
+          if(ctx.datasetIndex===0)return '수요 지수: ×'+ctx.parsed.y;
+          return '유저 유지율: '+ctx.parsed.y+'%';
+        }}}},
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#5a6275',font:{size:9}}},
+        y1:{type:'linear',position:'left',grid:{color:'rgba(0,0,0,.05)'},ticks:{color:'#dc2626',callback:v=>'×'+v},title:{display:true,text:'수요 지수',color:'#dc2626',font:{size:10}}},
+        y2:{type:'linear',position:'right',min:0,max:110,grid:{display:false},ticks:{color:'#2563eb',callback:v=>v+'%'},title:{display:true,text:'유저 유지율',color:'#2563eb',font:{size:10}}},
+      }},
+    plugins:[{afterDraw(c){
+      const ctx=c.ctx,xA=c.scales.x,yA=c.scales.y1;
+      if(!xA||!yA)return;
+      const x=xA.getPixelForValue(1);
+      ctx.save();ctx.strokeStyle='#dc2626';ctx.lineWidth=1.5;ctx.setLineDash([5,3]);
+      ctx.beginPath();ctx.moveTo(x,yA.top);ctx.lineTo(x,yA.bottom);ctx.stroke();
+      ctx.fillStyle='#dc2626';ctx.font='bold 10px sans-serif';ctx.textAlign='center';
+      ctx.fillText('과금 피크',x,yA.top+14);ctx.restore();
+    }}]
   });
 }
 
