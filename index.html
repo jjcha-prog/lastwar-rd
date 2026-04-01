@@ -946,33 +946,225 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 <section class="stage-sec" id="s7">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">7단계</span>
-  <div class="stitle"><h2>연맹 시스템 — 소셜 및 집단 경쟁</h2><p>직위 계층 · 연맹 기술·도움·상점 · 집결 메커니즘 · 리텐션 심리</p></div>
+  <div class="stitle">
+    <h2>연맹 시스템 — 구조 · 전쟁 · 버프 · 병합 · 리텐션 심리</h2>
+    <p>R1~R5 직위 계층 · 연맹 전쟁 점수 산정 · 연맹 버프·도움·상점 · 집결 공격 · 병합·해체 규칙 · 리텐션 심리</p>
+    <div class="merge-tag">⊕ 대폭 보강 · 직위 계층 완전 정의 · Alliance Duel 점수 체계 · 연맹 병합·해체 규칙 신규</div>
+  </div>
 </div>
 <div class="check-row">
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 표: 소셜 채널 × 심리 레버 매핑</span>
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 스탯 카드: 리텐션 격차 수치</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 인터랙티브: 리텐션 심리 채널 탐색기</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 차트: Alliance Duel 6일 점수 강도 + 리텐션 비교</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 표: R1~R5 직위 · Alliance Duel · 연맹 버프 · 집결 · 병합 규칙 · 심리 채널</span>
 </div>
 <div class="stat-row">
   <div class="scard"><div class="lbl">연맹 가입자 D30 리텐션</div><div class="val" style="color:var(--green)">~82%</div></div>
   <div class="scard"><div class="lbl">미가입자 D30 리텐션</div><div class="val" style="color:var(--red)">~28%</div></div>
   <div class="scard"><div class="lbl">R4~R5 과금 전환율 배율</div><div class="val" style="color:var(--amber)">×2~3</div></div>
-  <div class="scard"><div class="lbl">리텐션 차이</div><div class="val" style="color:var(--blue)">54%p</div></div>
+  <div class="scard"><div class="lbl">연맹 가입 D30 리텐션 격차</div><div class="val" style="color:var(--blue)">54%p</div></div>
 </div>
-<div class="insight"><strong>핵심 통찰:</strong> 과금이 개인 욕구가 아닌 집단 의무에서 발생하도록 설계된다. "내가 빠지면 동맹이 진다" 구조가 개인 과금 저항을 사회적 압박으로 무력화한다. 연맹은 게임 기능이 아니라 사회공학 장치다.</div>
+<div class="insight"><strong>핵심 통찰:</strong> 연맹은 게임 기능이 아니라 <strong>사회공학 장치</strong>다. R5→R1 계층 구조가 책임감·죄책감·지위 욕구를 계층별로 다르게 자극하고, Alliance Duel 6일 주기가 매주 과금 사이클을 재가동한다. "내가 약하면 동맹이 진다"는 집단 책임감이 개인의 과금 저항을 무력화하는 핵심 메커니즘이다.</div>
+
+<div class="sdiv">① 연맹 직위 계층 (R1~R5) — 권한·역할·과금 연결</div>
+<div class="cwrap" style="padding:14px">
+  <div class="clbl">직위별 권한 비교 — 위로 올라갈수록 과금 압박도 증가</div>
+  <canvas id="c-rank" style="max-height:180px"></canvas>
+</div>
+
 <table class="dt">
-  <thead><tr><th>소셜 채널</th><th>심리 레버</th><th>발동 조건</th><th>과금 강도</th></tr></thead>
+  <thead><tr><th>직위</th><th>호칭</th><th>인원</th><th>핵심 권한</th><th>주요 역할</th><th>과금 압박</th><th>리텐션 기여</th></tr></thead>
   <tbody>
-    <tr><td>집결 소집 (R4+)</td><td>책임감 + 수치 회피</td><td>R4 이상 집결 소집 시 알림</td><td style="color:var(--red)">★★★★★</td></tr>
-    <tr><td>수도 쟁탈전 참전</td><td>사회적 비교</td><td>SvS 전투 직전</td><td style="color:var(--red)">★★★★★</td></tr>
-    <tr><td>도움 잔여 시간</td><td>완료 욕구</td><td>건설 잔여 시간 短</td><td style="color:var(--amber)">★★★★</td></tr>
-    <tr><td>연맹 기술 기여 부족</td><td>죄책감</td><td>기여도 낮을 때</td><td style="color:var(--amber)">★★★★</td></tr>
-    <tr><td>직위 승격 조건</td><td>지위 욕구</td><td>R4 승급 조건 달성 직전</td><td>★★★</td></tr>
-    <tr><td>연맹 상점 포인트 만료</td><td>손실 회피</td><td>포인트 리셋 직전</td><td>★★★</td></tr>
+    <tr style="background:rgba(220,38,38,.05)">
+      <td style="color:var(--red);font-weight:600">R5</td><td>연맹장(Leader)</td><td>1명</td>
+      <td>모든 권한 · 연맹 해체 · R4 임명/해임 · 연맹 기술 연구</td>
+      <td>외교·전략 결정권자 · Capitol War 보상 분배 권한</td>
+      <td style="color:var(--red)">★★★★★</td><td style="color:var(--red)">★★★★★</td>
+    </tr>
+    <tr style="background:rgba(217,119,6,.03)">
+      <td style="color:var(--amber);font-weight:600">R4</td><td>간부(Officer)</td><td>최대 6명</td>
+      <td>R1~R3 승급·강등 · 집결 소집 · 연맹 건물 관리 · 신규 가입 승인</td>
+      <td>전쟁장(War General) · 외교관(Diplomat) · 모집관(Recruiter) 역할 특화</td>
+      <td style="color:var(--red)">★★★★★</td><td style="color:var(--red)">★★★★★</td>
+    </tr>
+    <tr>
+      <td style="color:var(--blue);font-weight:600">R3</td><td>핵심 멤버</td><td>제한 없음</td>
+      <td>R1~R2 대상 기여도 투표 참여 · 연맹 활동 우선 참여권</td>
+      <td>이벤트 조율자 · 신규 멤버 멘토</td>
+      <td style="color:var(--amber)">★★★★</td><td style="color:var(--amber)">★★★★</td>
+    </tr>
+    <tr>
+      <td style="color:var(--muted);font-weight:600">R2</td><td>정규 멤버</td><td>제한 없음</td>
+      <td>일반 연맹 활동 · 전체 메일 발송</td>
+      <td>이벤트 참여 · 자원 지원</td>
+      <td style="color:var(--blue)">★★★</td><td style="color:var(--blue)">★★★</td>
+    </tr>
+    <tr>
+      <td style="color:var(--muted);font-weight:600">R1</td><td>신규 멤버</td><td>제한 없음</td>
+      <td>기본 참여만 가능 · 메일 발송 불가</td>
+      <td>신규 가입자 수습 기간 · 활동 검증 단계</td>
+      <td>★★</td><td>★★</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="ssgrid">
+  <div class="ssitem"><span class="ssnum" style="color:var(--red)">전쟁장</span>집결 공격 계획 · 방어 조율 · 전투력 순위 관리 — 가장 높은 과금 압박 직위</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--amber)">외교관</span>외부 NAP 협상 · 연합 관계 구축 · 서버 외교 — 커뮤니케이션 중심</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--blue)">모집관</span>신규 멤버 스크리닝 · 온보딩 · 활동 모니터링 — 연맹 규모 유지</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--green)">이벤트 관리</span>Alliance Duel 일정 조율 · 포인트 추적 · 보상 분배 — 주간 루틴 핵심</div>
+</div>
+
+<div class="sdiv">② Alliance War (Alliance Duel) — 점수 산정 방식 완전 분석</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">Alliance Duel 구조</h4>
+    <p><strong>형식</strong>: 서버 개방 7주 이상 상위 16개 연맹이 리그 참가.<br>
+    <strong>주기</strong>: 매주 월~토 (6일). 일요일은 결산·준비.<br>
+    <strong>일별 테마</strong>: Day1 Radar/드론 → Day2 건설 → Day3 연구 → Day4 영웅 성장 → Day5 훈련 → Day6 Enemy Buster(PvP).<br>
+    <strong>리그 티어</strong>: Silver → Gold → Diamond. 시즌 순위에 따라 승급·강등.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">점수 산정 핵심 규칙</h4>
+    <p><strong>상대 연맹 처치</strong>: 일반 킬 대비 <strong>×5배 포인트</strong> — Enemy Buster일 최우선 타겟.<br>
+    <strong>연구 보너스</strong>: Alliance Duel 연구 트리로 포인트 최대 <strong>+150% 증폭</strong>.<br>
+    <strong>자원 저축 전략</strong>: 레이더 보상·건설 완료·훈련 완료를 해당 테마일에 맞춰 "해제"하는 배치 최적화.<br>
+    <strong>최소 점수 조건</strong>: 시즌 내 6,000,000점 이상 달성해야 시즌 보상 수령.</p>
+  </div>
+</div>
+
+<div class="cwrap">
+  <div class="clbl">Alliance Duel 6일 일별 과금 소비 강도 — Day6 Enemy Buster가 최고점</div>
+  <canvas id="c-alliwar" style="max-height:180px"></canvas>
+</div>
+
+<table class="dt">
+  <thead><tr><th>Day</th><th>테마</th><th>주요 점수 행동</th><th>사전 준비</th><th>과금 강도</th><th>Arms Race 중복</th></tr></thead>
+  <tbody>
+    <tr><td style="color:var(--blue)">Day 1 (월)</td><td>Radar·드론</td><td>레이더 보상 수령 · 스태미나 소비 · 드론 파츠</td><td>일요일부터 레이더 적립</td><td style="color:var(--amber)">★★★★</td><td>드론 업그레이드</td></tr>
+    <tr><td>Day 2 (화)</td><td>건설</td><td>건설 완료 해제 · 스피드업 사용 · 트럭 미션(전설)</td><td>Day1 말 장시간 건설 시작</td><td style="color:var(--amber)">★★★★</td><td>건설 관련</td></tr>
+    <tr><td>Day 3 (수)</td><td>연구</td><td>연구 완료 해제 · Valor 배지 사용 · 드론 부품 상자</td><td>Day2 말 장시간 연구 시작</td><td style="color:var(--amber)">★★★★</td><td>연구 관련</td></tr>
+    <tr><td>Day 4 (목)</td><td>영웅 성장</td><td>EXP 소비 · 조각 사용 · 스킬 메달 투자</td><td>EXP·조각 주간 저축</td><td style="color:var(--amber)">★★★★</td><td>영웅 관련</td></tr>
+    <tr><td>Day 5 (금)</td><td>훈련·복합</td><td>병사 훈련 완료 해제 · 건설·연구 중복 가능</td><td>Day4 말 병사 훈련 시작</td><td style="color:var(--red)">★★★★★</td><td>훈련 관련</td></tr>
+    <tr><td style="color:var(--red)">Day 6 (토)</td><td>Enemy Buster</td><td>상대 연맹 병사 처치(×5점) · 즉시 치료 · 집결 공격</td><td>방어 체계 구축 · 치료 팩 비축</td><td style="color:var(--red)">★★★★★</td><td>PvP 전투</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">③ 연맹 버프 시스템 — 기술 연구·도움·상점</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(37,99,235,.3)">
+    <h4 style="color:var(--blue)">연맹 기술 연구 버프</h4>
+    <p>기여도(Contribution)를 사용해 연맹 기술 트리 연구. 전 멤버에게 적용되는 패시브 버프 생성.<br><br>
+    주요 버프 카테고리:<br>
+    · <strong>건설 속도</strong>: 모든 멤버 건물 업그레이드 시간 단축<br>
+    · <strong>연구 속도</strong>: 과학기술센터 연구 시간 단축<br>
+    · <strong>Unit Load</strong>: 약탈 Charge +10%<br>
+    · <strong>전투 스탯</strong>: ATK·DEF·HP 전 멤버 +%<br>
+    · <strong>자원 생산</strong>: 식량·철강·골드 생산 +%</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(37,99,235,.3)">
+    <h4 style="color:var(--blue)">연맹 도움(Help) 시스템 — 건설 시간 단축</h4>
+    <p>멤버가 건물 업그레이드 중 도움 요청 → 다른 멤버가 "도움" 버튼 클릭 → <strong>건설 시간 감소</strong>.<br><br>
+    <strong>도움 1회당</strong>: 연맹 레벨·멤버 수에 따라 30초~5분 감소.<br>
+    <strong>최대 도움 횟수</strong>: 건물 레벨·VIP 레벨에 따라 다름.<br>
+    <strong>설계 의도</strong>: 도움 요청 행위가 <strong>로그인 트리거</strong>가 됨 — 알림→앱 실행→도움→기여도 획득→상점 구매 사이클.</p>
+  </div>
+</div>
+
+<table class="dt">
+  <thead><tr><th>연맹 상점 아이템</th><th>가격(기여도)</th><th>주요 용도</th><th>설계 역할</th><th>과금 대체 효과</th></tr></thead>
+  <tbody>
+    <tr><td>8h 방어막(Shield)</td><td>300~500</td><td>PvP 기간 기지 보호</td><td>무과금 방어막 공급</td><td>다이아 방어막 대체</td></tr>
+    <tr><td>자원 팩 (소형)</td><td>200~400</td><td>식량·철강·골드 보충</td><td>자원 부족 임시 해소</td><td>자원 팩 부분 대체</td></tr>
+    <tr><td>스피드업 (소형)</td><td>100~300</td><td>건설·연구 시간 단축</td><td>진행 가속</td><td>다이아 스피드업 대체</td></tr>
+    <tr><td style="color:var(--amber)">영웅 조각 (SSR)</td><td>1,000~3,000</td><td>SSR 영웅 성급 진급</td><td>장기 저축 목표</td><td>가챠 소환 부분 대체</td></tr>
+    <tr><td style="color:var(--amber)">이민 티켓</td><td>2,000~5,000</td><td>Transfer Surge 사용</td><td>서버 이동 수단</td><td>고가 아이템 — 기여도 적립 필요</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">④ 집결 공격(Rally) — 메커니즘 및 과금 연결</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">집결 공격 메커니즘</h4>
+    <p><strong>집결 소집 권한</strong>: R4 이상만 가능.<br>
+    <strong>참가 인원</strong>: 최대 5명 동시 집결.<br>
+    <strong>집결 포인트</strong>: 참가자 전투력 합산 → 최대 행군 규모 결정.<br>
+    <strong>집결 도착 타이밍</strong>: 모든 참가자가 동시 도착해야 함 — 지연 시 단독 공격 처리.<br>
+    <strong>R5 집결 버프</strong>: R5가 집결 리더 시 피해 +5%.<br>
+    <strong>집결 지점 건물 레벨</strong>: 레벨이 높을수록 집결 행군 시간 단축.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">집결의 과금 유발 구조</h4>
+    <p><strong>알림 → 즉각 반응 압박</strong>: "30분 후 집결 출발" 알림 → 준비 안 된 멤버 과금 동기.<br>
+    <strong>사회적 압박</strong>: 집결 불참 = 팀 배신 → 수치 회피 → 강화 팩 구매.<br>
+    <strong>치료 연쇄</strong>: 집결 후 병사 손실 → 즉시 치료 팩 → 다음 집결 준비.<br>
+    <strong>집결 강화 팩</strong>: 집결 전투력 임시 증폭 아이템 — 집결 시작 직전 팝업 노출.</p>
+  </div>
+</div>
+
+<table class="dt">
+  <thead><tr><th>집결 타겟</th><th>목적</th><th>권장 참가 조건</th><th>과금 소비 수준</th><th>성공 조건</th></tr></thead>
+  <tbody>
+    <tr><td>좀비 보스 (PvE)</td><td>이벤트 포인트·자원 획득</td><td>전투력 500만+</td><td style="color:var(--green)">낮음</td><td>보스 체력 0 이하</td></tr>
+    <tr><td>타 플레이어 기지 (PvP)</td><td>자원 약탈·병사 처치</td><td>전투력 상대 대비 120%+</td><td style="color:var(--amber)">중간</td><td>방어 병사 전멸 또는 항복</td></tr>
+    <tr><td>자원지 점령</td><td>자원 독점 채취</td><td>전투력 500만+</td><td style="color:var(--amber)">중간</td><td>자원지 방어 병사 처치</td></tr>
+    <tr><td style="color:var(--red)">Capitol/강점 공략</td><td>서버 패권 확보</td><td>서버 상위 30% 이상</td><td style="color:var(--red)">최고</td><td>건물 점령 진행도 100%</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">⑤ 연맹 병합·해체 — 자산 이전 규칙</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(124,58,237,.3)">
+    <h4 style="color:var(--purple)">연맹 병합 시 자산 처리</h4>
+    <p><strong>병합 협상</strong>: R5 간 합의 → 한쪽 R5가 리더십 이전 또는 해체 후 재가입.<br>
+    <strong>이전되는 자산</strong>: 전체 멤버(수동 재가입 필요) · 영토·건물은 <strong>이전 불가</strong> → 새 위치 재건설.<br>
+    <strong>연맹 기술</strong>: 기술 연구 진행 상황 <strong>이전 불가</strong> — 흡수 측 기술 레벨 유지.<br>
+    <strong>기여도 포인트</strong>: 멤버 개인 기여도는 유지. 연맹 상점 잔여 아이템은 소멸.<br>
+    <strong>리더십 결정</strong>: 병합 후 R5·R4 직위 재배분 협상 필요 — 분쟁 가장 많은 부분.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(124,58,237,.3)">
+    <h4 style="color:var(--purple)">연맹 해체 시 자산 처리</h4>
+    <p><strong>해체 권한</strong>: R5만 가능 (R4 불가).<br>
+    <strong>해체 즉시</strong>: 모든 멤버 연맹 없음 상태 → 개인 기지 무방비 노출.<br>
+    <strong>기여도 잔여분</strong>: <strong>전액 소멸</strong> — 상점 교환 미사용분 손실.<br>
+    <strong>연맹 건물·영토</strong>: 즉시 중립화 → 타 연맹 점령 가능.<br>
+    <strong>이전된 것</strong>: 없음. 멤버 개인 자산(기지·병사·영웅·자원)만 유지.<br>
+    <strong>설계 의도</strong>: 해체 비용이 크기 때문에 "그냥 나가기"보다 불만족 상태로 잔류 유도.</p>
+  </div>
+</div>
+
+<table class="dt">
+  <thead><tr><th>자산 항목</th><th>병합 시 이전 여부</th><th>해체 시 결과</th><th>비고</th></tr></thead>
+  <tbody>
+    <tr><td>멤버 목록</td><td style="color:var(--amber)">수동 재가입 필요</td><td style="color:var(--red)">전원 이탈</td><td>재가입 거절 위험</td></tr>
+    <tr><td>연맹 기술 진행</td><td style="color:var(--red)">이전 불가</td><td style="color:var(--red)">소멸</td><td>가장 큰 손실</td></tr>
+    <tr><td>연맹 영토·건물</td><td style="color:var(--red)">이전 불가</td><td style="color:var(--red)">즉시 중립화</td><td>재점령 필요</td></tr>
+    <tr><td>개인 기여도</td><td style="color:var(--green)">개인 보유 유지</td><td style="color:var(--red)">소멸</td><td>상점 교환 전 필수 소진</td></tr>
+    <tr><td>연맹 상점 잔여</td><td style="color:var(--red)">이전 불가</td><td style="color:var(--red)">소멸</td><td>병합 전 최대 구매 전략</td></tr>
+    <tr><td>개인 자산(기지·영웅)</td><td style="color:var(--green)">보존</td><td style="color:var(--green)">보존</td><td>항상 개인 소유</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">⑥ 연맹 상호작용의 리텐션 심리 구조 — 6개 채널 분석</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px" id="ret-tabs"></div>
+<div id="ret-detail" style="padding:12px;background:var(--sur);border-radius:8px;margin-bottom:12px;font-size:12px;color:var(--muted);line-height:1.8;min-height:80px">채널을 선택하면 심리 메커니즘 상세 분석이 표시됩니다.</div>
+<div class="cwrap" style="padding:14px">
+  <div class="clbl">소셜 채널별 과금 강도 vs 리텐션 기여도</div>
+  <canvas id="c-ret" style="max-height:200px"></canvas>
+</div>
+
+<table class="dt">
+  <thead><tr><th>소셜 채널</th><th>심리 레버</th><th>발동 조건</th><th>로그인 트리거</th><th>과금 강도</th></tr></thead>
+  <tbody>
+    <tr><td><strong>집결 소집 알림</strong></td><td>책임감 + 수치 회피</td><td>R4 이상 집결 소집 → 전체 알림</td><td style="color:var(--red)">즉각적 (30분 카운트다운)</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>도움 요청 알림</strong></td><td>완료 욕구 + 상호 의무</td><td>멤버 건설 완료 직전</td><td>수시 (1~2시간 간격)</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>Alliance Duel 일일 마감</strong></td><td>FOMO + 손실 회피</td><td>서버 리셋 2시간 전</td><td style="color:var(--amber)">일별 (리셋 전)</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td><strong>연맹 기술 기여 부족</strong></td><td>죄책감 + 소속감 위협</td><td>주간 기여도 하위 랭크</td><td>주간 (기여 마감 전)</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>직위 승급 조건 달성 임박</strong></td><td>지위 욕구 + 성취감</td><td>R3→R4 승급 기준 90% 달성</td><td>집중 로그인 구간</td><td style="color:var(--amber)">★★★★</td></tr>
+    <tr><td><strong>연맹 상점 포인트 만료</strong></td><td>손실 회피 + 완료 욕구</td><td>기여도 리셋 직전</td><td>주간 (리셋 전날)</td><td>★★★</td></tr>
   </tbody>
 </table>
 </section>
 
-<!-- ══════ S8: 시즌제 ══════ -->
 <section class="stage-sec" id="s8">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#f3f0ff;color:#5b21b6;border:1px solid #ddd6fe">8단계</span>
@@ -1279,6 +1471,7 @@ function initStage(id){
   if(id==='s4'){initS4(); setTimeout(calcCP,100);}
   if(id==='s5')initS5();
   if(id==='s6')initS6();
+  if(id==='s7')initS7();
   if(id==='s8')initS8();
   if(id==='s9')initS9();
   if(id==='s10')initS10();
@@ -2132,6 +2325,100 @@ function initS6(){
     migrTabs.appendChild(btn);
   });
   migrTabs.firstChild.onclick();
+}
+
+/* S7 */
+function initS7(){
+  /* ── R1~R5 직위 권한 레이더 ── */
+  new Chart(document.getElementById('c-rank'),{type:'bar',
+    data:{labels:['R5 연맹장','R4 간부','R3 핵심','R2 정규','R1 신규'],
+      datasets:[
+        {label:'권한 범위',data:[10,8,4,2,1],backgroundColor:['rgba(220,38,38,.75)','rgba(217,119,6,.75)','rgba(37,99,235,.6)','rgba(107,114,128,.5)','rgba(107,114,128,.4)'],borderRadius:4,barPercentage:.45},
+        {label:'과금 압박',data:[10,10,7,4,3],backgroundColor:['rgba(220,38,38,.25)','rgba(220,38,38,.2)','rgba(217,119,6,.2)','rgba(37,99,235,.15)','rgba(107,114,128,.15)'],borderRadius:4,barPercentage:.45},
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:8,font:{size:10}}}},
+      scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},y:{...ax('점수'),max:12}}}
+  });
+
+  /* ── Alliance Duel 6일 과금 강도 ── */
+  new Chart(document.getElementById('c-alliwar'),{type:'bar',
+    data:{labels:['Day1\nRadar','Day2\n건설','Day3\n연구','Day4\n영웅','Day5\n훈련','Day6\nEnemy Buster'],
+      datasets:[{label:'과금 소비 강도',data:[4,4,4,4,5,10],
+        backgroundColor:['rgba(37,99,235,.6)','rgba(37,99,235,.6)','rgba(124,58,237,.6)','rgba(217,119,6,.6)','rgba(217,119,6,.7)','rgba(220,38,38,.85)'],
+        borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{x:{grid:{display:false},ticks:{color:'#5a6275',font:{size:9}}},
+        y:{...ax(),max:12,ticks:{color:'#5a6275',callback:v=>v===10?'최고':v===0?'':v}}}}
+  });
+
+  /* ── 리텐션 채널 탐색기 ── */
+  const RET=[
+    {label:'집결 소집',color:'#dc2626',
+     psych:'책임감 + 수치 회피',
+     trigger:'R4가 집결 소집 → 전체 알림 발송. 30분 카운트다운 표시.',
+     mechanism:'"지금 안 들어가면 동맹이 진다" — 집단 실패 귀책이 개인에게 전가됨. 수치 회피가 불편함보다 강한 동기.',
+     pay:'집결 참가 전 즉시 강화 팩·치료 팩 구매. 집결 후 병사 손실 → 즉시 치료 팩.',
+     retention:9, charge:10},
+    {label:'도움 알림',color:'#2563eb',
+     psych:'완료 욕구 + 상호 의무',
+     trigger:'멤버 건설 잔여 시간 단축 알림 → 수시 (하루 10~20회 이상).',
+     mechanism:'"나도 받아야 하니까 줘야 한다" 상호 의무감. 앱 실행 빈도를 극도로 높이는 단기 로그인 트리거.',
+     pay:'직접 과금은 낮지만 로그인 빈도 증가 → 다른 과금 기회 노출.',
+     retention:8, charge:6},
+    {label:'Duel 마감',color:'#7c3aed',
+     psych:'FOMO + 손실 회피',
+     trigger:'서버 리셋 2시간 전 — 오늘 포인트 목표 미달 상태.',
+     mechanism:'"오늘 안 하면 이번 주 순위가 내려간다" — 주간 보상 손실에 대한 FOMO. 매일 발동.',
+     pay:'스피드업·자원 팩 집중 소비. Valor 배지 부족 시 직구매.',
+     retention:9, charge:9},
+    {label:'기여도 압박',color:'#d97706',
+     psych:'죄책감 + 소속감 위협',
+     trigger:'주간 기여도 랭킹 하위 → R4가 직접 연락하거나 공개 순위 노출.',
+     mechanism:'"기여 안 하면 강등된다" — 직위 상실 위협이 죄책감을 자원 기여(과금)로 전환.',
+     pay:'기여도 획득을 위한 골드·자원 소비. 연맹 기술 연구 자원 투자.',
+     retention:7, charge:7},
+    {label:'직위 승급',color:'#059669',
+     psych:'지위 욕구 + 성취감',
+     trigger:'R3→R4 승급 조건 90% 달성 시 — 인지된 "거의 다 됨" 심리.',
+     mechanism:'"조금만 더 하면 R4가 된다" — 완료 근접성 효과. R4 달성 시 과금 전환율 2~3배 증가.',
+     pay:'승급 조건 달성을 위한 집중 투자. R4 이후 집결 소집 참여 → 과금 본격화.',
+     retention:8, charge:8},
+    {label:'포인트 만료',color:'#5a6275',
+     psych:'손실 회피 + 완료 욕구',
+     trigger:'주간 기여도 리셋 직전 — 미사용 포인트 소멸 예고.',
+     mechanism:'"지금 안 쓰면 사라진다" — 손실 회피 본능. 상점 이동 → 다른 구매 기회 노출 부수 효과.',
+     pay:'상점에서 영웅 조각·이민 티켓 구매. 연맹 상점 방문 자체가 다른 소비 유발.',
+     retention:5, charge:5},
+  ];
+  const retTabs=document.getElementById('ret-tabs');
+  let retChart=null;
+  RET.forEach((r,i)=>{
+    const btn=document.createElement('div');btn.className='ibtn';btn.textContent=r.label;
+    btn.onclick=()=>{
+      document.querySelectorAll('#ret-tabs .ibtn').forEach((b,j)=>{
+        b.style.background=j===i?r.color+'22':'';b.style.color=j===i?r.color:'';b.style.borderColor=j===i?r.color:'';
+      });
+      document.getElementById('ret-detail').innerHTML=`
+        <div style="font-size:13px;font-weight:500;color:${r.color};margin-bottom:6px">${r.label} — 심리 레버: ${r.psych}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px">
+          <div><div style="font-size:10px;color:var(--blue);font-weight:500;margin-bottom:2px">발동 조건</div><div style="font-size:11px;color:var(--muted)">${r.trigger}</div></div>
+          <div><div style="font-size:10px;color:var(--purple);font-weight:500;margin-bottom:2px">심리 메커니즘</div><div style="font-size:11px;color:var(--muted)">${r.mechanism}</div></div>
+        </div>
+        <div><div style="font-size:10px;color:var(--red);font-weight:500;margin-bottom:2px">과금 유발 경로</div><div style="font-size:11px;color:var(--muted)">${r.pay}</div></div>`;
+      if(retChart)retChart.destroy();
+      retChart=new Chart(document.getElementById('c-ret'),{type:'bar',
+        data:{labels:RET.map(x=>x.label),
+          datasets:[
+            {label:'과금 강도',data:RET.map(x=>x.charge),backgroundColor:RET.map((_,j)=>j===i?'rgba(220,38,38,.85)':'rgba(220,38,38,.2)'),borderRadius:4,barPercentage:.35,categoryPercentage:.9},
+            {label:'리텐션 기여',data:RET.map(x=>x.retention),backgroundColor:RET.map((_,j)=>j===i?'rgba(37,99,235,.75)':'rgba(37,99,235,.15)'),borderRadius:4,barPercentage:.35,categoryPercentage:.9},
+          ]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:8,font:{size:10}}}},
+          scales:{x:{grid:{display:false},ticks:{color:'#5a6275',font:{size:9}}},y:{...ax('강도'),max:12}}}
+      });
+    };
+    retTabs.appendChild(btn);
+  });
+  retTabs.firstChild.onclick();
 }
 
 /* S8 */
