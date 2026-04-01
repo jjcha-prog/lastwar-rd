@@ -174,10 +174,10 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </div>
 </section>
 
-<!-- ══════ S2: 기지 건설 ══════ -->
-<section class="stage-sec" id="s2">
+<!-- ══════ S3: 기지 건설 ══════ -->
+<section class="stage-sec" id="s3">
 <div class="stage-hdr">
-  <span class="sbadge" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0">2단계</span>
+  <span class="sbadge" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0">3단계</span>
   <div class="stitle">
     <h2>핵심 인프라 — 기지 건설 및 테크트리</h2>
     <p>전체 건물 카테고리 분류 · HQ 해금 DAG · 자원 생산 효율 · 건설 큐 과금 연동 · 누락 건물 완전 수록</p>
@@ -261,6 +261,59 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
   </tbody>
 </table>
 
+<div class="sdiv">건물별 레벨업 단계 — 핵심 건물 레벨 마일스톤 상세</div>
+<div class="insight"><strong>레벨업 설계 원리:</strong> 건물 레벨은 선형으로 높아지지 않는다. <strong>Lv.5·10·15·20·25·30이 핵심 마일스톤</strong>이며 이 지점에서 기능 해금·효율 급등·다음 건물 선행 조건이 동시에 발동한다. 레벨 5 단위마다 한 번씩 "다음 레벨이면 더 좋아진다"는 피크가 반복되는 과금 유도 구조다.</div>
+
+<table class="dt">
+  <thead><tr><th>건물</th><th>레벨 구간</th><th>주요 해금 / 효과</th><th>핵심 마일스톤</th><th>비고</th></tr></thead>
+  <tbody>
+    <!-- 본부 -->
+    <tr style="background:rgba(220,38,38,.04)"><td colspan="5" style="font-weight:600;color:var(--red);padding:7px 13px">── 본부(HQ) — 모든 건물 레벨 상한을 결정하는 루트 노드</td></tr>
+    <tr><td rowspan="6"><strong>본부</strong><br><small>Headquarters</small></td><td>Lv.1~5</td><td>기본 건물 해금 · 영웅 레벨 캡 5~25 · 초반 미션 언락</td><td style="color:var(--green)">Lv.5: 태번·성벽·금광 해금</td><td>튜토리얼 완료 구간</td></tr>
+    <tr><td>Lv.6~10</td><td>유전·감시탑·정찰기 해금 · 영웅 캡 30~50</td><td style="color:var(--green)">Lv.8: 연맹센터·훈련기지 해금</td><td>사회 기능 진입</td></tr>
+    <tr><td>Lv.11~15</td><td>응급센터 해금 · 탱크/미사일/항공 센터 해금 · 병사 티어 확장</td><td style="color:var(--amber)">Lv.14: 특수훈련소(T4 경로) 선행</td><td>T4 진입 준비</td></tr>
+    <tr><td>Lv.16~20</td><td>T4 병사 해금(Lv.20) · 영웅 캡 80~100 · 고급 연구 해금</td><td style="color:var(--red)">Lv.20: T4 병사 해금 — 최대 파워 스파이크</td><td>과금 최고점 구간</td></tr>
+    <tr><td>Lv.21~25</td><td>T5~T6 병사 단계 · 영웅 캡 105~125 · 고급 생산 건물 해금</td><td style="color:var(--amber)">Lv.25: 2번째 과기센터 선행</td><td>Dolphin~Whale 구간</td></tr>
+    <tr><td>Lv.26~30 (최대)</td><td>T7~T10 경로 개방 · 3번째 과기센터 해금 · 영웅 캡 130~150</td><td style="color:var(--red)">Lv.30: 3번째 과기센터·T10 병사 해금</td><td>MegaWhale 구간</td></tr>
+    <!-- 병영 -->
+    <tr style="background:rgba(220,38,38,.04)"><td colspan="5" style="font-weight:600;color:var(--red);padding:7px 13px">── 병영(Barracks) — 훈련 속도·티어·슬롯 수를 결정하는 핵심 군사 건물</td></tr>
+    <tr><td rowspan="5"><strong>병영</strong><br><small>Barracks</small></td><td>Lv.1~4</td><td>T1 보병 훈련 가능 · 훈련 큐 슬롯 1개 · 기초 훈련 속도</td><td>Lv.1: T1 해금</td><td>초보자 구간</td></tr>
+    <tr><td>Lv.5~7</td><td>훈련 속도 증가 · T2 보병 해금(Lv.5) · 배치 가능 병사 수 증가</td><td style="color:var(--green)">Lv.5: T2 보병 해금</td><td>식량 소비 본격화</td></tr>
+    <tr><td>Lv.8~11</td><td>차고(기갑) 건설 선행 조건 충족(Lv.8) · T3 보병 해금(Lv.10) · 훈련 큐 2개</td><td style="color:var(--amber)">Lv.8: 차고 건설 가능<br>Lv.10: T3 보병 해금</td><td>병종 다각화 시작</td></tr>
+    <tr><td>Lv.12~14</td><td>훈련소(T4 경로) 선행 조건 충족(Lv.12) · 훈련 속도 대폭 증가</td><td style="color:var(--red)">Lv.12: 훈련소 건설 가능 — T4 경로 개방</td><td>과금 전환점</td></tr>
+    <tr><td>Lv.15~30</td><td>T4 훈련 속도 향상 · 훈련 큐 슬롯 확장 · 병사 배치 한도 증가</td><td style="color:var(--red)">Lv.20+: T5~T8 훈련 속도 최적화</td><td>Whale 집중 투자</td></tr>
+    <!-- 과학기술센터 -->
+    <tr style="background:rgba(37,99,235,.04)"><td colspan="5" style="font-weight:600;color:var(--blue);padding:7px 13px">── 과학기술센터(Tech Center) — 연구 큐·속도·가용 트리 수를 결정</td></tr>
+    <tr><td rowspan="4"><strong>과학기술센터</strong><br><small>Tech Center</small></td><td>Lv.1~9</td><td>기초 연구 트리(건설·훈련·경제) 접근 · 연구 큐 1개 · 기초 버프</td><td>Lv.7: 본부 선행 조건 충족 후 건설</td><td>F2P 기본 구간</td></tr>
+    <tr><td>Lv.10~19</td><td>중급 연구 트리(전투·Alliance Duel) 접근 · Valor 배지 사용 가능 구간 진입</td><td style="color:var(--amber)">Lv.15: Special Forces 트리 접근</td><td>Dolphin 투자 구간</td></tr>
+    <tr><td>Lv.20~29</td><td>고급 연구 트리(T8~T10 병사) 접근 · 연구 속도 대폭 증가</td><td style="color:var(--red)">Lv.25+: T10 병사 관련 연구 해금</td><td>Whale 구간</td></tr>
+    <tr><td>Lv.30 (최대)</td><td>모든 연구 트리 최대 해금 · 연구 속도 최고 · HQ 선행 조건 완성</td><td style="color:var(--red)">Lv.30: 3번째 과기센터 활성화</td><td>MegaWhale</td></tr>
+    <!-- 병원 -->
+    <tr style="background:rgba(220,38,38,.04)"><td colspan="5" style="font-weight:600;color:var(--red);padding:7px 13px">── 병원(Hospital) — 수용 한도가 즉시 치료 팩 과금 트리거를 결정</td></tr>
+    <tr><td rowspan="4"><strong>병원</strong><br><small>Hospital</small></td><td>Lv.1~9</td><td>부상 병사 수용 ~3,000명 수준 · 기초 치료 속도 · T1~T2 치료 가능</td><td>Lv.6: 응급센터 선행 해금 기반</td><td>초반 손실 최소화</td></tr>
+    <tr><td>Lv.10~14</td><td>수용 ~10,000명 · T3~T4 병사 치료 가능 · 치료 속도 중간</td><td style="color:var(--amber)">Lv.10: 수용 한도 배증 — PvP 생존 임계</td><td>Alliance War 진입</td></tr>
+    <tr><td>Lv.15~19</td><td>수용 ~30,000명 · 치료 속도 증가 · 대규모 PvP 대응 가능</td><td style="color:var(--amber)">Lv.15: Capitol War 참전 준비선</td><td>집결 공격 대응</td></tr>
+    <tr><td>Lv.20~30</td><td>수용 50,000명+ · T8~T10 치료 · VIP 버프 시 치료 속도 최고</td><td style="color:var(--red)">한도 초과 병사 → 영구 소멸 → 즉시 과금 트리거</td><td>Whale 필수 투자</td></tr>
+    <!-- 차고 -->
+    <tr style="background:rgba(220,38,38,.04)"><td colspan="5" style="font-weight:600;color:var(--red);padding:7px 13px">── 차고(Garage) — 기갑 티어·속도·이중 잠금으로 중반 병목 설계</td></tr>
+    <tr><td rowspan="4"><strong>차고</strong><br><small>Garage</small></td><td>Lv.1~7</td><td>T1~T2 기갑 훈련 · 훈련 속도 기초 · 병영 Lv.8 이후 건설 가능</td><td>Lv.1: T2 기갑 해금</td><td>기갑 병종 시작</td></tr>
+    <tr><td>Lv.8~11</td><td>격납고(항공) 건설 선행 조건 충족 · T3 기갑 해금 · 훈련 큐 확장</td><td style="color:var(--amber)">Lv.8: 격납고(항공) 건설 가능</td><td>3병종 완성 시작</td></tr>
+    <tr><td>Lv.12~19</td><td>훈련소 선행 조건 충족 · T4 기갑 훈련 가능(훈련소 완성 후)</td><td style="color:var(--red)">Lv.12: 훈련소 건설 가능 — T4 경로 개방</td><td>과금 폭발 구간</td></tr>
+    <tr><td>Lv.20~30</td><td>T5~T8 기갑 훈련 가속 · 최대 훈련 배치 수 증가</td><td>Lv.20+: 고티어 기갑 훈련 극대화</td><td>Whale 투자</td></tr>
+    <!-- 생산 건물 -->
+    <tr style="background:rgba(5,150,105,.04)"><td colspan="5" style="font-weight:600;color:var(--green);padding:7px 13px">── 자원 생산 건물(농장·광산·유전·금광) — 레벨당 복리 증가, Sink&gt;Faucet 불균형 설계</td></tr>
+    <tr><td rowspan="4"><strong>농장/광산/유전/금광</strong><br><small>생산 건물 공통</small></td><td>Lv.1~9</td><td>기초 생산량 · 증가율 약 +18~20%/레벨 · 수집 쿨 15분</td><td>Lv.5: 두 번째 슬롯 연구 가능</td><td>초반 자급 가능 구간</td></tr>
+    <tr><td>Lv.10~14</td><td>생산량 배증 구간 · HQ 레벨 연동 상한 · VIP 생산 버프 적용</td><td style="color:var(--amber)">Lv.10: 생산량 Lv.1 대비 약 5배</td><td>T3 훈련 자급 한계</td></tr>
+    <tr><td>Lv.15~24</td><td>고급 생산 단계 · 생산량 Lv.1 대비 20~50배 · Alliance 기술 버프 합산</td><td style="color:var(--amber)">Lv.20: 생산량 Lv.1 대비 약 30배</td><td>T4 소비 &gt; 생산 불균형 심화</td></tr>
+    <tr><td>Lv.25~35<br>(오프시즌 해금)</td><td>최고 생산량 · S2 오프시즌 이후 Lv.31~35 해금 · 석유 생산 최고</td><td style="color:var(--red)">Lv.35: 식량 최대 ~200K/h, 그러나 T8 훈련 시 소비 &gt;&gt; 생산</td><td>자원 팩 과금 구조 고착</td></tr>
+    <!-- 창고 -->
+    <tr style="background:rgba(107,114,128,.04)"><td colspan="5" style="font-weight:600;color:var(--muted);padding:7px 13px">── 창고(식량·철강·금고) — 보호 한도가 약탈 시스템과 직결</td></tr>
+    <tr><td rowspan="3"><strong>창고 3종</strong><br><small>Food/Iron Warehouse<br>Coin Vault</small></td><td>Lv.1~9</td><td>식량 보호 ~50K · 철강 ~40K · 골드 ~20K · 초과분 100% 약탈 가능</td><td>Lv.5: 첫 번째 의미 있는 보호 한도</td><td>초반 약탈 피해 경감</td></tr>
+    <tr><td>Lv.10~19</td><td>보호 한도 300~800K 수준 · T3 1회 훈련 비용 일부 보호</td><td style="color:var(--amber)">Lv.15: 중간 플레이어 실질 보호 구간</td><td>창고 수준이 과금 방어선</td></tr>
+    <tr><td>Lv.20~30</td><td>보호 한도 2~15M · T4 훈련 1회 비용 일부 보호 · 그래도 초과분 발생</td><td style="color:var(--red)">Lv.30: 최대 보호. 그러나 고레벨에서는 훈련 1회 비용이 한도 초과</td><td>자원 팩 구매 구조적 필요</td></tr>
+  </tbody>
+</table>
+
 <div class="sdiv">자원 생산 vs T4 소비 불균형</div>
 <div class="cwrap"><div class="clbl">HQ25 기준 시간당 생산량(초록) vs T4 훈련 소비량(빨강) — 의도적 적자 구조</div><canvas id="c-resource" style="max-height:200px"></canvas></div>
 
@@ -289,9 +342,9 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
   </tbody>
 </table>
 </section>
-<section class="stage-sec" id="s3">
+<section class="stage-sec" id="s4">
 <div class="stage-hdr">
-  <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">3단계</span>
+  <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">4단계</span>
   <div class="stitle">
     <h2>전투 시스템 — 러닝 엔진 · 4X 자동 전투 · 병종 상성 완전 분석</h2>
     <p>러닝 액션 전투 엔진 파라미터 수치화 · 4X 자동 전투 엔진 역공학 · 병종 상성 시스템 · 실전 조합 전략</p>
@@ -453,9 +506,9 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </div>
 </section>
 
-<section class="stage-sec" id="s4">
+<section class="stage-sec" id="s5">
 <div class="stage-hdr">
-  <span class="sbadge" style="background:#fffbeb;color:#92400e;border:1px solid #fde68a">4단계</span>
+  <span class="sbadge" style="background:#fffbeb;color:#92400e;border:1px solid #fde68a">5단계</span>
   <div class="stitle">
     <h2>영웅 성장 체계 — 레벨·성급·스킬·전용 장비 완전 분석</h2>
     <p>조각 기반 성급 진급 메커니즘 · 레벨업 경험치 요구량 구조 · 전용 장비 시스템 · CP 기여 4축 · 전체 영웅 목록</p>
@@ -616,9 +669,9 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </table>
 </section>
 
-<section class="stage-sec" id="s5">
+<section class="stage-sec" id="s6">
 <div class="stage-hdr">
-  <span class="sbadge" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0">5단계</span>
+  <span class="sbadge" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0">6단계</span>
   <div class="stitle">
     <h2>경제 시스템 — 자원 순환 · 보호막 · 약탈 · 서버 인플레이션</h2>
     <p>Sink &amp; Faucet 구조 · 자원 보호막(금고 보호 한도) · 약탈 Charge 시스템 · 서버 나이별 인플레이션 가속</p>
@@ -766,9 +819,9 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 <div class="cwrap"><div class="clbl">HQ 레벨 상승에 따른 식량 생산(초록) vs 소비(빨강) — T3→T4 전환 구간이 핵심 병목</div><canvas id="c-inflation" style="max-height:200px"></canvas></div>
 </section>
 
-<section class="stage-sec" id="s6">
+<section class="stage-sec" id="s7">
 <div class="stage-hdr">
-  <span class="sbadge" style="background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe">6단계</span>
+  <span class="sbadge" style="background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe">7단계</span>
   <div class="stitle">
     <h2>월드맵 · 자원 점령 · 수도 쟁탈전 · 서버간 전쟁 · 이민 시스템</h2>
     <p>타일 구조 상세 · 자원지 점령 메커니즘 · Capitol War · Warzone Duel · Transfer Surge 이민 시스템</p>
@@ -943,9 +996,9 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </table>
 </section>
 
-<section class="stage-sec" id="s7">
+<section class="stage-sec" id="s8">
 <div class="stage-hdr">
-  <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">7단계</span>
+  <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">8단계</span>
   <div class="stitle">
     <h2>연맹 시스템 — 구조 · 전쟁 · 버프 · 병합 · 리텐션 심리</h2>
     <p>R1~R5 직위 계층 · 연맹 전쟁 점수 산정 · 연맹 버프·도움·상점 · 집결 공격 · 병합·해체 규칙 · 리텐션 심리</p>
@@ -1165,9 +1218,9 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </table>
 </section>
 
-<section class="stage-sec" id="s8">
+<section class="stage-sec" id="s9">
 <div class="stage-hdr">
-  <span class="sbadge" style="background:#f3f0ff;color:#5b21b6;border:1px solid #ddd6fe">8단계</span>
+  <span class="sbadge" style="background:#f3f0ff;color:#5b21b6;border:1px solid #ddd6fe">9단계</span>
   <div class="stitle">
     <h2>시즌제 · 이월 규칙 · VS 구조 · 시즌 패스 · 영웅 도입 주기</h2>
     <p>시즌간 자산 이월·리셋 분류 · VS Duel+Arms Race 주간 구조 · 시즌 패스 설계 · 신규 영웅 도입 패턴</p>
@@ -1344,9 +1397,9 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </table>
 </section>
 
-<section class="stage-sec" id="s9">
+<section class="stage-sec" id="s10">
 <div class="stage-hdr">
-  <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">9단계</span>
+  <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">10단계</span>
   <div class="stitle">
     <h2>BM(비즈니스 모델) — 가챠·천장·VIP·과금 상품 완전 분석</h2>
     <p>가챠 확률 공시 · 소프트·하드 천장(Pity) · 과금 상품 전체 분류 · 첫 과금 전환 설계 · VIP 시스템 · 팝업 트리거</p>
@@ -1507,9 +1560,9 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </table>
 </section>
 
-<section class="stage-sec" id="s10">
+<section class="stage-sec" id="s2">
 <div class="stage-hdr">
-  <span class="sbadge" style="background:#f3f0ff;color:#5b21b6;border:1px solid #ddd6fe">10단계</span>
+  <span class="sbadge" style="background:#f3f0ff;color:#5b21b6;border:1px solid #ddd6fe">2단계</span>
   <div class="stitle">
     <h2>UX/UI 설계 — 튜토리얼·레드닷·성장 시각화·접근성·다크패턴</h2>
     <p>점진적 복잡도 공개 · 레드닷 배치 전략 · 성장 시각화 · 접속 유지 시간 구조 · 접근성·다크패턴 법적 쟁점 · 14가지 심리 기법</p>
@@ -1834,15 +1887,16 @@ const ax=(lbl,ex)=>({grid:G,ticks:{color:'#5a6275'},...(lbl?{title:{display:true
 
 const STAGES=[
   {id:'s1',n:1,title:'게임 정체성',color:'#7c3aed',merged:true},
-  {id:'s2',n:2,title:'기지 건설',color:'#059669',merged:true},
-  {id:'s3',n:3,title:'전투 시스템',color:'#dc2626',merged:true},
-  {id:'s4',n:4,title:'영웅 성장',color:'#d97706',merged:false},
-  {id:'s5',n:5,title:'경제 시스템',color:'#059669',merged:false},
-  {id:'s6',n:6,title:'월드맵',color:'#2563eb',merged:false},
-  {id:'s7',n:7,title:'연맹 시스템',color:'#dc2626',merged:false},
-  {id:'s8',n:8,title:'시즌·이벤트',color:'#7c3aed',merged:false},
-  {id:'s9',n:9,title:'BM·유료화',color:'#dc2626',merged:false},
-  {id:'s10',n:10,title:'UX·심리',color:'#7c3aed',merged:false},
+  {id:'s2',n:2,title:'UX·심리',color:'#7c3aed',merged:false},
+  {id:'s3',n:3,title:'기지 건설',color:'#059669',merged:true},
+  {id:'s4',n:4,title:'전투 시스템',color:'#dc2626',merged:true},
+  {id:'s5',n:5,title:'영웅 성장',color:'#d97706',merged:false},
+  {id:'s6',n:6,title:'경제 시스템',color:'#059669',merged:false},
+  {id:'s7',n:7,title:'월드맵',color:'#2563eb',merged:false},
+  {id:'s8',n:8,title:'연맹 시스템',color:'#dc2626',merged:false},
+  {id:'s9',n:9,title:'시즌·이벤트',color:'#7c3aed',merged:false},
+  {id:'s10',n:10,title:'BM·유료화',color:'#dc2626',merged:false},
+  
   {id:'s11',n:11,title:'가챠·규제',color:'#d97706',merged:false},
   {id:'s12',n:12,title:'서버 생태계',color:'#059669',merged:false},
   {id:'s13',n:13,title:'경쟁 분석',color:'#2563eb',merged:false},
@@ -1902,13 +1956,14 @@ function initStage(id){
   if(id==='s1')initS1();
   if(id==='s2')initS2();
   if(id==='s3')initS3();
-  if(id==='s4'){initS4(); setTimeout(calcCP,100);}
-  if(id==='s5')initS5();
+  if(id==='s4')initS4();
+  if(id==='s5'){initS5(); setTimeout(calcCP,100);}
   if(id==='s6')initS6();
   if(id==='s7')initS7();
   if(id==='s8')initS8();
   if(id==='s9')initS9();
   if(id==='s10')initS10();
+  if(id==='s2')initS2();
   if(id==='s11')initS11();
   if(id==='s12')initS12();
   if(id==='s13')initS13();
@@ -1961,8 +2016,8 @@ function initS1(){
   adBtns.firstChild.onclick(); // 첫 번째 항목 자동 활성화
 }
 
-/* S2 */
-function initS2(){
+/* S3 */
+function initS3(){
   // 건물 카테고리 탐색기
   const BLDGS = [
     // 핵심 인프라
@@ -2078,8 +2133,8 @@ function initS2(){
   calcSlot();
 }
 
-/* S3 */
-function initS3(){
+/* S4 */
+function initS4(){
   let patChart=null;
   function calcPat(){
     const S=+document.getElementById('stg-s').value;
@@ -2240,8 +2295,8 @@ function initS3(){
   comboTabs.firstChild.onclick();
 }
 
-/* S4 */
-function initS4(){
+/* S5 */
+function initS5(){
 
   /* ── EXP 요구량 데이터 (실측 기반) ── */
   const EXP_PER_LEVEL = [
@@ -2479,8 +2534,8 @@ function initS4_cpInit(){
   calcCP();
 }
 
-/* S5 */
-function initS5(){
+/* S6 */
+function initS6(){
   const resBldgs=[
     {id:'farm',name:'농장',res:'식량',color:'#059669',base:1.8,grow:1.195,sink:'소비 ×3.8배',roi:'높음 (Lv.1~15)'},
     {id:'mine',name:'광산',res:'철강',color:'#2563eb',base:1.4,grow:1.190,sink:'소비 ×4.2배',roi:'높음 (Lv.1~18)'},
@@ -2629,8 +2684,8 @@ function initS5(){
   });
 }
 
-/* S6 */
-function initS6(){
+/* S7 */
+function initS7(){
   /* ── 월드맵 동심원 개념도 (SVG-style on Canvas) ── */
   const wmCvs=document.getElementById('c-worldmap');
   if(wmCvs){
@@ -2761,8 +2816,8 @@ function initS6(){
   migrTabs.firstChild.onclick();
 }
 
-/* S7 */
-function initS7(){
+/* S8 */
+function initS8(){
   /* ── R1~R5 직위 권한 레이더 ── */
   new Chart(document.getElementById('c-rank'),{type:'bar',
     data:{labels:['R5 연맹장','R4 간부','R3 핵심','R2 정규','R1 신규'],
@@ -2792,37 +2847,37 @@ function initS7(){
      trigger:'R4가 집결 소집 → 전체 알림 발송. 30분 카운트다운 표시.',
      mechanism:'"지금 안 들어가면 동맹이 진다" — 집단 실패 귀책이 개인에게 전가됨. 수치 회피가 불편함보다 강한 동기.',
      pay:'집결 참가 전 즉시 강화 팩·치료 팩 구매. 집결 후 병사 손실 → 즉시 치료 팩.',
-     retention:9, charge:10},
+     retention:10, charge:10},
     {label:'도움 알림',color:'#2563eb',
      psych:'완료 욕구 + 상호 의무',
      trigger:'멤버 건설 잔여 시간 단축 알림 → 수시 (하루 10~20회 이상).',
      mechanism:'"나도 받아야 하니까 줘야 한다" 상호 의무감. 앱 실행 빈도를 극도로 높이는 단기 로그인 트리거.',
      pay:'직접 과금은 낮지만 로그인 빈도 증가 → 다른 과금 기회 노출.',
-     retention:8, charge:6},
+     retention:9, charge:6},
     {label:'Duel 마감',color:'#7c3aed',
      psych:'FOMO + 손실 회피',
      trigger:'서버 리셋 2시간 전 — 오늘 포인트 목표 미달 상태.',
      mechanism:'"오늘 안 하면 이번 주 순위가 내려간다" — 주간 보상 손실에 대한 FOMO. 매일 발동.',
      pay:'스피드업·자원 팩 집중 소비. Valor 배지 부족 시 직구매.',
-     retention:9, charge:9},
+     retention:10, charge:9},
     {label:'기여도 압박',color:'#d97706',
      psych:'죄책감 + 소속감 위협',
      trigger:'주간 기여도 랭킹 하위 → R4가 직접 연락하거나 공개 순위 노출.',
      mechanism:'"기여 안 하면 강등된다" — 직위 상실 위협이 죄책감을 자원 기여(과금)로 전환.',
      pay:'기여도 획득을 위한 골드·자원 소비. 연맹 기술 연구 자원 투자.',
-     retention:7, charge:7},
+     retention:8, charge:7},
     {label:'직위 승급',color:'#059669',
      psych:'지위 욕구 + 성취감',
      trigger:'R3→R4 승급 조건 90% 달성 시 — 인지된 "거의 다 됨" 심리.',
      mechanism:'"조금만 더 하면 R4가 된다" — 완료 근접성 효과. R4 달성 시 과금 전환율 2~3배 증가.',
      pay:'승급 조건 달성을 위한 집중 투자. R4 이후 집결 소집 참여 → 과금 본격화.',
-     retention:8, charge:8},
+     retention:9, charge:8},
     {label:'포인트 만료',color:'#5a6275',
      psych:'손실 회피 + 완료 욕구',
      trigger:'주간 기여도 리셋 직전 — 미사용 포인트 소멸 예고.',
      mechanism:'"지금 안 쓰면 사라진다" — 손실 회피 본능. 상점 이동 → 다른 구매 기회 노출 부수 효과.',
      pay:'상점에서 영웅 조각·이민 티켓 구매. 연맹 상점 방문 자체가 다른 소비 유발.',
-     retention:5, charge:5},
+     retention:6, charge:5},
   ];
   const retTabs=document.getElementById('ret-tabs');
   let retChart=null;
@@ -2855,8 +2910,8 @@ function initS7(){
   retTabs.firstChild.onclick();
 }
 
-/* S8 */
-function initS8(){
+/* S9 */
+function initS9(){
   /* ── VS Duel 요일별 과금 강도 ── */
   new Chart(document.getElementById('c-vs'),{type:'bar',
     data:{labels:['Day1\n월(Radar)','Day2\n화(건설)','Day3\n수(연구)','Day4\n목(영웅)','Day5\n금(훈련)','Day6\n토(Enemy Buster)'],
@@ -2978,8 +3033,8 @@ function initS8(){
   });
 }
 
-/* S9 */
-function initS9(){
+/* S10 */
+function initS10(){
   /* ── Pity 곡선 차트 ── */
   // 소환 횟수별 UR 누적 획득 확률 (시뮬레이션 기반 추정)
   const pityX = [];
@@ -3099,8 +3154,8 @@ function initS9(){
   });
 }
 
-/* S10 */
-function initS10(){
+/* S2 */
+function initS2(){
   /* ── 접속 유지 시간 구조 차트 ── */
   new Chart(document.getElementById('c-session'),{type:'bar',
     data:{labels:['일일 루틴\n(5~15분)','이벤트 참여\n(20~60분)','전투 반응\n(15~30분)','이벤트 마감\n(1~3시간)','Capitol War\n(2~6시간)'],
