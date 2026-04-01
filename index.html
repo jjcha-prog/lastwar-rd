@@ -293,61 +293,166 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 <div class="stage-hdr">
   <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">3단계</span>
   <div class="stitle">
-    <h2>전투 시스템 — 메커니즘과 상성</h2>
-    <p>러닝 패턴 문법 수치화 · 자동 전투 엔진 역공학 · 병종 상성 · 타겟 선택 알고리즘</p>
-    <div class="merge-tag">⊕ 보완 병합 · 5개 패턴 파라미터 공식 · 라운드별 처리 5단계 · 타겟 선택 3시나리오</div>
+    <h2>전투 시스템 — 러닝 엔진 · 4X 자동 전투 · 병종 상성 완전 분석</h2>
+    <p>러닝 액션 전투 엔진 파라미터 수치화 · 4X 자동 전투 엔진 역공학 · 병종 상성 시스템 · 실전 조합 전략</p>
+    <div class="merge-tag">⊕ 보강 · 2개 전투 엔진 상세 정의 · 상성 시스템 완전 표 · 실전 조합 6종 분석</div>
   </div>
 </div>
 <div class="check-row">
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 인터랙티브: 스테이지별 패턴 파라미터 시뮬</span>
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 차트: 파라미터 변화 곡선 + 방어 체감 함수</span>
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 표: 5개 파라미터 공식 + 상성 삼각 + 라운드 처리</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 인터랙티브: 패턴 파라미터 시뮬 + 상성 조합 탐색기</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 차트: 파라미터 곡선 + 방어 체감 + 상성 히트맵</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 표: 5개 파라미터 공식 + 라운드 처리 + 상성 완전 표 + 실전 조합 6종</span>
 </div>
-<div class="insight"><strong>핵심 통찰:</strong> 전투 결과는 전투 시작 전에 결정된다. 5단계 라운드 처리(전처리→이니셔티브→타겟 선택→피해 계산→상태 적용)의 각 단계가 고유한 과금 동기와 직결된다.</div>
+<div class="insight"><strong>핵심 통찰:</strong> Last War는 2개의 완전히 다른 전투 엔진이 하나의 게임에 공존한다. 러닝 액션 엔진은 UA 광고를 위한 훅이고, 4X 자동 전투 엔진이 실제 수익화 핵심이다. 전투 결과는 전투 시작 전에 결정되며, 각 처리 단계마다 고유한 과금 동기가 내장되어 있다.</div>
 
-<div class="sdiv">러닝 액션 패턴 파라미터 — 스테이지별 시뮬레이터</div>
+<div class="sdiv">① 러닝 액션 전투 엔진 — 파라미터 문법 완전 정의</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">엔진 목적 및 구조</h4>
+    <p>러닝 액션 엔진은 <strong>UA 광고 크리에이티브 전용 훅</strong>이다. 전체 플레이의 5~10%를 차지하며, 병사 합치기·장애물 회피·보스 처치의 3막 구조로 진행된다. 핵심 설계 원리는 "초반은 쉽게, 후반은 조작 불가 수준으로" — 이 불가능성이 4X 콘텐츠로 전환을 유도한다.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">5개 파라미터 상호작용 설계 논리</h4>
+    <p>① <strong>통로 폭 × 반응 시간</strong>: 둘 다 감소 → 이중 압박. 통로 80px + 반응 0.5초 = 사실상 조작 불가.<br>② <strong>장애물 밀도 × 통로 수</strong>: 밀도 70% × 통로 1개 = 유효 경로 0개에 수렴.<br>③ <strong>병사 배율</strong>: 고난이도 구간의 보상 인센티브 — 위험을 감수할 이유를 제공.</p>
+  </div>
+</div>
+
 <div class="cwrap">
+  <div class="clbl">스테이지별 파라미터 변화 시뮬레이터 — 선택한 스테이지 파라미터를 실시간 확인</div>
   <div class="sl-row"><label>스테이지 번호 <span id="stg-v" style="color:var(--text);font-weight:500">S1</span></label><input type="range" min="1" max="30" value="1" id="stg-s" oninput="window.calcPat&&window.calcPat()"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:2px"><span>초반(1)</span><span>중반(15)</span><span>후반(30)</span></div></div>
   <div id="pat-cards" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px"></div>
   <canvas id="c-pattern" style="max-height:200px"></canvas>
-  <div id="pat-insight" style="font-size:12px;color:var(--muted);padding:8px 10px;background:var(--bg);border-radius:8px;margin-top:10px;line-height:1.7"></div>
+  <div id="pat-insight" style="font-size:12px;color:var(--muted);padding:8px 10px;background:var(--sur);border-radius:8px;margin-top:10px;line-height:1.7"></div>
 </div>
 
 <table class="dt">
-  <thead><tr><th>파라미터</th><th>초반 값</th><th>후반 값</th><th>계산 공식 (S=스테이지)</th><th>설계 의도</th></tr></thead>
+  <thead><tr><th>파라미터</th><th>초반(S1)</th><th>중반(S15)</th><th>후반(S30)</th><th>계산 공식</th><th>임계점</th><th>설계 의도</th></tr></thead>
   <tbody>
-    <tr><td>통로 수</td><td>2~3개</td><td style="color:var(--red)">1개</td><td>max(1, 레인수 - floor(S/8))</td><td>1통로 = 선택 소멸</td></tr>
-    <tr><td>통로 폭</td><td>147px</td><td style="color:var(--red)">80px</td><td>147 - S×2.2, 최소 80px</td><td>80px↓ = 정밀 조작 강제</td></tr>
-    <tr><td>반응 시간</td><td>2.0초</td><td style="color:var(--red)">0.5초</td><td>2.0 - S×0.05, 최소 0.5초</td><td>0.8초↓ = 암기 기반 전환</td></tr>
-    <tr><td>장애물 밀도</td><td>10%</td><td style="color:var(--red)">70%</td><td>10 + S×2, 최대 70%</td><td>70% = 경로 사실상 1개</td></tr>
-    <tr><td>병사 배율</td><td>1.0×</td><td style="color:var(--green)">3.5×</td><td>1.0 + S×0.083</td><td>고위험 구간 = 고보상</td></tr>
+    <tr><td><strong>통로 수</strong></td><td>3개</td><td>2개</td><td style="color:var(--red)">1개</td><td>max(1, 3 − floor(S/8))</td><td>S8~16: 2→1개 전환</td><td>선택지 소멸 = 플레이어 통제감 박탈</td></tr>
+    <tr><td><strong>통로 폭</strong></td><td>147px</td><td>114px</td><td style="color:var(--red)">80px</td><td>147 − S×2.2, 최소 80</td><td>100px 이하: 정밀 스와이프 필요</td><td>80px = 엄지손가락 너비의 한계 수준</td></tr>
+    <tr><td><strong>반응 시간</strong></td><td>2.0초</td><td>1.25초</td><td style="color:var(--red)">0.5초</td><td>2.0 − S×0.05, 최소 0.5</td><td>0.8초 이하: 인지 처리 한계</td><td>0.5초 = 암기 없이 대응 불가 수준</td></tr>
+    <tr><td><strong>장애물 밀도</strong></td><td>10%</td><td>40%</td><td style="color:var(--red)">70%</td><td>10 + S×2, 최대 70</td><td>50% 이상: 경로 탐색 난이도 급증</td><td>70% = 통로 1개 상태에서 사실상 막힘</td></tr>
+    <tr><td><strong>병사 배율</strong></td><td>1.0×</td><td>2.25×</td><td style="color:var(--green)">3.5×</td><td>1.0 + S×0.083</td><td>없음 (선형 증가)</td><td>고위험=고보상 — 도전 동기 제공</td></tr>
   </tbody>
 </table>
 
-<div class="sdiv">자동 전투 라운드 처리 5단계</div>
+<div class="sdiv">② 4X 자동 전투 엔진 — 라운드 처리 상세 정의</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(37,99,235,.3)">
+    <h4 style="color:var(--blue)">엔진 구조 핵심 원리</h4>
+    <p><strong>정적 스탯 방식</strong>: 전투 시작 시 모든 버프가 캐싱되어 고정됨. 전투 중 버프 추가 불가.<br><strong>결정론적 결과</strong>: 동일 편성·동일 스탯이면 항상 같은 결과. 랜덤 요소 없음.<br><strong>병목 설계</strong>: 각 처리 단계가 서로 다른 과금 레버와 연결됨.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(37,99,235,.3)">
+    <h4 style="color:var(--blue)">최대 25라운드 + 무승부 규칙의 설계 의도</h4>
+    <p>25라운드 내 결판이 나지 않으면 <strong>공격측 패배</strong>. 이 규칙은 방어측 우위를 보장하며, 공격자는 반드시 압도적 전투력이 필요하다. 결과적으로 공격적 플레이어의 전투력 투자(스피드업·강화 팩) 동기가 강화된다.</p>
+  </div>
+</div>
+
 <div class="ssgrid">
-  <div class="ssitem"><span class="ssnum">0단계</span>전처리 — 영웅·연구·VIP 전 버프 캐싱 (정적 스탯 방식)</div>
-  <div class="ssitem"><span class="ssnum">1단계</span>이니셔티브 — Speed 내림차순 정렬 → 항공 선제 공격</div>
-  <div class="ssitem"><span class="ssnum">2단계</span>타겟 선택 — HP 비율 최소 유닛 + 상성 오버라이드</div>
-  <div class="ssitem"><span class="ssnum">3단계</span>피해 계산 — ATK × (1−DEF/(DEF+1500)) × 상성계수</div>
-  <div class="ssitem"><span class="ssnum">4단계</span>상태 적용 — 탈락 처리 · 영웅 쿨다운 · 종료 조건</div>
-  <div class="ssitem"><span class="ssnum">규칙</span>최대 25라운드 · 무승부 시 공격측 실패</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--muted)">0단계</span><strong>전처리 (Pre-processing)</strong> — 영웅 스탯, 연구 보너스, VIP 버프, 편성 시너지를 모두 계산하여 각 유닛의 최종 ATK·DEF·HP·Speed 확정. 이 스탯이 전투 내내 고정. <em style="color:var(--red)">과금 레버: 영웅 장비·스킬·전용 무기 업그레이드</em></div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--blue)">1단계</span><strong>이니셔티브 결정 (Initiative)</strong> — 전체 유닛을 Speed 스탯 내림차순으로 정렬. 항공 병종이 Speed 최고값 보유 → 항공이 항상 선제 공격. Speed 동점 시 공격측 우선. <em style="color:var(--red)">과금 레버: 항공 센터 레벨업·Speed 연구</em></div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--amber)">2단계</span><strong>타겟 선택 (Target Selection)</strong> — 기본: HP 비율(현재HP/최대HP)이 가장 낮은 적 유닛 집중 공격. 예외①: 상성 불리 타겟이 있으면 유리 타겟으로 전환. 예외②: 보병 탱커 능력 발동 시 피해 일부 흡수 (흡수율=보병비율×0.4). <em style="color:var(--red)">과금 레버: 탱커 강화·병원 업그레이드</em></div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--red)">3단계</span><strong>피해 계산 (Damage Calc)</strong> — 공식: <code>최종피해 = ATK × (1 − DEF/(DEF+1500)) × 상성계수 × 크리티컬계수</code>. DEF가 1500일 때 감소율 50%, 3000일 때 67% (체감 감소). 상성계수: 유리 ×1.25, 불리 ×0.80, 중립 ×1.00. <em style="color:var(--red)">과금 레버: ATK 강화·DEF 연구</em></div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--green)">4단계</span><strong>상태 적용 (State Update)</strong> — HP 차감 후 0 이하 유닛 탈락 처리. 영웅 스킬 쿨다운 감소 (1라운드에 1씩). 버프·디버프 지속시간 감소. 종료 조건 체크: 한쪽이 전멸하면 종료, 25라운드 도달 시 공격측 패배 처리. <em style="color:var(--red)">과금 레버: 영웅 스킬 업그레이드·스킬 메달</em></div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--muted)">반복</span><strong>라운드 반복</strong> — 1~4단계를 최대 25회 반복. 각 라운드는 약 0.3~0.5초. 전투 전 결과 예측이 가능한 구조 — 최적화된 편성이 전투 전에 결정됨. 이것이 "전투 전에 결과가 결정된다"는 의미.</div>
 </div>
 
-<div class="sdiv">방어 수확 체감 함수 시각화</div>
-<div class="cwrap"><div class="clbl">피해 감소율 = DEF/(DEF+1500) — DEF 1500→50%, 3000→67%</div><canvas id="c-defense" style="max-height:200px"></canvas></div>
+<div class="sdiv">방어 수확 체감 함수 — 피해 계산 시각화</div>
+<div class="cwrap"><div class="clbl">피해 감소율 = DEF/(DEF+1500) — 곡선이 완만해질수록 DEF 투자 대비 효율 감소</div><canvas id="c-defense" style="max-height:180px"></canvas></div>
 
 <table class="dt">
-  <thead><tr><th>공격 병종</th><th>유리 (×1.25)</th><th>불리 (×0.80)</th><th>주요 역할</th><th>과금 유도</th></tr></thead>
+  <thead><tr><th>DEF 값</th><th>피해 감소율</th><th>실질 피해 배율</th><th>투자 효율</th><th>과금 단계</th></tr></thead>
   <tbody>
-    <tr><td>보병</td><td>기갑</td><td>항공</td><td>탱커 — 흡수율 = 보병비율×0.4</td><td>병원·치료 팩</td></tr>
-    <tr><td>기갑</td><td>항공</td><td>보병</td><td>딜러 — 고단일 공격력</td><td>차고 스피드업</td></tr>
-    <tr><td>항공</td><td>보병</td><td>기갑</td><td>Speed 최고 → 이니셔티브 우위</td><td>격납고·VIP 버프</td></tr>
+    <tr><td>0</td><td>0%</td><td>×1.00 (풀 피해)</td><td>—</td><td>미투자</td></tr>
+    <tr><td>500</td><td>25%</td><td>×0.75</td><td style="color:var(--green)">매우 높음</td><td>초반 연구</td></tr>
+    <tr><td>1,500</td><td>50%</td><td>×0.50</td><td style="color:var(--green)">높음</td><td>중반 투자</td></tr>
+    <tr><td>3,000</td><td>67%</td><td>×0.33</td><td style="color:var(--amber)">중간</td><td>고급 연구</td></tr>
+    <tr><td>6,000</td><td>80%</td><td>×0.20</td><td style="color:var(--amber)">낮음 (체감↓)</td><td>Whale 구간</td></tr>
+    <tr><td>15,000</td><td>91%</td><td>×0.09</td><td style="color:var(--red)">매우 낮음</td><td>MegaWhale</td></tr>
   </tbody>
 </table>
+
+<div class="sdiv">③ 병종 상성 시스템 — 완전 표 및 삼각관계</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">상성 메커니즘 작동 원리</h4>
+    <p>상성 계수는 피해 계산 3단계에서 적용된다. <strong>유리 시 ×1.25 (25% 피해 증가)</strong>, <strong>불리 시 ×0.80 (20% 피해 감소)</strong>. 이 비대칭 구조(+25% vs -20%)는 유리 병종 공격의 실질 효과를 확대시킨다.<br><br>중요: 상성은 <strong>공격하는 병종 기준</strong>이다. 보병이 기갑을 공격하면 ×1.25. 기갑이 보병을 공격하면 ×0.80.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(37,99,235,.3)">
+    <h4 style="color:var(--blue)">상성 시스템의 과금 설계 연결</h4>
+    <p>상성 불리 병종을 대량 보유한 상태에서 공격받으면 피해가 20% 추가 감소된다. 이는 "상성이 맞지 않는 적에게 공격받을 때 병사 손실이 크다"는 인식을 만들어 <strong>유리한 병종 추가 훈련</strong> → 식량·석유 소비 → 자원 팩 구매로 이어지는 구매 동기를 생성한다.</p>
+  </div>
+</div>
+
+<div class="cwrap">
+  <div class="clbl">병종 상성 히트맵 — 행(공격 병종) vs 열(방어 병종) · 색상이 진할수록 유리</div>
+  <canvas id="c-affinity" style="max-height:200px"></canvas>
+</div>
+
+<table class="dt">
+  <thead>
+    <tr>
+      <th>공격 병종 ↓ / 방어 병종 →</th>
+      <th>보병 (Tank)</th><th>기갑 (Cavalry)</th><th>항공 (Aircraft)</th>
+      <th>주요 역할</th><th>Speed</th><th>위치</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>보병 (Tank)</strong></td>
+      <td style="background:rgba(107,114,128,.12);text-align:center">×1.00<br><span style="font-size:10px;color:var(--muted)">중립</span></td>
+      <td style="background:rgba(5,150,105,.18);text-align:center;color:var(--green)"><strong>×1.25</strong><br><span style="font-size:10px">유리</span></td>
+      <td style="background:rgba(220,38,38,.15);text-align:center;color:var(--red)"><strong>×0.80</strong><br><span style="font-size:10px">불리</span></td>
+      <td>탱커 · HP 흡수 · 아군 보호</td><td style="color:var(--muted)">낮음</td><td>최전방</td>
+    </tr>
+    <tr>
+      <td><strong>기갑 (Cavalry)</strong></td>
+      <td style="background:rgba(220,38,38,.15);text-align:center;color:var(--red)"><strong>×0.80</strong><br><span style="font-size:10px">불리</span></td>
+      <td style="background:rgba(107,114,128,.12);text-align:center">×1.00<br><span style="font-size:10px;color:var(--muted)">중립</span></td>
+      <td style="background:rgba(5,150,105,.18);text-align:center;color:var(--green)"><strong>×1.25</strong><br><span style="font-size:10px">유리</span></td>
+      <td>딜러 · 단일 고화력</td><td style="color:var(--amber)">중간</td><td>중열</td>
+    </tr>
+    <tr>
+      <td><strong>항공 (Aircraft)</strong></td>
+      <td style="background:rgba(5,150,105,.18);text-align:center;color:var(--green)"><strong>×1.25</strong><br><span style="font-size:10px">유리</span></td>
+      <td style="background:rgba(220,38,38,.15);text-align:center;color:var(--red)"><strong>×0.80</strong><br><span style="font-size:10px">불리</span></td>
+      <td style="background:rgba(107,114,128,.12);text-align:center">×1.00<br><span style="font-size:10px;color:var(--muted)">중립</span></td>
+      <td>이니셔티브 딜러 · 선제 공격</td><td style="color:var(--red)">최고</td><td>후열</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="sdiv">④ 병종 상성 삼각관계 — 실전 조합 전략 6종 분석</div>
+<div class="cwrap">
+  <div class="clbl">실전 편성 조합 선택 — 클릭하면 상세 전략 분석 표시</div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px" id="combo-tabs"></div>
+  <div id="combo-detail" style="padding:12px;background:var(--sur);border-radius:8px;margin-bottom:12px;min-height:80px;font-size:12px;color:var(--muted);line-height:1.8">편성 조합을 선택하면 상세 분석이 표시됩니다.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px" id="combo-stats"></div>
+</div>
+
+<table class="dt">
+  <thead><tr><th>편성 조합</th><th>비율(보병:기갑:항공)</th><th>핵심 강점</th><th>핵심 약점</th><th>최적 상황</th><th>과금 투자 포인트</th></tr></thead>
+  <tbody>
+    <tr><td style="color:var(--red);font-weight:600">탱커 중심</td><td>60:20:20</td><td>최고 생존력 · 병원 손실 최소화</td><td>딜 부족 · 25라운드 소진 위험</td><td>방어전 · 집결 버팀목</td><td>병원 용량 · Williams·Murphy</td></tr>
+    <tr><td style="color:var(--blue);font-weight:600">기갑 특화</td><td>20:60:20</td><td>대 항공 압도 · 단일 피해 극대화</td><td>보병 상대 피해 20% 증가</td><td>항공 편성 적 공격 시</td><td>차고 레벨 · 기갑 연구</td></tr>
+    <tr><td style="color:var(--amber);font-weight:600">항공 속공</td><td>20:20:60</td><td>이니셔티브 1위 · 선제 딜</td><td>기갑 상대 피해 20% 증가</td><td>보병 편성 적 공격 · 속공전</td><td>격납고 레벨 · DVA·Carlie</td></tr>
+    <tr><td style="color:var(--green);font-weight:600">균형 편성</td><td>40:30:30</td><td>상성 리스크 분산 · 범용성 최고</td><td>특화 편성 상대 시 열세</td><td>정보 없을 때 기본값</td><td>3개 병종 균형 유지</td></tr>
+    <tr><td style="color:var(--purple);font-weight:600">대 탱커 분쇄</td><td>10:70:20</td><td>기갑이 항공 압도 + 보병 공략 약함 방지</td><td>보병 비율 낮아 HP 흡수 부족</td><td>적이 탱커 중심 편성 시</td><td>기갑 집중 훈련 · 기갑 영웅</td></tr>
+    <tr><td style="color:var(--red);font-weight:600">집결 최적화</td><td>50:30:20</td><td>집결 생존력 + 충분한 딜</td><td>특화 편성 대비 딜 부족</td><td>연맹 집결 공격</td><td>집결 지점 레벨 · Marshall</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">상성 삼각관계 — 실전 판단 기준</div>
+<div class="ssgrid">
+  <div class="ssitem"><span class="ssnum" style="color:var(--red)">규칙①</span><strong>정보 우선</strong> — 공격 전 정찰로 적 편성 확인. 상성 유리 병종 60% 이상 편성 시 피해 25% 우위. 정보 없으면 균형 편성(40:30:30)이 기본값.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--red)">규칙②</span><strong>이니셔티브가 상성을 이길 수 있다</strong> — 항공은 기갑에 불리(×0.80)하지만 선제 공격으로 기갑 유닛을 먼저 제거하면 실질 유리. Speed 투자의 가치.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--amber)">규칙③</span><strong>탱커 흡수율 계산</strong> — 보병 비율×0.4 = 흡수율. 보병 50% 편성 → 아군 딜의 20% 흡수. 보병이 없으면 딜러가 직접 피해를 받아 손실 급증.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--amber)">규칙④</span><strong>25라운드 타임아웃 주의</strong> — 방어측이 충분한 보병을 보유하면 공격측이 타임아웃으로 패배. 공격 시 딜 비율 최소 40% 유지 필요.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--blue)">규칙⑤</span><strong>HP 집중 공격 AI 활용</strong> — 타겟 선택 AI는 HP 비율 최저 유닛을 집중 공격. 한 병종이 집중 손실되면 다른 병종의 상성 효과가 무너짐. 균형 편성의 이유.</div>
+  <div class="ssitem"><span class="ssnum" style="color:var(--blue)">규칙⑥</span><strong>과금 vs 상성</strong> — 상성 불리여도 전투력 차이 30% 이상이면 전투력 우위가 상성을 압도. 결국 전투력 투자(과금)가 상성 전략을 무력화하는 설계.</div>
+</div>
 </section>
 
-<!-- ══════ S4: 영웅 성장 ══════ -->
 <section class="stage-sec" id="s4">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#fffbeb;color:#92400e;border:1px solid #fde68a">4단계</span>
@@ -1160,6 +1265,119 @@ function initS3(){
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
       scales:{x:ax('방어력'),y:{...ax('감소율(%)'),min:0,max:100,ticks:{color:'#5a6275',callback:v=>v+'%'}}}}
   });
+
+  /* ── 상성 히트맵 ── */
+  const affLabels=['보병(Tank)','기갑(Cavalry)','항공(Aircraft)'];
+  // 행=공격, 열=방어 [보병공→보병방, 보병공→기갑방, 보병공→항공방, ...]
+  const affData=[[1.00,1.25,0.80],[0.80,1.00,1.25],[1.25,0.80,1.00]];
+  const affColors=v=>v===1.25?'rgba(5,150,105,.7)':v===0.80?'rgba(220,38,38,.65)':'rgba(107,114,128,.35)';
+  new Chart(document.getElementById('c-affinity'),{
+    type:'bar',
+    data:{
+      labels:affLabels,
+      datasets:affLabels.map((attacker,ai)=>({
+        label:attacker+' 공격',
+        data:affData[ai],
+        backgroundColor:affData[ai].map(v=>affColors(v)),
+        borderRadius:4, barPercentage:.28, categoryPercentage:.9,
+      }))
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{labels:{color:'#5a6275',boxWidth:8,font:{size:10}}},
+        tooltip:{callbacks:{
+          label:ctx=>{
+            const v=ctx.parsed.y;
+            const tag=v===1.25?'유리 (+25%)':v===0.80?'불리 (-20%)':'중립';
+            return `${ctx.dataset.label}: ×${v.toFixed(2)} (${tag})`;
+          }
+        }}
+      },
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#5a6275'},title:{display:true,text:'방어 병종',color:'#5a6275',font:{size:10}}},
+        y:{grid:{color:'rgba(0,0,0,.05)'},min:0.6,max:1.4,
+          ticks:{color:'#5a6275',callback:v=>'×'+v.toFixed(2)},
+          title:{display:true,text:'피해 계수',color:'#5a6275',font:{size:10}}},
+      }
+    },
+    plugins:[{afterDraw(c){
+      const ctx=c.ctx, yA=c.scales.y;
+      const y1=yA.getPixelForValue(1.00);
+      ctx.save();ctx.strokeStyle='rgba(0,0,0,.2)';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+      ctx.beginPath();ctx.moveTo(c.chartArea.left,y1);ctx.lineTo(c.chartArea.right,y1);ctx.stroke();
+      ctx.fillStyle='rgba(0,0,0,.4)';ctx.font='10px sans-serif';ctx.textAlign='right';
+      ctx.fillText('중립 ×1.00',c.chartArea.right,y1-4);ctx.restore();
+    }}]
+  });
+
+  /* ── 실전 조합 탐색기 ── */
+  const COMBOS=[
+    {label:'탱커 중심',color:'#dc2626',ratio:'60:20:20',
+     strength:'최고 생존력 — 보병 60% → 탱커 흡수율 24%. 병원 손실 최소화. 집결 버팀목.',
+     weakness:'딜 출력 부족 — 25라운드 타임아웃 위험. 적 체력이 높을 경우 무승부 패배.',
+     best:'방어전 · 집결 참가 · 상대 편성 정보 없을 때 안전 편성',
+     pay:'Williams·Murphy 강화 · 병원 용량 확장 · 보병 T4 훈련',
+     inf:60,cav:20,air:20,survive:95,dps:45,flex:55},
+    {label:'기갑 특화',color:'#2563eb',ratio:'20:60:20',
+     strength:'대 항공 압도 — 기갑이 항공에 ×1.25. 단일 피해 극대화. 타겟 집중 제거.',
+     weakness:'보병 상대 ×0.80 불리. 보병 비율 낮아 HP 흡수 부족 → 딜러 직접 피해.',
+     best:'적이 항공 특화 편성일 때 · 기갑 영웅(DVA, Schuyler) 보유 시',
+     pay:'차고 레벨업 · 기갑 연구 · 기갑 영웅 성급 강화',
+     inf:20,cav:60,air:20,survive:55,dps:85,flex:45},
+    {label:'항공 속공',color:'#d97706',ratio:'20:20:60',
+     strength:'이니셔티브 1위 — Speed 최고 → 선제 공격으로 적 유닛 먼저 제거. 보병에 ×1.25.',
+     weakness:'기갑 상대 ×0.80 불리. 선제 딜 후 체력 부족 시 역전 위험.',
+     best:'보병 중심 적 공격 · 속공전 · DVA·Carlie 보유 시 이니셔티브 극대화',
+     pay:'격납고 레벨업 · 항공 센터 · DVA·Carlie 전용 장비',
+     inf:20,cav:20,air:60,survive:50,dps:80,flex:50},
+    {label:'균형 편성',color:'#059669',ratio:'40:30:30',
+     strength:'상성 리스크 분산 — 어떤 편성에도 최악 결과 없음. 범용성 최고.',
+     weakness:'특화 편성 상대 시 항상 소폭 열세. 압도적 승리 없음.',
+     best:'적 편성 정보 없을 때 · 다수 적과 연속 전투 시 · 초중반 기본값',
+     pay:'3개 병종 균형 유지 · 전용 장비 균형 투자',
+     inf:40,cav:30,air:30,survive:75,dps:70,flex:90},
+    {label:'대 탱커 분쇄',color:'#7c3aed',ratio:'10:70:20',
+     strength:'기갑이 항공에 강하고 보병에만 약함 — 적 탱커(보병)에 상성 불리지만 화력으로 압도.',
+     weakness:'아군 보병 10%로 HP 흡수 거의 없음 → 기갑 직접 피해 증가.',
+     best:'적이 탱커 중심(보병 60%+)일 때 · Kimberly·Fiona 보유 시 화력 극대화',
+     pay:'기갑 대량 훈련 · Kimberly·Fiona 전용 장비 · 기갑 연구 집중',
+     inf:10,cav:70,air:20,survive:40,dps:95,flex:30},
+    {label:'집결 최적화',color:'#dc2626',ratio:'50:30:20',
+     strength:'탱커 50%로 생존력 유지 + 기갑 30% 딜 충분. 집결 공격 환경 최적화.',
+     weakness:'특화 편성 대비 딜 부족. 항공 편성 적에게 기갑 불리.',
+     best:'연맹 집결 공격 · 수도 쟁탈전 · Marshall 서포터 활용 시',
+     pay:'집결 지점 Lv.20+ · Marshall·Williams 강화 · 집결 전투력 팩',
+     inf:50,cav:30,air:20,survive:85,dps:65,flex:70},
+  ];
+  const comboTabs=document.getElementById('combo-tabs');
+  COMBOS.forEach((c2,i)=>{
+    const btn=document.createElement('div');btn.className='ibtn';btn.textContent=c2.label;
+    btn.onclick=()=>{
+      document.querySelectorAll('#combo-tabs .ibtn').forEach((b,j)=>{
+        b.style.background=j===i?c2.color+'22':'';b.style.color=j===i?c2.color:'';b.style.borderColor=j===i?c2.color:'';
+      });
+      document.getElementById('combo-detail').innerHTML=`
+        <div style="font-size:13px;font-weight:500;color:${c2.color};margin-bottom:8px">${c2.label} — 비율 ${c2.ratio}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px">
+          <div><div style="font-size:10px;color:var(--green);font-weight:500;margin-bottom:3px">핵심 강점</div><div style="font-size:12px;color:var(--muted);line-height:1.6">${c2.strength}</div></div>
+          <div><div style="font-size:10px;color:var(--red);font-weight:500;margin-bottom:3px">핵심 약점</div><div style="font-size:12px;color:var(--muted);line-height:1.6">${c2.weakness}</div></div>
+        </div>
+        <div style="margin-bottom:6px"><span style="font-size:10px;color:var(--blue);font-weight:500">최적 상황: </span><span style="font-size:12px;color:var(--muted)">${c2.best}</span></div>
+        <div><span style="font-size:10px;color:var(--amber);font-weight:500">과금 투자: </span><span style="font-size:12px;color:var(--muted)">${c2.pay}</span></div>`;
+      document.getElementById('combo-stats').innerHTML=[
+        {l:'생존력',v:c2.survive,c:'#059669'},
+        {l:'화력(DPS)',v:c2.dps,c:'#dc2626'},
+        {l:'범용성',v:c2.flex,c:'#2563eb'},
+      ].map(s=>`<div style="background:var(--sur);border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:10px;color:#5a6275;margin-bottom:6px">${s.l}</div>
+        <div style="height:6px;background:var(--border);border-radius:3px;margin-bottom:5px;overflow:hidden"><div style="height:100%;width:${s.v}%;background:${s.c};border-radius:3px"></div></div>
+        <div style="font-size:14px;font-weight:700;color:${s.c}">${s.v}%</div>
+      </div>`).join('');
+    };
+    comboTabs.appendChild(btn);
+  });
+  comboTabs.firstChild.onclick();
 }
 
 /* S4 */
