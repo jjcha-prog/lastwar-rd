@@ -1168,29 +1168,182 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 <section class="stage-sec" id="s8">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#f3f0ff;color:#5b21b6;border:1px solid #ddd6fe">8단계</span>
-  <div class="stitle"><h2>시즌제 및 이벤트 운용 로직</h2><p>VS 요일별 미션 7일 구조 · 시즌 4~6주 주기 · 신규 영웅 도입 · 메타 교란</p></div>
+  <div class="stitle">
+    <h2>시즌제 · 이월 규칙 · VS 구조 · 시즌 패스 · 영웅 도입 주기</h2>
+    <p>시즌간 자산 이월·리셋 분류 · VS Duel+Arms Race 주간 구조 · 시즌 패스 설계 · 신규 영웅 도입 패턴</p>
+    <div class="merge-tag">⊕ 대폭 보강 · 이월 규칙 완전 분류 · VS+Arms Race 통합 분석 · 시즌 패스 ROI · 영웅 출시 주기</div>
+  </div>
 </div>
 <div class="check-row">
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 차트: VS 7요일 과금 압박 강도 바 차트</span>
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 표: 요일별 미션 상세 분석</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 인터랙티브: 시즌 구조 탐색기 + VS 요일 타임라인</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 차트: VS 요일 강도 + Arms Race 6단계 + 시즌별 영웅 도입</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 표: 이월·리셋 자산 분류 · VS 구조 · 시즌 패스 티어 · 영웅 출시 주기</span>
 </div>
-<div class="insight"><strong>핵심 통찰:</strong> 주간·시즌·분기의 3중 시간 압박이 과금 피크를 반복 생성한다. VS 요일 배치(수·토 과금 집중)가 자원 생산-소비 사이클과 정밀 동기화. 신규 SSR 영웅 3~4주마다 출시로 메타를 교란해 지속적 투자 욕구를 만든다.</div>
-<div class="cwrap"><div class="clbl">VS 7요일 — 과금 압박 강도 (수·토 최고)</div><canvas id="c-vs" style="max-height:200px"></canvas></div>
+<div class="insight"><strong>핵심 통찰:</strong> Last War의 시즌제는 <strong>3중 시간 압박 장치</strong>다. ① 주간(VS Duel + Arms Race 동기화)으로 매주 과금 사이클 재가동, ② 시즌(8주)으로 영웅·전용 장비 FOMO 생성, ③ 시즌 종료 시 리셋되는 자산과 이월되는 자산의 비대칭이 "지금 써야 한다"는 소비 가속을 만든다.</div>
+
+<div class="sdiv">① 시즌간 자산 이월·리셋 규칙 — 완전 분류</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(5,150,105,.3)">
+    <h4 style="color:var(--green)">영구 이월 (시즌 종료 후에도 유지)</h4>
+    <p>
+    ✅ <strong>기지 건물 레벨</strong> — HQ·과학기술센터·병원 등 모든 영구 건물<br>
+    ✅ <strong>연구 진행</strong> — 과학기술센터 모든 연구 트리 영구 유지<br>
+    ✅ <strong>영웅 레벨·성급·스킬</strong> — 모든 영웅 성장 상태 영구<br>
+    ✅ <strong>전용 장비 레벨</strong> — Exclusive Weapon 모든 단계<br>
+    ✅ <strong>병사(T1~T10)</strong> — 훈련된 병사 전원 유지<br>
+    ✅ <strong>VIP 레벨</strong> — 누적 VIP 경험치 영구<br>
+    ✅ <strong>다이아(Diamonds)</strong> — 전량 이월<br>
+    ✅ <strong>일반 자원 (식량·철강·골드·석유)</strong> — 전량 이월<br>
+    ✅ <strong>드론·장비 강화</strong> — 모든 단계 유지
+    </p>
+  </div>
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">리셋·소멸 (시즌 종료 후 사라짐)</h4>
+    <p>
+    ❌ <strong>시즌 전용 자원</strong> — 단백질·석탄·희귀 토양·커피빈 등 시즌 고유 통화<br>
+    ❌ <strong>시즌 전용 건물</strong> — 단백질 농장·고열 용광로 등 (EXP로 전환 후 소멸)<br>
+    ❌ <strong>시즌 맵 거점</strong> — 도시·군사 거점 점령 상태 리셋<br>
+    ❌ <strong>시즌 직업(Profession)</strong> — 엔지니어·전쟁장 스킬 포인트 리셋<br>
+    ❌ <strong>바이러스 저항력 수치</strong> — 시즌별 새로 누적 필요<br>
+    ❌ <strong>시즌 특화 연구</strong> — 시즌 전용 연구 트리 리셋<br>
+    ⚠️ <strong>시즌 자원 → EXP 전환</strong>: 미소비 시즌 자원은 경험치로 전환 지급 (가치 손실 발생)
+    </p>
+  </div>
+</div>
+
 <table class="dt">
-  <thead><tr><th>요일</th><th>VS 미션</th><th>주요 소모</th><th>무과금 경쟁력</th><th>과금 압박</th></tr></thead>
+  <thead><tr><th>자산 항목</th><th>이월 여부</th><th>리셋 범위</th><th>설계 의도</th><th>과금 영향</th></tr></thead>
   <tbody>
-    <tr><td>월</td><td>건설</td><td>건설 스피드업, 철강</td><td>중간</td><td>★★★</td></tr>
-    <tr><td>화</td><td>연구</td><td>연구 스피드업</td><td>중간</td><td>★★★★</td></tr>
-    <tr><td style="color:var(--red)">수</td><td>훈련</td><td>식량·석유, 훈련 스피드업</td><td style="color:var(--red)">낮음</td><td style="color:var(--red)">★★★★★</td></tr>
-    <tr><td>목</td><td>채집</td><td>시간, 행군 스피드업</td><td style="color:var(--green)">높음</td><td>★★</td></tr>
-    <tr><td>금</td><td>영웅 성장</td><td>조각·골드·포션</td><td>낮음</td><td>★★★★</td></tr>
-    <tr><td style="color:var(--red)">토</td><td>적군 처치</td><td>병사 치료, 부활 아이템</td><td style="color:var(--red)">매우 낮음</td><td style="color:var(--red)">★★★★★</td></tr>
-    <tr><td>일</td><td>종합 결산</td><td>다이아 즉시 구매</td><td>매우 낮음</td><td>★★★★</td></tr>
+    <tr><td>HQ·영구 건물</td><td style="color:var(--green)">✅ 전액 이월</td><td>없음</td><td>장기 투자 안전 보장</td><td>지속 과금 동기</td></tr>
+    <tr><td>영웅 레벨·성급·전용 장비</td><td style="color:var(--green)">✅ 전액 이월</td><td>없음</td><td>가챠 소비 보호</td><td>가챠 과금 안심 보장</td></tr>
+    <tr><td>병사·자원·다이아</td><td style="color:var(--green)">✅ 전액 이월</td><td>없음</td><td>기본 자산 보호</td><td>과금 자산 보호</td></tr>
+    <tr><td style="color:var(--amber)">시즌 자원</td><td style="color:var(--red)">❌ EXP로 전환</td><td>시즌 종료 시</td><td>시즌 내 소비 강제</td><td style="color:var(--red)">소진 FOMO 유발</td></tr>
+    <tr><td style="color:var(--amber)">시즌 건물</td><td style="color:var(--red)">❌ 소멸</td><td>시즌 종료 시</td><td>시즌 재참여 유도</td><td style="color:var(--red)">재투자 필요</td></tr>
+    <tr><td style="color:var(--amber)">맵 거점·영토</td><td style="color:var(--red)">❌ 리셋</td><td>시즌 종료 시</td><td>재경쟁 기회 제공</td><td style="color:var(--amber)">SvS 재과금</td></tr>
+    <tr><td style="color:var(--amber)">시즌 직업 스킬</td><td style="color:var(--red)">❌ 리셋</td><td>시즌 종료 시</td><td>직업 재선택 유도</td><td>직업 변경 아이템</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">② VS Duel — 주간 미션 구조 핵심 설계 로직</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(124,58,237,.3)">
+    <h4 style="color:var(--purple)">VS Duel 점수 구조 설계 원리</h4>
+    <p><strong>승리 조건</strong>: 7포인트 달성 (일별 승리 포인트: Day1=1, Day2~5=2, Day6=특별).<br>
+    <strong>최적 전략</strong>: 월~목 4일 승리(1+2+2+2=7) → 조기 확보 후 금·토 여유.<br>
+    <strong>이중 포인트</strong>: Arms Race와 날짜 테마 동기화 → 동일 행동이 두 이벤트에서 동시 점수.<br>
+    <strong>사전 준비 전략</strong>: 보상 "저축 후 해당일 일괄 해제" — 레이더·건설·연구 완료를 쌓아뒀다가 해당 테마일에 오픈.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(124,58,237,.3)">
+    <h4 style="color:var(--purple)">Arms Race 6단계 구조</h4>
+    <p>하루 6개 Phase(각 4시간). 순서 고정, 시간은 서버별 상이.<br>
+    Phase 1: <strong>건설</strong> — 건물 업그레이드<br>
+    Phase 2: <strong>연구</strong> — 연구 완료<br>
+    Phase 3: <strong>훈련</strong> — 병사 훈련<br>
+    Phase 4: <strong>영웅 성장</strong> — EXP·조각 소비<br>
+    Phase 5: <strong>스태미나</strong> — 좀비 처치·레이더<br>
+    Phase 6: <strong>HQ 파워</strong> — 복합 성장<br>
+    <strong>핵심</strong>: VS Duel 테마와 Arms Race Phase 동기화로 이중 점수 극대화.</p>
+  </div>
+</div>
+
+<div class="cwrap">
+  <div class="clbl">VS Duel 요일별 과금 압박 강도 — Day6 Enemy Buster가 최고점</div>
+  <canvas id="c-vs" style="max-height:160px"></canvas>
+</div>
+
+<table class="dt">
+  <thead><tr><th>Day</th><th>VS 테마</th><th>주요 행동</th><th>Arms Race 동기화</th><th>사전 준비</th><th>과금 강도</th></tr></thead>
+  <tbody>
+    <tr><td style="color:var(--blue)">Day1 (월)</td><td>Radar·드론</td><td>레이더 보상 수령 · 드론 파츠·배틀 데이터 · 스태미나</td><td>Phase5 스태미나</td><td>일요일부터 레이더 34/35 적립</td><td>★★★★</td></tr>
+    <tr><td>Day2 (화)</td><td>건설</td><td>건설 완료 선물 해제 · 전설 트럭·비밀 임무</td><td>Phase1 건설</td><td>Day1 말 장기 건설 시작</td><td>★★★★</td></tr>
+    <tr><td>Day3 (수)</td><td>연구</td><td>연구 완료 해제 · Valor 배지 · 드론 부품 상자</td><td>Phase2 연구</td><td>Day2 말 장기 연구 시작</td><td>★★★★</td></tr>
+    <tr><td>Day4 (목)</td><td>영웅 성장</td><td>EXP·조각·스킬 메달 · 생존자 모집 · 엘리트 모집</td><td>Phase4 영웅</td><td>EXP·조각 주간 저축</td><td>★★★★</td></tr>
+    <tr><td>Day5 (금)</td><td>훈련·복합</td><td>병사 훈련 완료 해제 · 치료 스피드업 · 건설·연구 중복</td><td>Phase3 훈련</td><td>Day4 말 훈련 시작</td><td style="color:var(--red)">★★★★★</td></tr>
+    <tr><td style="color:var(--red)">Day6 (토)</td><td>Enemy Buster</td><td>상대 연맹 처치(×5점) · 집결 공격 · 즉시 치료</td><td>Phase6 HQ 파워</td><td>방어 체계·치료 팩 비축</td><td style="color:var(--red)">★★★★★</td></tr>
+  </tbody>
+</table>
+
+<div class="insight"><strong>VS 설계 로직 핵심:</strong> VS 요일 테마가 플레이어의 모든 진행 행동(건설·연구·훈련·영웅·전투)을 <strong>이벤트 점수로 변환</strong>한다. 평소에 하던 행동이 경쟁 포인트가 되는 구조 — "어차피 하는 거 지금 하면 점수도 된다"는 인식이 과금 행동의 심리적 진입 장벽을 낮춘다.</div>
+
+<div class="sdiv">③ 시즌 구조 — 중장기 리텐션 설계</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px" id="season-tabs"></div>
+<div id="season-detail" style="padding:12px;background:var(--sur);border-radius:8px;margin-bottom:12px;font-size:12px;color:var(--muted);line-height:1.8;min-height:90px">시즌을 선택하면 상세 구조가 표시됩니다.</div>
+<canvas id="c-season-hero" style="max-height:180px"></canvas>
+
+<table class="dt">
+  <thead><tr><th>시즌</th><th>테마</th><th>핵심 신규 자원</th><th>주요 신규 메커니즘</th><th>독점 영웅(전용 장비)</th><th>과금 핵심</th></tr></thead>
+  <tbody>
+    <tr><td>Pre-Season</td><td>기본 서버</td><td>식량·철강·골드</td><td>기지 건설 · 연맹 형성</td><td>—</td><td>건설 스피드업</td></tr>
+    <tr><td style="color:var(--red)">S1 크림슨 역병</td><td>좀비 바이러스</td><td style="color:var(--red)">단백질 · 면역 단백질</td><td>바이러스 저항력 · 직업 시스템</td><td>Mason·Violet 전용 장비</td><td>단백질 팩·직업 변경</td></tr>
+    <tr><td style="color:var(--blue)">S2 극지 폭풍</td><td>극지 냉전</td><td style="color:var(--blue)">석탄 · 티타늄 합금</td><td>온도 시스템 · 희귀 토양 전쟁</td><td>Scarlett·Sarah 전용 장비</td><td>난방 팩·온도 유지</td></tr>
+    <tr><td style="color:var(--amber)">S3 황금 왕국</td><td>사막 유물</td><td style="color:var(--amber)">미스릴 · 저주 저항력</td><td>사막 탐험 · 오아시스 점령</td><td>Venom·Swift 전용 장비</td><td>사막 탐험 팩</td></tr>
+    <tr><td style="color:var(--purple)">S4 영원의 섬</td><td>해양 미지</td><td style="color:var(--purple)">신성한 물</td><td>저주 시스템 · 전술 카드</td><td>Adam·Schuyler 전용 장비</td><td>저주 저항 팩</td></tr>
+    <tr><td style="color:var(--red)">S5 와일드 웨스트</td><td>황금 황야</td><td style="color:var(--red)">커피빈 · CrystalGold</td><td>열차 무역 · 은행 거점 · 하이 눈</td><td>Fiona·Morrison·Stetmann 전용 장비</td><td>CrystalGold·커피 팩</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">④ 시즌 패스(Battle Pass) 설계 — 구조와 ROI 분석</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">시즌 패스 종류 및 가격</h4>
+    <p><strong>무료 트랙</strong>: 과금 없이 기본 보상. 4,000~6,000포인트 획득 가능.<br>
+    <strong>Standard Pass</strong>: ~$4.99~9.99. 보너스 포인트 + 프리미엄 보상 트랙 해금.<br>
+    <strong>Advanced Pass</strong>: ~$19.99+. 즉시 보상 + 배지 + 더 높은 보너스 포인트.<br>
+    <strong>Exclusive Weapon Pass</strong>: ~$20+/시즌당 영웅. 전용 장비 조각 패스 — 5성 필수 조각 즉시 공급.<br>
+    <strong>Hero Growth Pass</strong>: ~£4.99 (약 $6). 유니버설 영웅 조각 + EXP — 5~6일 한정.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(220,38,38,.3)">
+    <h4 style="color:var(--red)">시즌 패스 설계 핵심 원리</h4>
+    <p><strong>조기 구매 인센티브</strong>: 패스 구매 즉시 보너스 포인트 적용 → 이전 활동까지 소급. Day1 구매가 최고 효율.<br>
+    <strong>9,000포인트 장벽</strong>: 무과금으로 최대 ~6,000포인트 → 최고 보상(Infinity Chest)은 9,000포인트 필요 → 패스 구매 강제.<br>
+    <strong>구독 효과</strong>: 시즌 패스는 구독 형태 → "이미 샀으니 매일 해야 한다" 로그인 의무감.<br>
+    <strong>손실 프레이밍</strong>: "패스 없으면 X 손해" 메시지로 손실 회피 심리 자극.</p>
+  </div>
+</div>
+
+<table class="dt">
+  <thead><tr><th>패스 종류</th><th>가격</th><th>핵심 보상</th><th>무과금 대비 가치</th><th>타겟 유저</th><th>과금 설계</th></tr></thead>
+  <tbody>
+    <tr><td>무료 트랙</td><td style="color:var(--green)">$0</td><td>기본 자원·스피드업</td><td>기준</td><td>전체</td><td>패스 가치 시연</td></tr>
+    <tr><td>Standard Pass</td><td>~$4.99</td><td>영웅 조각·Valor 배지</td><td style="color:var(--green)">4~5× 이상</td><td>Minnow~Dolphin</td><td>낮은 진입 장벽</td></tr>
+    <tr><td style="color:var(--amber)">Hero Growth Pass</td><td>~$5~7</td><td>유니버설 조각·EXP</td><td style="color:var(--amber)">★★★★★ (최고 가성비)</td><td>Dolphin</td><td>영웅 투자자 타겟</td></tr>
+    <tr><td>Advanced Pass</td><td>~$19.99</td><td>즉시 보상+배지+조각</td><td style="color:var(--amber)">높음</td><td>Dolphin~Whale</td><td>업셀 체인 2단계</td></tr>
+    <tr><td style="color:var(--red)">전용 장비 패스</td><td>~$20/영웅</td><td>전용 장비 조각 50개 (해금)</td><td style="color:var(--red)">전용 장비 조기 해금</td><td>Whale</td><td>FOMO + 경쟁 압박</td></tr>
+  </tbody>
+</table>
+
+<div class="sdiv">⑤ 신규 영웅 및 시스템 도입 주기 분석</div>
+<div class="grid2">
+  <div class="gcard" style="border-color:rgba(217,119,6,.3)">
+    <h4 style="color:var(--amber)">영웅 출시 패턴</h4>
+    <p><strong>시즌당 전용 장비 3종</strong>: 탱크·항공·미사일 각 1개 — Week 1, 3, 6에 순차 해금.<br>
+    <strong>SSR→UR 승급 영웅</strong>: 매 시즌 1명씩 승급 대상 (S1=Mason, S2=Violet, S3=Scarlett...).<br>
+    <strong>Legend Returns 이벤트</strong>: 이전 시즌 영웅을 일반 태번 무료 개방 → 신규 유저 캐치업 지원.<br>
+    <strong>간격</strong>: 주요 UR 영웅 출시는 서버 오픈 후 3~4주 간격으로 점진적 추가.</p>
+  </div>
+  <div class="gcard" style="border-color:rgba(217,119,6,.3)">
+    <h4 style="color:var(--amber)">메타 교란 설계</h4>
+    <p><strong>신규 UR 영웅 출시</strong>: 현재 메타(최강 조합)를 카운터하는 특성으로 설계 → 기존 투자자의 재투자 유도.<br>
+    <strong>전용 장비 공개 타이밍</strong>: 시즌 시작 전 미리 공개 → FOMO 극대화.<br>
+    <strong>시즌 전용 버프</strong>: 시즌마다 특정 영웅 타입 강화 버프 → 순환 투자 설계.<br>
+    <strong>Hero Swap 티켓</strong>: S5부터 영웅 간 레벨·성급 교환 가능 → 메타 전환 비용 완화(재투자 장벽 낮춤).</p>
+  </div>
+</div>
+
+<canvas id="c-hero-timeline" style="max-height:200px;margin-top:8px"></canvas>
+
+<table class="dt">
+  <thead><tr><th>도입 유형</th><th>주기</th><th>대표 예시</th><th>메타 영향</th><th>과금 유발</th></tr></thead>
+  <tbody>
+    <tr><td>UR 신규 영웅</td><td>시즌당 1~2명 (시즌 중반)</td><td>Swift, Adam, Schuyler, Fiona</td><td>기존 메타 부분 교란</td><td style="color:var(--red)">가챠 + 전용 장비 패스</td></tr>
+    <tr><td>SSR→UR 승급 영웅</td><td>시즌당 1명 (S1부터 순차)</td><td>Mason→UR, Violet→UR...</td><td>기존 SSR 투자자 이탈 방지</td><td style="color:var(--amber)">승급 조각 추가 과금</td></tr>
+    <tr><td>전용 장비 신규</td><td>시즌당 3종 (Week 1·3·6)</td><td>Kimberly·DVA·Tesla EW (S1)</td><td>해당 영웅 전투력 급등</td><td style="color:var(--red)">전용 장비 패스 $20/영웅</td></tr>
+    <tr><td>영웅 복귀 이벤트</td><td>시즌 중 1~2회</td><td>Legend Returns (기존 UR 무료)</td><td>캐치업 기회 제공</td><td style="color:var(--green)">무료 (재참여 유도)</td></tr>
+    <tr><td>신규 시스템 도입</td><td>시즌당 1~2개</td><td>직업·전술 카드·열차 무역</td><td>전략 레이어 추가</td><td>새 시스템 전용 자원 소비</td></tr>
   </tbody>
 </table>
 </section>
 
-<!-- ══════ S9: BM ══════ -->
 <section class="stage-sec" id="s9">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">9단계</span>
@@ -2423,12 +2576,94 @@ function initS7(){
 
 /* S8 */
 function initS8(){
+  /* ── VS Duel 요일별 과금 강도 ── */
   new Chart(document.getElementById('c-vs'),{type:'bar',
-    data:{labels:['월(건설)','화(연구)','수(훈련)','목(채집)','금(영웅)','토(처치)','일(결산)'],
-      datasets:[{label:'과금 압박',data:[3,4,5,2,4,5,4],
-        backgroundColor:['rgba(37,99,235,.6)','rgba(124,58,237,.6)','rgba(220,38,38,.85)','rgba(5,150,105,.6)','rgba(124,58,237,.6)','rgba(220,38,38,.85)','rgba(124,58,237,.6)'],borderRadius:5}]},
+    data:{labels:['Day1\n월(Radar)','Day2\n화(건설)','Day3\n수(연구)','Day4\n목(영웅)','Day5\n금(훈련)','Day6\n토(Enemy Buster)'],
+      datasets:[{label:'과금 압박',data:[4,4,4,4,5,10],
+        backgroundColor:['rgba(37,99,235,.6)','rgba(37,99,235,.6)','rgba(124,58,237,.6)','rgba(217,119,6,.6)','rgba(217,119,6,.7)','rgba(220,38,38,.85)'],borderRadius:5}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},y:{...ax(),max:6,ticks:{callback:v=>['','★','★★','★★★','★★★★','★★★★★'][v]||v}}}}
+      scales:{x:{grid:{display:false},ticks:{color:'#5a6275',font:{size:9}}},y:{...ax(),max:12,ticks:{callback:v=>v===10?'최고':v===0?'':v+'점'}}}}
+  });
+
+  /* ── 시즌 구조 탐색기 ── */
+  const SEASONS=[
+    {label:'Pre-Season',color:'#5a6275',
+     weeks:'무제한 (서버 생성~S1 시작)',theme:'기본 서버 정착',
+     newSys:'기지 건설·연맹·Alliance Duel 기초',
+     heroNew:'—',resource:'식량·철강·골드',
+     reset:'시즌 자원·직업·맵 거점',
+     key:'서버 초기 생태계 형성. 무과금 플레이어도 경쟁 가능한 유일한 구간.',
+     pay:3},
+    {label:'S1 크림슨 역병',color:'#dc2626',
+     weeks:'8주 + 1~2주 축하',theme:'좀비 바이러스 vs 면역',
+     newSys:'바이러스 저항력 · 직업(엔지니어/전쟁장) · 유전자 재조합',
+     heroNew:'Mason UR 승급 · 전용 장비 3종 (Kimberly·DVA·Tesla)',resource:'단백질 · 면역 단백질',
+     reset:'단백질·면역 단백질·직업 스킬·맵 거점',
+     key:'첫 시즌 = 게임 방향성 체험. 신규 플레이어 급증. 전용 장비 최초 도입으로 과금 구조 완성.',
+     pay:9},
+    {label:'S2 극지 폭풍',color:'#2563eb',
+     weeks:'8주 + 오프시즌(에이지 오브 오일)',theme:'극지 온도 생존',
+     newSys:'온도 시스템 · 고열 용광로 · 희귀 토양 전쟁 · 석유(오프시즌)',
+     heroNew:'Violet UR 승급 · 전용 장비 3종 (Murphy·Marshall·Williams)',resource:'석탄 · 티타늄 합금 · 석유(오프시즌)',
+     reset:'석탄·티타늄·희귀 토양·직업 스킬·맵 거점',
+     key:'온도 시스템으로 새로운 생존 압박. 석유(Age of Oil) 도입으로 경제 인플레이션 재가동.',
+     pay:9},
+    {label:'S3 황금 왕국',color:'#d97706',
+     weeks:'8주',theme:'사막 탐험·유물 발굴',
+     newSys:'저주 저항력 · 사막 탐험(아티팩트) · 오아시스 시스템',
+     heroNew:'Scarlett UR 승급 · 전용 장비 3종 (Swift·Adam·Schuyler)',resource:'미스릴 · 저주 저항력',
+     reset:'미스릴·저항력·직업·맵 거점',
+     key:'탐험 미니게임으로 PvE 다변화. 저주 저항력이 새 병목.',
+     pay:8},
+    {label:'S4 영원의 섬',color:'#7c3aed',
+     weeks:'8주',theme:'해양 섬 점령',
+     newSys:'저주 시스템 · 전술 카드 · 경력 센터',
+     heroNew:'Sarah UR 승급 · 전용 장비 3종 (Fiona·Lucius·Carlie)',resource:'신성한 물',
+     reset:'신성한 물·전술 카드·직업·맵 거점',
+     key:'전술 카드로 전략 레이어 추가. Hero Swap 티켓 도입(메타 전환 비용 완화).',
+     pay:8},
+    {label:'S5 와일드 웨스트',color:'#d97706',
+     weeks:'8주',theme:'황금 황야 무법지대',
+     newSys:'열차 무역(CrystalGold) · 은행 거점 · 하이 눈 미니게임 · Warzone 거점',
+     heroNew:'Venom UR 승급 · 전용 장비 3종 (Fiona·Morrison·Stetmann)',resource:'커피빈 · CrystalGold',
+     reset:'커피빈·CrystalGold·직업·맵 거점',
+     key:'열차 경제 시스템으로 PvP 경제 레이어 추가. 바이러스 저항력 39,900 요구 — 역대 최고 압박.',
+     pay:10},
+  ];
+  const seasonTabs=document.getElementById('season-tabs');
+  SEASONS.forEach((s,i)=>{
+    const btn=document.createElement('div');btn.className='ibtn';btn.textContent=s.label;
+    btn.onclick=()=>{
+      document.querySelectorAll('#season-tabs .ibtn').forEach((b,j)=>{
+        b.style.background=j===i?s.color+'22':'';b.style.color=j===i?s.color:'';b.style.borderColor=j===i?s.color:'';
+      });
+      document.getElementById('season-detail').innerHTML=`
+        <div style="font-size:13px;font-weight:500;color:${s.color};margin-bottom:6px">${s.label} — ${s.theme} (${s.weeks})</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:7px">
+          <div><div style="font-size:10px;color:var(--blue);font-weight:500;margin-bottom:2px">신규 시스템</div><div style="font-size:11px;color:var(--muted)">${s.newSys}</div></div>
+          <div><div style="font-size:10px;color:var(--amber);font-weight:500;margin-bottom:2px">신규 영웅·전용 장비</div><div style="font-size:11px;color:var(--muted)">${s.heroNew}</div></div>
+          <div><div style="font-size:10px;color:var(--red);font-weight:500;margin-bottom:2px">시즌 종료 시 리셋</div><div style="font-size:11px;color:var(--muted)">${s.reset}</div></div>
+        </div>
+        <div style="font-size:10px;color:var(--green);font-weight:500;margin-bottom:2px">핵심 인사이트</div>
+        <div style="font-size:11px;color:var(--muted)">${s.key}</div>`;
+    };
+    seasonTabs.appendChild(btn);
+  });
+  if(seasonTabs.firstChild)seasonTabs.firstChild.onclick();
+
+  /* ── 시즌별 영웅 도입 + 과금 강도 ── */
+  new Chart(document.getElementById('c-season-hero'),{type:'bar',
+    data:{labels:['Pre','S1','S2','S3','S4','S5'],
+      datasets:[
+        {label:'전용 장비 도입 수',data:[0,3,3,3,3,3],backgroundColor:'rgba(217,119,6,.7)',borderRadius:4,barPercentage:.35,categoryPercentage:.9,yAxisID:'y1'},
+        {label:'과금 강도',data:[3,9,9,8,8,10],type:'line',borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.08)',tension:.4,fill:true,pointRadius:5,pointBackgroundColor:'#dc2626',yAxisID:'y2'},
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:8,font:{size:10}}}},
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#5a6275'}},
+        y1:{type:'linear',position:'left',min:0,max:5,grid:{color:'rgba(0,0,0,.05)'},ticks:{color:'rgba(217,119,6,.8)',callback:v=>v+'종'},title:{display:true,text:'전용 장비',color:'rgba(217,119,6,.8)',font:{size:10}}},
+        y2:{type:'linear',position:'right',min:0,max:12,grid:{display:false},ticks:{color:'#dc2626',callback:v=>v+'점'},title:{display:true,text:'과금 강도',color:'#dc2626',font:{size:10}}},
+      }}
   });
 }
 
