@@ -2665,6 +2665,62 @@ function initS8(){
         y2:{type:'linear',position:'right',min:0,max:12,grid:{display:false},ticks:{color:'#dc2626',callback:v=>v+'점'},title:{display:true,text:'과금 강도',color:'#dc2626',font:{size:10}}},
       }}
   });
+
+  /* ── 시즌별 영웅·전용 장비 도입 타임라인 (c-hero-timeline) ── */
+  const htLabels=['Pre',
+    'S1\nW1','S1\nW3','S1\nW6',
+    'S2\nW1','S2\nW3','S2\nW6',
+    'S3\nW1','S3\nW3','S3\nW6',
+    'S4\nW1','S4\nW3','S4\nW6',
+    'S5\nW1','S5\nW3','S5\nW6'];
+  // 1=전용 장비 출시 주, 2=SSR→UR 승급 또는 신규 UR
+  const htEW  =[0,3,0,3,3,0,3,3,0,3,3,0,3,3,0,3];  // 전용 장비 조각 (높이용)
+  const htHero=[0,2,0,0,2,0,0,2,0,0,2,0,0,2,0,0];  // 신규/승급 영웅
+  // 시즌 구분용 배경색
+  const htBgEW  =htEW.map((v,i)=>{
+    const s=i===0?0:Math.floor((i-1)/3)+1;
+    const cols=['rgba(107,114,128,.6)','rgba(220,38,38,.75)','rgba(37,99,235,.75)','rgba(217,119,6,.75)','rgba(124,58,237,.75)','rgba(217,119,6,.75)'];
+    return v>0?cols[s]:'transparent';
+  });
+  const htBgHero=htHero.map((v,i)=>{
+    const s=i===0?0:Math.floor((i-1)/3)+1;
+    const cols=['rgba(107,114,128,.4)','rgba(220,38,38,.4)','rgba(37,99,235,.4)','rgba(217,119,6,.4)','rgba(124,58,237,.4)','rgba(217,119,6,.4)'];
+    return v>0?cols[s]:'transparent';
+  });
+  new Chart(document.getElementById('c-hero-timeline'),{type:'bar',
+    data:{labels:htLabels,
+      datasets:[
+        {label:'전용 장비 출시 (3종)',data:htEW,backgroundColor:htBgEW,borderRadius:3,barPercentage:.45,categoryPercentage:.85},
+        {label:'신규/승급 영웅',data:htHero,backgroundColor:htBgHero,borderRadius:3,barPercentage:.45,categoryPercentage:.85},
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#5a6275',boxWidth:8,font:{size:10}}},
+        tooltip:{callbacks:{label:ctx=>{
+          if(ctx.parsed.y===0)return null;
+          if(ctx.datasetIndex===0)return '전용 장비 3종 출시';
+          return '신규/승급 UR 영웅 등장';
+        }}}},
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#5a6275',font:{size:8}}},
+        y:{display:false,min:0,max:5},
+      }},
+    plugins:[{afterDraw(c){
+      const ctx2=c.ctx,xA=c.scales.x,yA=c.scales.y;
+      if(!xA||!yA)return;
+      // 시즌 레이블 + 구분선
+      const seasons=[[1,'S1','#dc2626'],[4,'S2','#2563eb'],[7,'S3','#d97706'],[10,'S4','#7c3aed'],[13,'S5','#d97706']];
+      seasons.forEach(([idx,lbl,col])=>{
+        const xLine=xA.getPixelForValue(idx-0.5);
+        ctx2.save();
+        ctx2.strokeStyle=col+'55';ctx2.lineWidth=1.5;ctx2.setLineDash([4,3]);
+        ctx2.beginPath();ctx2.moveTo(xLine,yA.top);ctx2.lineTo(xLine,yA.bottom);ctx2.stroke();
+        const xMid=xA.getPixelForValue(idx+1);
+        ctx2.fillStyle=col;ctx2.font='bold 11px sans-serif';ctx2.textAlign='center';
+        ctx2.fillText(lbl,xMid,yA.top+13);
+        ctx2.restore();
+      });
+    }}]
+  });
 }
 
 /* S9 */
