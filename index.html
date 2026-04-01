@@ -353,117 +353,111 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
   <span class="sbadge" style="background:#fffbeb;color:#92400e;border:1px solid #fde68a">4단계</span>
   <div class="stitle">
     <h2>영웅 성장 체계 — 레벨·성급·스킬·전용 장비 완전 분석</h2>
-    <p>조각 기반 성급 진급 메커니즘 · 레벨업 경험치 요구량 구조 · 전용 장비 시스템 · CP 기여 4축</p>
+    <p>조각 기반 성급 진급 메커니즘 · 레벨업 경험치 요구량 구조 · 전용 장비 시스템 · CP 기여 4축 · 전체 영웅 목록</p>
   </div>
 </div>
 <div class="check-row">
   <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 인터랙티브: SSR 획득 경로 탐색기 + CP 4축 시뮬</span>
   <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 차트: 조각 누적량 + EXP 요구량 + 전용 장비 조각 비용</span>
-  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 표: 성급 진급 조각 + HQ별 EXP 마일스톤 + 전용 장비 단계</span>
+  <span class="check-badge" style="background:#ecfdf5;color:#065f46">✓ 표: 성급 진급 조각 + EXP 마일스톤 + 전용 장비 + 영웅 전체 목록</span>
 </div>
 <div class="stat-row">
-  <div class="scard"><div class="lbl">6성 완성 누적 조각 (UR)</div><div class="val" style="color:var(--amber)">975개</div></div>
-  <div class="scard"><div class="lbl">전용 장비 최대 레벨 조각</div><div class="val" style="color:var(--red)">2,880개</div></div>
+  <div class="scard"><div class="lbl">UR 6성 누적 조각</div><div class="val" style="color:var(--amber)">275개</div></div>
+  <div class="scard"><div class="lbl">전용 장비 최대 조각</div><div class="val" style="color:var(--red)">2,880개</div></div>
   <div class="scard"><div class="lbl">Lv.150 누적 EXP</div><div class="val" style="color:var(--purple)">5.24B</div></div>
-  <div class="scard"><div class="lbl">EXP 기하급수 구간</div><div class="val" style="color:var(--red)">Lv.30+</div></div>
+  <div class="scard"><div class="lbl">전체 영웅 수</div><div class="val" style="color:var(--blue)">29명</div></div>
 </div>
-<div class="insight"><strong>핵심 통찰:</strong> 4개 독립 성장 통화(조각·경험치·스킬 메달·장비 광석)가 하나의 CP로 수렴한다. 어느 하나만 최대화해도 균형점 미달 — 영구 병목 순환 설계. 전용 장비는 Lv.20에서 7.5% 타입 버프를 주는 가성비 최고 포인트지만, Lv.30 → Wall of Honor 구간이 진짜 Whale 분리선이다.</div>
+<div class="insight"><strong>핵심 통찰:</strong> 4개 독립 성장 통화(조각·경험치·스킬 메달·장비 광석)가 하나의 CP로 수렴한다. 어느 하나만 최대화해도 균형점 미달 — 영구 병목 순환 설계. 전용 장비 Lv.20이 가성비 최고점(1,660조각 → 타입 전체 +7.5%), Lv.30→Wall of Honor가 Whale 분리선이다.</div>
 
 <div class="sdiv">① 조각(Shard) 기반 성급 진급 메커니즘</div>
 <div class="grid2">
   <div class="gcard" style="border-color:rgba(217,119,6,.3)">
-    <h4 style="color:var(--amber)">UR 영웅 성급 진급</h4>
-    <p>1→2성: <strong>15조각</strong> | 2→3성: <strong>30조각</strong> | 3→4성: <strong>80조각</strong> | 4→5성: <strong>150조각</strong><br>누적 5성: <strong>275조각</strong>. 5성 달성 후 "Wall of Honor" 등록, 전용 장비 해금 가능.<br><br>5성의 4~5성 구간(100+150=250조각)이 전체 비용의 62%를 차지하는 의도적 설계.</p>
+    <h4 style="color:var(--amber)">UR 영웅 성급 진급 조각</h4>
+    <p>1성(해금): <strong>10</strong> · 2성: <strong>15</strong> · 3성: <strong>30</strong> · 4성: <strong>80</strong> · 5성: <strong>140</strong><br>누적 5성: <strong>275조각</strong>. 5성 달성 시 Wall of Honor 등록 + 전용 장비 해금.<br><br>4→5성 구간(80+140=220조각)이 전체 비용의 80%를 차지하는 의도적 설계.</p>
   </div>
   <div class="gcard" style="border-color:rgba(124,58,237,.3)">
-    <h4 style="color:var(--purple)">SSR→UR 승급 시 특수 규칙</h4>
-    <p>SSR 5성에서 UR로 승급 시 <strong>UR 3성으로 시작</strong> (S1 업데이트 이후 변경).<br>이후 4성: 200조각(2×), 5성: 200조각(2×) — 일반 UR보다 2배 비쌈.<br>단, 승급 전 사용한 SSR 조각 350개 환급(S1 기준).<br><br>SSR 유니버설 조각 ≠ UR 유니버설 조각 — 별도 관리 필수.</p>
+    <h4 style="color:var(--purple)">SSR→UR 승급 특수 규칙</h4>
+    <p>SSR 5성에서 UR로 승급 시 <strong>UR 3성으로 시작</strong> (S1 업데이트 이후).<br>이후 4성: 200조각(일반 UR의 2배), 5성: 200조각(2배).<br>단, 승급 전 사용한 SSR 조각 350개 환급(S1 기준).<br><br>SSR 유니버설 조각 ≠ UR 유니버설 조각 — 등급별 별도 관리 필수.</p>
   </div>
 </div>
 
 <table class="dt">
-  <thead><tr><th>등급</th><th>별 (성)</th><th>필요 조각 (해당 성)</th><th>누적 조각</th><th>주요 해금 효과</th><th>무과금 소요 기간</th></tr></thead>
+  <thead><tr><th>등급</th><th>성급</th><th>해당 성 조각</th><th>누적 조각</th><th>주요 해금 효과</th><th>무과금 소요</th></tr></thead>
   <tbody>
-    <tr><td rowspan="5" style="color:var(--amber);font-weight:600">UR</td><td>1성 (해금)</td><td>10</td><td>10</td><td>영웅 배치 가능 · T1 스킬 해금</td><td>즉시 (이벤트 지급)</td></tr>
-    <tr><td>2성</td><td>15</td><td>25</td><td>T2 스킬 해금 · 기본 스탯 +18%</td><td>1~2주</td></tr>
-    <tr><td>3성</td><td>30</td><td>55</td><td>전용 장비 슬롯 해금 · 패시브 강화</td><td>1~2개월</td></tr>
+    <tr><td rowspan="5" style="color:var(--amber);font-weight:600">UR</td><td>1성</td><td>10</td><td>10</td><td>영웅 배치 가능 · T1 스킬</td><td>즉시</td></tr>
+    <tr><td>2성</td><td>15</td><td>25</td><td>T2 스킬 · 기본 스탯 +18%</td><td>1~2주</td></tr>
+    <tr><td>3성</td><td>30</td><td>55</td><td>전용 장비 슬롯 · 패시브 강화</td><td>1~2개월</td></tr>
     <tr><td>4성</td><td>80</td><td>135</td><td>얼티밋 스킬 준비 · 스탯 +85%</td><td>4~8개월</td></tr>
-    <tr><td style="color:var(--red)">5성</td><td style="color:var(--red)">140</td><td style="color:var(--red)">275</td><td style="color:var(--red)">Wall of Honor 등록 · 전용 장비 해금 · 스탯 +200%</td><td style="color:var(--red)">18~30개월</td></tr>
+    <tr><td style="color:var(--red)">5성</td><td style="color:var(--red)">140</td><td style="color:var(--red)">275</td><td style="color:var(--red)">Wall of Honor · 전용 장비 해금</td><td style="color:var(--red)">18~30개월</td></tr>
     <tr><td rowspan="5" style="color:var(--purple);font-weight:600">SSR</td><td>1성</td><td>10</td><td>10</td><td>영웅 배치 가능</td><td>즉시</td></tr>
     <tr><td>2성</td><td>20</td><td>30</td><td>스킬 1단계</td><td>2~4주</td></tr>
-    <tr><td>3성</td><td>50</td><td>80</td><td>전용 장비 슬롯 해금</td><td>3~6개월</td></tr>
-    <tr><td>4성</td><td>120</td><td>200</td><td>패시브 강화</td><td>10~18개월</td></tr>
-    <tr><td style="color:var(--red)">5성</td><td style="color:var(--red)">200 (승급 시 2×)</td><td style="color:var(--red)">400</td><td style="color:var(--red)">UR 3성으로 승급 조건</td><td style="color:var(--red)">30~60개월</td></tr>
+    <tr><td>3성</td><td>50</td><td>80</td><td>패시브 강화</td><td>3~6개월</td></tr>
+    <tr><td>4성</td><td>120</td><td>200</td><td>얼티밋 스킬</td><td>10~18개월</td></tr>
+    <tr><td style="color:var(--red)">5성</td><td style="color:var(--red)">200</td><td style="color:var(--red)">400</td><td style="color:var(--red)">UR 3성으로 승급 조건 (해당 영웅 한정)</td><td style="color:var(--red)">30~60개월</td></tr>
   </tbody>
 </table>
+<div class="cwrap"><div class="clbl">성급별 조각 요구량 — UR(주황) vs SSR(보라) 비교</div><canvas id="c-shard" style="max-height:200px"></canvas></div>
 
-<div class="cwrap"><div class="clbl">등급별 성급 진급 누적 조각 비교 — UR(주황) vs SSR(보라)</div><canvas id="c-shard" style="max-height:200px"></canvas></div>
-
-<div class="sdiv">② 레벨업 경험치 요구량 구조 — HQ 레벨 캡 연동</div>
-<div class="insight">영웅 최대 레벨 = HQ 레벨 × 5. HQ Lv.30 = 영웅 Lv.150. Lv.1~25는 선형 증가, Lv.26부터 기하급수 전환 — <strong>Lv.30 경계가 EXP 가속 분기점</strong>이다. Lv.150 누적 EXP 약 52억으로 Training Base 5개 × 259,200/h 기준 <strong>약 40,000시간 = 4.5년</strong> 분량.</div>
-
+<div class="sdiv">② 레벨업 경험치 요구량 구조 (HQ 레벨 캡 연동)</div>
+<div class="insight">영웅 최대 레벨 = HQ 레벨 × 5. <strong>Lv.26~35 구간이 기하급수 전환점</strong> — 이전 대비 EXP 요구량이 50배 급증. <strong>Lv.68~72가 주요 파워 스파이크</strong> (스킬 해금 집중 구간). Lv.150 누적 52억 EXP = Training Base 5개 기준 약 4.5년 분량.</div>
 <div class="cwrap">
   <div class="sl-row">
-    <label>목표 레벨 확인 <span id="exp-lv-v" style="color:var(--text);font-weight:500">Lv.30</span> — 해당 레벨업 EXP: <span id="exp-one" style="color:var(--red);font-weight:500">8,000</span> | 누적: <span id="exp-total" style="color:var(--purple);font-weight:500">59,900</span></label>
+    <label>목표 레벨 <span id="exp-lv-v" style="color:var(--text);font-weight:500">Lv.30</span> — 레벨업 EXP: <span id="exp-one" style="color:var(--red);font-weight:500">8,000</span> | 누적: <span id="exp-total" style="color:var(--purple);font-weight:500">59,900</span></label>
     <input type="range" min="2" max="150" value="30" id="exp-lv-s" oninput="window.calcExpLv&&window.calcExpLv()">
     <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:2px"><span>Lv.2</span><span>Lv.50 (HQ10)</span><span>Lv.100 (HQ20)</span><span>Lv.150 (HQ30)</span></div>
   </div>
   <div id="exp-insight" style="font-size:12px;color:var(--muted);padding:8px 10px;background:var(--sur);border-radius:8px;margin-bottom:12px;line-height:1.7"></div>
-  <canvas id="c-exp" style="max-height:220px"></canvas>
+  <canvas id="c-exp" style="max-height:200px"></canvas>
 </div>
 
 <table class="dt">
-  <thead><tr><th>HQ 레벨</th><th>영웅 레벨 범위</th><th>레벨업 EXP 범위</th><th>HQ 구간 누적 EXP</th><th>전체 대비 비율</th><th>특이사항</th></tr></thead>
+  <thead><tr><th>HQ</th><th>영웅 레벨 범위</th><th>레벨업 EXP 범위</th><th>구간 누적 EXP</th><th>특이사항</th></tr></thead>
   <tbody>
-    <tr><td>HQ 1</td><td>Lv.1~5</td><td>0~400</td><td>1,000</td><td>&lt;0.01%</td><td>선형 증가 구간 (초반)</td></tr>
-    <tr><td>HQ 5</td><td>Lv.21~25</td><td>2,000~3,200</td><td>12,300</td><td>0.02%</td><td>Lv.23부터 불규칙 증가 시작</td></tr>
-    <tr><td style="color:var(--amber)">HQ 6~7</td><td>Lv.26~35</td><td>3,900~20,000</td><td>101,100</td><td>0.2%</td><td style="color:var(--amber)"><strong>EXP 기하급수 전환점</strong></td></tr>
-    <tr><td>HQ 10</td><td>Lv.46~50</td><td>150K~310K</td><td>1,120,000</td><td>2.1%</td><td>레벨당 EXP 100K+ 구간 진입</td></tr>
-    <tr><td>HQ 14</td><td>Lv.66~70</td><td>3.4M~4.9M</td><td>20,600,000</td><td>39%</td><td><strong>Lv.68~72 주요 파워 스파이크</strong> (스킬 해금)</td></tr>
-    <tr><td>HQ 20</td><td>Lv.96~100</td><td>27M~33M</td><td>149,000,000</td><td>28%</td><td>레벨당 EXP 3억 구간</td></tr>
-    <tr><td style="color:var(--red)">HQ 30</td><td>Lv.146~150</td><td>165M~185M</td><td>875,000,000</td><td style="color:var(--red)">16.7%</td><td style="color:var(--red)">HQ 30 구간만 전체의 16.7% 소모</td></tr>
+    <tr><td>HQ 1</td><td>Lv.1~5</td><td>0~400</td><td>1,000</td><td>선형 증가 (초반)</td></tr>
+    <tr><td style="color:var(--amber)">HQ 6~7</td><td>Lv.26~35</td><td>3,900~20,000</td><td>101,100</td><td style="color:var(--amber)"><strong>기하급수 전환점</strong> — Lv.25 대비 50배 급증</td></tr>
+    <tr><td>HQ 10</td><td>Lv.46~50</td><td>150K~310K</td><td>1,120,000</td><td>레벨당 EXP 100K+ 진입</td></tr>
+    <tr><td style="color:var(--red)">HQ 14</td><td>Lv.66~70</td><td>3.4M~4.9M</td><td>20,600,000</td><td style="color:var(--red)"><strong>Lv.68~72 파워 스파이크</strong> (스킬 해금)</td></tr>
+    <tr><td>HQ 20</td><td>Lv.96~100</td><td>27M~33M</td><td>149,000,000</td><td>레벨당 EXP 3억 구간</td></tr>
+    <tr><td style="color:var(--red)">HQ 30</td><td>Lv.146~150</td><td>165M~185M</td><td>875,000,000</td><td style="color:var(--red)">HQ30 구간만 전체의 16.7% 소모</td></tr>
   </tbody>
 </table>
 
-<div class="sdiv">③ 전용 장비(Exclusive Weapon) 시스템 구조</div>
+<div class="sdiv">③ 전용 장비(Exclusive Weapon) 시스템</div>
 <div class="grid2">
   <div class="gcard" style="border-color:rgba(220,38,38,.3)">
     <h4 style="color:var(--red)">해금 조건 — 2가지 필수</h4>
-    <p><strong>① 영웅 5성 달성 필수</strong> — 조각이 아무리 많아도 5성 미달 시 불가.<br><strong>② 전용 무기 조각 50개 필요</strong> — 영웅 특정 조각(일반 조각 불가).<br><br>해금 즉시 스쿼드 전투력 <strong>+0.3M</strong> 상승. 매 시즌 3종(탱크·항공·미사일 각 1개) 신규 출시. 배틀패스($20)로 조기 해금 가능.</p>
+    <p><strong>① 영웅 5성 달성 필수</strong> — 조각이 많아도 5성 미달 시 불가.<br><strong>② 전용 무기 조각 50개</strong> — 영웅 특정 조각(유니버설 불가).<br>매 시즌 탱크·항공·미사일 각 1종 신규 출시. 배틀패스($20) 조기 해금 가능.</p>
   </div>
   <div class="gcard" style="border-color:rgba(5,150,105,.3)">
-    <h4 style="color:var(--green)">과금 효율 최적 포인트 — Lv.20</h4>
-    <p><strong>Lv.20 달성 시:</strong> 해당 영웅 타입(탱크/항공/미사일) 전체 스탯 <strong>+7.5%</strong> 버프.<br>Lv.20까지 총 <strong>1,660 조각</strong> 소요.<br><br>Lv.30 이후 Wall of Honor 진입 → 공격/HP/방어 각 50단계 추가 (조각 1,500개 추가). Whale 전용 구간.</p>
+    <h4 style="color:var(--green)">핵심 마일스톤</h4>
+    <p><strong>Lv.10</strong>: 2번 특수 능력 + 비주얼 변경 (410조각)<br><strong>Lv.20</strong>: 타입 전체 스탯 <strong>+7.5%</strong> — 가성비 최고점 (1,660조각)<br><strong>Lv.30</strong>: Wall of Honor 개방 (2,880조각)<br><strong>Wall of Honor</strong>: 공격·HP·방어 각 50단계 추가 (MegaWhale)</p>
   </div>
 </div>
-
-<div class="cwrap"><div class="clbl">전용 장비 레벨 구간별 누적 조각 — 주요 마일스톤 표시</div><canvas id="c-ew" style="max-height:220px"></canvas></div>
+<div class="cwrap"><div class="clbl">전용 장비 레벨 구간별 누적 조각 — 마일스톤 표시</div><canvas id="c-ew" style="max-height:200px"></canvas></div>
 
 <table class="dt">
-  <thead><tr><th>레벨 구간</th><th>레벨당 조각</th><th>구간 합계</th><th>누적 조각</th><th>주요 효과</th><th>과금 효율</th></tr></thead>
+  <thead><tr><th>레벨 구간</th><th>레벨당 조각</th><th>구간 합계</th><th>누적 조각</th><th>주요 효과</th></tr></thead>
   <tbody>
-    <tr><td style="color:var(--red)"><strong>Lv.1 (해금)</strong></td><td style="color:var(--red)">50 (전용 조각 필수)</td><td style="color:var(--red)">50</td><td style="color:var(--red)">50</td><td style="color:var(--red)">전용 장비 해금 + 1번 특수 능력 + 전투력 +0.3M</td><td style="color:var(--red)">★★★★★</td></tr>
-    <tr><td>Lv.2~4</td><td>20</td><td>60</td><td>110</td><td>기본 스탯 증가 시작</td><td style="color:var(--green)">★★★★★</td></tr>
-    <tr><td>Lv.5~9</td><td>40</td><td>200</td><td>310</td><td>스탯 강화 가속 구간</td><td style="color:var(--green)">★★★★</td></tr>
-    <tr><td style="color:var(--amber)"><strong>Lv.10 마일스톤</strong></td><td>60</td><td>60</td><td>410</td><td style="color:var(--amber)">2번 특수 능력 + 비주얼 업그레이드 (차량 외형 변경)</td><td style="color:var(--amber)">★★★★★</td></tr>
-    <tr><td>Lv.11~14</td><td>60</td><td>240</td><td>650</td><td>스킬 3레벨마다 추가 해금 (최대 스킬 레벨 30→40)</td><td>★★★★</td></tr>
-    <tr><td>Lv.15~19</td><td>100</td><td>500</td><td>1,150</td><td>스킬 추가 강화</td><td>★★★</td></tr>
-    <tr><td style="color:var(--green)"><strong>Lv.20 마일스톤</strong></td><td>150</td><td>150</td><td>1,300</td><td style="color:var(--green)">3번 특수 능력 + <strong>타입 전체 스탯 +7.5%</strong> (가성비 최고점)</td><td style="color:var(--red)">★★★★★</td></tr>
-    <tr><td>Lv.21~24</td><td>150</td><td>600</td><td>1,900</td><td>지속 스탯 강화</td><td>★★</td></tr>
-    <tr><td>Lv.25~29</td><td>200</td><td>1,000</td><td>2,900</td><td>추가 강화 구간</td><td>★★</td></tr>
-    <tr><td style="color:var(--red)"><strong>Lv.30 마일스톤</strong></td><td>200</td><td>200</td><td style="color:var(--red)">2,880 (해금 포함)</td><td style="color:var(--red)">4번 특수 능력 + Wall of Honor 개방 + 전투력 +1.2M 누적</td><td style="color:var(--red)">★★★ (Whale 전용)</td></tr>
-    <tr><td style="color:var(--red)"><strong>Wall of Honor</strong></td><td style="color:var(--red)">10 (공격/HP/방어 각 50단계)</td><td style="color:var(--red)">1,500 (각 500)</td><td style="color:var(--red)">4,380 (최대)</td><td style="color:var(--red)">50레벨마다 대형 스탯 보너스 · 아바타 변경</td><td style="color:var(--red)">MegaWhale 전용</td></tr>
+    <tr><td style="color:var(--red)"><strong>Lv.1 (해금)</strong></td><td>50 (전용 필수)</td><td>50</td><td>50</td><td style="color:var(--red)">전용 장비 해금 + 1번 특수 능력 + 전투력 +0.3M</td></tr>
+    <tr><td>Lv.2~4</td><td>20</td><td>60</td><td>110</td><td>기본 스탯 증가 시작</td></tr>
+    <tr><td>Lv.5~9</td><td>40</td><td>200</td><td>310</td><td>스탯 강화 가속</td></tr>
+    <tr><td style="color:var(--amber)"><strong>Lv.10 마일스톤</strong></td><td>60</td><td>60</td><td>410</td><td style="color:var(--amber)">2번 특수 능력 + 차량 외형 변경</td></tr>
+    <tr><td>Lv.11~19</td><td>60→100</td><td>740</td><td>1,150</td><td>스킬 3레벨마다 추가 (최대 스킬 Lv.30→40)</td></tr>
+    <tr><td style="color:var(--green)"><strong>Lv.20 마일스톤</strong></td><td>150</td><td>150</td><td>1,300</td><td style="color:var(--green)">3번 특수 능력 + <strong>타입 전체 스탯 +7.5%</strong></td></tr>
+    <tr><td>Lv.21~29</td><td>150→200</td><td>1,580</td><td>2,880</td><td>지속 강화 (월 20~50조각 기준 2~5년)</td></tr>
+    <tr><td style="color:var(--red)"><strong>Lv.30 마일스톤</strong></td><td>200</td><td>200</td><td>2,880</td><td style="color:var(--red)">4번 특수 능력 + Wall of Honor 개방 + 전투력 +1.2M 누적</td></tr>
+    <tr><td style="color:var(--red)">Wall of Honor</td><td>10 (×150단계)</td><td>1,500</td><td>4,380</td><td style="color:var(--red)">공격·HP·방어 각 50단계 · MegaWhale 전용</td></tr>
   </tbody>
 </table>
 
 <div class="sdiv">SSR 영웅 획득 경로 5종 — 탐색기</div>
 <div class="cwrap">
   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px" id="ssr-tabs"></div>
-  <div id="ssr-info" style="font-size:12px;color:var(--muted);line-height:1.8;padding:10px;background:var(--bg);border-radius:8px;margin-bottom:12px;min-height:70px">경로를 선택하면 상세 분석이 표시됩니다.</div>
+  <div id="ssr-info" style="font-size:12px;color:var(--muted);line-height:1.8;padding:10px;background:var(--sur);border-radius:8px;margin-bottom:12px;min-height:70px">경로를 선택하면 상세 분석이 표시됩니다.</div>
   <canvas id="c-ssr" style="max-height:200px"></canvas>
 </div>
 
-<div class="sdiv">CP 기여 4개 축 — 실시간 시뮬레이터</div>
+<div class="sdiv">④ CP 기여 4개 축 — 실시간 시뮬레이터</div>
 <div class="cwrap">
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
     <div>
@@ -476,8 +470,46 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
   </div>
   <canvas id="c-cp" style="max-height:180px;margin-top:14px"></canvas>
 </div>
-</section>
 
+<div class="sdiv">⑤ 전체 영웅 목록 — UR / SSR / SR (29명)</div>
+<table class="dt">
+  <thead><tr><th>이름</th><th>등급</th><th>병종</th><th>역할</th><th>UR 승급</th><th>티어</th><th>핵심 특징</th></tr></thead>
+  <tbody>
+    <tr style="background:rgba(217,119,6,.05)"><td colspan="7" style="font-weight:600;color:var(--amber);padding:7px 13px;font-size:11px">── UR 등급 (15명) — 황금색 · 전설 등급 · 유니버설 레전더리 조각 사용</td></tr>
+    <tr><td><strong>Kimberly</strong></td><td style="color:var(--amber)">UR</td><td>Tank</td><td>공격</td><td>—</td><td style="color:var(--red);font-weight:600">SS</td><td>최강 탱크 AoE 딜러 · 전용 무기 시 폭발적 강화 · PvP·PvE 필수</td></tr>
+    <tr><td><strong>DVA</strong></td><td style="color:var(--amber)">UR</td><td>항공</td><td>공격</td><td>—</td><td style="color:var(--red);font-weight:600">SS</td><td>항공 최강 버스트 딜러 · 크리 30% 버프 · Steel Barrage AoE</td></tr>
+    <tr><td><strong>Tesla</strong></td><td style="color:var(--amber)">UR</td><td>미사일</td><td>공격</td><td>—</td><td style="color:var(--red);font-weight:600">SS</td><td>미사일 최강 에너지 딜러 · 좀비·대군 웨이브 클리어 핵심</td></tr>
+    <tr><td><strong>Williams</strong></td><td style="color:var(--amber)">UR</td><td>Tank</td><td>방어</td><td>—</td><td style="color:var(--red);font-weight:600">SS</td><td>최강 방어 탱크 · 전 아군 피해 감소 · PvP·집결 생존 필수</td></tr>
+    <tr><td><strong>Murphy</strong></td><td style="color:var(--amber)">UR</td><td>Tank</td><td>방어</td><td>—</td><td style="color:var(--red);font-weight:600">SS</td><td>HP·공격 버프 + 높은 생존력 · Williams 대체 탱크</td></tr>
+    <tr><td><strong>Marshall</strong></td><td style="color:var(--amber)">UR</td><td>Tank</td><td>지원</td><td>—</td><td style="color:var(--red);font-weight:600">SS</td><td>유일한 UR 서포터 · 팀 공격력 부스트 · 대체 불가</td></tr>
+    <tr><td><strong>Swift</strong></td><td style="color:var(--amber)">UR</td><td>미사일</td><td>공격</td><td>—</td><td style="color:var(--amber)">S</td><td>저체력 적 자동 집중 · 공격 버프 무한 스택 · 월드보스 최강</td></tr>
+    <tr><td><strong>Adam</strong></td><td style="color:var(--amber)">UR</td><td>미사일</td><td>방어</td><td>—</td><td style="color:var(--amber)">S</td><td>미사일 진영 전문 탱커 · 반격 데미지 · McGregor와 듀얼 프론트</td></tr>
+    <tr><td><strong>Schuyler</strong></td><td style="color:var(--amber)">UR</td><td>항공</td><td>공격</td><td>—</td><td style="color:var(--amber)">S</td><td>군중 제어(스턴·마비) 전문 · PvP 최강 CC</td></tr>
+    <tr><td><strong>Fiona</strong></td><td style="color:var(--amber)">UR</td><td>미사일</td><td>공격</td><td>—</td><td style="color:var(--amber)">S</td><td>미사일 최고 광역 딜러 · S5 전용 무기 출시</td></tr>
+    <tr><td><strong>Lucius</strong></td><td style="color:var(--amber)">UR</td><td>미사일</td><td>지원</td><td>—</td><td style="color:var(--amber)">S</td><td>팀 전체 에너지 피해 감소 쉴드 · 데일리 판매 전용 획득</td></tr>
+    <tr><td><strong>Carlie</strong></td><td style="color:var(--amber)">UR</td><td>항공</td><td>방어</td><td>—</td><td style="color:var(--amber)">S</td><td>유일한 항공 타입 탱커 · 에너지 피해 흡수 + AoE</td></tr>
+    <tr><td><strong>Morrison</strong></td><td style="color:var(--amber)">UR</td><td>미사일</td><td>공격</td><td>—</td><td style="color:var(--green)">A</td><td>관통 피해 + 팀 공격력 증가 · S5 전용 무기</td></tr>
+    <tr><td><strong>Stetmann</strong></td><td style="color:var(--amber)">UR</td><td>Tank</td><td>공격</td><td>—</td><td style="color:var(--green)">A</td><td>탱크 타입 에너지 딜러 · 특정 적에 강함</td></tr>
+    <tr><td><strong>McGregor</strong></td><td style="color:var(--amber)">UR</td><td>미사일</td><td>방어</td><td>—</td><td style="color:var(--green)">A</td><td>미사일 진영 필수 프론트라인 · 도발 스킬 양날검</td></tr>
+    <tr style="background:rgba(124,58,237,.05)"><td colspan="7" style="font-weight:600;color:var(--purple);padding:7px 13px;font-size:11px">── SSR 등급 (10명) — 보라색 · 에픽 등급 · 유니버설 에픽 조각 사용</td></tr>
+    <tr><td><strong>Mason</strong></td><td style="color:var(--purple)">SSR</td><td>Tank</td><td>공격</td><td style="color:var(--green)">S1 UR 승급</td><td style="color:var(--green)">A</td><td>가장 접근성 높은 SSR · S1에서 UR 승급 가능 · 좀비 특화</td></tr>
+    <tr><td><strong>Violet</strong></td><td style="color:var(--purple)">SSR</td><td>Tank</td><td>방어</td><td style="color:var(--green)">S2 UR 승급</td><td style="color:var(--blue)">B</td><td>독 스킬 기반 딜탱 · S2 UR 승급 · Murphy 초반 대체</td></tr>
+    <tr><td><strong>Scarlett</strong></td><td style="color:var(--purple)">SSR</td><td>Tank</td><td>방어</td><td style="color:var(--green)">S3 UR 승급</td><td style="color:var(--blue)">B</td><td>화염 기반 탱크 · S3 UR 승급 후 최강 · 승급 전 투자 주의</td></tr>
+    <tr><td><strong>Sarah</strong></td><td style="color:var(--purple)">SSR</td><td>항공</td><td>지원</td><td style="color:var(--green)">S4 UR 승급</td><td style="color:var(--blue)">B</td><td>항공 서포터 · 백라인 몬스터 피해 +18% · S4 UR 승급</td></tr>
+    <tr><td><strong>Venom</strong></td><td style="color:var(--purple)">SSR</td><td>미사일</td><td>공격</td><td style="color:var(--green)">S5 UR 승급</td><td style="color:var(--blue)">B</td><td>독 에너지 딜러 · S5 UR 승급 · 초반 미사일 캐리</td></tr>
+    <tr><td><strong>Richard</strong></td><td style="color:var(--purple)">SSR</td><td>Tank</td><td>방어</td><td>—</td><td style="color:var(--purple)">C</td><td>초반 피해 감소 · Ch.10 이후 급격히 약해짐 · 저우선순위</td></tr>
+    <tr><td><strong>Elsa</strong></td><td style="color:var(--purple)">SSR</td><td>미사일</td><td>방어</td><td>—</td><td style="color:var(--purple)">C</td><td>미사일 초반 임시 탱커 · 중반 이후 교체</td></tr>
+    <tr><td><strong>Maxwell</strong></td><td style="color:var(--purple)">SSR</td><td>항공</td><td>공격</td><td>—</td><td style="color:var(--purple)">C</td><td>단일 폭발 피해 · 특수 메커니즘 없음 · 초반 이후 약함</td></tr>
+    <tr><td><strong>Braz</strong></td><td style="color:var(--purple)">SSR</td><td>항공</td><td>공격</td><td>—</td><td style="color:var(--purple)">C</td><td>5회 랜덤 로켓 공격 · 중반 이후 경쟁력 낮음</td></tr>
+    <tr><td><strong>Cage</strong></td><td style="color:var(--purple)">SSR</td><td>항공</td><td>방어</td><td>—</td><td style="color:var(--purple)">C</td><td>전방 방어력 +40 버프 · 비스택 · 초반 방어 서포터</td></tr>
+    <tr style="background:rgba(37,99,235,.05)"><td colspan="7" style="font-weight:600;color:var(--blue);padding:7px 13px;font-size:11px">── SR 등급 (4명) — 하늘색 · 레어 등급 · UR/SSR 확보 즉시 교체 권장</td></tr>
+    <tr><td>Gump</td><td style="color:var(--blue)">SR</td><td>Tank</td><td>방어</td><td>—</td><td style="color:var(--muted)">D</td><td>초반 임시 탱커 · UR/SSR 확보 즉시 교체</td></tr>
+    <tr><td>Loki</td><td style="color:var(--blue)">SR</td><td>Tank</td><td>방어</td><td>—</td><td style="color:var(--muted)">D</td><td>초반 SR 탱커 · 빠르게 도태</td></tr>
+    <tr><td>Kane</td><td style="color:var(--blue)">SR</td><td>미사일</td><td>공격</td><td>—</td><td style="color:var(--muted)">D</td><td>기본 미사일 공격 · 초반 전용</td></tr>
+    <tr><td>Ambolt</td><td style="color:var(--blue)">SR</td><td>항공</td><td>지원</td><td>—</td><td style="color:var(--muted)">D</td><td>미미한 힐 · 초반 이후 기여 없음</td></tr>
+  </tbody>
+</table>
+</section>
 
 <section class="stage-sec" id="s5">
 <div class="stage-hdr">
@@ -907,7 +939,7 @@ function initStage(id){
   if(id==='s1')initS1();
   if(id==='s2')initS2();
   if(id==='s3')initS3();
-  if(id==='s4')initS4();
+  if(id==='s4'){initS4(); setTimeout(calcCP,100);}
   if(id==='s5')initS5();
   if(id==='s8')initS8();
   if(id==='s9')initS9();
@@ -1302,6 +1334,8 @@ function initS4(){
     ssrBtns.appendChild(b);
   });
   ssrBtns.firstChild.onclick(); // 첫 번째 항목 자동 활성화
+  // CP 시뮬레이터 초기화 (전역 calcCP 연결)
+  initS4_cpInit();
   const SHARDS=[10,30,80,200,500,1200],SPC=[0,18,42,85,160,300];
   new Chart(document.getElementById('c-shard'),{type:'bar',
     data:{labels:['1성','2성','3성','4성','5성','6성'],
@@ -1315,31 +1349,55 @@ function initS4(){
         y2:{type:'linear',position:'right',grid:{display:false},ticks:{color:'#dc2626',callback:v=>'+'+v+'%'}}
       }}
   });
-  const BASE=50000,SBNS=[0,.18,.42,.85,1.60,3.00];
-  let cpChart=null;
-  function calcCP(){
-    const lv=+document.getElementById('hlv-s').value,st=+document.getElementById('hst-s').value,
-      sk=+document.getElementById('hsk-s').value,eq=+document.getElementById('heq-s').value;
-    document.getElementById('hlv-v').textContent='Lv.'+lv;document.getElementById('hst-v').textContent=st+'성';
-    document.getElementById('hsk-v').textContent='Lv.'+sk;document.getElementById('heq-v').textContent='Lv.'+eq+' (0~30)';
-    const lvCP=Math.round(BASE*(lv/100)*1.30),stCP=Math.round(BASE*(SBNS[st-1]||0)*.25),
-      skCP=Math.round(BASE*((sk-1)/9)*.25),eqCP=Math.round(BASE*(eq/30)*.20),tot=lvCP+stCP+skCP+eqCP;
-    const maxCP=Math.round(BASE*(1.30+SBNS[5]*.25+.25+.20));
-    document.getElementById('cp-result').innerHTML=
-      [['레벨(30%)',lvCP,'#2563eb'],['성급(25%)',stCP,'#dc2626'],['스킬(25%)',skCP,'#059669'],['장비(20%)',eqCP,'#d97706']].map(([l,v,c])=>`<div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:12px"><span style="color:#5a6275">${l}</span><span style="font-weight:500;color:${c}">${v.toLocaleString()}</span></div>`).join('')+
-      `<div style="border-top:1px solid var(--border);padding-top:8px;margin-top:4px;display:flex;justify-content:space-between"><span style="font-size:12px;color:#5a6275">총 CP</span><span style="font-size:18px;font-weight:700;color:#2563eb">${tot.toLocaleString()}</span></div><div style="text-align:right;font-size:11px;color:${tot/maxCP>.7?'#059669':'#d97706'}">최대 대비 ${(tot/maxCP*100).toFixed(1)}%</div>`;
-    if(cpChart)cpChart.destroy();
-    cpChart=new Chart(document.getElementById('c-cp'),{type:'bar',
-      data:{labels:['레벨(30%)','성급(25%)','스킬(25%)','장비(20%)'],
-        datasets:[
-          {label:'현재',data:[lvCP,stCP,skCP,eqCP],backgroundColor:['rgba(37,99,235,.75)','rgba(220,38,38,.75)','rgba(5,150,105,.75)','rgba(217,119,6,.75)'],borderRadius:4,barPercentage:.45},
-          {label:'최대',data:[Math.round(BASE*1.30),Math.round(BASE*SBNS[5]*.25),Math.round(BASE*.25),Math.round(BASE*.20)],backgroundColor:['rgba(37,99,235,.12)','rgba(220,38,38,.12)','rgba(5,150,105,.12)','rgba(217,119,6,.12)'],borderRadius:4,barPercentage:.45},
-        ]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:8,font:{size:10}}}},scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},y:ax('CP')}}
-    });
-  }
-  window.calcCP=calcCP;
-  ['hlv-s','hst-s','hsk-s','heq-s'].forEach(id=>document.getElementById(id).oninput=calcCP);
+}
+
+/* CP 시뮬레이터 — 전역 선언 (initS4 밖에서도 즉시 호출 가능) */
+const BASE=50000, SBNS=[0,.18,.42,.85,1.60,3.00];
+let cpChart=null;
+function calcCP(){
+  const lv=+document.getElementById('hlv-s').value,st=+document.getElementById('hst-s').value,
+    sk=+document.getElementById('hsk-s').value,eq=+document.getElementById('heq-s').value;
+  document.getElementById('hlv-v').textContent='Lv.'+lv;
+  document.getElementById('hst-v').textContent=st+'성';
+  document.getElementById('hsk-v').textContent='Lv.'+sk;
+  document.getElementById('heq-v').textContent='Lv.'+eq;
+  const lvCP=Math.round(BASE*(lv/100)*1.30),
+    stCP=Math.round(BASE*(SBNS[st-1]||0)*.25),
+    skCP=Math.round(BASE*((sk-1)/9)*.25),
+    eqCP=Math.round(BASE*(eq/30)*.20),
+    tot=lvCP+stCP+skCP+eqCP;
+  const maxCP=Math.round(BASE*(1.30+SBNS[4]*.25+.25+.20));
+  const cpResultEl=document.getElementById('cp-result');
+  if(!cpResultEl)return;
+  cpResultEl.innerHTML=
+    [['레벨 (30%)',lvCP,'#2563eb'],['성급 (25%)',stCP,'#dc2626'],['스킬 (25%)',skCP,'#059669'],['전용장비 (20%)',eqCP,'#d97706']].map(([l,v,c])=>`
+      <div style="margin-bottom:5px">
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px"><span style="color:#5a6275">${l}</span><span style="font-weight:500;color:${c}">${v.toLocaleString()}</span></div>
+        <div style="height:5px;background:rgba(0,0,0,.07);border-radius:3px;overflow:hidden"><div style="height:100%;width:${(v/Math.max(lvCP,stCP,skCP,eqCP,1)*100).toFixed(0)}%;background:${c};border-radius:3px"></div></div>
+      </div>`).join('')+
+    `<div style="border-top:0.5px solid var(--border2);padding-top:8px;margin-top:6px">
+       <div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:12px;color:#5a6275">총 CP</span><span style="font-size:20px;font-weight:700;color:#2563eb">${tot.toLocaleString()}</span></div>
+       <div style="text-align:right;font-size:11px;color:${tot/maxCP>.7?'#059669':'#d97706'}">최대 대비 ${(tot/maxCP*100).toFixed(1)}%</div>
+     </div>`;
+  const cpCanvas=document.getElementById('c-cp');
+  if(!cpCanvas)return;
+  if(cpChart)cpChart.destroy();
+  cpChart=new Chart(cpCanvas,{type:'bar',
+    data:{labels:['레벨(30%)','성급(25%)','스킬(25%)','전용장비(20%)'],
+      datasets:[
+        {label:'현재',data:[lvCP,stCP,skCP,eqCP],backgroundColor:['rgba(37,99,235,.75)','rgba(220,38,38,.75)','rgba(5,150,105,.75)','rgba(217,119,6,.75)'],borderRadius:4,barPercentage:.45},
+        {label:'최대',data:[Math.round(BASE*1.30),Math.round(BASE*SBNS[4]*.25),Math.round(BASE*.25),Math.round(BASE*.20)],backgroundColor:['rgba(37,99,235,.12)','rgba(220,38,38,.12)','rgba(5,150,105,.12)','rgba(217,119,6,.12)'],borderRadius:4,barPercentage:.45},
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#5a6275',boxWidth:8,font:{size:10}}}},scales:{x:{grid:{display:false},ticks:{color:'#5a6275'}},y:ax('CP')}}
+  });
+}
+window.calcCP=calcCP;
+
+function initS4_cpInit(){
+  ['hlv-s','hst-s','hsk-s','heq-s'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.oninput=calcCP;
+  });
   calcCP();
 }
 
