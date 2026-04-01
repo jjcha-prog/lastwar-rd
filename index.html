@@ -872,6 +872,7 @@ function initS1(){
     };
     adBtns.appendChild(b);
   });
+  adBtns.firstChild.onclick(); // 첫 번째 항목 자동 활성화
 }
 
 /* S2 */
@@ -981,6 +982,7 @@ function initS4(){
     };
     ssrBtns.appendChild(b);
   });
+  ssrBtns.firstChild.onclick(); // 첫 번째 항목 자동 활성화
   const SHARDS=[10,30,80,200,500,1200],SPC=[0,18,42,85,160,300];
   new Chart(document.getElementById('c-shard'),{type:'bar',
     data:{labels:['1성','2성','3성','4성','5성','6성'],
