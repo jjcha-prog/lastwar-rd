@@ -42,8 +42,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .snav-btn{flex-shrink:0;font-size:11px;padding:5px 11px;border-radius:5px;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .15s;background:transparent;font-family:'Noto Sans KR',sans-serif;white-space:nowrap}
 .snav-btn:hover{color:var(--text);border-color:var(--border2)}
 .container{max-width:1060px;margin:0 auto;padding:0 28px}
-.stage-sec{padding:56px 0;border-bottom:1px solid var(--border)}
-.stage-sec.vis{}
+.stage-sec{padding:56px 0;border-bottom:1px solid var(--border);display:none}
+.stage-sec.vis{display:block}
 .stage-hdr{display:flex;align-items:flex-start;gap:16px;margin-bottom:32px}
 .sbadge{font-size:11px;font-weight:700;padding:5px 11px;border-radius:5px;white-space:nowrap;flex-shrink:0;margin-top:3px}
 .stitle h2{font-size:22px;font-weight:700;margin-bottom:5px}
@@ -82,7 +82,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .check-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
 .check-badge{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:500;display:inline-flex;align-items:center;gap:4px}
 footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);color:var(--dim);font-size:11px;line-height:2}
-@media print{.site-header,.snav-outer{display:none}.stage-sec{display:block!important;page-break-before:always}[hidden].stage-sec{display:block!important}}
+@media print{.site-header,.snav-outer{display:none}.stage-sec,.stage-sec[hidden]{display:block!important;page-break-before:always}}
 </style>
 </head>
 <body>
@@ -339,7 +339,7 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 
 <!-- ══════ S2: UX·심리 ══════ -->
 
-<section class="stage-sec" id="s2" hidden>
+<section class="stage-sec" id="s2">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#f3f0ff;color:#5b21b6;border:1px solid #ddd6fe">2단계</span>
   <div class="stitle">
@@ -509,7 +509,7 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </section>
 
 <!-- ══════ S3: 기지 건설 ══════ -->
-<section class="stage-sec" id="s3" hidden>
+<section class="stage-sec" id="s3">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0">3단계</span>
   <div class="stitle">
@@ -685,7 +685,7 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
   </tbody>
 </table>
 </section>
-<section class="stage-sec" id="s4" hidden>
+<section class="stage-sec" id="s4">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">4단계</span>
   <div class="stitle">
@@ -849,7 +849,7 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </div>
 </section>
 
-<section class="stage-sec" id="s5" hidden>
+<section class="stage-sec" id="s5">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#fffbeb;color:#92400e;border:1px solid #fde68a">5단계</span>
   <div class="stitle">
@@ -1012,7 +1012,7 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </table>
 </section>
 
-<section class="stage-sec" id="s6" hidden>
+<section class="stage-sec" id="s6">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0">6단계</span>
   <div class="stitle">
@@ -1162,7 +1162,7 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 <div class="cwrap"><div class="clbl">HQ 레벨 상승에 따른 식량 생산(초록) vs 소비(빨강) — T3→T4 전환 구간이 핵심 병목</div><canvas id="c-inflation" style="max-height:200px"></canvas></div>
 </section>
 
-<section class="stage-sec" id="s7" hidden>
+<section class="stage-sec" id="s7">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe">7단계</span>
   <div class="stitle">
@@ -1339,7 +1339,7 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </table>
 </section>
 
-<section class="stage-sec" id="s8" hidden>
+<section class="stage-sec" id="s8">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">8단계</span>
   <div class="stitle">
@@ -1561,7 +1561,7 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </table>
 </section>
 
-<section class="stage-sec" id="s9" hidden>
+<section class="stage-sec" id="s9">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#f3f0ff;color:#5b21b6;border:1px solid #ddd6fe">9단계</span>
   <div class="stitle">
@@ -1740,7 +1740,7 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </table>
 </section>
 
-<section class="stage-sec" id="s10" hidden>
+<section class="stage-sec" id="s10">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca">10단계</span>
   <div class="stitle">
@@ -1903,7 +1903,7 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </table>
 </section>
 
-<section class="stage-sec" id="s11" hidden>
+<section class="stage-sec" id="s11">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#fffbeb;color:#92400e;border:1px solid #fde68a">11단계</span>
   <div class="stitle"><h2>가챠 확률 설계 및 규제 대응 분석</h2><p>4개 소환 레이어 · 소프트·하드 천장 · 도파민 연출 5단계 · 국가별 규제</p></div>
@@ -1946,7 +1946,7 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </section>
 
 <!-- ══════ S12: 서버 ══════ -->
-<section class="stage-sec" id="s12" hidden>
+<section class="stage-sec" id="s12">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0">12단계</span>
   <div class="stitle"><h2>서버 생애주기 및 신규 서버 설계</h2><p>탄생→성장→패권→침체→붕괴 5단계 · 이민 비용 구조 · 병합 수익화</p></div>
@@ -1970,7 +1970,7 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </section>
 
 <!-- ══════ S13: 경쟁 포지셔닝 ══════ -->
-<section class="stage-sec" id="s13" hidden>
+<section class="stage-sec" id="s13">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe">13단계</span>
   <div class="stitle"><h2>경쟁 포지셔닝 및 장르 내 차별화 분석</h2><p>4개 타이틀 비교 · 5개 경쟁 축 심층 분석 · 장르 진화 타임라인 2013~2023</p></div>
@@ -1995,7 +1995,7 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 </section>
 
 <!-- ══════ S14: KPI ══════ -->
-<section class="stage-sec" id="s14" hidden>
+<section class="stage-sec" id="s14">
 <div class="stage-hdr">
   <span class="sbadge" style="background:#f8fafc;color:#374151;border:1px solid #e2e8f0">14단계</span>
   <div class="stitle"><h2>데이터 분석 구조 및 KPI 추정 분석</h2><p>KPI 4레이어 계층 · 핵심 지표 역산 시뮬레이터 · A/B 테스트 8종 추정 · 코호트 분석</p></div>
@@ -2094,17 +2094,11 @@ STAGES.forEach(s=>{
 function switchStage(id){
   viewMode='stage';
   curStage=id;
-  // hidden attribute 방식으로 섹션 토글
   document.querySelectorAll('.stage-sec').forEach(function(el){
-    el.setAttribute('hidden','');
     el.classList.remove('vis');
   });
   var t=document.getElementById(id);
-  if(t){
-    t.removeAttribute('hidden');
-    t.classList.add('vis');
-  }
-  // 네비 버튼 업데이트
+  if(t){t.classList.add('vis');}
   document.querySelectorAll('.snav-btn').forEach(function(b){
     var s=STAGES.find(function(x){return x.id===b.dataset.id;});
     b.classList.remove('active');
@@ -2116,10 +2110,7 @@ function switchStage(id){
       b.style.color=s.color;
     }
   });
-  // 뷰 버튼 업데이트
   document.querySelectorAll('.vtbtn').forEach(function(b){b.classList.remove('active');});
-  var sb=document.querySelector(".vtbtn[onclick*='stage']");
-  if(sb)sb.classList.add('active');
   var nb=document.querySelector('.snav-btn[data-id="'+id+'"]');
   if(nb)nb.scrollIntoView({inline:'center',block:'nearest'});
   document.documentElement.scrollTop=0;
@@ -2132,12 +2123,12 @@ function setView(mode,btn){
   document.querySelectorAll('.vtbtn').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
   if(mode==='all'){
-    document.querySelectorAll('.stage-sec').forEach(function(el){el.removeAttribute('hidden');el.classList.add('vis');});
+    document.querySelectorAll('.stage-sec').forEach(function(el){el.classList.add('vis');});
     setTimeout(function(){STAGES.forEach(function(s){initStage(s.id);});},50);
   } else {
-    document.querySelectorAll('.stage-sec').forEach(function(el){el.setAttribute('hidden','');el.classList.remove('vis');});
+    document.querySelectorAll('.stage-sec').forEach(function(el){el.classList.remove('vis');});
     var cs=document.getElementById(curStage);
-    if(cs){cs.removeAttribute('hidden');cs.classList.add('vis');}
+    if(cs){cs.classList.add('vis');}
     setTimeout(function(){initStage(curStage);},50);
   }
 }
