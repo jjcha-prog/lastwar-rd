@@ -2118,7 +2118,7 @@ function switchStage(id){
   });
   // 뷰 버튼 업데이트
   document.querySelectorAll('.vtbtn').forEach(function(b){b.classList.remove('active');});
-  var sb=document.querySelector('.vtbtn[onclick*=\"stage\"]');
+  var sb=document.querySelector(".vtbtn[onclick*='stage']");
   if(sb)sb.classList.add('active');
   var nb=document.querySelector('.snav-btn[data-id="'+id+'"]');
   if(nb)nb.scrollIntoView({inline:'center',block:'nearest'});
