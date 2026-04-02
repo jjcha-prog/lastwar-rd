@@ -1997,7 +1997,7 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
 
 <div class="cwrap">
   <div class="clbl">소환 횟수별 UR 누적 획득 확률 — 소프트 천장 이후 곡선 가속</div>
-  <canvas id="c-pity" style="max-height:200px"></canvas>
+  <canvas id="c-pity-s10" style="max-height:200px"></canvas>
 </div>
 
 <table class="dt">
@@ -3581,7 +3581,7 @@ function initS10(){
     pityX.push(n);
     pityY.push(+((1 - cumNot) * 100).toFixed(2));
   }
-  new Chart(document.getElementById('c-pity'),{type:'line',
+  new Chart(document.getElementById('c-pity-s10'),{type:'line',
     data:{labels:pityX.map((v,i)=>i%10===0?v+'회':''),
       datasets:[{label:'UR 누적 획득 확률(%)',data:pityY,
         borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,.07)',
