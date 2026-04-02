@@ -6,7 +6,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>라스트워: 서바이벌 역기획서</title>
+<title>라스트워: 서바이벌 역기획서 [2026-04-02 01:09:41]</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -44,6 +44,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .container{max-width:1060px;margin:0 auto;padding:0 28px}
 .stage-sec{padding:56px 0;border-bottom:1px solid var(--border);display:none}
 .stage-sec.vis{display:block}
+.stage-sec:target{display:block}
 .stage-hdr{display:flex;align-items:flex-start;gap:16px;margin-bottom:32px}
 .sbadge{font-size:11px;font-weight:700;padding:5px 11px;border-radius:5px;white-space:nowrap;flex-shrink:0;margin-top:3px}
 .stitle h2{font-size:22px;font-weight:700;margin-bottom:5px}
@@ -104,9 +105,25 @@ footer{padding:32px 28px;text-align:center;border-top:1px solid var(--border);co
     <div class="hstat"><div class="hstat-n">18+</div><div class="hstat-l">데이터 차트</div></div>
   </div>
 </section>
-<nav class="snav-outer"><div class="snav-inner" id="snav"></div></nav>
+<nav class="snav-outer"><div class="snav-inner" id="snav">
+  <button class="snav-btn active" data-id="s1" style="background:#7c3aed22;border-color:#7c3aed;color:#7c3aed" onclick="var es=document.querySelectorAll('.stage-sec');for(var i=0;i<es.length;i++){es[i].style.display='none';es[i].classList.remove('vis');}var t=document.getElementById('s1');if(t){t.style.display='block';t.classList.add('vis');}var bs=document.querySelectorAll('.snav-btn');for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');bs[j].style.cssText='';}this.classList.add('active');this.style.cssText='background:#7c3aed22;border-color:#7c3aed;color:#7c3aed';if(window.initStage)window.initStage('s1');">1. 게임 정체성 ★</button>
+  <button class="snav-btn" data-id="s2" onclick="var es=document.querySelectorAll('.stage-sec');for(var i=0;i<es.length;i++){es[i].style.display='none';es[i].classList.remove('vis');}var t=document.getElementById('s2');if(t){t.style.display='block';t.classList.add('vis');}var bs=document.querySelectorAll('.snav-btn');for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');bs[j].style.cssText='';}this.classList.add('active');this.style.cssText='background:#7c3aed22;border-color:#7c3aed;color:#7c3aed';if(window.initStage)window.initStage('s2');">2. UX·심리</button>
+  <button class="snav-btn" data-id="s3" onclick="var es=document.querySelectorAll('.stage-sec');for(var i=0;i<es.length;i++){es[i].style.display='none';es[i].classList.remove('vis');}var t=document.getElementById('s3');if(t){t.style.display='block';t.classList.add('vis');}var bs=document.querySelectorAll('.snav-btn');for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');bs[j].style.cssText='';}this.classList.add('active');this.style.cssText='background:#05966922;border-color:#059669;color:#059669';if(window.initStage)window.initStage('s3');">3. 기지 건설 ★</button>
+  <button class="snav-btn" data-id="s4" onclick="var es=document.querySelectorAll('.stage-sec');for(var i=0;i<es.length;i++){es[i].style.display='none';es[i].classList.remove('vis');}var t=document.getElementById('s4');if(t){t.style.display='block';t.classList.add('vis');}var bs=document.querySelectorAll('.snav-btn');for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');bs[j].style.cssText='';}this.classList.add('active');this.style.cssText='background:#dc262622;border-color:#dc2626;color:#dc2626';if(window.initStage)window.initStage('s4');">4. 전투 시스템 ★</button>
+  <button class="snav-btn" data-id="s5" onclick="var es=document.querySelectorAll('.stage-sec');for(var i=0;i<es.length;i++){es[i].style.display='none';es[i].classList.remove('vis');}var t=document.getElementById('s5');if(t){t.style.display='block';t.classList.add('vis');}var bs=document.querySelectorAll('.snav-btn');for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');bs[j].style.cssText='';}this.classList.add('active');this.style.cssText='background:#d9770622;border-color:#d97706;color:#d97706';if(window.initStage)window.initStage('s5');">5. 영웅 성장</button>
+  <button class="snav-btn" data-id="s6" onclick="var es=document.querySelectorAll('.stage-sec');for(var i=0;i<es.length;i++){es[i].style.display='none';es[i].classList.remove('vis');}var t=document.getElementById('s6');if(t){t.style.display='block';t.classList.add('vis');}var bs=document.querySelectorAll('.snav-btn');for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');bs[j].style.cssText='';}this.classList.add('active');this.style.cssText='background:#05966922;border-color:#059669;color:#059669';if(window.initStage)window.initStage('s6');">6. 경제 시스템</button>
+  <button class="snav-btn" data-id="s7" onclick="var es=document.querySelectorAll('.stage-sec');for(var i=0;i<es.length;i++){es[i].style.display='none';es[i].classList.remove('vis');}var t=document.getElementById('s7');if(t){t.style.display='block';t.classList.add('vis');}var bs=document.querySelectorAll('.snav-btn');for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');bs[j].style.cssText='';}this.classList.add('active');this.style.cssText='background:#2563eb22;border-color:#2563eb;color:#2563eb';if(window.initStage)window.initStage('s7');">7. 월드맵</button>
+  <button class="snav-btn" data-id="s8" onclick="var es=document.querySelectorAll('.stage-sec');for(var i=0;i<es.length;i++){es[i].style.display='none';es[i].classList.remove('vis');}var t=document.getElementById('s8');if(t){t.style.display='block';t.classList.add('vis');}var bs=document.querySelectorAll('.snav-btn');for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');bs[j].style.cssText='';}this.classList.add('active');this.style.cssText='background:#dc262622;border-color:#dc2626;color:#dc2626';if(window.initStage)window.initStage('s8');">8. 연맹 시스템</button>
+  <button class="snav-btn" data-id="s9" onclick="var es=document.querySelectorAll('.stage-sec');for(var i=0;i<es.length;i++){es[i].style.display='none';es[i].classList.remove('vis');}var t=document.getElementById('s9');if(t){t.style.display='block';t.classList.add('vis');}var bs=document.querySelectorAll('.snav-btn');for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');bs[j].style.cssText='';}this.classList.add('active');this.style.cssText='background:#7c3aed22;border-color:#7c3aed;color:#7c3aed';if(window.initStage)window.initStage('s9');">9. 시즌·이벤트</button>
+  <button class="snav-btn" data-id="s10" onclick="var es=document.querySelectorAll('.stage-sec');for(var i=0;i<es.length;i++){es[i].style.display='none';es[i].classList.remove('vis');}var t=document.getElementById('s10');if(t){t.style.display='block';t.classList.add('vis');}var bs=document.querySelectorAll('.snav-btn');for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');bs[j].style.cssText='';}this.classList.add('active');this.style.cssText='background:#dc262622;border-color:#dc2626;color:#dc2626';if(window.initStage)window.initStage('s10');">10. BM·유료화</button>
+  <button class="snav-btn" data-id="s11" onclick="var es=document.querySelectorAll('.stage-sec');for(var i=0;i<es.length;i++){es[i].style.display='none';es[i].classList.remove('vis');}var t=document.getElementById('s11');if(t){t.style.display='block';t.classList.add('vis');}var bs=document.querySelectorAll('.snav-btn');for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');bs[j].style.cssText='';}this.classList.add('active');this.style.cssText='background:#d9770622;border-color:#d97706;color:#d97706';if(window.initStage)window.initStage('s11');">11. 가챠·규제</button>
+  <button class="snav-btn" data-id="s12" onclick="var es=document.querySelectorAll('.stage-sec');for(var i=0;i<es.length;i++){es[i].style.display='none';es[i].classList.remove('vis');}var t=document.getElementById('s12');if(t){t.style.display='block';t.classList.add('vis');}var bs=document.querySelectorAll('.snav-btn');for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');bs[j].style.cssText='';}this.classList.add('active');this.style.cssText='background:#05966922;border-color:#059669;color:#059669';if(window.initStage)window.initStage('s12');">12. 서버 생태계</button>
+  <button class="snav-btn" data-id="s13" onclick="var es=document.querySelectorAll('.stage-sec');for(var i=0;i<es.length;i++){es[i].style.display='none';es[i].classList.remove('vis');}var t=document.getElementById('s13');if(t){t.style.display='block';t.classList.add('vis');}var bs=document.querySelectorAll('.snav-btn');for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');bs[j].style.cssText='';}this.classList.add('active');this.style.cssText='background:#2563eb22;border-color:#2563eb;color:#2563eb';if(window.initStage)window.initStage('s13');">13. 경쟁 분석</button>
+  <button class="snav-btn" data-id="s14" onclick="var es=document.querySelectorAll('.stage-sec');for(var i=0;i<es.length;i++){es[i].style.display='none';es[i].classList.remove('vis');}var t=document.getElementById('s14');if(t){t.style.display='block';t.classList.add('vis');}var bs=document.querySelectorAll('.snav-btn');for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');bs[j].style.cssText='';}this.classList.add('active');this.style.cssText='background:#6b728022;border-color:#6b7280;color:#6b7280';if(window.initStage)window.initStage('s14');">14. KPI·데이터</button>
+</div></nav>
 <main class="container" id="main">
 
+<!-- BUILD: 2026-04-02 01:09:41 -->
 <!-- ══════ S1: 게임 정체성 ══════ -->
 <section class="stage-sec vis" id="s1">
 <div class="stage-hdr">
@@ -2079,26 +2096,17 @@ const STAGES=[
 const inited={};
 let curStage='s1',viewMode='stage';
 
-// NAV 빌드
-const snav=document.getElementById('snav');
-STAGES.forEach(s=>{
-  const b=document.createElement('button');
-  b.className='snav-btn'+(s.id==='s1'?' active':'');
-  b.dataset.id=s.id;
-  if(s.id==='s1'){b.style.background=s.color+'22';b.style.borderColor=s.color;b.style.color=s.color;}
-  b.innerHTML=`${s.n}. ${s.title}${s.merged?' <span style="color:#059669;font-size:9px">★</span>'  :''}`;
-  b.onclick=function(){switchStage(s.id);};
-  snav.appendChild(b);
-});
+// NAV: 정적 HTML 버튼 사용
 
 function switchStage(id){
   viewMode='stage';
   curStage=id;
   document.querySelectorAll('.stage-sec').forEach(function(el){
     el.classList.remove('vis');
+    el.style.display='none';
   });
   var t=document.getElementById(id);
-  if(t){t.classList.add('vis');}
+  if(t){t.classList.add('vis');t.style.display='block';}
   document.querySelectorAll('.snav-btn').forEach(function(b){
     var s=STAGES.find(function(x){return x.id===b.dataset.id;});
     b.classList.remove('active');
@@ -2113,8 +2121,10 @@ function switchStage(id){
   document.querySelectorAll('.vtbtn').forEach(function(b){b.classList.remove('active');});
   var nb=document.querySelector('.snav-btn[data-id="'+id+'"]');
   if(nb)nb.scrollIntoView({inline:'center',block:'nearest'});
-  document.documentElement.scrollTop=0;
-  document.body.scrollTop=0;
+  // URL hash 변경 → CSS :target도 함께 활성화
+  
+  var top=document.getElementById(id);
+  if(top)top.scrollIntoView({behavior:'smooth',block:'start'});
   setTimeout(function(){initStage(id);},50);
 }
 function gotoStage(id){switchStage(id);}
@@ -2123,12 +2133,12 @@ function setView(mode,btn){
   document.querySelectorAll('.vtbtn').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
   if(mode==='all'){
-    document.querySelectorAll('.stage-sec').forEach(function(el){el.classList.add('vis');});
+    document.querySelectorAll('.stage-sec').forEach(function(el){el.classList.add('vis');el.style.display='block';});
     setTimeout(function(){STAGES.forEach(function(s){initStage(s.id);});},50);
   } else {
-    document.querySelectorAll('.stage-sec').forEach(function(el){el.classList.remove('vis');});
+    document.querySelectorAll('.stage-sec').forEach(function(el){el.classList.remove('vis');el.style.display='none';});
     var cs=document.getElementById(curStage);
-    if(cs){cs.classList.add('vis');}
+    if(cs){cs.classList.add('vis');cs.style.display='block';}
     setTimeout(function(){initStage(curStage);},50);
   }
 }
@@ -3705,11 +3715,25 @@ function initS14(){
 }
 
 /* 초기 실행 */
-window.setView=setView;window.gotoStage=gotoStage;window.switchStage=switchStage;
+window.setView=setView;window.gotoStage=gotoStage;window.switchStage=switchStage;window.initStage=initStage;
+
+// 강제 초기화: s1만 보이고 나머지 숨기기
+(function(){
+  var secs=document.querySelectorAll('.stage-sec');
+  secs.forEach(function(el){
+    el.classList.remove('vis');
+    el.style.display='none';
+  });
+  var s1=document.getElementById('s1');
+  if(s1){s1.classList.add('vis');s1.style.display='block';}
+})();
+
 inited['s1']=true;
-setTimeout(()=>initS1(),80);
+setTimeout(function(){initS1();},80);
 
 }); // DOMContentLoaded
 </script>
+
+
 </body>
 </html>
